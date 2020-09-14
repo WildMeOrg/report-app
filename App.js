@@ -27,7 +27,7 @@ const HomeScreen = ({ navigation }) => {
   return (
     <Button
       title="Switch to Login View"
-      onPress={() => navigation.navigate('Login', { name: 'Bob' })}
+      onPress={() => navigation.navigate('Login')}
     />
   );
 };
