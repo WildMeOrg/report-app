@@ -1,7 +1,6 @@
 import 'react-native-gesture-handler'; // this import MUST come first
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, Button } from 'react-native';
+import { Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -31,7 +30,4 @@ const HomeScreen = ({ navigation }) => {
       onPress={() => navigation.navigate('Login', { name: 'Bob' })}
     />
   );
-};
-const ProfileScreen = () => {
-  return <Text>This is Jane's profile</Text>;
 };
