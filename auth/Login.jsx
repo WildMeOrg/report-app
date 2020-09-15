@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
 import { houstonUrl } from '../constants/urls';
 
 const Login = () => {
-  const [email, onChangeEmail] = React.useState();
-  const [password, onChangePassword] = React.useState();
-  const [responseData, onChangeResponseData] = React.useState(
+  const [email, onChangeEmail] = useState('');
+  const [password, onChangePassword] = useState('');
+  const [responseData, onChangeResponseData] = useState(
     'No request sent'
   );
 
@@ -49,7 +49,7 @@ const Login = () => {
         autoCompleteType="password"
         textContentType="password"
         autoCapitalize="none"
-        secureTextEntry={true}
+        secureTextEntry
       />
       <Button
         title="Login"
