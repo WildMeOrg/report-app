@@ -11,9 +11,8 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const authenticate = async (email, password) => {
+    setIsLoading(true);
     try {
-      setIsLoading(true);
-
       const response = await axios.request({
         url: `${houstonUrl}/api/v1/auth/sessions`,
         method: 'post',
@@ -24,11 +23,10 @@ const Login = () => {
       });
 
       onChangeResponseData(JSON.stringify(response.data));
-      setIsLoading(false);
     } catch (loginError) {
       onChangeResponseData(loginError.name + ': ' + loginError.message);
-      setIsLoading(false);
     }
+    setIsLoading(false);
   };
 
   return isLoading ? (
