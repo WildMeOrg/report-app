@@ -3,7 +3,8 @@ import React from 'react';
 import { Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Login from './auth/login';
+import Login from './auth/Login';
+import screens from './constants/screens';
 
 const Stack = createStackNavigator();
 
@@ -12,11 +13,11 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
-          name="Home"
+          name={screens.home}
           component={HomeScreen}
           options={(title = 'Welcome!')}
         />
-        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name={screens.login} component={Login} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -26,7 +27,7 @@ const HomeScreen = ({ navigation }) => {
   return (
     <Button
       title="Switch to Login View"
-      onPress={() => navigation.navigate('Login')}
+      onPress={() => navigation.navigate(screens.login)}
     />
   );
 };
