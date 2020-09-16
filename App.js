@@ -4,6 +4,7 @@ import { Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Login from './auth/Login';
+import Loading from './screens/Loading';
 import screens from './constants/screens';
 
 const Stack = createStackNavigator();
@@ -18,6 +19,7 @@ export default function App() {
           options={{ title: 'Welcome' }}
         />
         <Stack.Screen name={screens.login} component={Login} />
+        <Stack.Screen name={screens.loading} component={Loading} />
       </Stack.Navigator>
     </NavigationContainer>
   );
