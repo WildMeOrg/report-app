@@ -1,4 +1,5 @@
 export default {
   home: 'Home',
-  login: 'Login'
+  login: 'Login',
+  loading: 'Loading',
 };

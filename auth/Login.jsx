@@ -6,13 +6,12 @@ import { houstonUrl } from '../constants/urls';
 const Login = () => {
   const [email, onChangeEmail] = useState('');
   const [password, onChangePassword] = useState('');
-  const [responseData, onChangeResponseData] = useState(
-    'No request sent'
-  );
+  const [responseData, onChangeResponseData] = useState('No request sent');
 
   const authenticate = async (email, password) => {
     try {
       onChangeResponseData('Request is sending...');
+
       const response = await axios.request({
         url: `${houstonUrl}/api/v1/auth/sessions`,
         method: 'post',

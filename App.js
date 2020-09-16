@@ -15,7 +15,7 @@ export default function App() {
         <Stack.Screen
           name={screens.home}
           component={HomeScreen}
-          options={(title = 'Welcome!')}
+          options={{ title: 'Welcome' }}
         />
         <Stack.Screen name={screens.login} component={Login} />
       </Stack.Navigator>
