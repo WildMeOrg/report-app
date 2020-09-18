@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
-import { houstonUrl } from '../constants/urls';
-import Loading from '../screens/loading/Loading';
+import { houstonUrl } from '../../constants/urls';
+import Loading from '../loading/Loading';
 
 const Login = () => {
   const [email, onChangeEmail] = useState('');
