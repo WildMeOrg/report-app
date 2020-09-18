@@ -6,7 +6,7 @@ import {
   DrawerItem,
 } from '@react-navigation/drawer';
 import { Icon } from 'react-native-elements';
-import theme from '../src/constants/theme';
+import theme from '../constants/theme';
 
 export default function CustomDrawerContent(props) {
   return (
