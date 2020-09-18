@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
-import { houstonUrl } from '../constants/urls';
+import { houstonUrl } from '../../constants/urls';
 
 const Login = () => {
   const [email, onChangeEmail] = useState('');
   const [password, onChangePassword] = useState('');
-  const [responseData, onChangeResponseData] = useState(
-    'No request sent'
-  );
+  const [responseData, onChangeResponseData] = useState('No request sent');
 
   const authenticate = async (email, password) => {
     try {
