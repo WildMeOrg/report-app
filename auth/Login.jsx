@@ -2,17 +2,17 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
 import { houstonUrl } from '../constants/urls';
+import Loading from '../screens/loading/Loading';
 
 const Login = () => {
   const [email, onChangeEmail] = useState('');
   const [password, onChangePassword] = useState('');
-  const [responseData, onChangeResponseData] = useState(
-    'No request sent'
-  );
+  const [responseData, onChangeResponseData] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const authenticate = async (email, password) => {
+    setIsLoading(true);
     try {
-      onChangeResponseData('Request is sending...');
       const response = await axios.request({
         url: `${houstonUrl}/api/v1/auth/sessions`,
         method: 'post',
@@ -26,9 +26,12 @@ const Login = () => {
     } catch (loginError) {
       onChangeResponseData(loginError.name + ': ' + loginError.message);
     }
+    setIsLoading(false);
   };
 
-  return (
+  return isLoading ? (
+    <Loading />
+  ) : (
     <View>
       <TextInput
         style={styles.inputFields}
