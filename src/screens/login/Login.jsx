@@ -1,22 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
-<<<<<<< HEAD:src/screens/login/Login.jsx
 import { houstonUrl } from '../../constants/urls';
-=======
-import { houstonUrl } from '../constants/urls';
-import Loading from '../screens/loading/Loading';
->>>>>>> 5ad79eb0e40f7a6fee56f6ee90f6ce84dd82c54d:auth/Login.jsx
+import Loading from '../loading/Loading';
 
 const Login = () => {
   const [email, onChangeEmail] = useState('');
   const [password, onChangePassword] = useState('');
-<<<<<<< HEAD:src/screens/login/Login.jsx
-  const [responseData, onChangeResponseData] = useState('No request sent');
-=======
   const [responseData, onChangeResponseData] = useState('');
   const [isLoading, setIsLoading] = useState(false);
->>>>>>> 5ad79eb0e40f7a6fee56f6ee90f6ce84dd82c54d:auth/Login.jsx
 
   const authenticate = async (email, password) => {
     setIsLoading(true);
