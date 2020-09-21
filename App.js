@@ -8,6 +8,7 @@ import HomeStackScreen from './src/components/HomeStackScreen';
 import LoginStackScreen from './src/components/LoginStackScreen';
 import screens from './src/constants/screens';
 import CustomDrawerContent from './src/components/CustomDrawerContent';
+import SettingsStackScreen from './src/components/SettingsStackScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -29,6 +30,10 @@ export default function App() {
           {/* As new screens are made, put them here to be able to view them */}
           <Drawer.Screen name={screens.home} component={HomeStackScreen} />
           <Drawer.Screen name={screens.login} component={LoginStackScreen} />
+          <Drawer.Screen
+            name={screens.setings}
+            component={SettingsStackScreen}
+          />
         </Drawer.Navigator>
       </NavigationContainer>
     );
