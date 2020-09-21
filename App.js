@@ -30,7 +30,7 @@ export default function App() {
           {/* As new screens are made, put them here to be able to view them */}
           <Drawer.Screen name={screens.home} component={HomeStackScreen} />
           <Drawer.Screen name={screens.login} component={LoginStackScreen} />
-          <Drawer.Screen name={screens.view_sighting} component={ViewSightingStackScreen} />
+          <Drawer.Screen name={screens.viewSighting} component={ViewSightingStackScreen} />
         </Drawer.Navigator>
       </NavigationContainer>
     );
