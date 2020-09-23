@@ -3,7 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  Button,
   TextInput,
   TouchableOpacity,
   Animated
@@ -12,7 +11,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { Icon, withTheme } from "react-native-elements";
 import screens from "../constants/screens";
 import theme from "../constants/theme";
-import { setStatusBarHidden } from "expo-status-bar";
 
 const NewSightingStack = createStackNavigator();
 
@@ -173,7 +171,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.white
   },
   buttonContainer: {
-    position: "absolute", //Here is the trick
+    position: "absolute",
     bottom: 0,
     alignSelf: "center",
     margin: "5%"

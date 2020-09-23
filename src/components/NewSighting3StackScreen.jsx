@@ -3,7 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  Button,
   TextInput,
   TouchableOpacity,
   Animated
@@ -138,7 +137,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.white
   },
   buttonContainer: {
-    position: "absolute", //Here is the trick
+    position: "absolute",
     bottom: 0,
     alignSelf: "center",
     margin: "5%"
