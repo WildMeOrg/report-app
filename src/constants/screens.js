@@ -5,4 +5,5 @@ export default {
   newSighting: "NewSighting",
   newSighting2: "NewSighting2",
   newSighting3: "NewSighting3"
+  viewSighting: 'View Sighting',
 };

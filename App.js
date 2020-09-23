@@ -11,6 +11,10 @@ import NewSighting2StackScreen from "./src/components/NewSighting2StackScreen";
 import NewSighting3StackScreen from "./src/components/NewSighting3StackScreen";
 import screens from "./src/constants/screens";
 import CustomDrawerContent from "./src/components/CustomDrawerContent";
+import ViewSightingStackScreen from './src/components/ViewSightingStackScreen';
+import screens from './src/constants/screens';
+import CustomDrawerContent from './src/components/CustomDrawerContent';
+
 
 const Drawer = createDrawerNavigator();
 
@@ -44,6 +48,7 @@ export default function App() {
             name={screens.newSighting3}
             component={NewSighting3StackScreen}
           />
+          <Drawer.Screen name={screens.viewSighting} component={ViewSightingStackScreen} />
         </Drawer.Navigator>
       </NavigationContainer>
     );
