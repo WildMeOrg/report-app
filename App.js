@@ -9,12 +9,9 @@ import LoginStackScreen from "./src/components/LoginStackScreen";
 import NewSightingStackScreen from "./src/components/NewSightingStackScreen";
 import NewSighting2StackScreen from "./src/components/NewSighting2StackScreen";
 import NewSighting3StackScreen from "./src/components/NewSighting3StackScreen";
+import ViewSightingStackScreen from './src/components/ViewSightingStackScreen';
 import screens from "./src/constants/screens";
 import CustomDrawerContent from "./src/components/CustomDrawerContent";
-import ViewSightingStackScreen from './src/components/ViewSightingStackScreen';
-import screens from './src/constants/screens';
-import CustomDrawerContent from './src/components/CustomDrawerContent';
-
 
 const Drawer = createDrawerNavigator();
 

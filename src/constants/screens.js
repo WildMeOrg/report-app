@@ -4,6 +4,6 @@ export default {
   loading: "Loading",
   newSighting: "NewSighting",
   newSighting2: "NewSighting2",
-  newSighting3: "NewSighting3"
-  viewSighting: 'View Sighting',
+  newSighting3: "NewSighting3",
+  viewSighting: 'View Sighting'
 };
