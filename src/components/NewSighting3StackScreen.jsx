@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   innerStyle: {
     width: "100%",
     height: 3,
-    backgroundColor: "#CDABFD",
+    backgroundColor: theme.primary,
   },
   headerText: {
     fontFamily: "Lato-Regular",
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     margin: "5%",
     marginBottom: "3%",
-    color: "#2c2c2c"
+    color: theme.black
   },
   inputFields: {
     textAlign: "left",
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     height: 150,
   },
   button: {
-    backgroundColor: "#CDABFD",
+    backgroundColor: theme.primary,
     paddingVertical: 12,
     paddingHorizontal: 50,
     borderRadius: 20,
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#CACACA",
   },
   buttonText: {
-    color: "#ffffff",
+    color: theme.white,
     fontSize: 16,
     alignSelf: "center"
   },
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexGrow: 1,
-    backgroundColor: "#ffffff"
+    backgroundColor: theme.white
   },
   buttonContainer: {
     position: "absolute", //Here is the trick

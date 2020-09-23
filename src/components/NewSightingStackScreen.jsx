@@ -22,6 +22,18 @@ const NewSightingScreen = ({ navigation }) => {
       <View style={styles.progressBar}>
         <Animated.View style={[styles.innerStyle, { width: "33%" },]} />
       </View>
+      <View style={styles.addNew} onPress={() => navigation.navigate(screens.newSighting2)}>
+        <TouchableOpacity onPress={() => navigation.navigate(screens.newSighting)}>
+          <Icon
+            name="cloud-upload"
+            type="font-awesome"
+            color={theme.black}
+            iconStyle={styles.addText}
+            size={40}
+          />
+          <Text style={[styles.inputHeader, styles.addText]}> Add Images </Text>
+        </TouchableOpacity>
+      </View>
       <Text style={styles.inputHeader}> Title </Text>
       <TextInput style={styles.inputFields} autoCorrect={false} />
       <Text style={styles.inputHeader}> Location </Text>
@@ -91,7 +103,23 @@ const styles = StyleSheet.create({
   innerStyle: {
     width: "100%",
     height: 3,
-    backgroundColor: "#CDABFD",
+    backgroundColor: theme.primary,
+  },
+  addNew: {
+    flexDirection: "column",
+    alignContent: "center",
+    backgroundColor: "#2C2C2C30",
+    margin: "5%",
+    borderWidth: 1,
+    borderStyle: 'dashed',
+    borderColor: theme.black,
+    borderRadius: 6,
+    opacity: 0.5,
+    paddingVertical: "7%"
+  },
+  addText: {
+    alignSelf: "center",
+    margin: "1%"
   },
   headerText: {
     fontFamily: "Lato-Regular",
@@ -105,7 +133,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     margin: "5%",
     marginBottom: "3%",
-    color: "#2c2c2c"
+    color: theme.black
   },
   inputFields: {
     textAlign: "left",
@@ -117,10 +145,10 @@ const styles = StyleSheet.create({
     padding: "2%",
   },
   multiLine: {
-    height: 150,
+    height: 100,
   },
   button: {
-    backgroundColor: "#CDABFD",
+    backgroundColor: theme.primary,
     paddingVertical: 12,
     paddingHorizontal: 50,
     borderRadius: 20,
@@ -130,7 +158,7 @@ const styles = StyleSheet.create({
     opacity: 0
   },
   buttonText: {
-    color: "#ffffff",
+    color: theme.white,
     fontSize: 16,
     alignSelf: "center"
   },
@@ -142,7 +170,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexGrow: 1,
-    backgroundColor: "#ffffff"
+    backgroundColor: theme.white
   },
   buttonContainer: {
     position: "absolute", //Here is the trick
