@@ -15,19 +15,10 @@ import Jaguar from '../../assets/jaguar.jpg';
 
 const HomeStack = createStackNavigator();
 
-const HomeScreenOld = ({ navigation }) => {
-  return (
-    <Button
-      title="Switch to Login View"
-      onPress={() => navigation.navigate(screens.login)}
-    />
-  );
-};
-
 const HomeScreen = ({ nagivation }) => {
   return (
     <View>
-      {/* TODO: Turn from ScrollView into something FlatView*/}
+      {/* TODO: Turn from ScrollView into something FlatView */}
       <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.sortBy}>
           <Text style={styles.fontLato}>
@@ -45,7 +36,7 @@ const HomeScreen = ({ nagivation }) => {
             + Add new sighting
           </Text>
         </View>
-        {/* TODO: Split into separate "SightingCards" function based creation*/}
+        {/* TODO: Split following into separate "SightingCards" function based creation */}
         <View style={styles.sightingCard}>
           <Image style={styles.imageCover} source={Humpback} />
           <View style={styles.sightingInfo}>
@@ -239,6 +230,10 @@ export default function HomeStackScreen({ navigation }) {
   );
 }
 
+// TODO: Cleanup the styles into something more organized and clean
+// TODO: Go through and insert theme colors instead of hard-set if possible
+// TODO: Define font usage throughout the app? Discuss
+// TODO: Clean up explicit numbers and check on different displays
 const styles = StyleSheet.create({
   headerText: {
     fontFamily: 'Lato-Regular',
@@ -316,7 +311,7 @@ const styles = StyleSheet.create({
     flex: 2,
     alignItems: 'center',
   },
-  imageCover: {
+  imageCover: { // This particularly needs to be cleaned up and made work better
     resizeMode: 'cover', // Doesn't work?
     borderTopLeftRadius: 6,
     borderBottomLeftRadius: 6,
