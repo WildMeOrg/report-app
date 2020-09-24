@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   Animated,
+  KeyboardAvoidingView,
 } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon, withTheme } from 'react-native-elements';
@@ -20,31 +21,43 @@ const NewSightingScreen = ({ navigation }) => {
       <View style={styles.progressBar}>
         <Animated.View style={styles.innerStyle} />
       </View>
-      <View style={styles.addNew}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate(screens.newSightings[0])}
-        >
-          <Icon
-            name='cloud-upload'
-            type='font-awesome'
-            color={theme.black}
-            iconStyle={styles.addText}
-            size={40}
-          />
-          <Text style={[styles.inputHeader, styles.addText]}> Add Images </Text>
-        </TouchableOpacity>
-      </View>
-      <Text style={styles.inputHeader}> Title </Text>
-      <TextInput style={styles.inputFields} autoCorrect={false} />
-      <Text style={styles.inputHeader}> Location </Text>
-      <TextInput style={styles.inputFields} autoCorrect={false} />
-      <Text style={styles.inputHeader}> Sighting Context </Text>
-      <TextInput
-        style={[styles.inputFields, styles.multiLine]}
-        autoCorrect={false}
-        multiline={true}
-        numberOfLines={5}
-      />
+      <KeyboardAvoidingView
+        behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 100}
+        style={styles.keyboardView}
+        keyboardShouldPersistTaps='handled'
+      >
+        <View style={styles.addNew}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate(screens.newSightings[0])}
+          >
+            <Icon
+              name='cloud-upload'
+              type='font-awesome'
+              color={theme.black}
+              iconStyle={styles.addText}
+              size={40}
+            />
+            <Text style={[styles.inputHeader, styles.addText]}>
+              {' '}
+              Add Images{' '}
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <Text style={styles.inputHeader}> Title </Text>
+        <TextInput style={styles.inputFields} autoCorrect={false} />
+        <Text style={styles.inputHeader}> Location </Text>
+        <TextInput style={styles.inputFields} autoCorrect={false} />
+        <Text style={styles.inputHeader}> Sighting Context </Text>
+        <TextInput
+          style={[styles.inputFields, styles.multiLine]}
+          autoCorrect={false}
+          multiline={true}
+          numberOfLines={5}
+        />
+        <View style={styles.keyboardView} />
+      </KeyboardAvoidingView>
+
       <View style={styles.buttonContainer}>
         <View style={styles.horizontal}>
           <TouchableOpacity>
@@ -105,6 +118,10 @@ const styles = StyleSheet.create({
     width: '33%',
     height: 3,
     backgroundColor: theme.primary,
+  },
+  keyboardView: {
+    flex: 1,
+    justifyContent: 'flex-end',
   },
   addNew: {
     flexDirection: 'column',
