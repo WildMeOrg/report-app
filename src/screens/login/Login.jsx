@@ -78,7 +78,7 @@ const Login = () => {
 
       <View style={styles.forgotView}>
         <TouchableOpacity style={styles.forgot}>
-          <Text style={{color: '#2C2C2C80'}}>
+          <Text style={[styles.fontBasicText,{color: '#2C2C2C80'}]}>
             Forgot password?
           </Text>
         </TouchableOpacity>
@@ -99,7 +99,7 @@ const Login = () => {
       
       <View style={styles.guestView}>
         <TouchableOpacity style={styles.guest}>
-          <Text style={{color: '#2C2C2C80'}}>
+          <Text style={[styles.fontBasicText,{color: '#2C2C2C80'}]}>
             Continue as guest
           </Text>
         </TouchableOpacity>
@@ -182,7 +182,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: '2%',
     marginRight: '15%',
-  }
+  },
+  fontBasicText: {
+    fontSize: 16, 
+    fontFamily: 'Lato-Regular',
+  },
 });
 
 export default Login;
