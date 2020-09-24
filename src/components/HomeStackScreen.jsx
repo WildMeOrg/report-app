@@ -15,13 +15,44 @@ import Jaguar from '../../assets/jaguar.jpg';
 
 const HomeStack = createStackNavigator();
 
+/** <SightingCard>
+ *    @description A functional component that creates the sighting cards on the homepage
+ *    @props
+ *      name  -- the name of the sighting displayed in larger, upper text
+ *      image -- the imported image to be used for the cover of the card
+ *      date  -- the date of the sighting displayed in smaller, lower text
+ */
+const SightingCard = (props) => {
+  return (
+    <View style={cardElementStyles.sightingCard}>
+      <Image style={cardElementStyles.imageCover} source={props.image} />
+      <View style={cardElementStyles.sightingInfo}>
+        <View style={cardElementStyles.sightingText}>
+          <Text style={cardElementStyles.sightingTitle}>
+            {props.name}
+          </Text>
+          <Text style={cardElementStyles.sightingDate}>
+            {props.date}
+          </Text>
+        </View>
+        <Icon
+          name="more-vert"
+          type="materialicons"
+          size={28}
+          color={theme.black}
+        />
+      </View>
+    </View>
+  );
+}
+
 const HomeScreen = ({ nagivation }) => {
   return (
     <View>
-      {/* TODO: Turn from ScrollView into something FlatView */}
-      <ScrollView contentContainerStyle={styles.content}>
-        <View style={styles.sortBy}>
-          <Text style={styles.fontLato}>
+      {/* TODO: Turn from ScrollView into something FlatView for performance in long term(?) */}
+      <ScrollView contentContainerStyle={bodyStyles.content}>
+        <View style={bodyStyles.sortBy}>
+          <Text style={bodyStyles.sortByText}>
             Last Added
           </Text>
           <Icon
@@ -31,164 +62,51 @@ const HomeScreen = ({ nagivation }) => {
             color={theme.black}
           />
         </View>
-        <View style={styles.addNew}>
-          <Text style={styles.addNewText}>
+        <View style={bodyStyles.addNew}>
+          <Text style={bodyStyles.addNewText}>
             + Add new sighting
           </Text>
         </View>
-        {/* TODO: Split following into separate "SightingCards" function based creation */}
-        <View style={styles.sightingCard}>
-          <Image style={styles.imageCover} source={Humpback} />
-          <View style={styles.sightingInfo}>
-            <View style={styles.sightingText}>
-              <Text style={styles.sightingTitle}>
-                Humpback Whale
-              </Text>
-              <Text style={styles.sightingDate}>
-                September 23rd, 2019
-              </Text>
-            </View>
-            <Icon
-              name="more-vert"
-              type="materialicons"
-              size={28}
-              color={theme.black}
-            />
-          </View>
-        </View>
-        <View style={styles.sightingCard}>
-          <Image style={styles.imageCover} source={Hummingbird} />
-          <View style={styles.sightingInfo}>
-            <View style={styles.sightingText}>
-              <Text style={styles.sightingTitle}>
-                Anna's Hummingbird
-              </Text>
-              <Text style={styles.sightingDate}>
-                September 23rd, 2019
-              </Text>
-            </View>
-            <Icon
-              name="more-vert"
-              type="materialicons"
-              size={32}
-              color={theme.black}
-            />
-          </View>
-        </View>
-        <View style={styles.sightingCard}>
-          <Image style={styles.imageCover} source={RedPanda} />
-          <View style={styles.sightingInfo}>
-            <View style={styles.sightingText}>
-              <Text style={styles.sightingTitle}>
-                Red Panda
-              </Text>
-              <Text style={styles.sightingDate}>
-                September 23rd, 2019
-              </Text>
-            </View>
-            <Icon
-              name="more-vert"
-              type="materialicons"
-              size={32}
-              color={theme.black}
-            />
-          </View>
-        </View>
-        <View style={styles.sightingCard}>
-          <Image style={styles.imageCover} source={Octopus} />
-          <View style={styles.sightingInfo}>
-            <View style={styles.sightingText}>
-              <Text style={styles.sightingTitle}>
-                Maldives Octopus
-              </Text>
-              <Text style={styles.sightingDate}>
-                September 23rd, 2019
-              </Text>
-            </View>
-            <Icon
-              name="more-vert"
-              type="materialicons"
-              size={32}
-              color={theme.black}
-            />
-          </View>
-        </View>
-        <View style={styles.sightingCard}>
-          <Image style={styles.imageCover} source={WhaleShark} />
-          <View style={styles.sightingInfo}>
-            <View style={styles.sightingText}>
-              <Text style={styles.sightingTitle}>
-                Whale Shark
-              </Text>
-              <Text style={styles.sightingDate}>
-                September 23rd, 2019
-              </Text>
-            </View>
-            <Icon
-              name="more-vert"
-              type="materialicons"
-              size={32}
-              color={theme.black}
-            />
-          </View>
-        </View>
-        <View style={styles.sightingCard}>
-          <Image style={styles.imageCover} source={ForestLizard} />
-          <View style={styles.sightingInfo}>
-            <View style={styles.sightingText}>
-              <Text style={styles.sightingTitle}>
-                Indonesian Forest Liza...
-              </Text>
-              <Text style={styles.sightingDate}>
-                September 23rd, 2019
-              </Text>
-            </View>
-            <Icon
-              name="more-vert"
-              type="materialicons"
-              size={32}
-              color={theme.black}
-            />
-          </View>
-        </View>
-        <View style={styles.sightingCard}>
-          <Image style={styles.imageCover} source={Elephant} />
-          <View style={styles.sightingInfo}>
-            <View style={styles.sightingText}>
-              <Text style={styles.sightingTitle}>
-                African Bush Elephant
-              </Text>
-              <Text style={styles.sightingDate}>
-                September 23rd, 2019
-              </Text>
-            </View>
-            <Icon
-              name="more-vert"
-              type="materialicons"
-              size={32}
-              color={theme.black}
-            />
-          </View>
-        </View>
-        <View style={styles.sightingCard}>
-          <Image style={styles.imageCover} source={Jaguar} />
-          <View style={styles.sightingInfo}>
-            <View style={styles.sightingText}>
-              <Text style={styles.sightingTitle}>
-                North American Jaguar
-              </Text>
-              <Text style={styles.sightingDate}>
-                September 23rd, 2019
-              </Text>
-            </View>
-            <Icon
-              name="more-vert"
-              type="materialicons"
-              size={32}
-              color={theme.black}
-            />
-          </View>
-        </View>
+        <SightingCard
+          image={Humpback}
+          name={"Humpback Whale"}
+          date={"September 23rd, 2019"}
+        />
+        <SightingCard
+          image={Hummingbird}
+          name={"Anna's Hummingbird"}
+          date={"September 23rd, 2019"}
+        />
+        <SightingCard
+          image={RedPanda}
+          name={"Red Panda"}
+          date={"September 23rd, 2019"}
+        />
+        <SightingCard
+          image={Octopus}
+          name={"Maldives Octopus"}
+          date={"September 23rd, 2019"}
+        />
+        <SightingCard
+          image={WhaleShark}
+          name={"Whale Shark"}
+          date={"September 23rd, 2019"}
+        />
+        <SightingCard
+          image={ForestLizard}
+          name={"Indonesian Forest Liza..."}
+          date={"September 23rd, 2019"}
+        />
+        <SightingCard
+          image={Elephant}
+          name={"African Bush Elephant"}
+          date={"September 23rd, 2019"}
+        />
+        <SightingCard
+          image={Jaguar}
+          name={"North American Jaguar"}
+          date={"September 23rd, 2019"}
+        />
       </ScrollView>
     </View>
   );
@@ -205,7 +123,7 @@ export default function HomeStackScreen({ navigation }) {
             type="font-awesome"
             color={theme.black}
             onPress={() => navigation.toggleDrawer()}
-            iconStyle={styles.iconLeft}
+            iconStyle={headerStyles.iconLeft}
           />
         ),
         headerRight: () => (
@@ -214,7 +132,7 @@ export default function HomeStackScreen({ navigation }) {
             type="font-awesome"
             color={theme.black}
             //onPress={() => navigation.toggleDrawer()} TODO: replace with search bar in the banner
-            iconStyle={styles.iconRight}
+            iconStyle={headerStyles.iconRight}
           />
         )
       }}
@@ -223,7 +141,7 @@ export default function HomeStackScreen({ navigation }) {
         name={screens.home}
         component={HomeScreen}
         options={{
-          headerTitle: () => <Text style={styles.headerText}>Home</Text>,
+          headerTitle: () => <Text style={headerStyles.headerText}>WildMe Report</Text>,
         }}
       />
     </HomeStack.Navigator>
@@ -234,10 +152,10 @@ export default function HomeStackScreen({ navigation }) {
 // TODO: Go through and insert theme colors instead of hard-set if possible
 // TODO: Define font usage throughout the app? Discuss
 // TODO: Clean up explicit numbers and check on different displays
-const styles = StyleSheet.create({
+const headerStyles = StyleSheet.create({
   headerText: {
     fontFamily: 'Lato-Regular',
-    fontSize: 14,
+    fontSize: 20,
   },
   iconLeft: {
     marginLeft: 16,
@@ -245,6 +163,9 @@ const styles = StyleSheet.create({
   iconRight: {
     marginRight: 16,
   },
+});
+
+const bodyStyles = StyleSheet.create({
   content: {
     flexDirection: 'column',
     alignItems: 'center',
@@ -259,7 +180,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignSelf: 'flex-start',
   },
-  fontLato: {
+  sortByText: {
     fontFamily: 'Lato-Regular',
     fontSize: 16,
   },
@@ -280,6 +201,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#888',
   },
+});
+
+const cardElementStyles = StyleSheet.create({
   sightingCard: {
     flexDirection: 'row',
     marginVertical: 10,
@@ -293,7 +217,7 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     // TODO: Relpace with react-native-shadow
     // iOS
-    shadowColor: "#000",
+    shadowColor: theme.black,
     shadowOffset: {
     	width: 0,
     	height: 2,
@@ -308,11 +232,11 @@ const styles = StyleSheet.create({
     paddingRight: 4,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    flex: 2,
+    flex: 2.5,
     alignItems: 'center',
   },
-  imageCover: { // This particularly needs to be cleaned up and made work better
-    resizeMode: 'cover', // Doesn't work?
+  imageCover: {
+    resizeMode: 'cover', // TODO: Fix to dynamically take up space in View
     borderTopLeftRadius: 6,
     borderBottomLeftRadius: 6,
     height: 78,
