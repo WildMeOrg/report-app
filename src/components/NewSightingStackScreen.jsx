@@ -22,10 +22,9 @@ const NewSightingScreen = ({ navigation }) => {
         <Animated.View style={styles.innerStyle} />
       </View>
       <KeyboardAvoidingView
-        behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+        behavior={Platform.OS == 'ios' ? 'padding' : null}
         keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 100}
         style={styles.keyboardView}
-        keyboardShouldPersistTaps='handled'
       >
         <View style={styles.addNew}>
           <TouchableOpacity
@@ -38,10 +37,7 @@ const NewSightingScreen = ({ navigation }) => {
               iconStyle={styles.addText}
               size={40}
             />
-            <Text style={[styles.inputHeader, styles.addText]}>
-              {' '}
-              Add Images{' '}
-            </Text>
+            <Text style={[styles.inputHeader, styles.addText]}>Add Images</Text>
           </TouchableOpacity>
         </View>
         <Text style={styles.inputHeader}> Title </Text>
@@ -55,6 +51,7 @@ const NewSightingScreen = ({ navigation }) => {
           multiline={true}
           numberOfLines={5}
         />
+
         <View style={styles.keyboardView} />
       </KeyboardAvoidingView>
 
@@ -123,6 +120,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
   },
+  innerContainer: {
+    flex: 1,
+    flexGrow: 1,
+  },
   addNew: {
     flexDirection: 'column',
     alignContent: 'center',
@@ -164,6 +165,7 @@ const styles = StyleSheet.create({
   },
   multiLine: {
     height: 100,
+    textAlignVertical: 'top',
   },
   button: {
     backgroundColor: theme.primary,
@@ -186,7 +188,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
   container: {
-    flex: 1,
     flexGrow: 1,
     backgroundColor: theme.white,
   },
