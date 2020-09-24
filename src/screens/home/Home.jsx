@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { ScrollView, Text, View, StyleSheet, Image, Icon } from 'react-native';
 import theme from '../../constants/theme';
 import Humpback from '../../../assets/humpback.jpg';
@@ -16,30 +16,28 @@ import Jaguar from '../../../assets/jaguar.jpg';
  *      image -- the imported image to be used for the cover of the card
  *      date  -- the date of the sighting displayed in smaller, lower text
  */
-class SightingCard extends Component {
-  render() {
-    return (
-      <View style={cardElementStyles.sightingCard}>
-        <Image style={cardElementStyles.imageCover} source={this.props.image} />
-        <View style={cardElementStyles.sightingInfo}>
-          <View style={cardElementStyles.sightingText}>
-            <Text style={cardElementStyles.sightingTitle}>
-              {this.props.name}
-            </Text>
-            <Text style={cardElementStyles.sightingDate}>
-              {this.props.date}
-            </Text>
-          </View>
-          <Icon
-            name='more-vert'
-            type='materialicons'
-            size={28}
-            color={theme.black}
-          />
+const SightingCard = () => {
+  return (
+    <View style={cardElementStyles.sightingCard}>
+      <Image style={cardElementStyles.imageCover} source={props.image} />
+      <View style={cardElementStyles.sightingInfo}>
+        <View style={cardElementStyles.sightingText}>
+          <Text style={cardElementStyles.sightingTitle}>
+            {props.name}
+          </Text>
+          <Text style={cardElementStyles.sightingDate}>
+            {props.date}
+          </Text>
         </View>
+        <Icon
+          name='more-vert'
+          type='materialicons'
+          size={28}
+          color={theme.black}
+        />
       </View>
-    );
-  }
+    </View>
+  );
 }
 
 const HomeScreen = ({ nagivation }) => {
