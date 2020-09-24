@@ -71,6 +71,12 @@ export default function Settings() {
           iconStyle={styles.icon}
         />
       </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.settingRow}
+        onPress={() => console.log('click')}
+      >
+        <Text style={styles.settingText}>Log Out</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -100,5 +106,6 @@ const styles = StyleSheet.create({
     marginVertical: 12,
     borderBottomWidth: 0.5,
     borderBottomColor: '#2C2C2C',
+    paddingBottom: 16,
   },
 });
