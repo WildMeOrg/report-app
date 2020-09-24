@@ -10,7 +10,7 @@ import ForestLizard from '../../../assets/lizard.jpg';
 import Elephant from '../../../assets/elephant.jpg';
 import Jaguar from '../../../assets/jaguar.jpg';
 
-/** <SightingCard> : A class component that creates the sighting cards on the homepage
+/** <SightingCard> : A functional component that creates the sighting cards on the homepage
  *    @props
  *      name  -- the name of the sighting displayed in larger, upper text
  *      image -- the imported image to be used for the cover of the card
