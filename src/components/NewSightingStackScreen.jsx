@@ -6,8 +6,8 @@ import {
   TextInput,
   TouchableOpacity,
   Animated,
-  KeyboardAvoidingView,
 } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon, withTheme } from 'react-native-elements';
 import screens from '../constants/screens';
@@ -21,11 +21,10 @@ const NewSightingScreen = ({ navigation }) => {
       <View style={styles.progressBar}>
         <Animated.View style={styles.innerStyle} />
       </View>
-      <KeyboardAvoidingView
-        behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
-        keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 100}
+      <KeyboardAwareScrollView
+        resetScrollToCoords={{ x: 0, y: 0 }}
         style={styles.keyboardView}
-        keyboardShouldPersistTaps='handled'
+        scrollEnabled={true}
       >
         <View style={styles.addNew}>
           <TouchableOpacity
@@ -38,10 +37,7 @@ const NewSightingScreen = ({ navigation }) => {
               iconStyle={styles.addText}
               size={40}
             />
-            <Text style={[styles.inputHeader, styles.addText]}>
-              {' '}
-              Add Images{' '}
-            </Text>
+            <Text style={[styles.inputHeader, styles.addText]}>Add Images</Text>
           </TouchableOpacity>
         </View>
         <Text style={styles.inputHeader}> Title </Text>
@@ -55,8 +51,9 @@ const NewSightingScreen = ({ navigation }) => {
           multiline={true}
           numberOfLines={5}
         />
+
         <View style={styles.keyboardView} />
-      </KeyboardAvoidingView>
+      </KeyboardAwareScrollView>
 
       <View style={styles.buttonContainer}>
         <View style={styles.horizontal}>
@@ -121,7 +118,11 @@ const styles = StyleSheet.create({
   },
   keyboardView: {
     flex: 1,
-    justifyContent: 'flex-end',
+    backgroundColor: theme.white,
+  },
+  innerContainer: {
+    flex: 1,
+    flexGrow: 1,
   },
   addNew: {
     flexDirection: 'column',
@@ -164,6 +165,7 @@ const styles = StyleSheet.create({
   },
   multiLine: {
     height: 100,
+    textAlignVertical: 'top',
   },
   button: {
     backgroundColor: theme.primary,
@@ -186,7 +188,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
   container: {
-    flex: 1,
     flexGrow: 1,
     backgroundColor: theme.white,
   },
