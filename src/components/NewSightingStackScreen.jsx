@@ -6,8 +6,8 @@ import {
   TextInput,
   TouchableOpacity,
   Animated,
-  KeyboardAvoidingView,
 } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon, withTheme } from 'react-native-elements';
 import screens from '../constants/screens';
@@ -21,10 +21,10 @@ const NewSightingScreen = ({ navigation }) => {
       <View style={styles.progressBar}>
         <Animated.View style={styles.innerStyle} />
       </View>
-      <KeyboardAvoidingView
-        behavior={Platform.OS == 'ios' ? 'padding' : null}
-        keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 100}
+      <KeyboardAwareScrollView
+        resetScrollToCoords={{ x: 0, y: 0 }}
         style={styles.keyboardView}
+        scrollEnabled={true}
       >
         <View style={styles.addNew}>
           <TouchableOpacity
@@ -53,7 +53,7 @@ const NewSightingScreen = ({ navigation }) => {
         />
 
         <View style={styles.keyboardView} />
-      </KeyboardAvoidingView>
+      </KeyboardAwareScrollView>
 
       <View style={styles.buttonContainer}>
         <View style={styles.horizontal}>
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
   },
   keyboardView: {
     flex: 1,
-    justifyContent: 'flex-end',
+    backgroundColor: theme.white,
   },
   innerContainer: {
     flex: 1,

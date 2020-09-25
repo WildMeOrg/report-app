@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Animated,
 } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon, withTheme } from 'react-native-elements';
 import screens from '../constants/screens';
@@ -20,12 +21,20 @@ const NewSighting2Screen = ({ navigation }) => {
       <View style={styles.progressBar}>
         <Animated.View style={styles.innerStyle} />
       </View>
-      <Text style={styles.inputHeader}> Status </Text>
-      <TextInput style={styles.inputFields} autoCorrect={false} />
-      <Text style={styles.inputHeader}> Relationships </Text>
-      <TextInput style={styles.inputFields} autoCorrect={false} />
-      <Text style={styles.inputHeader}> Match Individual </Text>
-      <TextInput style={styles.inputFields} autoCorrect={false} />
+
+      <KeyboardAwareScrollView
+        style={{ backgroundColor: '#ffffff' }}
+        resetScrollToCoords={{ x: 0, y: 0 }}
+        style={styles.keyboardView}
+        scrollEnabled={true}
+      >
+        <Text style={styles.inputHeader}> Status </Text>
+        <TextInput style={styles.inputFields} autoCorrect={false} />
+        <Text style={styles.inputHeader}> Relationships </Text>
+        <TextInput style={styles.inputFields} autoCorrect={false} />
+        <Text style={styles.inputHeader}> Match Individual </Text>
+        <TextInput style={styles.inputFields} autoCorrect={false} />
+      </KeyboardAwareScrollView>
       <View style={styles.buttonContainer}>
         <View style={styles.horizontal}>
           <TouchableOpacity
@@ -86,6 +95,10 @@ const styles = StyleSheet.create({
     width: '66%',
     height: 3,
     backgroundColor: theme.primary,
+  },
+  keyboardView: {
+    flex: 1,
+    backgroundColor: theme.white,
   },
   headerText: {
     fontFamily: 'Lato-Regular',
