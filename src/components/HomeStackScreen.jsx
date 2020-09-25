@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, ScrollView, Text, View, StyleSheet, Image } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { createStackNavigator } from '@react-navigation/stack';
+import Settings from '../screens/settings/Settings';
 import screens from '../constants/screens';
 import theme from '../constants/theme';
 import HomeScreen from '../screens/home/Home.jsx'

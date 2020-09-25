@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, Image, KeyboardAvoidingView } from 'react-native';
 import { houstonUrl } from '../../constants/urls';
 import Loading from '../loading/Loading';
+import Logo from '../../../assets/logo.png';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import theme from '../../constants/theme';
+import { ThemeConsumer } from 'react-native-elements';
 
 const Login = () => {
   const [email, onChangeEmail] = useState('');
@@ -32,48 +36,156 @@ const Login = () => {
   return isLoading ? (
     <Loading />
   ) : (
-    <View>
+    <KeyboardAvoidingView 
+      style={styles.parent}
+      behavior={Platform.OS == "ios" ? "padding" : "height"}
+    >
+      <View style={styles.logoView}>
+        <Image 
+          source={Logo}
+          style = {styles.logo} 
+        />
+      </View>
+
+      <Text style={styles.textFontInput}>
+        Username
+      </Text>
+
       <TextInput
         style={styles.inputFields}
         onChangeText={(input) => onChangeEmail(input)}
         value={email}
-        placeholder="Email"
         autoCorrect={false}
         autoCompleteType="email"
         textContentType="emailAddress"
         autoCapitalize="none"
       />
+
+      <Text style={styles.textFontInput}>
+        Password
+      </Text>
+
       <TextInput
         style={styles.inputFields}
         onChangeText={(input) => onChangePassword(input)}
         value={password}
-        placeholder="Password"
         autoCorrect={false}
         autoCompleteType="password"
         textContentType="password"
         autoCapitalize="none"
         secureTextEntry
       />
-      <Button
-        title="Login"
-        onPress={() => {
-          authenticate(email, password);
-        }}
-      />
 
+      <View style={styles.forgotView}>
+        <TouchableOpacity style={styles.forgot}>
+          <Text style={[styles.fontBasicText,{color: '#2C2C2C80'}]}>
+            Forgot password?
+          </Text>
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.buttonView}>
+        <TouchableOpacity
+          style={styles.loginButton}
+          onPress={() => {
+            authenticate(email, password);
+          }}
+        >
+          <Text style={styles.textFontLogin}>
+            Login
+          </Text>
+        </TouchableOpacity>
+      </View>
+      
+      <View style={styles.guestView}>
+        <TouchableOpacity style={styles.guest}>
+          <Text style={[styles.fontBasicText,{color: '#2C2C2C80'}]}>
+            Continue as guest
+          </Text>
+        </TouchableOpacity>
+      </View>
+      
+
+      {/*This text field display login success or unsuccesful response from server*/}
       <Text style={{ fontSize: 16, textAlign: 'center', marginTop: 25 }}>
         {responseData}
       </Text>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
-  inputFields: {
-    textAlign: 'center',
+  parent: {
+    justifyContent: 'center',
+  },
+  logoView: {
+    height: '50%',
+    width: '50%',
     marginLeft: '25%',
     marginRight: '25%',
+  },
+  logo: {
+    height: '100%',
+    width: '100%',
+    resizeMode: 'contain',
+  },
+  inputFields: {
+    textAlign: 'center',
+    marginLeft: '15%',
+    marginRight: '15%',
     fontSize: 16,
+    height: '5%',
+    borderWidth: 2,
+    borderColor: '#C0C0C0',
+    borderRadius: 5,
+  },
+  textFontInput: { 
+    marginLeft: '15%',
+    marginTop: '5%',
+    marginBottom: '2%',
+    fontSize: 16, 
+    fontFamily: 'Lato-Regular'
+  },
+  textFontLogin: { 
+    fontSize: 16, 
+    fontFamily: 'Lato-Regular',
+    color: theme.white,
+  },
+  loginButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: '2%',
+    marginBottom: '2%',
+  },
+  buttonView: {
+    marginTop: '5%',
+    marginLeft: '15%',
+    marginRight: '15%',
+    backgroundColor: theme.primary,
+    borderWidth: 2,
+    borderColor: '#C0C0C000',
+    borderRadius: 5,
+  },
+  guest: {
+    flexWrap: 'wrap',
+  },
+  guestView: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: '2%',
+  },
+  forgot: {
+    flexWrap: 'wrap',
+  },
+  forgotView: {
+    alignItems: 'flex-end',
+    justifyContent: 'center',
+    marginTop: '2%',
+    marginRight: '15%',
+  },
+  fontBasicText: {
+    fontSize: 16, 
+    fontFamily: 'Lato-Regular',
   },
 });
 
