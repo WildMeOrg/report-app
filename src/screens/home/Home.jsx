@@ -1,5 +1,6 @@
 import React from 'react';
-import { ScrollView, Text, View, StyleSheet, Image, Icon } from 'react-native';
+import { ScrollView, Text, View, StyleSheet, Image } from 'react-native';
+import { Icon } from 'react-native-elements'
 import theme from '../../constants/theme';
 import Humpback from '../../../assets/humpback.jpg';
 import Hummingbird from '../../../assets/hummingbird.jpg';
@@ -16,7 +17,7 @@ import Jaguar from '../../../assets/jaguar.jpg';
  *      image -- the imported image to be used for the cover of the card
  *      date  -- the date of the sighting displayed in smaller, lower text
  */
-const SightingCard = () => {
+const SightingCard = (props) => {
   return (
     <View style={cardElementStyles.sightingCard}>
       <Image style={cardElementStyles.imageCover} source={props.image} />
