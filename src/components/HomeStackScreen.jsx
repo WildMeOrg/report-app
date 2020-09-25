@@ -44,8 +44,6 @@ export default function HomeStackScreen({ navigation }) {
   );
 }
 
-// TODO: Define font usage throughout the app? Discuss
-// TODO: Clean up explicit numbers and check on different displays
 const headerStyles = StyleSheet.create({
   headerText: {
     fontFamily: 'Lato-Regular',

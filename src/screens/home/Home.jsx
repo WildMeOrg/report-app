@@ -107,6 +107,7 @@ const HomeScreen = ({ nagivation }) => {
   );
 }
 
+// TODO: Clean up explicit numbers and check on different displays
 const bodyStyles = StyleSheet.create({
   content: {
     flexDirection: 'column',
