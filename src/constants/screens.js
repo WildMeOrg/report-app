@@ -2,6 +2,7 @@ export default {
   home: 'Home',
   login: 'Login',
   loading: 'Loading',
+  setings: 'Settings',
   newSighting: 'NewSighting',
   newSighting2: 'NewSighting2',
   newSighting3: 'NewSighting3',

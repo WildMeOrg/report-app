@@ -50,7 +50,7 @@ export default function ViewSightingStackScreen({navigation}){
         }}
         >
         <ViewSightingStack.Screen
-            name={screens.view_sighting}
+            name={screens.viewSighting}
             component ={ViewSightingScreen}
             options={{
                 headerTitle: () => <Text style={styles.headerText}>View Sighting</Text>,

@@ -1,11 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 import {
   DrawerContentScrollView,
   DrawerItemList,
   DrawerItem,
 } from '@react-navigation/drawer';
 import { Icon } from 'react-native-elements';
+import screens from '../constants/screens';
 import theme from '../constants/theme';
 
 export default function CustomDrawerContent(props) {
@@ -51,6 +52,7 @@ export default function CustomDrawerContent(props) {
             <Text style={styles.drawerListText}>Settings</Text>
           </View>
         )}
+        onPress={() => props.navigation.navigate(screens.setings)}
       />
       <DrawerItem
         style={styles.drawerItemEnd}

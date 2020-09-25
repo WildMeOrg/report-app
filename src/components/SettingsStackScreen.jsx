@@ -1,25 +1,16 @@
 import React from 'react';
-import { Button, Text, StyleSheet } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from 'react-native-elements';
-import Settings from '../screens/settings/Settings';
 import screens from '../constants/screens';
+import Settings from '../screens/settings/Settings';
 import theme from '../constants/theme';
 
-const HomeStack = createStackNavigator();
+const LoginStack = createStackNavigator();
 
-const HomeScreen = ({ navigation }) => {
+export default function LoginStackScreen({ navigation }) {
   return (
-    <Button
-      title="Switch to Login View"
-      onPress={() => navigation.navigate(screens.login)}
-    />
-  );
-};
-
-export default function HomeStackScreen({ navigation }) {
-  return (
-    <HomeStack.Navigator
+    <LoginStack.Navigator
       screenOptions={{
         headerTitleAlign: 'center',
         headerLeft: () => (
@@ -33,21 +24,14 @@ export default function HomeStackScreen({ navigation }) {
         ),
       }}
     >
-      <HomeStack.Screen
-        name={screens.home}
-        component={HomeScreen}
-        options={{
-          headerTitle: () => <Text style={styles.headerText}>Home</Text>,
-        }}
-      />
-      {/* <HomeStack.Screen
+      <LoginStack.Screen
         name={screens.setings}
         component={Settings}
         options={{
           headerTitle: () => <Text style={styles.headerText}>Settings</Text>,
         }}
-      /> */}
-    </HomeStack.Navigator>
+      />
+    </LoginStack.Navigator>
   );
 }
 
