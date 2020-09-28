@@ -1,21 +1,12 @@
 import React from 'react';
-import { Button, Text, StyleSheet } from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { Button, ScrollView, Text, View, StyleSheet, Image } from 'react-native';
 import { Icon } from 'react-native-elements';
-import Settings from '../screens/settings/Settings';
+import { createStackNavigator } from '@react-navigation/stack';
 import screens from '../constants/screens';
 import theme from '../constants/theme';
+import HomeScreen from '../screens/home/Home.jsx'
 
 const HomeStack = createStackNavigator();
-
-const HomeScreen = ({ navigation }) => {
-  return (
-    <Button
-      title="Switch to Login View"
-      onPress={() => navigation.navigate(screens.login)}
-    />
-  );
-};
 
 export default function HomeStackScreen({ navigation }) {
   return (
@@ -28,35 +19,40 @@ export default function HomeStackScreen({ navigation }) {
             type="font-awesome"
             color={theme.black}
             onPress={() => navigation.toggleDrawer()}
-            iconStyle={styles.icon}
+            iconStyle={headerStyles.iconLeft}
           />
         ),
+        headerRight: () => (
+          <Icon
+            name="search"
+            type="font-awesome"
+            color={theme.black}
+            //onPress={() => navigation.toggleDrawer()} TODO: replace with search bar in the banner
+            iconStyle={headerStyles.iconRight}
+          />
+        )
       }}
     >
       <HomeStack.Screen
         name={screens.home}
         component={HomeScreen}
         options={{
-          headerTitle: () => <Text style={styles.headerText}>Home</Text>,
+          headerTitle: () => <Text style={headerStyles.headerText}>WildMe Report</Text>,
         }}
       />
-      {/* <HomeStack.Screen
-        name={screens.setings}
-        component={Settings}
-        options={{
-          headerTitle: () => <Text style={styles.headerText}>Settings</Text>,
-        }}
-      /> */}
     </HomeStack.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
+const headerStyles = StyleSheet.create({
   headerText: {
     fontFamily: 'Lato-Regular',
-    fontSize: 14,
+    fontSize: 20,
   },
-  icon: {
+  iconLeft: {
     marginLeft: 16,
+  },
+  iconRight: {
+    marginRight: 16,
   },
 });
