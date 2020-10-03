@@ -12,6 +12,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Icon, withTheme } from 'react-native-elements';
 import screens from '../constants/screens';
 import theme from '../constants/theme';
+import globalStyles from '../styles/globalStyles';
+import styles from '../styles/newSightingStyles';
 
 const NewSightingStack = createStackNavigator();
 
@@ -19,7 +21,7 @@ const NewSightingScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.progressBar}>
-        <Animated.View style={styles.innerStyle} />
+        <Animated.View style={(styles.innerProgressBar, styles.thirtyThree)} />
       </View>
       <KeyboardAwareScrollView
         resetScrollToCoords={{ x: 0, y: 0 }}
@@ -37,16 +39,18 @@ const NewSightingScreen = ({ navigation }) => {
               iconStyle={styles.addText}
               size={40}
             />
-            <Text style={[styles.inputHeader, styles.addText]}>Add Images</Text>
+            <Text style={[globalStyles.inputHeader, styles.addText]}>
+              Add Images
+            </Text>
           </TouchableOpacity>
         </View>
-        <Text style={styles.inputHeader}> Title </Text>
-        <TextInput style={styles.inputFields} autoCorrect={false} />
-        <Text style={styles.inputHeader}> Location </Text>
-        <TextInput style={styles.inputFields} autoCorrect={false} />
-        <Text style={styles.inputHeader}> Sighting Context </Text>
+        <Text style={globalStyles.inputHeader}> Title </Text>
+        <TextInput style={globalStyles.inputFields} autoCorrect={false} />
+        <Text style={globalStyles.inputHeader}> Location </Text>
+        <TextInput style={globalStyles.inputFields} autoCorrect={false} />
+        <Text style={globalStyles.inputHeader}> Sighting Context </Text>
         <TextInput
-          style={[styles.inputFields, styles.multiLine]}
+          style={[globalStyles.inputFields, styles.multiLine]}
           autoCorrect={false}
           multiline={true}
           numberOfLines={5}
@@ -58,15 +62,15 @@ const NewSightingScreen = ({ navigation }) => {
       <View style={styles.buttonContainer}>
         <View style={styles.horizontal}>
           <TouchableOpacity>
-            <View style={[styles.button, styles.buttonInactive]}>
-              <Text style={styles.buttonText}>Back</Text>
+            <View style={[styles.button, globalStyles.invisible]}>
+              <Text style={globalStyles.buttonText}>Back</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => navigation.navigate(screens.newSightings[1])}
           >
-            <View style={styles.button}>
-              <Text style={styles.buttonText}>Next </Text>
+            <View style={(globalStyles.button, styles.button)}>
+              <Text style={globalStyles.buttonText}>Next </Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -86,7 +90,7 @@ export default function NewSightingStackScreen({ navigation }) {
             type='font-awesome'
             color={theme.black}
             onPress={() => navigation.navigate(screens.home)}
-            iconStyle={styles.icon}
+            iconStyle={globalStyles.icon}
           />
         ),
       }}
@@ -96,7 +100,7 @@ export default function NewSightingStackScreen({ navigation }) {
         component={NewSightingScreen}
         options={{
           headerTitle: () => (
-            <Text style={styles.headerText}>Sighting Info</Text>
+            <Text style={globalStyles.headerText}>Sighting Info</Text>
           ),
         }}
       />
@@ -104,97 +108,66 @@ export default function NewSightingStackScreen({ navigation }) {
   );
 }
 
-const styles = StyleSheet.create({
-  progressBar: {
-    width: '100%',
-    height: 3,
-    backgroundColor: '#EDEDED',
-    justifyContent: 'center',
-  },
-  innerStyle: {
-    width: '33%',
-    height: 3,
-    backgroundColor: theme.primary,
-  },
-  keyboardView: {
-    flex: 1,
-    backgroundColor: theme.white,
-  },
-  innerContainer: {
-    flex: 1,
-    flexGrow: 1,
-  },
-  addNew: {
-    flexDirection: 'column',
-    alignContent: 'center',
-    backgroundColor: '#2C2C2C30',
-    margin: '5%',
-    borderWidth: 1,
-    borderStyle: 'dashed',
-    borderColor: theme.black,
-    borderRadius: 6,
-    opacity: 0.5,
-    paddingVertical: '7%',
-  },
-  addText: {
-    alignSelf: 'center',
-    margin: '1%',
-  },
-  headerText: {
-    fontFamily: 'Lato-Regular',
-    fontSize: 14,
-  },
-  icon: {
-    marginRight: 16,
-  },
-  inputHeader: {
-    fontFamily: 'Lato-Regular',
-    fontSize: 16,
-    margin: '5%',
-    marginBottom: '3%',
-    color: theme.black,
-  },
-  inputFields: {
-    textAlign: 'left',
-    marginHorizontal: '5%',
-    fontSize: 16,
-    borderColor: '#2c2c2c80',
-    borderWidth: 1,
-    borderRadius: 6,
-    padding: '2%',
-  },
-  multiLine: {
-    height: 100,
-    textAlignVertical: 'top',
-  },
-  button: {
-    backgroundColor: theme.primary,
-    paddingVertical: 12,
-    paddingHorizontal: 50,
-    borderRadius: 20,
-    margin: '5%',
-  },
-  buttonInactive: {
-    opacity: 0,
-  },
-  buttonText: {
-    color: theme.white,
-    fontSize: 16,
-    alignSelf: 'center',
-  },
-  horizontal: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-  },
-  container: {
-    flexGrow: 1,
-    backgroundColor: theme.white,
-  },
-  buttonContainer: {
-    position: 'absolute',
-    bottom: 0,
-    alignSelf: 'center',
-    margin: '5%',
-  },
-});
+// const styles = StyleSheet.create({
+//   progressBar: {
+//     width: '100%',
+//     height: 3,
+//     backgroundColor: '#EDEDED',
+//     justifyContent: 'center',
+//   },
+//   innerStyle: {
+//     width: '33%',
+//     height: 3,
+//     backgroundColor: theme.primary,
+//   },
+//   keyboardView: {
+//     flex: 1,
+//     backgroundColor: theme.white,
+//   },
+//   innerContainer: {
+//     flex: 1,
+//     flexGrow: 1,
+//   },
+//   addNew: {
+//     flexDirection: 'column',
+//     alignContent: 'center',
+//     backgroundColor: '#2C2C2C30',
+//     margin: '5%',
+//     borderWidth: 1,
+//     borderStyle: 'dashed',
+//     borderColor: theme.black,
+//     borderRadius: 6,
+//     opacity: 0.5,
+//     paddingVertical: '7%',
+//   },
+//   addText: {
+//     alignSelf: 'center',
+//     margin: '1%',
+//   },
+//   multiLine: {
+//     height: 100,
+//     textAlignVertical: 'top',
+//   },
+//   button: {
+//     backgroundColor: theme.primary,
+//     paddingVertical: 12,
+//     paddingHorizontal: 50,
+//     borderRadius: 20,
+//     margin: '5%',
+//   },
+//   horizontal: {
+//     flex: 1,
+//     flexDirection: 'row',
+//     justifyContent: 'space-around',
+//   },
+//   container: {
+//     flexGrow: 1,
+//     backgroundColor: theme.white,
+//   },
+//   buttonContainer: {
+//     position: 'absolute',
+//     bottom: 0,
+//     alignSelf: 'center',
+//     margin: '5%',
+//   },
+// });
