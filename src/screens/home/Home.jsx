@@ -41,7 +41,6 @@ const SightingCard = (props) => {
   );
 }
 
-const HomeScreen = ({ nagivation }) => {
   // TODO: Move to state
   var sightings = [
     {
@@ -126,8 +125,6 @@ const HomeScreen = ({ nagivation }) => {
           />
         </View>
         <View style={bodyStyles.addNew}>
-          <Text style={bodyStyles.addNewText}>
-            + Add new sighting
           <TouchableOpacity onPress={() => navigation.navigate(screens.newSightings[0])}>
             <Text style={bodyStyles.addNewText}>
           </TouchableOpacity>
