@@ -33,4 +33,9 @@ export default StyleSheet.create({
     fontSize: 16,
     alignSelf: 'center',
   },
+  basicText: {
+    fontSize: 16,
+    fontFamily: 'Lato-Regular',
+    color: '#2C2C2C80',
+  },
 });
