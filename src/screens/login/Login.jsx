@@ -1,11 +1,20 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { StyleSheet, Text, View, TextInput, Button, Image, KeyboardAvoidingView } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Button,
+  Image,
+  KeyboardAvoidingView,
+} from 'react-native';
 import { houstonUrl } from '../../constants/urls';
 import Loading from '../loading/Loading';
 import Logo from '../../../assets/logo.png';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import theme from '../../constants/theme';
+import { baseUrl } from '../../constants/urls';
 import { ThemeConsumer } from 'react-native-elements';
 
 const Login = () => {
@@ -30,26 +39,34 @@ const Login = () => {
     } catch (loginError) {
       onChangeResponseData(loginError.name + ': ' + loginError.message);
     }
+
+    try {
+      const setingsPacket = await axios(
+        `${baseUrl}/api/v0/configuration/__bundle_setup`
+      );
+      console.log('====================================');
+      console.log({ setingsPacket });
+      console.log('====================================');
+    } catch (settingsFetchError) {
+      onChangeResponseData(
+        settingsFetchError.name + ': ' + settingsFetchError.message
+      );
+    }
     setIsLoading(false);
   };
 
   return isLoading ? (
     <Loading />
   ) : (
-    <KeyboardAvoidingView 
+    <KeyboardAvoidingView
       style={styles.parent}
-      behavior={Platform.OS == "ios" ? "padding" : "height"}
+      behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
     >
       <View style={styles.logoView}>
-        <Image 
-          source={Logo}
-          style = {styles.logo} 
-        />
+        <Image source={Logo} style={styles.logo} />
       </View>
 
-      <Text style={styles.textFontInput}>
-        Username
-      </Text>
+      <Text style={styles.textFontInput}>Username</Text>
 
       <TextInput
         style={styles.inputFields}
@@ -61,9 +78,7 @@ const Login = () => {
         autoCapitalize="none"
       />
 
-      <Text style={styles.textFontInput}>
-        Password
-      </Text>
+      <Text style={styles.textFontInput}>Password</Text>
 
       <TextInput
         style={styles.inputFields}
@@ -78,7 +93,7 @@ const Login = () => {
 
       <View style={styles.forgotView}>
         <TouchableOpacity style={styles.forgot}>
-          <Text style={[styles.fontBasicText,{color: '#2C2C2C80'}]}>
+          <Text style={[styles.fontBasicText, { color: '#2C2C2C80' }]}>
             Forgot password?
           </Text>
         </TouchableOpacity>
@@ -91,20 +106,17 @@ const Login = () => {
             authenticate(email, password);
           }}
         >
-          <Text style={styles.textFontLogin}>
-            Login
-          </Text>
+          <Text style={styles.textFontLogin}>Login</Text>
         </TouchableOpacity>
       </View>
-      
+
       <View style={styles.guestView}>
         <TouchableOpacity style={styles.guest}>
-          <Text style={[styles.fontBasicText,{color: '#2C2C2C80'}]}>
+          <Text style={[styles.fontBasicText, { color: '#2C2C2C80' }]}>
             Continue as guest
           </Text>
         </TouchableOpacity>
       </View>
-      
 
       {/*This text field display login success or unsuccesful response from server*/}
       <Text style={{ fontSize: 16, textAlign: 'center', marginTop: 25 }}>
@@ -139,15 +151,15 @@ const styles = StyleSheet.create({
     borderColor: '#C0C0C0',
     borderRadius: 5,
   },
-  textFontInput: { 
+  textFontInput: {
     marginLeft: '15%',
     marginTop: '5%',
     marginBottom: '2%',
-    fontSize: 16, 
-    fontFamily: 'Lato-Regular'
+    fontSize: 16,
+    fontFamily: 'Lato-Regular',
   },
-  textFontLogin: { 
-    fontSize: 16, 
+  textFontLogin: {
+    fontSize: 16,
     fontFamily: 'Lato-Regular',
     color: theme.white,
   },
@@ -184,7 +196,7 @@ const styles = StyleSheet.create({
     marginRight: '15%',
   },
   fontBasicText: {
-    fontSize: 16, 
+    fontSize: 16,
     fontFamily: 'Lato-Regular',
   },
 });
