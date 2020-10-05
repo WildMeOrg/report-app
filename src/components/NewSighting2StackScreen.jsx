@@ -30,11 +30,20 @@ const NewSighting2Screen = ({ navigation }) => {
         style={styles.keyboardView}
         scrollEnabled={true}
       >
-        <Text style={globalStyles.inputHeader}> Status </Text>
+        <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
+          {' '}
+          Status{' '}
+        </Text>
         <TextInput style={globalStyles.inputFields} autoCorrect={false} />
-        <Text style={globalStyles.inputHeader}> Relationships </Text>
+        <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
+          {' '}
+          Relationships{' '}
+        </Text>
         <TextInput style={globalStyles.inputFields} autoCorrect={false} />
-        <Text style={globalStyles.inputHeader}> Match Individual </Text>
+        <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
+          {' '}
+          Match Individual{' '}
+        </Text>
         <TextInput style={globalStyles.inputFields} autoCorrect={false} />
       </KeyboardAwareScrollView>
       <View style={styles.buttonContainer}>

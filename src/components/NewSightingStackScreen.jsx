@@ -44,11 +44,20 @@ const NewSightingScreen = ({ navigation }) => {
             </Text>
           </TouchableOpacity>
         </View>
-        <Text style={globalStyles.inputHeader}> Title </Text>
+        <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
+          {' '}
+          Title{' '}
+        </Text>
         <TextInput style={globalStyles.inputFields} autoCorrect={false} />
-        <Text style={globalStyles.inputHeader}> Location </Text>
+        <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
+          {' '}
+          Location{' '}
+        </Text>
         <TextInput style={globalStyles.inputFields} autoCorrect={false} />
-        <Text style={globalStyles.inputHeader}> Sighting Context </Text>
+        <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
+          {' '}
+          Sighting Context{' '}
+        </Text>
         <TextInput
           style={[globalStyles.inputFields, styles.multiLine]}
           autoCorrect={false}

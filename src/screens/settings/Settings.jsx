@@ -2,6 +2,7 @@ import React from 'react';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { Icon } from 'react-native-elements';
 import theme from '../../constants/theme';
+import globalStyles from '../../styles/globalStyles';
 
 export default function Settings() {
   return (
@@ -10,10 +11,10 @@ export default function Settings() {
         style={styles.settingRow}
         onPress={() => console.log('click')}
       >
-        <Text style={styles.settingText}>Profile</Text>
+        <Text style={globalStyles.h2Text}>Profile</Text>
         <Icon
-          name="chevron-right"
-          type="font-awesome"
+          name='chevron-right'
+          type='font-awesome'
           color={theme.black}
           onPress={() => navigation.toggleDrawer()}
           iconStyle={styles.icon}
@@ -23,10 +24,10 @@ export default function Settings() {
         style={styles.settingRow}
         onPress={() => console.log('click')}
       >
-        <Text style={styles.settingText}>Notifications</Text>
+        <Text style={globalStyles.h2Text}>Notifications</Text>
         <Icon
-          name="chevron-right"
-          type="font-awesome"
+          name='chevron-right'
+          type='font-awesome'
           color={theme.black}
           onPress={() => navigation.toggleDrawer()}
           iconStyle={styles.icon}
@@ -36,10 +37,10 @@ export default function Settings() {
         style={styles.settingRow}
         onPress={() => console.log('click')}
       >
-        <Text style={styles.settingText}>Privacy</Text>
+        <Text style={globalStyles.h2Text}>Privacy</Text>
         <Icon
-          name="chevron-right"
-          type="font-awesome"
+          name='chevron-right'
+          type='font-awesome'
           color={theme.black}
           onPress={() => navigation.toggleDrawer()}
           iconStyle={styles.icon}
@@ -49,10 +50,10 @@ export default function Settings() {
         style={styles.settingRow}
         onPress={() => console.log('click')}
       >
-        <Text style={styles.settingText}>Security</Text>
+        <Text style={globalStyles.h2Text}>Security</Text>
         <Icon
-          name="chevron-right"
-          type="font-awesome"
+          name='chevron-right'
+          type='font-awesome'
           color={theme.black}
           onPress={() => navigation.toggleDrawer()}
           iconStyle={styles.icon}
@@ -62,10 +63,10 @@ export default function Settings() {
         style={styles.settingRowBottom}
         onPress={() => console.log('click')}
       >
-        <Text style={styles.settingText}>Help</Text>
+        <Text style={globalStyles.h2Text}>Help</Text>
         <Icon
-          name="chevron-right"
-          type="font-awesome"
+          name='chevron-right'
+          type='font-awesome'
           color={theme.black}
           onPress={() => navigation.toggleDrawer()}
           iconStyle={styles.icon}
@@ -75,7 +76,7 @@ export default function Settings() {
         style={styles.settingRow}
         onPress={() => console.log('click')}
       >
-        <Text style={styles.settingText}>Log Out</Text>
+        <Text style={globalStyles.h2Text}>Log Out</Text>
       </TouchableOpacity>
     </View>
   );
@@ -98,6 +99,7 @@ const styles = StyleSheet.create({
   settingText: {
     fontFamily: 'Lato-Regular',
     fontSize: 16,
+    color: theme.black,
   },
   settingRowBottom: {
     flexDirection: 'row',

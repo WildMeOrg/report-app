@@ -9,12 +9,14 @@ export default StyleSheet.create({
   icon: {
     marginRight: 16,
   },
-  inputHeader: {
+  h2Text: {
     fontFamily: 'Lato-Regular',
     fontSize: 16,
+    color: theme.black,
+  },
+  inputHeader: {
     margin: '5%',
     marginBottom: '3%',
-    color: theme.black,
   },
   inputFields: {
     textAlign: 'left',

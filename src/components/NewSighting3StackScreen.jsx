@@ -29,9 +29,15 @@ const NewSighting3Screen = ({ navigation }) => {
         style={styles.keyboardView}
         scrollEnabled={true}
       >
-        <Text style={globalStyles.inputHeader}> Photographer name </Text>
+        <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
+          {' '}
+          Photographer name{' '}
+        </Text>
         <TextInput style={globalStyles.inputFields} autoCorrect={false} />
-        <Text style={globalStyles.inputHeader}> Photographer email </Text>
+        <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
+          {' '}
+          Photographer email{' '}
+        </Text>
         <TextInput style={globalStyles.inputFields} autoCorrect={false} />
       </KeyboardAwareScrollView>
       <View style={styles.buttonContainer}>

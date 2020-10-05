@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScrollView, Text, View, StyleSheet, Image } from 'react-native';
-import { Icon } from 'react-native-elements'
+import { Icon } from 'react-native-elements';
 import theme from '../../constants/theme';
 import Humpback from '../../../assets/humpback.jpg';
 import Hummingbird from '../../../assets/hummingbird.jpg';
@@ -23,12 +23,8 @@ const SightingCard = (props) => {
       <Image style={cardElementStyles.imageCover} source={props.image} />
       <View style={cardElementStyles.sightingInfo}>
         <View style={cardElementStyles.sightingText}>
-          <Text style={cardElementStyles.sightingTitle}>
-            {props.name}
-          </Text>
-          <Text style={cardElementStyles.sightingDate}>
-            {props.date}
-          </Text>
+          <Text style={cardElementStyles.sightingTitle}>{props.name}</Text>
+          <Text style={cardElementStyles.sightingDate}>{props.date}</Text>
         </View>
         <Icon
           name='more-vert'
@@ -39,7 +35,7 @@ const SightingCard = (props) => {
       </View>
     </View>
   );
-}
+};
 
 const HomeScreen = ({ nagivation }) => {
   return (
@@ -47,9 +43,7 @@ const HomeScreen = ({ nagivation }) => {
       {/* TODO: Turn from ScrollView into something FlatView for performance in long term(?) */}
       <ScrollView contentContainerStyle={bodyStyles.content}>
         <View style={bodyStyles.sortBy}>
-          <Text style={bodyStyles.sortByText}>
-            Last Added
-          </Text>
+          <Text style={bodyStyles.sortByText}>Last Added</Text>
           <Icon
             name='arrowdown'
             type='antdesign'
@@ -58,9 +52,7 @@ const HomeScreen = ({ nagivation }) => {
           />
         </View>
         <View style={bodyStyles.addNew}>
-          <Text style={bodyStyles.addNewText}>
-            + Add new sighting
-          </Text>
+          <Text style={bodyStyles.addNewText}>+ Add new sighting</Text>
         </View>
         <SightingCard
           image={Humpback}
@@ -69,7 +61,7 @@ const HomeScreen = ({ nagivation }) => {
         />
         <SightingCard
           image={Hummingbird}
-          name={'Anna\'s Hummingbird'}
+          name={"Anna's Hummingbird"}
           date={'September 23rd, 2019'}
         />
         <SightingCard
@@ -105,7 +97,7 @@ const HomeScreen = ({ nagivation }) => {
       </ScrollView>
     </View>
   );
-}
+};
 
 // TODO: Clean up explicit numbers and check on different displays
 const bodyStyles = StyleSheet.create({
@@ -114,6 +106,7 @@ const bodyStyles = StyleSheet.create({
     alignItems: 'center',
     overflow: 'visible',
     paddingBottom: 5,
+    backgroundColor: theme.white,
   },
   sortBy: {
     width: 102,
@@ -162,8 +155,8 @@ const cardElementStyles = StyleSheet.create({
     // iOS
     shadowColor: theme.black,
     shadowOffset: {
-    	width: 0,
-    	height: 2,
+      width: 0,
+      height: 2,
     },
     shadowOpacity: 0.23,
     shadowRadius: 2.62,

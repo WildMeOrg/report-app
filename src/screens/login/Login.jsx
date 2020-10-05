@@ -53,7 +53,9 @@ const Login = () => {
         <Image source={Logo} style={styles.logo} />
       </View>
 
-      <Text style={globalStyles.inputHeader}>Username</Text>
+      <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
+        Username
+      </Text>
 
       <TextInput
         style={globalStyles.inputFields}
@@ -65,7 +67,9 @@ const Login = () => {
         autoCapitalize='none'
       />
 
-      <Text style={globalStyles.inputHeader}>Password</Text>
+      <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
+        Password
+      </Text>
 
       <TextInput
         style={globalStyles.inputFields}
