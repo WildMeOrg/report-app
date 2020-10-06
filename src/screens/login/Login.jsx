@@ -26,7 +26,7 @@ const Login = ({navigation}) => {
           password,
         },
       });
-      if(JSON.stringify(response.data).includes("success")){
+      if(response.data != null){
         navigation.navigate(screens.home);
       }
       onChangeResponseData(JSON.stringify(response.data));
