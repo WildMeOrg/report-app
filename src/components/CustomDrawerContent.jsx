@@ -39,6 +39,7 @@ export default function CustomDrawerContent(props) {
             <Text style={styles.drawerListText}>New Sighting</Text>
           </View>
         )}
+        onPress ={() => props.navigation.navigate(screens.newSightings[0])}
       />
       <DrawerItem
         label={() => (
@@ -75,6 +76,7 @@ export default function CustomDrawerContent(props) {
             <Text style={styles.drawerListText}>Log Out</Text>
           </View>
         )}
+        onPress ={() => props.navigation.navigate(screens.login)}
       />
       {/* Until all screens are linked together this allow us to go to each screen */}
       <DrawerItemList {...props} />

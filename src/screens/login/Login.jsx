@@ -6,9 +6,10 @@ import Loading from '../loading/Loading';
 import Logo from '../../../assets/logo.png';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import theme from '../../constants/theme';
+import screens from '../../constants/screens';
 import { ThemeConsumer } from 'react-native-elements';
 
-const Login = () => {
+const Login = ({navigation}) => {
   const [email, onChangeEmail] = useState('');
   const [password, onChangePassword] = useState('');
   const [responseData, onChangeResponseData] = useState('');
@@ -25,7 +26,9 @@ const Login = () => {
           password,
         },
       });
-
+      if(response.data != null){
+        navigation.navigate(screens.home);
+      }
       onChangeResponseData(JSON.stringify(response.data));
     } catch (loginError) {
       onChangeResponseData(loginError.name + ': ' + loginError.message);

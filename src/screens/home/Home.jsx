@@ -10,6 +10,8 @@ import WhaleShark from '../../../assets/whaleshark.jpg';
 import ForestLizard from '../../../assets/lizard.jpg';
 import Elephant from '../../../assets/elephant.jpg';
 import Jaguar from '../../../assets/jaguar.jpg';
+import screens from '../../constants/screens';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 /** <SightingCard> : A functional component that creates the sighting cards on the homepage
  *    @props
@@ -41,7 +43,7 @@ const SightingCard = (props) => {
   );
 }
 
-const HomeScreen = ({ nagivation }) => {
+const HomeScreen = ({ navigation }) => {
   // TODO: Move to state
   var sightings = [
     {
@@ -126,19 +128,26 @@ const HomeScreen = ({ nagivation }) => {
           />
         </View>
         <View style={bodyStyles.addNew}>
-          <Text style={bodyStyles.addNewText}>
-            + Add new sighting
-          </Text>
+          <TouchableOpacity onPress={() => navigation.navigate(screens.newSightings[0])}>
+            <Text style={bodyStyles.addNewText}>
+              + Add new sighting
+            </Text>
+          </TouchableOpacity>
         </View>
         { // Procedurally generate the cards from the sightings array
           sightings.map(sighting => {
             return(
+              //TODO:  change the onPress depending on the sighting card
+              //currently they all go to the same card
+              <TouchableOpacity onPress ={() => navigation.navigate(screens.viewSighting)}
+              style={cardElementStyles.touchableOpacityHolder}>
               <SightingCard
                 key =   {sighting.id}
                 image = {sighting.image}
                 name =  {sighting.name}
                 date =  {sighting.date}
               />
+              </TouchableOpacity>
             );
           })
         }
@@ -187,6 +196,9 @@ const bodyStyles = StyleSheet.create({
 });
 
 const cardElementStyles = StyleSheet.create({
+  touchableOpacityHolder: {
+    width: '95%',
+  },
   sightingCard: {
     flexDirection: 'row',
     marginVertical: 10,
