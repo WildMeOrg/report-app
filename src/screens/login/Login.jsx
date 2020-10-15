@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { StyleSheet, Text, View, TextInput, Button, Image, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Image, KeyboardAvoidingView, Platform } from 'react-native';
 import { houstonUrl } from '../../constants/urls';
 import Loading from '../loading/Loading';
 import Logo from '../../../assets/logo.png';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import theme from '../../constants/theme';
 import screens from '../../constants/screens';
-import { ThemeConsumer } from 'react-native-elements';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const Login = ({navigation}) => {
   const [email, onChangeEmail] = useState('');
@@ -39,10 +39,12 @@ const Login = ({navigation}) => {
   return isLoading ? (
     <Loading />
   ) : (
-    <KeyboardAvoidingView 
-      style={styles.parent}
-      behavior={Platform.OS == "ios" ? "padding" : "height"}
-    >
+    <KeyboardAwareScrollView 
+    enableOnAndroid={false}
+    contentContainerStyle={{flex: 1, maxHeight: "100%"}}
+    extraScrollHeight={130}
+    >  
+    
       <View style={styles.logoView}>
         <Image 
           source={Logo}
@@ -107,25 +109,27 @@ const Login = ({navigation}) => {
           </Text>
         </TouchableOpacity>
       </View>
-      
 
       {/*This text field display login success or unsuccesful response from server*/}
       <Text style={{ fontSize: 16, textAlign: 'center', marginTop: 25 }}>
         {responseData}
       </Text>
-    </KeyboardAvoidingView>
+    
+    </KeyboardAwareScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   parent: {
     justifyContent: 'center',
+    flex: 1
   },
   logoView: {
     height: '50%',
     width: '50%',
     marginLeft: '25%',
     marginRight: '25%',
+    marginBottom: '-10%'
   },
   logo: {
     height: '100%',
