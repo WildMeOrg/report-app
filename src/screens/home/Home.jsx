@@ -139,7 +139,9 @@ const HomeScreen = ({ navigation }) => {
             return(
               //TODO:  change the onPress depending on the sighting card
               //currently they all go to the same card
-              <TouchableOpacity onPress ={() => navigation.navigate(screens.viewSighting)}
+              <TouchableOpacity 
+              key={sighting.id}
+              onPress={() => navigation.navigate(screens.viewSighting)}
               style={cardElementStyles.touchableOpacityHolder}>
               <SightingCard
                 key =   {sighting.id}
