@@ -58,6 +58,15 @@ export default function ViewSightingStackScreen({ navigation }) {
             iconStyle={styles.icon}
           />
         ),
+        headerRight: () => (
+          <Icon
+            name='times'
+            type='font-awesome'
+            color={theme.black}
+            onPress={() => navigation.navigate(screens.home)}
+            iconStyle={styles.icon2}
+          />
+        ),
       }}
     >
       <ViewSightingStack.Screen
@@ -79,6 +88,9 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginLeft: 16,
+  },
+  icon2: {
+    marginRight: 16,
   },
   image: {
     width: '100%',

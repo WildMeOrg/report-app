@@ -11,6 +11,8 @@ import ForestLizard from '../../../assets/lizard.jpg';
 import Elephant from '../../../assets/elephant.jpg';
 import Jaguar from '../../../assets/jaguar.jpg';
 import globalStyles from '../../styles/globalStyles';
+import screens from '../../constants/screens';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 /** <SightingCard> : A functional component that creates the sighting cards on the homepage
  *    @props
@@ -38,7 +40,75 @@ const SightingCard = (props) => {
   );
 };
 
-const HomeScreen = ({ nagivation }) => {
+const HomeScreen = ({ navigation }) => {
+  // TODO: Move to state
+  var sightings = [
+    {
+      id: 1,
+      image: Humpback,
+      name: 'Humpback Whale',
+      date: 'September 23rd, 2019',
+      synced: true,
+      inProgress: false,
+    },
+    {
+      id: 2,
+      image: Hummingbird,
+      name: "Anna's Hummingbird",
+      date: 'September 23rd, 2019',
+      synced: true,
+      inProgress: false,
+    },
+    {
+      id: 3,
+      image: RedPanda,
+      name: 'Red Panda',
+      date: 'September 23rd, 2019',
+      synced: true,
+      inProgress: false,
+    },
+    {
+      id: 4,
+      image: Octopus,
+      name: 'Maldives Octopus',
+      date: 'September 23rd, 2019',
+      synced: true,
+      inProgress: false,
+    },
+    {
+      id: 5,
+      image: WhaleShark,
+      name: 'Whale Shark',
+      date: 'September 23rd, 2019',
+      synced: true,
+      inProgress: false,
+    },
+    {
+      id: 6,
+      image: ForestLizard,
+      name: 'Indonesian Forest Liza...',
+      date: 'September 23rd, 2019',
+      synced: true,
+      inProgress: false,
+    },
+    {
+      id: 7,
+      image: Elephant,
+      name: 'African Bush Elephant',
+      date: 'September 23rd, 2019',
+      synced: true,
+      inProgress: false,
+    },
+    {
+      id: 8,
+      image: Jaguar,
+      name: 'North American Jaguar',
+      date: 'September 23rd, 2019',
+      synced: true,
+      inProgress: false,
+    },
+  ];
+
   return (
     <View>
       {/* TODO: Turn from ScrollView into something FlatView for performance in long term(?) */}
@@ -53,48 +123,32 @@ const HomeScreen = ({ nagivation }) => {
           />
         </View>
         <View style={bodyStyles.addNew}>
-          <Text style={bodyStyles.addNewText}>+ Add new sighting</Text>
+          <TouchableOpacity
+            onPress={() => navigation.navigate(screens.newSightings[0])}
+          >
+            <Text style={bodyStyles.addNewText}>+ Add new sighting</Text>
+          </TouchableOpacity>
         </View>
-        <SightingCard
-          image={Humpback}
-          name={'Humpback Whale'}
-          date={'September 23rd, 2019'}
-        />
-        <SightingCard
-          image={Hummingbird}
-          name={"Anna's Hummingbird"}
-          date={'September 23rd, 2019'}
-        />
-        <SightingCard
-          image={RedPanda}
-          name={'Red Panda'}
-          date={'September 23rd, 2019'}
-        />
-        <SightingCard
-          image={Octopus}
-          name={'Maldives Octopus'}
-          date={'September 23rd, 2019'}
-        />
-        <SightingCard
-          image={WhaleShark}
-          name={'Whale Shark'}
-          date={'September 23rd, 2019'}
-        />
-        <SightingCard
-          image={ForestLizard}
-          name={'Indonesian Forest Liza...'}
-          date={'September 23rd, 2019'}
-        />
-        <SightingCard
-          image={Elephant}
-          name={'African Bush Elephant'}
-          date={'September 23rd, 2019'}
-        />
-        <SightingCard
-          image={Jaguar}
-          name={'North American Jaguar'}
-          date={'September 23rd, 2019'}
-        />
+        {
+          // Procedurally generate the cards from the sightings array
+          sightings.map((sighting) => {
+            return (
+              //TODO:  change the onPress depending on the sighting card
+              //currently they all go to the same card
+              <TouchableOpacity
+                onPress={() => navigation.navigate(screens.viewSighting)}
+                style={cardElementStyles.touchableOpacityHolder}
+              >
+                <SightingCard
+                  key={sighting.id}
+                  image={sighting.image}
+                  name={sighting.name}
+                  date={sighting.date}
+                />
+              </TouchableOpacity>
+            );
+          })
+        }
       </ScrollView>
     </View>
   );
@@ -141,6 +195,9 @@ const bodyStyles = StyleSheet.create({
 });
 
 const cardElementStyles = StyleSheet.create({
+  touchableOpacityHolder: {
+    width: '95%',
+  },
   sightingCard: {
     flexDirection: 'row',
     marginVertical: 10,
