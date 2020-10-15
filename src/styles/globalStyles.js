@@ -14,6 +14,16 @@ export default StyleSheet.create({
     fontSize: 16,
     color: theme.black,
   },
+  buttonText: {
+    color: theme.white,
+    fontSize: 16,
+    alignSelf: 'center',
+  },
+  basicText: {
+    fontSize: 16,
+    fontFamily: 'Lato-Regular',
+    color: '#2C2C2C80',
+  },
   inputHeader: {
     margin: '5%',
     marginBottom: '3%',
@@ -29,15 +39,5 @@ export default StyleSheet.create({
   },
   invisible: {
     opacity: 0,
-  },
-  buttonText: {
-    color: theme.white,
-    fontSize: 16,
-    alignSelf: 'center',
-  },
-  basicText: {
-    fontSize: 16,
-    fontFamily: 'Lato-Regular',
-    color: '#2C2C2C80',
   },
 });

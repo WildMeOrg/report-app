@@ -10,6 +10,7 @@ import WhaleShark from '../../../assets/whaleshark.jpg';
 import ForestLizard from '../../../assets/lizard.jpg';
 import Elephant from '../../../assets/elephant.jpg';
 import Jaguar from '../../../assets/jaguar.jpg';
+import globalStyles from '../../styles/globalStyles';
 
 /** <SightingCard> : A functional component that creates the sighting cards on the homepage
  *    @props
@@ -43,7 +44,7 @@ const HomeScreen = ({ nagivation }) => {
       {/* TODO: Turn from ScrollView into something FlatView for performance in long term(?) */}
       <ScrollView contentContainerStyle={bodyStyles.content}>
         <View style={bodyStyles.sortBy}>
-          <Text style={bodyStyles.sortByText}>Last Added</Text>
+          <Text style={globalStyles.h2Text}>Last Added</Text>
           <Icon
             name='arrowdown'
             type='antdesign'
@@ -116,10 +117,10 @@ const bodyStyles = StyleSheet.create({
     justifyContent: 'space-between',
     alignSelf: 'flex-start',
   },
-  sortByText: {
-    fontFamily: 'Lato-Regular',
-    fontSize: 16,
-  },
+  // sortByText: {
+  //   fontFamily: 'Lato-Regular',
+  //   fontSize: 16,
+  // },
   addNew: {
     marginVertical: 11,
     marginVertical: 11,
