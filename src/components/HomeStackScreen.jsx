@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  Button,
-  ScrollView,
-  Text,
-  View,
-  StyleSheet,
-  Image,
-} from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { createStackNavigator } from '@react-navigation/stack';
 import screens from '../constants/screens';
@@ -45,7 +38,9 @@ export default function HomeStackScreen({ navigation }) {
         name={screens.home}
         component={HomeScreen}
         options={{
-          headerTitle: () => <Typography style={headerStyles.headerText} id="APP_NAME" />,
+          headerTitle: () => (
+            <Typography style={headerStyles.headerText} id="APP_NAME" />
+          ),
         }}
       />
     </HomeStack.Navigator>

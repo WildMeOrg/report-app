@@ -4,12 +4,14 @@ import { FormattedMessage } from 'react-intl';
 
 export default function Typography({ id, style, ...rest }) {
   const defaultStyles = {
-    fontFamily: 'Lato-Regular'
-  }
+    fontFamily: 'Lato-Regular',
+  };
 
-  const mergedStyles = {...defaultStyles, ...style}
+  const mergedStyles = { ...defaultStyles, ...style };
 
   return (
-    <Text style={mergedStyles} {...rest} ><FormattedMessage id={id} /></Text>
-  )
+    <Text style={mergedStyles} {...rest}>
+      <FormattedMessage id={id} />
+    </Text>
+  );
 }

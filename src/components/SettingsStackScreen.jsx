@@ -29,7 +29,9 @@ export default function LoginStackScreen({ navigation }) {
         name={screens.setings}
         component={Settings}
         options={{
-          headerTitle: () => <Typography style={styles.headerText} id="SETTINGS" />,
+          headerTitle: () => (
+            <Typography style={styles.headerText} id="SETTINGS" />
+          ),
         }}
       />
     </LoginStack.Navigator>

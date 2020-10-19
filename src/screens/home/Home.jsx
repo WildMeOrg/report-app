@@ -54,7 +54,7 @@ const HomeScreen = ({ navigation }) => {
     {
       id: 2,
       image: Hummingbird,
-      name: 'Anna\'s Hummingbird',
+      name: "Anna's Hummingbird",
       date: 'September 23rd, 2019',
       synced: true,
       inProgress: false,
@@ -175,7 +175,6 @@ const bodyStyles = StyleSheet.create({
     fontSize: 16,
   },
   addNew: {
-    marginVertical: 11,
     marginVertical: 11,
     width: '94%',
     padding: 25,

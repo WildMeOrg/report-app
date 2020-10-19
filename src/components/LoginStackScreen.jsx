@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from 'react-native-elements';
 import screens from '../constants/screens';
@@ -29,7 +29,9 @@ export default function LoginStackScreen({ navigation }) {
         name={screens.login}
         component={Login}
         options={{
-          headerTitle: () => <Typography id="LOGIN" style={styles.headerText} />,
+          headerTitle: () => (
+            <Typography id="LOGIN" style={styles.headerText} />
+          ),
         }}
       />
     </LoginStack.Navigator>
