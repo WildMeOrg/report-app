@@ -1,17 +1,11 @@
 import React from 'react';
-import {
-  Button,
-  Text,
-  StyleSheet,
-  Image,
-  View,
-  ScrollView,
-} from 'react-native';
+import { Text, StyleSheet, Image, View, ScrollView } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import screens from '../constants/screens';
 import { Icon } from 'react-native-elements';
 import Humpback from '../../assets/humpback.jpg';
 import theme from '../constants/theme';
+import Typography from './Typography';
 
 const ViewSightingStack = createStackNavigator();
 
@@ -24,15 +18,17 @@ const ViewSightingScreen = ({ Navigation }) => {
         <Text style={styles.InfoHeader}>Humpback</Text>
         <Text style={styles.InfoText}>9/20/2020</Text>
         <View style={styles.Divider} />
-        <Text style={styles.Title}>Sighting</Text>
+        <Typography id="SIGHTING" style={styles.Title} />
         <View style={styles.Divider} />
-        <Text style={styles.InfoHeader}>Species</Text>
+        <Typography id="SPECIES" style={styles.InfoHeader} />
         <Text style={styles.InfoText}>Humpback Whale</Text>
+        <Typography id="TITLE" style={styles.InfoHeader} />
         <Text style={styles.InfoHeader}>Title</Text>
         <Text style={styles.InfoText}>Humpy</Text>
+        <Typography id="LOCATION" style={styles.InfoHeader} />
         <Text style={styles.InfoHeader}>Location</Text>
         <Text style={styles.InfoText}>Portland, OR</Text>
-        <Text style={styles.InfoHeader}>Sighting Context</Text>
+        <Typography id="SIGHTING_CONTEXT" style={styles.InfoHeader} />
         <Text style={styles.InfoText}>
           I saw it. The thing was absolutly massive bro.
         </Text>
@@ -71,7 +67,7 @@ export default function ViewSightingStackScreen({ navigation }) {
         component={ViewSightingScreen}
         options={{
           headerTitle: () => (
-            <Text style={styles.headerText}>View Sighting</Text>
+            <Typography id="VIEW_SIGHTING" style={styles.headerText} />
           ),
         }}
       />

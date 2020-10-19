@@ -11,7 +11,7 @@ import { Icon } from 'react-native-elements';
 import { createStackNavigator } from '@react-navigation/stack';
 import screens from '../constants/screens';
 import theme from '../constants/theme';
-import Typography from '../components/Typography';
+import Typography from './Typography';
 import HomeScreen from '../screens/home/Home.jsx';
 
 const HomeStack = createStackNavigator();

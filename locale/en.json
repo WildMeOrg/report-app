@@ -1,4 +1,23 @@
 {
   "LOGIN": "Login",
-  "APP_NAME": "Wild Me Report"
+  "LOG_OUT": "Log out",
+  "APP_NAME": "Wild Me Report",
+  "NEW_SIGHTING": "New sighting",
+  "HELP": "Help",
+  "SIGHTING": "Sighting",
+  "SPECIES": "Species",
+  "TITLE": "Title",
+  "LAST_ADDED": "Last added",
+  "USERNAME": "Username",
+  "PASSWORD": "Password",
+  "FORGOT_PASSWORD_QUESTION": "Forgot password",
+  "LOCATION": "Location",
+  "PROFILE": "Profile",
+  "NOTIFICATIONS": "Notifications",
+  "PRIVACY": "Privacy",
+  "SECURITY": "Security",
+  "CONTINUE_AS_GUEST": "Continue as guest",
+  "SIGHTING_CONTEXT": "Sighting context",
+  "VIEW_SIGHTING": "View sighting",
+  "SETTINGS": "Settings"
 }

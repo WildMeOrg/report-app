@@ -5,6 +5,7 @@ import { Icon } from 'react-native-elements';
 import screens from '../constants/screens';
 import Login from '../screens/login/Login';
 import theme from '../constants/theme';
+import Typography from './Typography';
 
 const LoginStack = createStackNavigator();
 
@@ -28,7 +29,7 @@ export default function LoginStackScreen({ navigation }) {
         name={screens.login}
         component={Login}
         options={{
-          headerTitle: () => <Text style={styles.headerText}>Login</Text>,
+          headerTitle: () => <Typography id="LOGIN" style={styles.headerText} />,
         }}
       />
     </LoginStack.Navigator>
@@ -37,7 +38,6 @@ export default function LoginStackScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   headerText: {
-    fontFamily: 'Lato-Regular',
     fontSize: 14,
   },
   icon: {

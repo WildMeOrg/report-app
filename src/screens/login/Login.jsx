@@ -5,7 +5,6 @@ import {
   Text,
   View,
   TextInput,
-  Button,
   Image,
   KeyboardAvoidingView,
 } from 'react-native';
@@ -15,7 +14,7 @@ import Logo from '../../../assets/logo.png';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import theme from '../../constants/theme';
 import screens from '../../constants/screens';
-import { ThemeConsumer } from 'react-native-elements';
+import Typography from '../../components/Typography';
 
 const Login = ({ navigation }) => {
   const [email, onChangeEmail] = useState('');
@@ -55,7 +54,7 @@ const Login = ({ navigation }) => {
         <Image source={Logo} style={styles.logo} />
       </View>
 
-      <Text style={styles.textFontInput}>Username</Text>
+      <Typography id="USERNAME" style={styles.textFontInput} />
 
       <TextInput
         style={styles.inputFields}
@@ -67,7 +66,7 @@ const Login = ({ navigation }) => {
         autoCapitalize="none"
       />
 
-      <Text style={styles.textFontInput}>Password</Text>
+      <Typography id="PASSWORD" style={styles.textFontInput} />
 
       <TextInput
         style={styles.inputFields}
@@ -82,9 +81,10 @@ const Login = ({ navigation }) => {
 
       <View style={styles.forgotView}>
         <TouchableOpacity style={styles.forgot}>
-          <Text style={[styles.fontBasicText, { color: '#2C2C2C80' }]}>
-            Forgot password?
-          </Text>
+          <Typography
+            id="FORGOT_PASSWORD_QUESTION"
+            style={[styles.fontBasicText, { color: '#2C2C2C80' }]}
+          />
         </TouchableOpacity>
       </View>
 
@@ -95,15 +95,16 @@ const Login = ({ navigation }) => {
             authenticate(email, password);
           }}
         >
-          <Text style={styles.textFontLogin}>Login</Text>
+          <Typography style={styles.textFontLogin} id="LOGIN" />
         </TouchableOpacity>
       </View>
 
       <View style={styles.guestView}>
         <TouchableOpacity style={styles.guest}>
-          <Text style={[styles.fontBasicText, { color: '#2C2C2C80' }]}>
-            Continue as guest
-          </Text>
+          <Typography
+            id="CONTINUE_AS_GUEST"
+            style={[styles.fontBasicText, { color: '#2C2C2C80' }]}
+          />
         </TouchableOpacity>
       </View>
 

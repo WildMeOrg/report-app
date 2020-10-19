@@ -1,6 +1,8 @@
 import React from 'react';
 import { ScrollView, Text, View, StyleSheet, Image } from 'react-native';
 import { Icon } from 'react-native-elements';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import Typography from '../../components/Typography';
 import theme from '../../constants/theme';
 import Humpback from '../../../assets/humpback.jpg';
 import Hummingbird from '../../../assets/hummingbird.jpg';
@@ -11,7 +13,6 @@ import ForestLizard from '../../../assets/lizard.jpg';
 import Elephant from '../../../assets/elephant.jpg';
 import Jaguar from '../../../assets/jaguar.jpg';
 import screens from '../../constants/screens';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 /** <SightingCard> : A functional component that creates the sighting cards on the homepage
  *    @props
@@ -113,7 +114,7 @@ const HomeScreen = ({ navigation }) => {
       {/* TODO: Turn from ScrollView into something FlatView for performance in long term(?) */}
       <ScrollView contentContainerStyle={bodyStyles.content}>
         <View style={bodyStyles.sortBy}>
-          <Text style={bodyStyles.sortByText}>Last Added</Text>
+          <Typography id="LAST_ADDED" style={bodyStyles.sortByText} />
           <Icon
             name="arrowdown"
             type="antdesign"
@@ -125,7 +126,7 @@ const HomeScreen = ({ navigation }) => {
           style={bodyStyles.addNew}
           onPress={() => navigation.navigate(screens.newSightings[0])}
         >
-          <Text style={bodyStyles.addNewText}>+ Add new sighting</Text>
+          <Typography id="NEW_SIGHTING" style={bodyStyles.addNewText} />
         </TouchableOpacity>
         {
           // Procedurally generate the cards from the sightings array
