@@ -127,20 +127,18 @@ const HomeScreen = ({ navigation }) => {
             color={theme.black}
           />
         </View>
-        <View style={bodyStyles.addNew}>
-          <TouchableOpacity onPress={() => navigation.navigate(screens.newSightings[0])}>
+        <TouchableOpacity style={bodyStyles.addNew} onPress={() => navigation.navigate(screens.newSightings[0])}>
             <Text style={bodyStyles.addNewText}>
               + Add new sighting
             </Text>
-          </TouchableOpacity>
-        </View>
+        </TouchableOpacity>
         { // Procedurally generate the cards from the sightings array
           sightings.map(sighting => {
             return(
               //TODO:  change the onPress depending on the sighting card
               //currently they all go to the same card
               <TouchableOpacity onPress ={() => navigation.navigate(screens.viewSighting)}
-              style={cardElementStyles.touchableOpacityHolder}>
+              style={cardElementStyles.touchableOpacityHolder} key={sighting.id}>
               <SightingCard
                 key =   {sighting.id}
                 image = {sighting.image}
@@ -188,6 +186,8 @@ const bodyStyles = StyleSheet.create({
     borderRadius: 6,
   },
   addNewText: {
+    marginLeft: 75,
+    marginRight: 75,
     fontSize: 20,
     fontFamily: 'Lato-Regular',
     textAlign: 'center',
