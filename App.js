@@ -16,6 +16,8 @@ import SettingsStackScreen from './src/components/SettingsStackScreen';
 
 const Drawer = createDrawerNavigator();
 
+const State = React.createContext({text: "Hello"});
+
 const loadFonts = () =>
   Font.loadAsync({
     'Lato-Regular': require('./assets/fonts/Lato/Lato-Regular.ttf'),
@@ -27,35 +29,37 @@ export default function App() {
 
   if (fontsLoaded) {
     return (
-      <NavigationContainer>
-        <Drawer.Navigator
-          drawerContent={(props) => <CustomDrawerContent {...props} />}
-        >
-          {/* As new screens are made, put them here to be able to view them */}
-          <Drawer.Screen name={screens.home} component={HomeStackScreen} />
-          <Drawer.Screen name={screens.login} component={LoginStackScreen} />
-          <Drawer.Screen
-            name={screens.setings}
-            component={SettingsStackScreen}
-          />
-          <Drawer.Screen
-            name={screens.newSightings[0]}
-            component={NewSightingStackScreen}
-          />
-          <Drawer.Screen
-            name={screens.newSightings[1]}
-            component={NewSighting2StackScreen}
-          />
-          <Drawer.Screen
-            name={screens.newSightings[2]}
-            component={NewSighting3StackScreen}
-          />
-          <Drawer.Screen
-            name={screens.viewSighting}
-            component={ViewSightingStackScreen}
-          />
-        </Drawer.Navigator>
-      </NavigationContainer>
+      <State.Provider value={{text: "Goodbye"}}>
+        <NavigationContainer>
+          <Drawer.Navigator
+            drawerContent={(props) => <CustomDrawerContent {...props} />}
+          >
+            {/* As new screens are made, put them here to be able to view them */}
+            <Drawer.Screen name={screens.home} component={HomeStackScreen} />
+            <Drawer.Screen name={screens.login} component={LoginStackScreen} />
+            <Drawer.Screen
+              name={screens.setings}
+              component={SettingsStackScreen}
+            />
+            <Drawer.Screen
+              name={screens.newSightings[0]}
+              component={NewSightingStackScreen}
+            />
+            <Drawer.Screen
+              name={screens.newSightings[1]}
+              component={NewSighting2StackScreen}
+            />
+            <Drawer.Screen
+              name={screens.newSightings[2]}
+              component={NewSighting3StackScreen}
+            />
+            <Drawer.Screen
+              name={screens.viewSighting}
+              component={ViewSightingStackScreen}
+            />
+          </Drawer.Navigator>
+        </NavigationContainer>
+      </State.Provider>
     );
   } else {
     return (

@@ -20,13 +20,16 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
  *      date  -- the date of the sighting displayed in smaller, lower text
  */
 const SightingCard = (props) => {
+  const state = useContext(State);
+
   return (
     <View style={cardElementStyles.sightingCard}>
       <Image style={cardElementStyles.imageCover} source={props.image} />
       <View style={cardElementStyles.sightingInfo}>
         <View style={cardElementStyles.sightingText}>
           <Text style={cardElementStyles.sightingTitle}>
-            {props.name}
+            {/*{props.name}*/}
+            {state.text}
           </Text>
           <Text style={cardElementStyles.sightingDate}>
             {props.date}
