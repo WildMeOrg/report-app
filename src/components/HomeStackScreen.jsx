@@ -1,16 +1,10 @@
 import React from 'react';
-import {
-  Button,
-  ScrollView,
-  Text,
-  View,
-  StyleSheet,
-  Image,
-} from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { createStackNavigator } from '@react-navigation/stack';
 import screens from '../constants/screens';
 import theme from '../constants/theme';
+import Typography from './Typography';
 import HomeScreen from '../screens/home/Home.jsx';
 
 const HomeStack = createStackNavigator();
@@ -45,7 +39,7 @@ export default function HomeStackScreen({ navigation }) {
         component={HomeScreen}
         options={{
           headerTitle: () => (
-            <Text style={headerStyles.headerText}>WildMe Report</Text>
+            <Typography style={headerStyles.headerText} id="APP_NAME" />
           ),
         }}
       />
@@ -55,7 +49,6 @@ export default function HomeStackScreen({ navigation }) {
 
 const headerStyles = StyleSheet.create({
   headerText: {
-    fontFamily: 'Lato-Regular',
     fontSize: 20,
   },
   iconLeft: {

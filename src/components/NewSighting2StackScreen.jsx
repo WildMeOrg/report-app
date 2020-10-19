@@ -26,7 +26,7 @@ const NewSighting2Screen = ({ navigation }) => {
         style={{ backgroundColor: '#ffffff' }}
         resetScrollToCoords={{ x: 0, y: 0 }}
         style={styles.keyboardView}
-        scrollEnabled={true}
+        scrollEnabled
       >
         <Text style={styles.inputHeader}> Status </Text>
         <TextInput style={styles.inputFields} autoCorrect={false} />
