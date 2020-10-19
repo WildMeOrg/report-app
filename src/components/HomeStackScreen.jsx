@@ -1,11 +1,18 @@
 import React from 'react';
-import { Button, ScrollView, Text, View, StyleSheet, Image } from 'react-native';
+import {
+  Button,
+  ScrollView,
+  Text,
+  View,
+  StyleSheet,
+  Image,
+} from 'react-native';
 import { Icon } from 'react-native-elements';
 import { createStackNavigator } from '@react-navigation/stack';
 import screens from '../constants/screens';
 import theme from '../constants/theme';
-import HomeScreen from '../screens/home/Home.jsx'
 import Typography from '../components/Typography';
+import HomeScreen from '../screens/home/Home.jsx';
 
 const HomeStack = createStackNavigator();
 
@@ -31,7 +38,7 @@ export default function HomeStackScreen({ navigation }) {
             //onPress={() => navigation.toggleDrawer()} TODO: replace with search bar in the banner
             iconStyle={headerStyles.iconRight}
           />
-        )
+        ),
       }}
     >
       <HomeStack.Screen
