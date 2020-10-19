@@ -16,6 +16,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import theme from '../../constants/theme';
 import { baseUrl } from '../../constants/urls';
 import { ThemeConsumer } from 'react-native-elements';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const Login = () => {
   const [email, onChangeEmail] = useState('');
