@@ -1,18 +1,12 @@
 import React from 'react';
-import {
-  Button,
-  Text,
-  StyleSheet,
-  Image,
-  View,
-  ScrollView,
-} from 'react-native';
+import { Text, StyleSheet, Image, View, ScrollView } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import screens from '../constants/screens';
 import { Icon } from 'react-native-elements';
 import Humpback from '../../assets/humpback.jpg';
 import theme from '../constants/theme';
 import globalStyles from '../styles/globalStyles';
+import Typography from './Typography';
 
 const ViewSightingStack = createStackNavigator();
 
@@ -22,21 +16,21 @@ const ViewSightingScreen = ({ Navigation }) => {
     <View style={styles.InfoView}>
       <Image style={styles.image} source={Humpback} />
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <Text style={globalStyles.inputHeader}>Humpback</Text>
-        <Text style={[globalStyles.basicText, styles.InfoText]}>9/20/2020</Text>
+        <Text style={styles.InfoHeader}>Humpback</Text>
+        <Text style={styles.InfoText}>9/20/2020</Text>
         <View style={styles.Divider} />
-        <Text style={globalStyles.inputHeader}>Species</Text>
-        <Text style={[globalStyles.basicText, styles.InfoText]}>
-          Humpback Whale
-        </Text>
-        <Text style={globalStyles.inputHeader}>Title</Text>
-        <Text style={[globalStyles.basicText, styles.InfoText]}>Humpy</Text>
-        <Text style={globalStyles.inputHeader}>Location</Text>
-        <Text style={[globalStyles.basicText, styles.InfoText]}>
-          Portland, OR
-        </Text>
-        <Text style={globalStyles.inputHeader}>Sighting Context</Text>
-        <Text style={[globalStyles.basicText, styles.InfoText]}>
+        <Typography id="SIGHTING" style={styles.Title} />
+        <View style={styles.Divider} />
+        <Typography id="SPECIES" style={styles.InfoHeader} />
+        <Text style={styles.InfoText}>Humpback Whale</Text>
+        <Typography id="TITLE" style={styles.InfoHeader} />
+        <Text style={styles.InfoHeader}>Title</Text>
+        <Text style={styles.InfoText}>Humpy</Text>
+        <Typography id="LOCATION" style={styles.InfoHeader} />
+        <Text style={styles.InfoHeader}>Location</Text>
+        <Text style={styles.InfoText}>Portland, OR</Text>
+        <Typography id="SIGHTING_CONTEXT" style={styles.InfoHeader} />
+        <Text style={styles.InfoText}>
           I saw it. The thing was absolutly massive bro.
         </Text>
       </ScrollView>
@@ -51,8 +45,8 @@ export default function ViewSightingStackScreen({ navigation }) {
         headerTitleAlign: 'center',
         headerLeft: () => (
           <Icon
-            name='bars'
-            type='font-awesome'
+            name="bars"
+            type="font-awesome"
             color={theme.black}
             onPress={() => navigation.toggleDrawer()}
             iconStyle={styles.icon}
@@ -60,8 +54,8 @@ export default function ViewSightingStackScreen({ navigation }) {
         ),
         headerRight: () => (
           <Icon
-            name='times'
-            type='font-awesome'
+            name="times"
+            type="font-awesome"
             color={theme.black}
             onPress={() => navigation.navigate(screens.home)}
             iconStyle={styles.icon2}
@@ -74,7 +68,7 @@ export default function ViewSightingStackScreen({ navigation }) {
         component={ViewSightingScreen}
         options={{
           headerTitle: () => (
-            <Text style={styles.headerText}>View Sighting</Text>
+            <Typography id="VIEW_SIGHTING" style={styles.headerText} />
           ),
         }}
       />
@@ -101,14 +95,14 @@ const styles = StyleSheet.create({
     flex: 1,
     marginBottom: 10,
   },
-  //   InfoHeader: {
-  //     color: '#2c2c2c',
-  //     fontFamily: 'Lato-Regular',
-  //     fontSize: 24,
-  //     fontWeight: 'bold',
-  //     marginTop: 20,
-  //     marginLeft: 20,
-  //   },
+  InfoHeader: {
+    color: '#2c2c2c',
+    fontFamily: 'Lato-Regular',
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginTop: 20,
+    marginLeft: 20,
+  },
   InfoText: {
     // fontFamily: 'Lato-Regular',
     // fontSize: 18,

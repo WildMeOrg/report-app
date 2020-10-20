@@ -28,7 +28,7 @@ const NewSighting2Screen = ({ navigation }) => {
         style={{ backgroundColor: '#ffffff' }}
         resetScrollToCoords={{ x: 0, y: 0 }}
         style={styles.keyboardView}
-        scrollEnabled={true}
+        scrollEnabled
       >
         <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
           {' '}
@@ -75,8 +75,8 @@ export default function NewSighting2StackScreen({ navigation }) {
         headerTitleAlign: 'center',
         headerRight: () => (
           <Icon
-            name='times'
-            type='font-awesome'
+            name="times"
+            type="font-awesome"
             color={theme.black}
             onPress={() => navigation.navigate(screens.home)}
             iconStyle={globalStyles.icon}

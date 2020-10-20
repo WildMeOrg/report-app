@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Icon } from 'react-native-elements';
 import theme from '../../constants/theme';
 import globalStyles from '../../styles/globalStyles';
+import Typography from '../../components/Typography';
 
 export default function Settings() {
   return (
@@ -11,10 +12,10 @@ export default function Settings() {
         style={styles.settingRow}
         onPress={() => console.log('click')}
       >
-        <Text style={globalStyles.h2Text}>Profile</Text>
+        <Typography id="PROFILE" style={globalStyles.h2Text} />
         <Icon
-          name='chevron-right'
-          type='font-awesome'
+          name="chevron-right"
+          type="font-awesome"
           color={theme.black}
           onPress={() => navigation.toggleDrawer()}
           iconStyle={styles.icon}
@@ -24,10 +25,10 @@ export default function Settings() {
         style={styles.settingRow}
         onPress={() => console.log('click')}
       >
-        <Text style={globalStyles.h2Text}>Notifications</Text>
+        <Typography id="NOTIFICATIONS" style={globalStyles.h2Text} />
         <Icon
-          name='chevron-right'
-          type='font-awesome'
+          name="chevron-right"
+          type="font-awesome"
           color={theme.black}
           onPress={() => navigation.toggleDrawer()}
           iconStyle={styles.icon}
@@ -37,10 +38,10 @@ export default function Settings() {
         style={styles.settingRow}
         onPress={() => console.log('click')}
       >
-        <Text style={globalStyles.h2Text}>Privacy</Text>
+        <Typography id="PRIVACY" style={globalStyles.h2Text} />
         <Icon
-          name='chevron-right'
-          type='font-awesome'
+          name="chevron-right"
+          type="font-awesome"
           color={theme.black}
           onPress={() => navigation.toggleDrawer()}
           iconStyle={styles.icon}
@@ -50,10 +51,10 @@ export default function Settings() {
         style={styles.settingRow}
         onPress={() => console.log('click')}
       >
-        <Text style={globalStyles.h2Text}>Security</Text>
+        <Typography id="SECURITY" style={globalStyles.h2Text} />
         <Icon
-          name='chevron-right'
-          type='font-awesome'
+          name="chevron-right"
+          type="font-awesome"
           color={theme.black}
           onPress={() => navigation.toggleDrawer()}
           iconStyle={styles.icon}
@@ -63,10 +64,10 @@ export default function Settings() {
         style={styles.settingRowBottom}
         onPress={() => console.log('click')}
       >
-        <Text style={globalStyles.h2Text}>Help</Text>
+        <Typography id="HELP" style={globalStyles.h2Text} />
         <Icon
-          name='chevron-right'
-          type='font-awesome'
+          name="chevron-right"
+          type="font-awesome"
           color={theme.black}
           onPress={() => navigation.toggleDrawer()}
           iconStyle={styles.icon}
@@ -76,17 +77,13 @@ export default function Settings() {
         style={styles.settingRow}
         onPress={() => console.log('click')}
       >
-        <Text style={globalStyles.h2Text}>Log Out</Text>
+        <Typography id="LOG_OUT" style={globalStyles.h2Text} />
       </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  headerText: {
-    fontFamily: 'Lato-Regular',
-    fontSize: 14,
-  },
   icon: {
     marginLeft: 16,
   },
@@ -97,7 +94,6 @@ const styles = StyleSheet.create({
     marginVertical: 12,
   },
   settingText: {
-    fontFamily: 'Lato-Regular',
     fontSize: 16,
     color: theme.black,
   },

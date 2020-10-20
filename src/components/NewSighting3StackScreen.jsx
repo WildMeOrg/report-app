@@ -67,8 +67,8 @@ export default function NewSighting3StackScreen({ navigation }) {
         headerTitleAlign: 'center',
         headerRight: () => (
           <Icon
-            name='times'
-            type='font-awesome'
+            name="times"
+            type="font-awesome"
             color={theme.black}
             onPress={() => navigation.navigate(screens.home)}
             iconStyle={globalStyles.icon}

@@ -17,8 +17,9 @@ import theme from '../../constants/theme';
 import screens from '../../constants/screens';
 import { ThemeConsumer } from 'react-native-elements';
 import globalStyles from '../../styles/globalStyles';
+import Typography from '../../components/Typography';
 
-const Login = ({navigation}) => {
+const Login = ({ navigation }) => {
   const [email, onChangeEmail] = useState('');
   const [password, onChangePassword] = useState('');
   const [responseData, onChangeResponseData] = useState('');
@@ -35,7 +36,7 @@ const Login = ({navigation}) => {
           password,
         },
       });
-      if(response.data != null){
+      if (response.data != null) {
         navigation.navigate(screens.home);
       }
       onChangeResponseData(JSON.stringify(response.data));
@@ -56,38 +57,43 @@ const Login = ({navigation}) => {
         <Image source={Logo} style={styles.logo} />
       </View>
 
-      <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
-        Username
-      </Text>
+      <Typography
+        id="USERNAME"
+        style={[globalStyles.h2Text, globalStyles.inputHeader]}
+      />
 
       <TextInput
         style={globalStyles.inputFields}
         onChangeText={(input) => onChangeEmail(input)}
         value={email}
         autoCorrect={false}
-        autoCompleteType='email'
-        textContentType='emailAddress'
-        autoCapitalize='none'
+        autoCompleteType="email"
+        textContentType="emailAddress"
+        autoCapitalize="none"
       />
 
-      <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
-        Password
-      </Text>
+      <Typography
+        id="PASSWORD"
+        style={[globalStyles.h2Text, globalStyles.inputHeader]}
+      />
 
       <TextInput
         style={globalStyles.inputFields}
         onChangeText={(input) => onChangePassword(input)}
         value={password}
         autoCorrect={false}
-        autoCompleteType='password'
-        textContentType='password'
-        autoCapitalize='none'
+        autoCompleteType="password"
+        textContentType="password"
+        autoCapitalize="none"
         secureTextEntry
       />
 
       <View style={styles.forgotView}>
         <TouchableOpacity style={styles.forgot}>
-          <Text style={[globalStyles.basicText]}>Forgot password?</Text>
+          <Typography
+            id="FORGOT_PASSWORD_QUESTION"
+            style={[globalStyles.basicText]}
+          />
         </TouchableOpacity>
       </View>
 
@@ -98,13 +104,13 @@ const Login = ({navigation}) => {
             authenticate(email, password);
           }}
         >
-          <Text style={globalStyles.buttonText}>Login</Text>
+          <Typography style={globalStyles.buttonText} id="LOGIN" />
         </TouchableOpacity>
       </View>
 
       <View style={styles.guestView}>
         <TouchableOpacity style={styles.guest}>
-          <Text style={[globalStyles.basicText]}>Continue as guest</Text>
+          <Typography id="CONTINUE_AS_GUEST" style={[globalStyles.basicText]} />
         </TouchableOpacity>
       </View>
 

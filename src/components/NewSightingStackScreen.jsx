@@ -33,8 +33,8 @@ const NewSightingScreen = ({ navigation }) => {
             onPress={() => navigation.navigate(screens.newSightings[0])}
           >
             <Icon
-              name='cloud-upload'
-              type='font-awesome'
+              name="cloud-upload"
+              type="font-awesome"
               color={theme.black}
               iconStyle={styles.addText}
               size={40}
@@ -95,8 +95,8 @@ export default function NewSightingStackScreen({ navigation }) {
         headerTitleAlign: 'center',
         headerRight: () => (
           <Icon
-            name='times'
-            type='font-awesome'
+            name="times"
+            type="font-awesome"
             color={theme.black}
             onPress={() => navigation.navigate(screens.home)}
             iconStyle={globalStyles.icon}

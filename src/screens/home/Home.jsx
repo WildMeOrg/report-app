@@ -1,6 +1,8 @@
 import React from 'react';
 import { ScrollView, Text, View, StyleSheet, Image } from 'react-native';
 import { Icon } from 'react-native-elements';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import Typography from '../../components/Typography';
 import theme from '../../constants/theme';
 import Humpback from '../../../assets/humpback.jpg';
 import Hummingbird from '../../../assets/hummingbird.jpg';
@@ -12,7 +14,6 @@ import Elephant from '../../../assets/elephant.jpg';
 import Jaguar from '../../../assets/jaguar.jpg';
 import globalStyles from '../../styles/globalStyles';
 import screens from '../../constants/screens';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 /** <SightingCard> : A functional component that creates the sighting cards on the homepage
  *    @props
@@ -30,8 +31,8 @@ const SightingCard = (props) => {
           <Text style={cardElementStyles.sightingDate}>{props.date}</Text>
         </View>
         <Icon
-          name='more-vert'
-          type='materialicons'
+          name="more-vert"
+          type="materialicons"
           size={28}
           color={theme.black}
         />
@@ -114,21 +115,20 @@ const HomeScreen = ({ navigation }) => {
       {/* TODO: Turn from ScrollView into something FlatView for performance in long term(?) */}
       <ScrollView contentContainerStyle={bodyStyles.content}>
         <View style={bodyStyles.sortBy}>
-          <Text style={globalStyles.h2Text}>Last Added</Text>
+          <Typography id="LAST_ADDED" style={globalStyles.h2Text} />
           <Icon
-            name='arrowdown'
-            type='antdesign'
+            name="arrowdown"
+            type="antdesign"
             size={18}
             color={theme.black}
           />
         </View>
-        <View style={bodyStyles.addNew}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate(screens.newSightings[0])}
-          >
-            <Text style={bodyStyles.addNewText}>+ Add new sighting</Text>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity
+          style={bodyStyles.addNew}
+          onPress={() => navigation.navigate(screens.newSightings[0])}
+        >
+          <Typography id="NEW_SIGHTING" style={bodyStyles.addNewText} />
+        </TouchableOpacity>
         {
           // Procedurally generate the cards from the sightings array
           sightings.map((sighting) => {
@@ -138,6 +138,7 @@ const HomeScreen = ({ navigation }) => {
               <TouchableOpacity
                 onPress={() => navigation.navigate(screens.viewSighting)}
                 style={cardElementStyles.touchableOpacityHolder}
+                key={sighting.id}
               >
                 <SightingCard
                   key={sighting.id}
@@ -177,7 +178,6 @@ const bodyStyles = StyleSheet.create({
   // },
   addNew: {
     marginVertical: 11,
-    marginVertical: 11,
     width: '94%',
     padding: 25,
     justifyContent: 'center',
@@ -187,6 +187,8 @@ const bodyStyles = StyleSheet.create({
     borderRadius: 6,
   },
   addNewText: {
+    marginLeft: 75,
+    marginRight: 75,
     fontSize: 20,
     fontFamily: 'Lato-Regular',
     textAlign: 'center',
