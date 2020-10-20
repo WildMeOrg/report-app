@@ -1,9 +1,19 @@
 import 'react-native-gesture-handler'; // this import MUST come first
+
+/* These polyfills are needed to support react-intl */
+import Intl from 'intl';
+import EnNumberFormat from 'intl/locale-data/jsonp/en.js';
+
 import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
+import { IntlProvider } from 'react-intl';
+
+import englishTranslations from './locale/en.json';
+import spanishTranslations from './locale/es.json';
+
 import HomeStackScreen from './src/components/HomeStackScreen';
 import LoginStackScreen from './src/components/LoginStackScreen';
 import NewSightingStackScreen from './src/components/NewSightingStackScreen';
@@ -13,6 +23,12 @@ import ViewSightingStackScreen from './src/components/ViewSightingStackScreen';
 import screens from './src/constants/screens';
 import CustomDrawerContent from './src/components/CustomDrawerContent';
 import SettingsStackScreen from './src/components/SettingsStackScreen';
+import getLocale from './src/utils/getLocale';
+
+const messageMap = {
+  en: englishTranslations,
+  es: spanishTranslations,
+};
 
 const Drawer = createDrawerNavigator();
 
@@ -26,10 +42,12 @@ const loadFonts = () =>
 
 export default function App() {
   const [fontsLoaded, setfontsLoaded] = useState(false);
+  const locale = getLocale();
 
   if (fontsLoaded) {
     return (
       <State.Provider value={{text: "Goodbye"}}>
+      <IntlProvider locale={locale} messages={messageMap[locale]} defaultLocale="en">
         <NavigationContainer>
           <Drawer.Navigator
             drawerContent={(props) => <CustomDrawerContent {...props} />}
@@ -59,6 +77,7 @@ export default function App() {
             />
           </Drawer.Navigator>
         </NavigationContainer>
+      </IntlProvider>
       </State.Provider>
     );
   } else {

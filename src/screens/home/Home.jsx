@@ -1,6 +1,8 @@
 import React from 'react';
 import { ScrollView, Text, View, StyleSheet, Image } from 'react-native';
-import { Icon } from 'react-native-elements'
+import { Icon } from 'react-native-elements';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import Typography from '../../components/Typography';
 import theme from '../../constants/theme';
 import Humpback from '../../../assets/humpback.jpg';
 import Hummingbird from '../../../assets/hummingbird.jpg';
@@ -11,7 +13,6 @@ import ForestLizard from '../../../assets/lizard.jpg';
 import Elephant from '../../../assets/elephant.jpg';
 import Jaguar from '../../../assets/jaguar.jpg';
 import screens from '../../constants/screens';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 /** <SightingCard> : A functional component that creates the sighting cards on the homepage
  *    @props
@@ -36,15 +37,15 @@ const SightingCard = (props) => {
           </Text>
         </View>
         <Icon
-          name='more-vert'
-          type='materialicons'
+          name="more-vert"
+          type="materialicons"
           size={28}
           color={theme.black}
         />
       </View>
     </View>
   );
-}
+};
 
 const HomeScreen = ({ navigation }) => {
   // TODO: Move to state
@@ -60,7 +61,7 @@ const HomeScreen = ({ navigation }) => {
     {
       id: 2,
       image: Hummingbird,
-      name: 'Anna\'s Hummingbird',
+      name: "Anna's Hummingbird",
       date: 'September 23rd, 2019',
       synced: true,
       inProgress: false,
@@ -112,44 +113,45 @@ const HomeScreen = ({ navigation }) => {
       date: 'September 23rd, 2019',
       synced: true,
       inProgress: false,
-    }
-  ]
+    },
+  ];
 
   return (
     <View>
       {/* TODO: Turn from ScrollView into something FlatView for performance in long term(?) */}
       <ScrollView contentContainerStyle={bodyStyles.content}>
         <View style={bodyStyles.sortBy}>
-          <Text style={bodyStyles.sortByText}>
-            Last Added
-          </Text>
+          <Typography id="LAST_ADDED" style={bodyStyles.sortByText} />
           <Icon
-            name='arrowdown'
-            type='antdesign'
+            name="arrowdown"
+            type="antdesign"
             size={18}
             color={theme.black}
           />
         </View>
-        <View style={bodyStyles.addNew}>
-          <TouchableOpacity onPress={() => navigation.navigate(screens.newSightings[0])}>
-            <Text style={bodyStyles.addNewText}>
-              + Add new sighting
-            </Text>
-          </TouchableOpacity>
-        </View>
-        { // Procedurally generate the cards from the sightings array
-          sightings.map(sighting => {
-            return(
+        <TouchableOpacity
+          style={bodyStyles.addNew}
+          onPress={() => navigation.navigate(screens.newSightings[0])}
+        >
+          <Typography id="NEW_SIGHTING" style={bodyStyles.addNewText} />
+        </TouchableOpacity>
+        {
+          // Procedurally generate the cards from the sightings array
+          sightings.map((sighting) => {
+            return (
               //TODO:  change the onPress depending on the sighting card
               //currently they all go to the same card
-              <TouchableOpacity onPress ={() => navigation.navigate(screens.viewSighting)}
-              style={cardElementStyles.touchableOpacityHolder}>
-              <SightingCard
-                key =   {sighting.id}
-                image = {sighting.image}
-                name =  {sighting.name}
-                date =  {sighting.date}
-              />
+              <TouchableOpacity
+                onPress={() => navigation.navigate(screens.viewSighting)}
+                style={cardElementStyles.touchableOpacityHolder}
+                key={sighting.id}
+              >
+                <SightingCard
+                  key={sighting.id}
+                  image={sighting.image}
+                  name={sighting.name}
+                  date={sighting.date}
+                />
               </TouchableOpacity>
             );
           })
@@ -157,7 +159,7 @@ const HomeScreen = ({ navigation }) => {
       </ScrollView>
     </View>
   );
-}
+};
 
 // TODO: Clean up explicit numbers and check on different displays
 const bodyStyles = StyleSheet.create({
@@ -181,7 +183,6 @@ const bodyStyles = StyleSheet.create({
   },
   addNew: {
     marginVertical: 11,
-    marginVertical: 11,
     width: '94%',
     padding: 25,
     justifyContent: 'center',
@@ -191,6 +192,8 @@ const bodyStyles = StyleSheet.create({
     borderRadius: 6,
   },
   addNewText: {
+    marginLeft: 75,
+    marginRight: 75,
     fontSize: 20,
     fontFamily: 'Lato-Regular',
     textAlign: 'center',
@@ -217,8 +220,8 @@ const cardElementStyles = StyleSheet.create({
     // iOS
     shadowColor: theme.black,
     shadowOffset: {
-    	width: 0,
-    	height: 2,
+      width: 0,
+      height: 2,
     },
     shadowOpacity: 0.23,
     shadowRadius: 2.62,
