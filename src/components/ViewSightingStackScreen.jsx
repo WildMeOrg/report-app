@@ -16,21 +16,21 @@ const ViewSightingScreen = ({ Navigation }) => {
     <View style={styles.InfoView}>
       <Image style={styles.image} source={Humpback} />
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <Text style={styles.InfoHeader}>Humpback</Text>
-        <Text style={styles.InfoText}>9/20/2020</Text>
+        <Text style={globalStyles.inputHeader}>Humpback</Text>
+        <Text style={[globalStyles.basicText, styles.InfoText]}>9/20/2020</Text>
         <View style={styles.Divider} />
-        <Typography id="SIGHTING" style={styles.Title} />
-        <View style={styles.Divider} />
-        <Typography id="SPECIES" style={styles.InfoHeader} />
-        <Text style={styles.InfoText}>Humpback Whale</Text>
-        <Typography id="TITLE" style={styles.InfoHeader} />
-        <Text style={styles.InfoHeader}>Title</Text>
-        <Text style={styles.InfoText}>Humpy</Text>
-        <Typography id="LOCATION" style={styles.InfoHeader} />
-        <Text style={styles.InfoHeader}>Location</Text>
-        <Text style={styles.InfoText}>Portland, OR</Text>
-        <Typography id="SIGHTING_CONTEXT" style={styles.InfoHeader} />
-        <Text style={styles.InfoText}>
+        <Typography id="SPECIES" style={globalStyles.inputHeader} />
+        <Text style={[globalStyles.basicText, styles.InfoText]}>
+          Humpback Whale
+        </Text>
+        <Typography id="TITLE" style={globalStyles.inputHeader} />
+        <Text style={[globalStyles.basicText, styles.InfoText]}>Humpy</Text>
+        <Typography id="LOCATION" style={globalStyles.inputHeader} />
+        <Text style={[globalStyles.basicText, styles.InfoText]}>
+          Portland, OR
+        </Text>
+        <Typography id="SIGHTING_CONTEXT" style={globalStyles.inputHeader} />
+        <Text style={[globalStyles.basicText, styles.InfoText]}>
           I saw it. The thing was absolutly massive bro.
         </Text>
       </ScrollView>
