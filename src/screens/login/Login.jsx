@@ -92,7 +92,7 @@ const Login = ({ navigation }) => {
         <TouchableOpacity style={styles.forgot}>
           <Typography
             id="FORGOT_PASSWORD_QUESTION"
-            style={[globalStyles.basicText]}
+            style={globalStyles.basicText}
           />
         </TouchableOpacity>
       </View>
