@@ -14,6 +14,8 @@ import Loading from '../loading/Loading';
 import Logo from '../../../assets/logo.png';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import theme from '../../constants/theme';
+import { baseUrl } from '../../constants/urls';
+import AsyncStorage from '@react-native-community/async-storage';
 import screens from '../../constants/screens';
 import { ThemeConsumer } from 'react-native-elements';
 import globalStyles from '../../styles/globalStyles';
@@ -42,6 +44,19 @@ const Login = ({ navigation }) => {
       onChangeResponseData(JSON.stringify(response.data));
     } catch (loginError) {
       onChangeResponseData(loginError.name + ': ' + loginError.message);
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      const settingsPacket = await axios(
+        `${baseUrl}/api/v0/configuration/__bundle_setup`
+      );
+      await AsyncStorage.setItem('appConfiguration', JSON.stringify(settingsPacket.data.response.configuration))
+    } catch (settingsFetchError) {
+      onChangeResponseData(
+        settingsFetchError.name + ': ' + settingsFetchError.message
+      );
     }
     setIsLoading(false);
   };
