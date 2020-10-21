@@ -24,6 +24,7 @@ import screens from './src/constants/screens';
 import CustomDrawerContent from './src/components/CustomDrawerContent';
 import SettingsStackScreen from './src/components/SettingsStackScreen';
 import getLocale from './src/utils/getLocale';
+import { ReportContextProvider } from './src/context/report-context';
 
 const messageMap = {
   en: englishTranslations,
@@ -32,8 +33,6 @@ const messageMap = {
 
 const Drawer = createDrawerNavigator();
 
-const State = React.createContext({text: "Hello"});
-
 const loadFonts = () =>
   Font.loadAsync({
     'Lato-Regular': require('./assets/fonts/Lato/Lato-Regular.ttf'),
@@ -41,12 +40,13 @@ const loadFonts = () =>
   });
 
 export default function App() {
+  
   const [fontsLoaded, setfontsLoaded] = useState(false);
   const locale = getLocale();
 
   if (fontsLoaded) {
     return (
-      <State.Provider value={{text: "Goodbye"}}>
+      <ReportContextProvider>
       <IntlProvider locale={locale} messages={messageMap[locale]} defaultLocale="en">
         <NavigationContainer>
           <Drawer.Navigator
@@ -78,7 +78,7 @@ export default function App() {
           </Drawer.Navigator>
         </NavigationContainer>
       </IntlProvider>
-      </State.Provider>
+      </ReportContextProvider>
     );
   } else {
     return (

@@ -1,19 +1,12 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { ScrollView, Text, View, StyleSheet, Image } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Typography from '../../components/Typography';
 import theme from '../../constants/theme';
-import Humpback from '../../../assets/humpback.jpg';
-import Hummingbird from '../../../assets/hummingbird.jpg';
-import RedPanda from '../../../assets/redPanda.jpg';
-import Octopus from '../../../assets/octopus.jpg';
-import WhaleShark from '../../../assets/whaleshark.jpg';
-import ForestLizard from '../../../assets/lizard.jpg';
-import Elephant from '../../../assets/elephant.jpg';
-import Jaguar from '../../../assets/jaguar.jpg';
 import globalStyles from '../../styles/globalStyles';
 import screens from '../../constants/screens';
+import { ReportContext } from '../../context/report-context';
 
 /** <SightingCard> : A functional component that creates the sighting cards on the homepage
  *    @props
@@ -22,7 +15,7 @@ import screens from '../../constants/screens';
  *      date  -- the date of the sighting displayed in smaller, lower text
  */
 const SightingCard = (props) => {
-  const state = useContext(State);
+  //const state = useContext(State);
 
   return (
     <View style={cardElementStyles.sightingCard}>
@@ -30,8 +23,7 @@ const SightingCard = (props) => {
       <View style={cardElementStyles.sightingInfo}>
         <View style={cardElementStyles.sightingText}>
           <Text style={cardElementStyles.sightingTitle}>
-            {/*{props.name}*/}
-            {state.text}
+            {props.name}
           </Text>
           <Text style={cardElementStyles.sightingDate}>
             {props.date}
@@ -49,73 +41,8 @@ const SightingCard = (props) => {
 };
 
 const HomeScreen = ({ navigation }) => {
-  // TODO: Move to state
-  var sightings = [
-    {
-      id: 1,
-      image: Humpback,
-      name: 'Humpback Whale',
-      date: 'September 23rd, 2019',
-      synced: true,
-      inProgress: false,
-    },
-    {
-      id: 2,
-      image: Hummingbird,
-      name: "Anna's Hummingbird",
-      date: 'September 23rd, 2019',
-      synced: true,
-      inProgress: false,
-    },
-    {
-      id: 3,
-      image: RedPanda,
-      name: 'Red Panda',
-      date: 'September 23rd, 2019',
-      synced: true,
-      inProgress: false,
-    },
-    {
-      id: 4,
-      image: Octopus,
-      name: 'Maldives Octopus',
-      date: 'September 23rd, 2019',
-      synced: true,
-      inProgress: false,
-    },
-    {
-      id: 5,
-      image: WhaleShark,
-      name: 'Whale Shark',
-      date: 'September 23rd, 2019',
-      synced: true,
-      inProgress: false,
-    },
-    {
-      id: 6,
-      image: ForestLizard,
-      name: 'Indonesian Forest Liza...',
-      date: 'September 23rd, 2019',
-      synced: true,
-      inProgress: false,
-    },
-    {
-      id: 7,
-      image: Elephant,
-      name: 'African Bush Elephant',
-      date: 'September 23rd, 2019',
-      synced: true,
-      inProgress: false,
-    },
-    {
-      id: 8,
-      image: Jaguar,
-      name: 'North American Jaguar',
-      date: 'September 23rd, 2019',
-      synced: true,
-      inProgress: false,
-    },
-  ];
+
+  const [state, dispatch] = useContext(ReportContext);
 
   return (
     <View>
@@ -138,7 +65,7 @@ const HomeScreen = ({ navigation }) => {
         </TouchableOpacity>
         {
           // Procedurally generate the cards from the sightings array
-          sightings.map((sighting) => {
+          state.testSightings.map((sighting) => {
             return (
               //TODO:  change the onPress depending on the sighting card
               //currently they all go to the same card
