@@ -39,15 +39,15 @@ const Login = () => {
       onChangeResponseData(JSON.stringify(response.data));
     } catch (loginError) {
       onChangeResponseData(loginError.name + ': ' + loginError.message);
+      setIsLoading(false);
+      return;
     }
 
     try {
       const setingsPacket = await axios(
         `${baseUrl}/api/v0/configuration/__bundle_setup`
       );
-      console.log('====================================');
-      console.log({ setingsPacket });
-      console.log('====================================');
+      await AsyncStorage.setItem('appConfiguration', JSON.stringify(setingsPacket.data.response.configuration))
     } catch (settingsFetchError) {
       onChangeResponseData(
         settingsFetchError.name + ': ' + settingsFetchError.message
