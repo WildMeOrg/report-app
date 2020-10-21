@@ -5,6 +5,7 @@ import {
   Text,
   View,
   TextInput,
+  Button,
   Image,
   KeyboardAvoidingView,
 } from 'react-native';
@@ -14,6 +15,8 @@ import Logo from '../../../assets/logo.png';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import theme from '../../constants/theme';
 import screens from '../../constants/screens';
+import { ThemeConsumer } from 'react-native-elements';
+import globalStyles from '../../styles/globalStyles';
 import Typography from '../../components/Typography';
 
 const Login = ({ navigation }) => {
@@ -54,10 +57,13 @@ const Login = ({ navigation }) => {
         <Image source={Logo} style={styles.logo} />
       </View>
 
-      <Typography id="USERNAME" style={styles.textFontInput} />
+      <Typography
+        id="USERNAME"
+        style={globalStyles.h2Text, globalStyles.inputHeader}
+      />
 
       <TextInput
-        style={styles.inputFields}
+        style={globalStyles.inputFields}
         onChangeText={(input) => onChangeEmail(input)}
         value={email}
         autoCorrect={false}
@@ -66,10 +72,13 @@ const Login = ({ navigation }) => {
         autoCapitalize="none"
       />
 
-      <Typography id="PASSWORD" style={styles.textFontInput} />
+      <Typography
+        id="PASSWORD"
+        style={globalStyles.h2Text, globalStyles.inputHeader}
+      />
 
       <TextInput
-        style={styles.inputFields}
+        style={globalStyles.inputFields}
         onChangeText={(input) => onChangePassword(input)}
         value={password}
         autoCorrect={false}
@@ -83,7 +92,7 @@ const Login = ({ navigation }) => {
         <TouchableOpacity style={styles.forgot}>
           <Typography
             id="FORGOT_PASSWORD_QUESTION"
-            style={[styles.fontBasicText, { color: '#2C2C2C80' }]}
+            style={globalStyles.basicText}
           />
         </TouchableOpacity>
       </View>
@@ -95,16 +104,13 @@ const Login = ({ navigation }) => {
             authenticate(email, password);
           }}
         >
-          <Typography style={styles.textFontLogin} id="LOGIN" />
+          <Typography style={globalStyles.buttonText} id="LOGIN" />
         </TouchableOpacity>
       </View>
 
       <View style={styles.guestView}>
         <TouchableOpacity style={styles.guest}>
-          <Typography
-            id="CONTINUE_AS_GUEST"
-            style={[styles.fontBasicText, { color: '#2C2C2C80' }]}
-          />
+          <Typography id="CONTINUE_AS_GUEST" style={globalStyles.basicText} />
         </TouchableOpacity>
       </View>
 
@@ -119,6 +125,7 @@ const Login = ({ navigation }) => {
 const styles = StyleSheet.create({
   parent: {
     justifyContent: 'center',
+    backgroundColor: theme.white,
   },
   logoView: {
     height: '50%',
@@ -131,28 +138,28 @@ const styles = StyleSheet.create({
     width: '100%',
     resizeMode: 'contain',
   },
-  inputFields: {
-    textAlign: 'center',
-    marginLeft: '15%',
-    marginRight: '15%',
-    fontSize: 16,
-    height: '5%',
-    borderWidth: 2,
-    borderColor: '#C0C0C0',
-    borderRadius: 5,
-  },
-  textFontInput: {
-    marginLeft: '15%',
-    marginTop: '5%',
-    marginBottom: '2%',
-    fontSize: 16,
-    fontFamily: 'Lato-Regular',
-  },
-  textFontLogin: {
-    fontSize: 16,
-    fontFamily: 'Lato-Regular',
-    color: theme.white,
-  },
+  // inputFields: {
+  //   textAlign: 'center',
+  //   marginLeft: '15%',
+  //   marginRight: '15%',
+  //   fontSize: 16,
+  //   height: '5%',
+  //   borderWidth: 2,
+  //   borderColor: '#C0C0C0',
+  //   borderRadius: 5,
+  // },
+  // textFontInput: {
+  //   marginLeft: '15%',
+  //   marginTop: '5%',
+  //   marginBottom: '2%',
+  //   fontSize: 16,
+  //   fontFamily: 'Lato-Regular',
+  // },
+  // textFontLogin: {
+  //   fontSize: 16,
+  //   fontFamily: 'Lato-Regular',
+  //   color: theme.white,
+  // },
   loginButton: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -161,11 +168,9 @@ const styles = StyleSheet.create({
   },
   buttonView: {
     marginTop: '5%',
-    marginLeft: '15%',
-    marginRight: '15%',
+    marginLeft: '5%',
+    marginRight: '5%',
     backgroundColor: theme.primary,
-    borderWidth: 2,
-    borderColor: '#C0C0C000',
     borderRadius: 5,
   },
   guest: {
@@ -183,12 +188,13 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     justifyContent: 'center',
     marginTop: '2%',
-    marginRight: '15%',
+    marginRight: '5%',
   },
-  fontBasicText: {
-    fontSize: 16,
-    fontFamily: 'Lato-Regular',
-  },
+  // fontBasicText: {
+  //   fontSize: 16,
+  //   fontFamily: 'Lato-Regular',
+  //   color: '#2C2C2C80',
+  // },
 });
 
 export default Login;

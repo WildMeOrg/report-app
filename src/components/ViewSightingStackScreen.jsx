@@ -5,6 +5,7 @@ import screens from '../constants/screens';
 import { Icon } from 'react-native-elements';
 import Humpback from '../../assets/humpback.jpg';
 import theme from '../constants/theme';
+import globalStyles from '../styles/globalStyles';
 import Typography from './Typography';
 
 const ViewSightingStack = createStackNavigator();
@@ -15,21 +16,21 @@ const ViewSightingScreen = ({ Navigation }) => {
     <View style={styles.InfoView}>
       <Image style={styles.image} source={Humpback} />
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <Text style={styles.InfoHeader}>Humpback</Text>
-        <Text style={styles.InfoText}>9/20/2020</Text>
+        <Text style={globalStyles.inputHeader}>Humpback</Text>
+        <Text style={[globalStyles.basicText, styles.InfoText]}>9/20/2020</Text>
         <View style={styles.Divider} />
-        <Typography id="SIGHTING" style={styles.Title} />
-        <View style={styles.Divider} />
-        <Typography id="SPECIES" style={styles.InfoHeader} />
-        <Text style={styles.InfoText}>Humpback Whale</Text>
-        <Typography id="TITLE" style={styles.InfoHeader} />
-        <Text style={styles.InfoHeader}>Title</Text>
-        <Text style={styles.InfoText}>Humpy</Text>
-        <Typography id="LOCATION" style={styles.InfoHeader} />
-        <Text style={styles.InfoHeader}>Location</Text>
-        <Text style={styles.InfoText}>Portland, OR</Text>
-        <Typography id="SIGHTING_CONTEXT" style={styles.InfoHeader} />
-        <Text style={styles.InfoText}>
+        <Typography id="SPECIES" style={globalStyles.inputHeader} />
+        <Text style={[globalStyles.basicText, styles.InfoText]}>
+          Humpback Whale
+        </Text>
+        <Typography id="TITLE" style={globalStyles.inputHeader} />
+        <Text style={[globalStyles.basicText, styles.InfoText]}>Humpy</Text>
+        <Typography id="LOCATION" style={globalStyles.inputHeader} />
+        <Text style={[globalStyles.basicText, styles.InfoText]}>
+          Portland, OR
+        </Text>
+        <Typography id="SIGHTING_CONTEXT" style={globalStyles.inputHeader} />
+        <Text style={[globalStyles.basicText, styles.InfoText]}>
           I saw it. The thing was absolutly massive bro.
         </Text>
       </ScrollView>
@@ -103,11 +104,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
   InfoText: {
-    fontFamily: 'Lato-Regular',
-    fontSize: 18,
-    marginTop: 5,
     marginLeft: 20,
-    opacity: 0.5,
   },
   Title: {
     color: '#2c2c2c',
@@ -118,11 +115,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   Divider: {
-    marginLeft: 25,
+    marginHorizontal: '5%',
     marginTop: 10,
     borderBottomColor: '#2C2C2C',
     borderBottomWidth: 0.5,
-    width: 375,
     opacity: 0.5,
   },
 });
