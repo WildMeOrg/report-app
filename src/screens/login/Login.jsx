@@ -110,7 +110,7 @@ const Login = ({ navigation }) => {
 
       <View style={styles.guestView}>
         <TouchableOpacity style={styles.guest}>
-          <Typography id="CONTINUE_AS_GUEST" style={[globalStyles.basicText]} />
+          <Typography id="CONTINUE_AS_GUEST" style={globalStyles.basicText} />
         </TouchableOpacity>
       </View>
 
