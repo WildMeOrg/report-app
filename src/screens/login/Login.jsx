@@ -49,10 +49,10 @@ const Login = ({ navigation }) => {
     }
 
     try {
-      const setingsPacket = await axios(
+      const settingsPacket = await axios(
         `${baseUrl}/api/v0/configuration/__bundle_setup`
       );
-      await AsyncStorage.setItem('appConfiguration', JSON.stringify(setingsPacket.data.response.configuration))
+      await AsyncStorage.setItem('appConfiguration', JSON.stringify(settingsPacket.data.response.configuration))
     } catch (settingsFetchError) {
       onChangeResponseData(
         settingsFetchError.name + ': ' + settingsFetchError.message
