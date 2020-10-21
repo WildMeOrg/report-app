@@ -74,7 +74,7 @@ const Login = ({ navigation }) => {
 
       <Typography
         id="PASSWORD"
-        style={[globalStyles.h2Text, globalStyles.inputHeader]}
+        style={globalStyles.h2Text, globalStyles.inputHeader}
       />
 
       <TextInput
