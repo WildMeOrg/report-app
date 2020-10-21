@@ -1,6 +1,8 @@
 import React from 'react';
 import { ScrollView, Text, View, StyleSheet, Image } from 'react-native';
-import { Icon } from 'react-native-elements'
+import { Icon } from 'react-native-elements';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import Typography from '../../components/Typography';
 import theme from '../../constants/theme';
 import Humpback from '../../../assets/humpback.jpg';
 import Hummingbird from '../../../assets/hummingbird.jpg';
@@ -10,6 +12,8 @@ import WhaleShark from '../../../assets/whaleshark.jpg';
 import ForestLizard from '../../../assets/lizard.jpg';
 import Elephant from '../../../assets/elephant.jpg';
 import Jaguar from '../../../assets/jaguar.jpg';
+import globalStyles from '../../styles/globalStyles';
+import screens from '../../constants/screens';
 
 /** <SightingCard> : A functional component that creates the sighting cards on the homepage
  *    @props
@@ -23,25 +27,21 @@ const SightingCard = (props) => {
       <Image style={cardElementStyles.imageCover} source={props.image} />
       <View style={cardElementStyles.sightingInfo}>
         <View style={cardElementStyles.sightingText}>
-          <Text style={cardElementStyles.sightingTitle}>
-            {props.name}
-          </Text>
-          <Text style={cardElementStyles.sightingDate}>
-            {props.date}
-          </Text>
+          <Text style={cardElementStyles.sightingTitle}>{props.name}</Text>
+          <Text style={cardElementStyles.sightingDate}>{props.date}</Text>
         </View>
         <Icon
-          name='more-vert'
-          type='materialicons'
+          name="more-vert"
+          type="materialicons"
           size={28}
           color={theme.black}
         />
       </View>
     </View>
   );
-}
+};
 
-const HomeScreen = ({ nagivation }) => {
+const HomeScreen = ({ navigation }) => {
   // TODO: Move to state
   var sightings = [
     {
@@ -55,7 +55,7 @@ const HomeScreen = ({ nagivation }) => {
     {
       id: 2,
       image: Hummingbird,
-      name: 'Anna\'s Hummingbird',
+      name: "Anna's Hummingbird",
       date: 'September 23rd, 2019',
       synced: true,
       inProgress: false,
@@ -107,45 +107,53 @@ const HomeScreen = ({ nagivation }) => {
       date: 'September 23rd, 2019',
       synced: true,
       inProgress: false,
-    }
-  ]
+    },
+  ];
 
   return (
     <View>
       {/* TODO: Turn from ScrollView into something FlatView for performance in long term(?) */}
       <ScrollView contentContainerStyle={bodyStyles.content}>
         <View style={bodyStyles.sortBy}>
-          <Text style={bodyStyles.sortByText}>
-            Last Added
-          </Text>
+          <Typography id="LAST_ADDED" style={globalStyles.h2Text} />
           <Icon
-            name='arrowdown'
-            type='antdesign'
+            name="arrowdown"
+            type="antdesign"
             size={18}
             color={theme.black}
           />
         </View>
-        <View style={bodyStyles.addNew}>
-          <Text style={bodyStyles.addNewText}>
-            + Add new sighting
-          </Text>
-        </View>
-        { // Procedurally generate the cards from the sightings array
-          sightings.map(sighting => {
-            return(
-              <SightingCard
-                key =   {sighting.id}
-                image = {sighting.image}
-                name =  {sighting.name}
-                date =  {sighting.date}
-              />
+        <TouchableOpacity
+          style={bodyStyles.addNew}
+          onPress={() => navigation.navigate(screens.newSightings[0])}
+        >
+          <Typography id="NEW_SIGHTING" style={bodyStyles.addNewText} />
+        </TouchableOpacity>
+        {
+          // Procedurally generate the cards from the sightings array
+          sightings.map((sighting) => {
+            return (
+              //TODO:  change the onPress depending on the sighting card
+              //currently they all go to the same card
+              <TouchableOpacity
+                onPress={() => navigation.navigate(screens.viewSighting)}
+                style={cardElementStyles.touchableOpacityHolder}
+                key={sighting.id}
+              >
+                <SightingCard
+                  key={sighting.id}
+                  image={sighting.image}
+                  name={sighting.name}
+                  date={sighting.date}
+                />
+              </TouchableOpacity>
             );
           })
         }
       </ScrollView>
     </View>
   );
-}
+};
 
 // TODO: Clean up explicit numbers and check on different displays
 const bodyStyles = StyleSheet.create({
@@ -154,6 +162,7 @@ const bodyStyles = StyleSheet.create({
     alignItems: 'center',
     overflow: 'visible',
     paddingBottom: 5,
+    backgroundColor: theme.white,
   },
   sortBy: {
     width: 102,
@@ -163,12 +172,11 @@ const bodyStyles = StyleSheet.create({
     justifyContent: 'space-between',
     alignSelf: 'flex-start',
   },
-  sortByText: {
-    fontFamily: 'Lato-Regular',
-    fontSize: 16,
-  },
+  // sortByText: {
+  //   fontFamily: 'Lato-Regular',
+  //   fontSize: 16,
+  // },
   addNew: {
-    marginVertical: 11,
     marginVertical: 11,
     width: '94%',
     padding: 25,
@@ -179,6 +187,8 @@ const bodyStyles = StyleSheet.create({
     borderRadius: 6,
   },
   addNewText: {
+    marginLeft: 75,
+    marginRight: 75,
     fontSize: 20,
     fontFamily: 'Lato-Regular',
     textAlign: 'center',
@@ -187,6 +197,9 @@ const bodyStyles = StyleSheet.create({
 });
 
 const cardElementStyles = StyleSheet.create({
+  touchableOpacityHolder: {
+    width: '95%',
+  },
   sightingCard: {
     flexDirection: 'row',
     marginVertical: 10,
@@ -202,8 +215,8 @@ const cardElementStyles = StyleSheet.create({
     // iOS
     shadowColor: theme.black,
     shadowOffset: {
-    	width: 0,
-    	height: 2,
+      width: 0,
+      height: 2,
     },
     shadowOpacity: 0.23,
     shadowRadius: 2.62,

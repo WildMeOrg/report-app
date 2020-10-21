@@ -1,7 +1,9 @@
 import React from 'react';
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Icon } from 'react-native-elements';
 import theme from '../../constants/theme';
+import globalStyles from '../../styles/globalStyles';
+import Typography from '../../components/Typography';
 
 export default function Settings() {
   return (
@@ -10,7 +12,7 @@ export default function Settings() {
         style={styles.settingRow}
         onPress={() => console.log('click')}
       >
-        <Text style={styles.settingText}>Profile</Text>
+        <Typography id="PROFILE" style={globalStyles.h2Text} />
         <Icon
           name="chevron-right"
           type="font-awesome"
@@ -23,7 +25,7 @@ export default function Settings() {
         style={styles.settingRow}
         onPress={() => console.log('click')}
       >
-        <Text style={styles.settingText}>Notifications</Text>
+        <Typography id="NOTIFICATIONS" style={globalStyles.h2Text} />
         <Icon
           name="chevron-right"
           type="font-awesome"
@@ -36,7 +38,7 @@ export default function Settings() {
         style={styles.settingRow}
         onPress={() => console.log('click')}
       >
-        <Text style={styles.settingText}>Privacy</Text>
+        <Typography id="PRIVACY" style={globalStyles.h2Text} />
         <Icon
           name="chevron-right"
           type="font-awesome"
@@ -49,7 +51,7 @@ export default function Settings() {
         style={styles.settingRow}
         onPress={() => console.log('click')}
       >
-        <Text style={styles.settingText}>Security</Text>
+        <Typography id="SECURITY" style={globalStyles.h2Text} />
         <Icon
           name="chevron-right"
           type="font-awesome"
@@ -62,7 +64,7 @@ export default function Settings() {
         style={styles.settingRowBottom}
         onPress={() => console.log('click')}
       >
-        <Text style={styles.settingText}>Help</Text>
+        <Typography id="HELP" style={globalStyles.h2Text} />
         <Icon
           name="chevron-right"
           type="font-awesome"
@@ -75,17 +77,13 @@ export default function Settings() {
         style={styles.settingRow}
         onPress={() => console.log('click')}
       >
-        <Text style={styles.settingText}>Log Out</Text>
+        <Typography id="LOG_OUT" style={globalStyles.h2Text} />
       </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  headerText: {
-    fontFamily: 'Lato-Regular',
-    fontSize: 14,
-  },
   icon: {
     marginLeft: 16,
   },
@@ -96,8 +94,8 @@ const styles = StyleSheet.create({
     marginVertical: 12,
   },
   settingText: {
-    fontFamily: 'Lato-Regular',
     fontSize: 16,
+    color: theme.black,
   },
   settingRowBottom: {
     flexDirection: 'row',

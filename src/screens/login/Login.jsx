@@ -15,10 +15,13 @@ import Logo from '../../../assets/logo.png';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import theme from '../../constants/theme';
 import { baseUrl } from '../../constants/urls';
-import { ThemeConsumer } from 'react-native-elements';
 import AsyncStorage from '@react-native-community/async-storage';
+import screens from '../../constants/screens';
+import { ThemeConsumer } from 'react-native-elements';
+import globalStyles from '../../styles/globalStyles';
+import Typography from '../../components/Typography';
 
-const Login = () => {
+const Login = ({ navigation }) => {
   const [email, onChangeEmail] = useState('');
   const [password, onChangePassword] = useState('');
   const [responseData, onChangeResponseData] = useState('');
@@ -35,7 +38,9 @@ const Login = () => {
           password,
         },
       });
-
+      if (response.data != null) {
+        navigation.navigate(screens.home);
+      }
       onChangeResponseData(JSON.stringify(response.data));
     } catch (loginError) {
       onChangeResponseData(loginError.name + ': ' + loginError.message);
@@ -67,10 +72,13 @@ const Login = () => {
         <Image source={Logo} style={styles.logo} />
       </View>
 
-      <Text style={styles.textFontInput}>Username</Text>
+      <Typography
+        id="USERNAME"
+        style={globalStyles.h2Text, globalStyles.inputHeader}
+      />
 
       <TextInput
-        style={styles.inputFields}
+        style={globalStyles.inputFields}
         onChangeText={(input) => onChangeEmail(input)}
         value={email}
         autoCorrect={false}
@@ -79,10 +87,13 @@ const Login = () => {
         autoCapitalize="none"
       />
 
-      <Text style={styles.textFontInput}>Password</Text>
+      <Typography
+        id="PASSWORD"
+        style={globalStyles.h2Text, globalStyles.inputHeader}
+      />
 
       <TextInput
-        style={styles.inputFields}
+        style={globalStyles.inputFields}
         onChangeText={(input) => onChangePassword(input)}
         value={password}
         autoCorrect={false}
@@ -94,9 +105,10 @@ const Login = () => {
 
       <View style={styles.forgotView}>
         <TouchableOpacity style={styles.forgot}>
-          <Text style={[styles.fontBasicText, { color: '#2C2C2C80' }]}>
-            Forgot password?
-          </Text>
+          <Typography
+            id="FORGOT_PASSWORD_QUESTION"
+            style={globalStyles.basicText}
+          />
         </TouchableOpacity>
       </View>
 
@@ -107,15 +119,13 @@ const Login = () => {
             authenticate(email, password);
           }}
         >
-          <Text style={styles.textFontLogin}>Login</Text>
+          <Typography style={globalStyles.buttonText} id="LOGIN" />
         </TouchableOpacity>
       </View>
 
       <View style={styles.guestView}>
         <TouchableOpacity style={styles.guest}>
-          <Text style={[styles.fontBasicText, { color: '#2C2C2C80' }]}>
-            Continue as guest
-          </Text>
+          <Typography id="CONTINUE_AS_GUEST" style={globalStyles.basicText} />
         </TouchableOpacity>
       </View>
 
@@ -130,6 +140,7 @@ const Login = () => {
 const styles = StyleSheet.create({
   parent: {
     justifyContent: 'center',
+    backgroundColor: theme.white,
   },
   logoView: {
     height: '50%',
@@ -142,28 +153,28 @@ const styles = StyleSheet.create({
     width: '100%',
     resizeMode: 'contain',
   },
-  inputFields: {
-    textAlign: 'center',
-    marginLeft: '15%',
-    marginRight: '15%',
-    fontSize: 16,
-    height: '5%',
-    borderWidth: 2,
-    borderColor: '#C0C0C0',
-    borderRadius: 5,
-  },
-  textFontInput: {
-    marginLeft: '15%',
-    marginTop: '5%',
-    marginBottom: '2%',
-    fontSize: 16,
-    fontFamily: 'Lato-Regular',
-  },
-  textFontLogin: {
-    fontSize: 16,
-    fontFamily: 'Lato-Regular',
-    color: theme.white,
-  },
+  // inputFields: {
+  //   textAlign: 'center',
+  //   marginLeft: '15%',
+  //   marginRight: '15%',
+  //   fontSize: 16,
+  //   height: '5%',
+  //   borderWidth: 2,
+  //   borderColor: '#C0C0C0',
+  //   borderRadius: 5,
+  // },
+  // textFontInput: {
+  //   marginLeft: '15%',
+  //   marginTop: '5%',
+  //   marginBottom: '2%',
+  //   fontSize: 16,
+  //   fontFamily: 'Lato-Regular',
+  // },
+  // textFontLogin: {
+  //   fontSize: 16,
+  //   fontFamily: 'Lato-Regular',
+  //   color: theme.white,
+  // },
   loginButton: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -172,11 +183,9 @@ const styles = StyleSheet.create({
   },
   buttonView: {
     marginTop: '5%',
-    marginLeft: '15%',
-    marginRight: '15%',
+    marginLeft: '5%',
+    marginRight: '5%',
     backgroundColor: theme.primary,
-    borderWidth: 2,
-    borderColor: '#C0C0C000',
     borderRadius: 5,
   },
   guest: {
@@ -194,12 +203,13 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     justifyContent: 'center',
     marginTop: '2%',
-    marginRight: '15%',
+    marginRight: '5%',
   },
-  fontBasicText: {
-    fontSize: 16,
-    fontFamily: 'Lato-Regular',
-  },
+  // fontBasicText: {
+  //   fontSize: 16,
+  //   fontFamily: 'Lato-Regular',
+  //   color: '#2C2C2C80',
+  // },
 });
 
 export default Login;
