@@ -104,11 +104,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
   InfoText: {
-    // fontFamily: 'Lato-Regular',
-    // fontSize: 18,
-    // marginTop: 5,
     marginLeft: 20,
-    // opacity: 0.5,
   },
   Title: {
     color: '#2c2c2c',
