@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import {
   DrawerContentScrollView,
   DrawerItemList,
@@ -8,6 +8,7 @@ import {
 import { Icon } from 'react-native-elements';
 import screens from '../constants/screens';
 import theme from '../constants/theme';
+import Typography from './Typography';
 
 export default function CustomDrawerContent(props) {
   return (
@@ -37,10 +38,10 @@ export default function CustomDrawerContent(props) {
               color={theme.black}
               iconStyle={styles.icon}
             />
-            <Text style={styles.drawerListText}>New Sighting</Text>
+            <Typography id="NEW_SIGHTING" style={styles.drawerListText} />
           </View>
         )}
-        onPress ={() => props.navigation.navigate(screens.newSightings[0])}
+        onPress={() => props.navigation.navigate(screens.newSightings[0])}
       />
       <DrawerItem
         label={() => (
@@ -51,7 +52,7 @@ export default function CustomDrawerContent(props) {
               color={theme.black}
               iconStyle={styles.icon}
             />
-            <Text style={styles.drawerListText}>Settings</Text>
+            <Typography id="SETTINGS" style={styles.drawerListText} />
           </View>
         )}
         onPress={() => props.navigation.navigate(screens.setings)}
@@ -66,7 +67,7 @@ export default function CustomDrawerContent(props) {
               color={theme.black}
               iconStyle={styles.icon}
             />
-            <Text style={styles.drawerListText}>Help</Text>
+            <Typography id="HELP" style={styles.drawerListText} />
           </View>
         )}
       />
@@ -74,10 +75,10 @@ export default function CustomDrawerContent(props) {
         style={styles.drawerItem}
         label={() => (
           <View style={styles.drawerListItem}>
-            <Text style={styles.drawerListText}>Log Out</Text>
+            <Typography id="LOG_OUT" style={styles.drawerListText} />
           </View>
         )}
-        onPress ={() => props.navigation.navigate(screens.login)}
+        onPress={() => props.navigation.navigate(screens.login)}
       />
       {/* Until all screens are linked together this allow us to go to each screen */}
       <DrawerItemList {...props} />
@@ -101,5 +102,5 @@ const styles = StyleSheet.create({
     fontFamily: 'Lato-Regular',
   },
   drawerListItem: { flexDirection: 'row', alignItems: 'center' },
-  drawerListText: { marginLeft: 16, fontSize: 14, fontFamily: 'Lato-Regular' },
+  drawerListText: { marginLeft: 16, fontSize: 14 },
 });
