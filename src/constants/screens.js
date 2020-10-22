@@ -8,4 +8,6 @@ export default {
   newSighting3: 'NewSighting3',
   newSightings: ['newSighting', 'newSighting2', 'newSighting3'],
   viewSighting: 'View Sighting',
+  profile: 'Profile',
+  notifications: 'Notifications',
 };

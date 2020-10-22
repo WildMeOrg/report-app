@@ -2,13 +2,13 @@ import React from 'react';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { Icon } from 'react-native-elements';
 import theme from '../../constants/theme';
-
-export default function Settings() {
+import screens from '../../constants/screens';
+export default function Settings({navigation}) {
   return (
     <View>
       <TouchableOpacity
         style={styles.settingRow}
-        onPress={() => console.log('click')}
+        onPress={() => navigation.navigate(screens.profile)}
       >
         <Text style={styles.settingText}>Profile</Text>
         <Icon
@@ -21,14 +21,14 @@ export default function Settings() {
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.settingRow}
-        onPress={() => console.log('click')}
+        onPress={() => navigation.navigate(screens.notifications)}
       >
         <Text style={styles.settingText}>Notifications</Text>
         <Icon
           name="chevron-right"
           type="font-awesome"
           color={theme.black}
-          onPress={() => navigation.toggleDrawer()}
+          onPress={() => navigation.toggleDrawer(screens.notifications)}
           iconStyle={styles.icon}
         />
       </TouchableOpacity>
