@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import screens from '../constants/screens';
 import {Icon} from 'react-native-elements';
 import theme from '../constants/theme';
+import globalStyles from '../styles/globalStyles';
 import profilePic from '../../assets/joeShmo.jpg';
 
 const ProfileStack = createStackNavigator();
@@ -12,27 +13,27 @@ const ProfileScreen = ({navigation}) => {
     return(
         //hardcoded to be replaced for later
         <View style={styles.InfoView}>
-        <ScrollView contentContainerStyle={{flexGrow: 1}}>
-        <Icon
-        name='more-vert'
-        type='materialicons'
-        size={28}
-        color={theme.black}
-        style={styles.editIcon}
-        //add onPress eventually 
-        /> 
-        <Image style={styles.image} source={profilePic}/>    
-        <Text style={styles.Name}>Joe Schmoe</Text>
-        <View style={styles.Divider}/>
-        <Text style={styles.InfoHeader}>Organization</Text>
-        <Text style={styles.InfoText}>The Schmoe Conservation</Text>
-        <Text style={styles.InfoHeader}>Email</Text>
-        <Text style={styles.InfoText}>schmoe.joe@email.com</Text>
-        <Text style={styles.InfoHeader}>Phone Number</Text>
-        <Text style={styles.InfoText}>(503)123-4567</Text>
-        <Text style={styles.InfoHeader}>Location</Text>
-        <Text style={styles.InfoText}>Portland, OR</Text>
-        </ScrollView>
+            <ScrollView contentContainerStyle={{flexGrow: 1}}>
+                <Icon
+                name='more-vert'
+                type='materialicons'
+                size={28}
+                color={theme.black}
+                style={styles.editIcon}
+                //add onPress eventually 
+                /> 
+                <Image style={styles.image} source={profilePic}/>    
+                <Text style={[globalStyles.headerText,styles.Name]}>Joe Schmoe</Text>
+                <View style={styles.Divider}/>
+                <Text style={[globalStyles.headerText,styles.InfoHeader]}>Organization</Text>
+                <Text style={[globalStyles.basicText,styles.InfoText]}>The Schmoe Conservation</Text>
+                <Text style={[globalStyles.headerText, styles.InfoHeader]}>Email</Text>
+                <Text style={[globalStyles.basicText, styles.InfoText]}>schmoe.joe@email.com</Text>
+                <Text style={[globalStyles.headerText, styles.InfoHeader]}>Phone Number</Text>
+                <Text style={[globalStyles.basicText, styles.InfoText]}>(503)123-4567</Text>
+                <Text style={[globalStyles.headerText, styles.InfoHeader]}>Location</Text>
+                <Text style={[globalStyles.basicText,styles.InfoText]}>Portland, OR</Text>
+            </ScrollView>
         </View>
     );
 };
@@ -103,21 +104,17 @@ const styles = StyleSheet.create({
           color:'#2c2c2c',
           fontFamily: 'Lato-Regular',
           fontSize: 28,
-          fontWeight: 'bold',
           marginTop: 25,
-          marginLeft: '31%',
+          marginLeft: '33%',
       },
       InfoHeader: {
           color: '#2c2c2c',
-          fontFamily: 'Lato-Regular',
           fontSize: 24,
-          fontWeight: 'bold',
           marginTop: 20,
           marginLeft: 20,
       },
       InfoText: {
-          fontFamily:'Lato-Regular',
-          fontSize: 18,
+          fontSize: 20,
           marginTop: 5,
           marginLeft: 20,
           opacity: 0.5,

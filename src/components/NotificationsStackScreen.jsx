@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import screens from '../constants/screens';
 import {Icon, ThemeConsumer} from 'react-native-elements';
 import theme from '../constants/theme';
+import globalStyles from '../styles/globalStyles';
 import Humpback from '../../assets/humpback.jpg';
 import Hummingbird from '../../assets/hummingbird.jpg';
 import RedPanda from '../../assets/redPanda.jpg';
@@ -17,10 +18,10 @@ const NotificationCard = (props) => {
         <View style={notificationCardStyle.notificationCard}>
             <Image style={notificationCardStyle.imageCover} source={props.image}/>
             <View style={notificationCardStyle.info}> 
-                <Text style={notificationCardStyle.title}>
+                <Text style={[globalStyles.headerText,notificationCardStyle.title]}>
                     {props.title}: {props.name}
                 </Text>
-                <Text style={notificationCardStyle.message}>
+                <Text style={[globalStyles.basicText,notificationCardStyle.message]}>
                     {props.message}
                 </Text>
             </View>
@@ -174,17 +175,15 @@ const notificationCardStyle = StyleSheet.create({
     },
     info: {
         paddingTop: 20,
-        //paddingRight: 20,
+        paddingRight: 20,
         alignItems: 'center',
         flex: 2.5,
     },
     title: {
-        fontSize: 16,
-        fontFamily: 'Lato-Regular',
+        fontSize: 18,
     },
     message:{
-        fontSize: 12,
-        fontFamily: 'Lato-Regular',
+        fontSize: 16,
     },
 });
 const styles = StyleSheet.create({
