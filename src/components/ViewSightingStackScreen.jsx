@@ -1,18 +1,12 @@
 import React from 'react';
-import {
-  Button,
-  Text,
-  StyleSheet,
-  Image,
-  View,
-  ScrollView,
-} from 'react-native';
+import { Text, StyleSheet, Image, View, ScrollView } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import screens from '../constants/screens';
 import { Icon } from 'react-native-elements';
 import Humpback from '../../assets/humpback.jpg';
 import theme from '../constants/theme';
 import globalStyles from '../styles/globalStyles';
+import Typography from './Typography';
 
 const ViewSightingStack = createStackNavigator();
 
@@ -25,17 +19,17 @@ const ViewSightingScreen = ({ Navigation }) => {
         <Text style={globalStyles.inputHeader}>Humpback</Text>
         <Text style={[globalStyles.basicText, styles.InfoText]}>9/20/2020</Text>
         <View style={styles.Divider} />
-        <Text style={globalStyles.inputHeader}>Species</Text>
+        <Typography id="SPECIES" style={globalStyles.inputHeader} />
         <Text style={[globalStyles.basicText, styles.InfoText]}>
           Humpback Whale
         </Text>
-        <Text style={globalStyles.inputHeader}>Title</Text>
+        <Typography id="TITLE" style={globalStyles.inputHeader} />
         <Text style={[globalStyles.basicText, styles.InfoText]}>Humpy</Text>
-        <Text style={globalStyles.inputHeader}>Location</Text>
+        <Typography id="LOCATION" style={globalStyles.inputHeader} />
         <Text style={[globalStyles.basicText, styles.InfoText]}>
           Portland, OR
         </Text>
-        <Text style={globalStyles.inputHeader}>Sighting Context</Text>
+        <Typography id="SIGHTING_CONTEXT" style={globalStyles.inputHeader} />
         <Text style={[globalStyles.basicText, styles.InfoText]}>
           I saw it. The thing was absolutly massive bro.
         </Text>
@@ -51,11 +45,20 @@ export default function ViewSightingStackScreen({ navigation }) {
         headerTitleAlign: 'center',
         headerLeft: () => (
           <Icon
-            name='bars'
-            type='font-awesome'
+            name="bars"
+            type="font-awesome"
             color={theme.black}
             onPress={() => navigation.toggleDrawer()}
             iconStyle={styles.icon}
+          />
+        ),
+        headerRight: () => (
+          <Icon
+            name="times"
+            type="font-awesome"
+            color={theme.black}
+            onPress={() => navigation.navigate(screens.home)}
+            iconStyle={styles.icon2}
           />
         ),
       }}
@@ -65,7 +68,7 @@ export default function ViewSightingStackScreen({ navigation }) {
         component={ViewSightingScreen}
         options={{
           headerTitle: () => (
-            <Text style={styles.headerText}>View Sighting</Text>
+            <Typography id="VIEW_SIGHTING" style={styles.headerText} />
           ),
         }}
       />
@@ -80,6 +83,9 @@ const styles = StyleSheet.create({
   icon: {
     marginLeft: 16,
   },
+  icon2: {
+    marginRight: 16,
+  },
   image: {
     width: '100%',
     height: '40%',
@@ -89,20 +95,16 @@ const styles = StyleSheet.create({
     flex: 1,
     marginBottom: 10,
   },
-  //   InfoHeader: {
-  //     color: '#2c2c2c',
-  //     fontFamily: 'Lato-Regular',
-  //     fontSize: 24,
-  //     fontWeight: 'bold',
-  //     marginTop: 20,
-  //     marginLeft: 20,
-  //   },
-  InfoText: {
-    // fontFamily: 'Lato-Regular',
-    // fontSize: 18,
-    // marginTop: 5,
+  InfoHeader: {
+    color: '#2c2c2c',
+    fontFamily: 'Lato-Regular',
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginTop: 20,
     marginLeft: 20,
-    // opacity: 0.5,
+  },
+  InfoText: {
+    marginLeft: 20,
   },
   Title: {
     color: '#2c2c2c',

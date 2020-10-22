@@ -14,10 +14,14 @@ import Loading from '../loading/Loading';
 import Logo from '../../../assets/logo.png';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import theme from '../../constants/theme';
+import { baseUrl } from '../../constants/urls';
+import AsyncStorage from '@react-native-community/async-storage';
+import screens from '../../constants/screens';
 import { ThemeConsumer } from 'react-native-elements';
 import globalStyles from '../../styles/globalStyles';
+import Typography from '../../components/Typography';
 
-const Login = () => {
+const Login = ({ navigation }) => {
   const [email, onChangeEmail] = useState('');
   const [password, onChangePassword] = useState('');
   const [responseData, onChangeResponseData] = useState('');
@@ -34,10 +38,25 @@ const Login = () => {
           password,
         },
       });
-
+      if (response.data != null) {
+        navigation.navigate(screens.home);
+      }
       onChangeResponseData(JSON.stringify(response.data));
     } catch (loginError) {
       onChangeResponseData(loginError.name + ': ' + loginError.message);
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      const settingsPacket = await axios(
+        `${baseUrl}/api/v0/configuration/__bundle_setup`
+      );
+      await AsyncStorage.setItem('appConfiguration', JSON.stringify(settingsPacket.data.response.configuration))
+    } catch (settingsFetchError) {
+      onChangeResponseData(
+        settingsFetchError.name + ': ' + settingsFetchError.message
+      );
     }
     setIsLoading(false);
   };
@@ -53,38 +72,43 @@ const Login = () => {
         <Image source={Logo} style={styles.logo} />
       </View>
 
-      <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
-        Username
-      </Text>
+      <Typography
+        id="USERNAME"
+        style={globalStyles.h2Text, globalStyles.inputHeader}
+      />
 
       <TextInput
         style={globalStyles.inputFields}
         onChangeText={(input) => onChangeEmail(input)}
         value={email}
         autoCorrect={false}
-        autoCompleteType='email'
-        textContentType='emailAddress'
-        autoCapitalize='none'
+        autoCompleteType="email"
+        textContentType="emailAddress"
+        autoCapitalize="none"
       />
 
-      <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
-        Password
-      </Text>
+      <Typography
+        id="PASSWORD"
+        style={globalStyles.h2Text, globalStyles.inputHeader}
+      />
 
       <TextInput
         style={globalStyles.inputFields}
         onChangeText={(input) => onChangePassword(input)}
         value={password}
         autoCorrect={false}
-        autoCompleteType='password'
-        textContentType='password'
-        autoCapitalize='none'
+        autoCompleteType="password"
+        textContentType="password"
+        autoCapitalize="none"
         secureTextEntry
       />
 
       <View style={styles.forgotView}>
         <TouchableOpacity style={styles.forgot}>
-          <Text style={[globalStyles.basicText]}>Forgot password?</Text>
+          <Typography
+            id="FORGOT_PASSWORD_QUESTION"
+            style={globalStyles.basicText}
+          />
         </TouchableOpacity>
       </View>
 
@@ -95,13 +119,13 @@ const Login = () => {
             authenticate(email, password);
           }}
         >
-          <Text style={globalStyles.buttonText}>Login</Text>
+          <Typography style={globalStyles.buttonText} id="LOGIN" />
         </TouchableOpacity>
       </View>
 
       <View style={styles.guestView}>
         <TouchableOpacity style={styles.guest}>
-          <Text style={[globalStyles.basicText]}>Continue as guest</Text>
+          <Typography id="CONTINUE_AS_GUEST" style={globalStyles.basicText} />
         </TouchableOpacity>
       </View>
 

@@ -28,7 +28,7 @@ const NewSighting2Screen = ({ navigation }) => {
         style={{ backgroundColor: '#ffffff' }}
         resetScrollToCoords={{ x: 0, y: 0 }}
         style={styles.keyboardView}
-        scrollEnabled={true}
+        scrollEnabled
       >
         <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
           {' '}
@@ -75,8 +75,8 @@ export default function NewSighting2StackScreen({ navigation }) {
         headerTitleAlign: 'center',
         headerRight: () => (
           <Icon
-            name='times'
-            type='font-awesome'
+            name="times"
+            type="font-awesome"
             color={theme.black}
             onPress={() => navigation.navigate(screens.home)}
             iconStyle={globalStyles.icon}
@@ -96,78 +96,3 @@ export default function NewSighting2StackScreen({ navigation }) {
     </NewSighting2Stack.Navigator>
   );
 }
-
-// const styles = StyleSheet.create({
-//   progressBar: {
-//     width: '100%',
-//     height: 3,
-//     backgroundColor: '#EDEDED',
-//     justifyContent: 'center',
-//   },
-//   innerStyle: {
-//     width: '66%',
-//     height: 3,
-//     backgroundColor: theme.primary,
-//   },
-//   keyboardView: {
-//     flex: 1,
-//     backgroundColor: theme.white,
-//   },
-//   headerText: {
-//     fontFamily: 'Lato-Regular',
-//     fontSize: 14,
-//   },
-//   icon: {
-//     marginRight: 16,
-//   },
-//   inputHeader: {
-//     fontFamily: 'Lato-Regular',
-//     fontSize: 16,
-//     margin: '5%',
-//     marginBottom: '3%',
-//     color: theme.black,
-//   },
-//   inputFields: {
-//     textAlign: 'left',
-//     marginHorizontal: '5%',
-//     fontSize: 16,
-//     borderColor: '#2c2c2c80',
-//     borderWidth: 1,
-//     borderRadius: 6,
-//     padding: '2%',
-//   },
-//   multiLine: {
-//     height: 150,
-//   },
-//   button: {
-//     backgroundColor: theme.primary,
-//     paddingVertical: 12,
-//     paddingHorizontal: 50,
-//     borderRadius: 20,
-//     margin: '5%',
-//   },
-//   buttonInactive: {
-//     backgroundColor: '#CACACA',
-//   },
-//   buttonText: {
-//     color: theme.white,
-//     fontSize: 16,
-//     alignSelf: 'center',
-//   },
-//   horizontal: {
-//     flex: 1,
-//     flexDirection: 'row',
-//     justifyContent: 'space-around',
-//   },
-//   container: {
-//     flex: 1,
-//     flexGrow: 1,
-//     backgroundColor: theme.white,
-//   },
-//   buttonContainer: {
-//     position: 'absolute',
-//     bottom: 0,
-//     alignSelf: 'center',
-//     margin: '5%',
-//   },
-// });
