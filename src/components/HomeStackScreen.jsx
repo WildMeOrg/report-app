@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { Icon } from 'react-native-elements';
@@ -13,6 +14,7 @@ const HomeStack = createStackNavigator();
 
 export default function HomeStackScreen({ navigation }) {
   const [isSearching, setIsSearching] = useState(false);
+
   if (isSearching) {
     return (
       <HomeStack.Navigator
@@ -47,7 +49,9 @@ export default function HomeStackScreen({ navigation }) {
                 placeholder="Search"
                 autoFocus={true}
                 style={headerStyles.searchBar}
-                onChangeText={(text) => console.log(text)}
+                onChangeText={
+                  (text) => console.log(text) /*console.log for testing*/
+                }
               />
             ),
           }}
