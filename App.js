@@ -40,21 +40,27 @@ const loadFonts = () =>
   });
 
 export default function App() {
-  
   const [fontsLoaded, setfontsLoaded] = useState(false);
   const locale = getLocale();
 
   if (fontsLoaded) {
     return (
       <ReportContextProvider>
-        <IntlProvider locale={locale} messages={messageMap[locale]} defaultLocale="en">
+        <IntlProvider
+          locale={locale}
+          messages={messageMap[locale]}
+          defaultLocale="en"
+        >
           <NavigationContainer>
             <Drawer.Navigator
               drawerContent={(props) => <CustomDrawerContent {...props} />}
             >
               {/* As new screens are made, put them here to be able to view them */}
               <Drawer.Screen name={screens.home} component={HomeStackScreen} />
-              <Drawer.Screen name={screens.login} component={LoginStackScreen} />
+              <Drawer.Screen
+                name={screens.login}
+                component={LoginStackScreen}
+              />
               <Drawer.Screen
                 name={screens.setings}
                 component={SettingsStackScreen}

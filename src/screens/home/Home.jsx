@@ -22,12 +22,8 @@ const SightingCard = (props) => {
       <Image style={cardElementStyles.imageCover} source={props.image} />
       <View style={cardElementStyles.sightingInfo}>
         <View style={cardElementStyles.sightingText}>
-          <Text style={cardElementStyles.sightingTitle}>
-            {props.name}
-          </Text>
-          <Text style={cardElementStyles.sightingDate}>
-            {props.date}
-          </Text>
+          <Text style={cardElementStyles.sightingTitle}>{props.name}</Text>
+          <Text style={cardElementStyles.sightingDate}>{props.date}</Text>
         </View>
         <Icon
           name="more-vert"
@@ -41,7 +37,6 @@ const SightingCard = (props) => {
 };
 
 const HomeScreen = ({ navigation }) => {
-
   const [state, dispatch] = useContext(ReportContext);
 
   return (
@@ -136,7 +131,6 @@ const cardElementStyles = StyleSheet.create({
   },
   sightingCard: {
     flexDirection: 'row',
-    marginVertical: 10,
     marginVertical: 10,
     width: '95%',
     height: 80,
