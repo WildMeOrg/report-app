@@ -18,7 +18,7 @@ export default function Settings({ navigation }) {
           name="chevron-right"
           type="font-awesome"
           color={theme.black}
-          onPress={() => navigation.toggleDrawer()}
+          onPress={() => navigation.navigate(screens.profile)}
           iconStyle={styles.icon}
         />
       </TouchableOpacity>
@@ -31,7 +31,7 @@ export default function Settings({ navigation }) {
           name="chevron-right"
           type="font-awesome"
           color={theme.black}
-          onPress={() => navigation.toggleDrawer(screens.notifications)}
+          onPress={() => navigation.navigate(screens.notifications)}
           iconStyle={styles.icon}
         />
       </TouchableOpacity>
