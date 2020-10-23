@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Icon, withTheme } from 'react-native-elements';
+import { Icon } from 'react-native-elements';
 import screens from '../constants/screens';
 import theme from '../constants/theme';
 import globalStyles from '../styles/globalStyles';

@@ -1,6 +1,8 @@
 export default {
   home: 'Home',
   login: 'Login',
+  guestHome: 'GuestHome',
+  guestAdd: 'GuestAdd',
   loading: 'Loading',
   setings: 'Settings',
   newSighting: 'NewSighting',

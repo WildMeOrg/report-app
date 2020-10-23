@@ -1,20 +1,20 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from 'react-native-elements';
 import screens from '../constants/screens';
-import Login from '../screens/login/Login';
+import GuestAdd from '../screens/guest/GuestAdd';
 import theme from '../constants/theme';
 import Typography from './Typography';
 import globalStyles from '../styles/globalStyles';
 
-const LoginStack = createStackNavigator();
+const GuestAddStack = createStackNavigator();
 
-export default function LoginStackScreen({ navigation }) {
+export default function GuestAddStackScreen({ navigation }) {
   return (
-    <LoginStack.Navigator
+    <GuestAddStack.Navigator
       screenOptions={{
         headerTitleAlign: 'center',
+        // eslint-disable-next-line react/display-name
         headerLeft: () => (
           <Icon
             name="bars"
@@ -26,15 +26,16 @@ export default function LoginStackScreen({ navigation }) {
         ),
       }}
     >
-      <LoginStack.Screen
-        name={screens.login}
-        component={Login}
+      <GuestAddStack.Screen
+        name={screens.guestAdd}
+        component={GuestAdd}
         options={{
+          // eslint-disable-next-line react/display-name
           headerTitle: () => (
             <Typography id="LOGIN" style={globalStyles.headerText} />
           ),
         }}
       />
-    </LoginStack.Navigator>
+    </GuestAddStack.Navigator>
   );
 }

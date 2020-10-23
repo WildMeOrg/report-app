@@ -52,7 +52,10 @@ const Login = ({ navigation }) => {
       const settingsPacket = await axios(
         `${baseUrl}/api/v0/configuration/__bundle_setup`
       );
-      await AsyncStorage.setItem('appConfiguration', JSON.stringify(settingsPacket.data.response.configuration))
+      await AsyncStorage.setItem(
+        'appConfiguration',
+        JSON.stringify(settingsPacket.data.response.configuration)
+      );
     } catch (settingsFetchError) {
       onChangeResponseData(
         settingsFetchError.name + ': ' + settingsFetchError.message
@@ -74,7 +77,7 @@ const Login = ({ navigation }) => {
 
       <Typography
         id="USERNAME"
-        style={globalStyles.h2Text, globalStyles.inputHeader}
+        style={(globalStyles.h2Text, globalStyles.inputHeader)}
       />
 
       <TextInput
@@ -89,7 +92,7 @@ const Login = ({ navigation }) => {
 
       <Typography
         id="PASSWORD"
-        style={globalStyles.h2Text, globalStyles.inputHeader}
+        style={(globalStyles.h2Text, globalStyles.inputHeader)}
       />
 
       <TextInput
@@ -124,7 +127,10 @@ const Login = ({ navigation }) => {
       </View>
 
       <View style={styles.guestView}>
-        <TouchableOpacity style={styles.guest}>
+        <TouchableOpacity
+          style={styles.guest}
+          onPress={() => navigation.navigate(screens.guestHome)}
+        >
           <Typography id="CONTINUE_AS_GUEST" style={globalStyles.basicText} />
         </TouchableOpacity>
       </View>
