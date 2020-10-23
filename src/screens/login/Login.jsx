@@ -66,12 +66,12 @@ const Login = ({ navigation }) => {
     <Loading />
   ) : (
     <KeyboardAwareScrollView 
-    enableOnAndroid={false}
-    contentContainerStyle={{flex: 1, maxHeight: "100%"}}
+    enableOnAndroid={true}
+    contentContainerStyle={{flex: 1, maxHeight: '100%', justifyContent: 'center'}}
     extraScrollHeight={130}
-    style={styles.parent}
+    scrollEnabled={false}
     >  
-    
+
       <View style={styles.logoView}>
         <Image source={Logo} style={styles.logo} />
       </View>
@@ -137,7 +137,7 @@ const Login = ({ navigation }) => {
       <Text style={{ fontSize: 16, textAlign: 'center', marginTop: 25 }}>
         {responseData}
       </Text>
-    
+
     </KeyboardAwareScrollView>
   );
 };
