@@ -46,7 +46,11 @@ export default function App() {
 
   if (fontsLoaded) {
     return (
-      <IntlProvider locale={locale} messages={messageMap[locale]} defaultLocale="en">
+      <IntlProvider
+        locale={locale}
+        messages={messageMap[locale]}
+        defaultLocale="en"
+      >
         <NavigationContainer>
           <Drawer.Navigator
             drawerContent={(props) => <CustomDrawerContent {...props} />}
@@ -75,12 +79,12 @@ export default function App() {
               component={ViewSightingStackScreen}
             />
             <Drawer.Screen
-            name={screens.profile}
-            component={ProfileStackScreen}
+              name={screens.profile}
+              component={ProfileStackScreen}
             />
             <Drawer.Screen
-            name={screens.notifications}
-            component={NotificationsStackScreen}
+              name={screens.notifications}
+              component={NotificationsStackScreen}
             />
           </Drawer.Navigator>
         </NavigationContainer>

@@ -6,7 +6,7 @@ import screens from '../../constants/screens';
 import globalStyles from '../../styles/globalStyles';
 import Typography from '../../components/Typography';
 
-export default function Settings({navigation}) {
+export default function Settings({ navigation }) {
   return (
     <View>
       <TouchableOpacity
