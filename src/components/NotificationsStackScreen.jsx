@@ -106,13 +106,14 @@ const NotificationsScreen = ({ navigation }) => {
       {/* to be continued */}
       {notifications.map((notification) => {
         return (
-            <Icon
-                name='circle'
-                type='font-awesome'
-                size={14}
-                marginTop='40%'
-                marginRight='5%'
-                color={theme.primary}
+          <TouchableOpacity key={notification.id}>
+            <NotificationCard
+              key={notification.id}
+              image={notification.image}
+              title={notification.title}
+              name={notification.name}
+              message={notification.message}
+              new={notification.new}
             />
           </TouchableOpacity>
         );
