@@ -27,6 +27,7 @@ export default function CustomDrawerContent(props) {
             <Text style={styles.drawerHeaderName}>Joe Schmoe</Text>
           </View>
         )}
+        onPress={() => props.navigation.navigate(screens.profile)}
       />
       <DrawerItem
         label={() => (

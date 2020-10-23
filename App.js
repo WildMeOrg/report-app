@@ -20,9 +20,11 @@ import NewSightingStackScreen from './src/components/NewSightingStackScreen';
 import NewSighting2StackScreen from './src/components/NewSighting2StackScreen';
 import NewSighting3StackScreen from './src/components/NewSighting3StackScreen';
 import ViewSightingStackScreen from './src/components/ViewSightingStackScreen';
+import ProfileStackScreen from './src/components/ProfileStackScreen';
 import screens from './src/constants/screens';
 import CustomDrawerContent from './src/components/CustomDrawerContent';
 import SettingsStackScreen from './src/components/SettingsStackScreen';
+import NotificationsStackScreen from './src/components/NotificationsStackScreen';
 import getLocale from './src/utils/getLocale';
 
 const messageMap = {
@@ -44,7 +46,11 @@ export default function App() {
 
   if (fontsLoaded) {
     return (
-      <IntlProvider locale={locale} messages={messageMap[locale]} defaultLocale="en">
+      <IntlProvider
+        locale={locale}
+        messages={messageMap[locale]}
+        defaultLocale="en"
+      >
         <NavigationContainer>
           <Drawer.Navigator
             drawerContent={(props) => <CustomDrawerContent {...props} />}
@@ -71,6 +77,14 @@ export default function App() {
             <Drawer.Screen
               name={screens.viewSighting}
               component={ViewSightingStackScreen}
+            />
+            <Drawer.Screen
+              name={screens.profile}
+              component={ProfileStackScreen}
+            />
+            <Drawer.Screen
+              name={screens.notifications}
+              component={NotificationsStackScreen}
             />
           </Drawer.Navigator>
         </NavigationContainer>

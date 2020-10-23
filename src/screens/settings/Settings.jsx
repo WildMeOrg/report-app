@@ -2,15 +2,16 @@ import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Icon } from 'react-native-elements';
 import theme from '../../constants/theme';
+import screens from '../../constants/screens';
 import globalStyles from '../../styles/globalStyles';
 import Typography from '../../components/Typography';
 
-export default function Settings() {
+export default function Settings({ navigation }) {
   return (
     <View>
       <TouchableOpacity
         style={styles.settingRow}
-        onPress={() => console.log('click')}
+        onPress={() => navigation.navigate(screens.profile)}
       >
         <Typography id="PROFILE" style={globalStyles.h2Text} />
         <Icon
@@ -23,14 +24,14 @@ export default function Settings() {
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.settingRow}
-        onPress={() => console.log('click')}
+        onPress={() => navigation.navigate(screens.notifications)}
       >
         <Typography id="NOTIFICATIONS" style={globalStyles.h2Text} />
         <Icon
           name="chevron-right"
           type="font-awesome"
           color={theme.black}
-          onPress={() => navigation.toggleDrawer()}
+          onPress={() => navigation.toggleDrawer(screens.notifications)}
           iconStyle={styles.icon}
         />
       </TouchableOpacity>

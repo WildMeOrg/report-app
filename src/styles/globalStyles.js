@@ -25,6 +25,7 @@ export default StyleSheet.create({
     color: '#2C2C2C80',
   },
   inputHeader: {
+    fontSize: 18,
     margin: '5%',
     marginBottom: '3%',
   },

@@ -203,7 +203,6 @@ const cardElementStyles = StyleSheet.create({
   sightingCard: {
     flexDirection: 'row',
     marginVertical: 10,
-    marginVertical: 10,
     width: '95%',
     height: 80,
     justifyContent: 'center',
