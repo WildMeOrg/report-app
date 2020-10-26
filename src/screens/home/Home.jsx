@@ -60,7 +60,7 @@ const HomeScreen = ({ navigation }) => {
         </TouchableOpacity>
         {
           // Procedurally generate the cards from the sightings array
-          state.testSightings.map((sighting) => {
+          state.sightings.map((sighting) => {
             return (
               //TODO:  change the onPress depending on the sighting card
               //currently they all go to the same card

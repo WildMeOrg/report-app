@@ -1,5 +1,5 @@
 export default storage = {
-  testSightings: [
+  sightings: [
     {
       id: 1,
       image: require('../../assets/humpback.jpg'),
@@ -11,7 +11,7 @@ export default storage = {
     {
       id: 2,
       image: require('../../assets/hummingbird.jpg'),
-      name: "Anna's Hummingbird",
+      name: 'Anna\'s Hummingbird',
       date: 'September 23rd, 2019',
       synced: true,
       inProgress: false,
