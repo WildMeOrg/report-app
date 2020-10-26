@@ -20,9 +20,11 @@ import NewSightingStackScreen from './src/components/NewSightingStackScreen';
 import NewSighting2StackScreen from './src/components/NewSighting2StackScreen';
 import NewSighting3StackScreen from './src/components/NewSighting3StackScreen';
 import ViewSightingStackScreen from './src/components/ViewSightingStackScreen';
+import ProfileStackScreen from './src/components/ProfileStackScreen';
 import screens from './src/constants/screens';
 import CustomDrawerContent from './src/components/CustomDrawerContent';
 import SettingsStackScreen from './src/components/SettingsStackScreen';
+import NotificationsStackScreen from './src/components/NotificationsStackScreen';
 import getLocale from './src/utils/getLocale';
 import { ReportContextProvider } from './src/context/report-context';
 

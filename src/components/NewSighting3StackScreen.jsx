@@ -24,9 +24,8 @@ const NewSighting3Screen = ({ navigation }) => {
         <Animated.View style={[styles.innerProgressBar, styles.oneHundred]} />
       </View>
       <KeyboardAwareScrollView
-        style={{ backgroundColor: '#ffffff' }}
+        style={({ backgroundColor: '#ffffff' }, styles.keyboardView)}
         resetScrollToCoords={{ x: 0, y: 0 }}
-        style={styles.keyboardView}
         scrollEnabled={true}
       >
         <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
