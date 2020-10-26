@@ -17,8 +17,6 @@ import spanishTranslations from './locale/es.json';
 import HomeStackScreen from './src/components/HomeStackScreen';
 import LoginStackScreen from './src/components/LoginStackScreen';
 import NewSightingStackScreen from './src/components/NewSightingStackScreen';
-import NewSighting2StackScreen from './src/components/NewSighting2StackScreen';
-import NewSighting3StackScreen from './src/components/NewSighting3StackScreen';
 import ViewSightingStackScreen from './src/components/ViewSightingStackScreen';
 import ProfileStackScreen from './src/components/ProfileStackScreen';
 import screens from './src/constants/screens';
@@ -63,16 +61,8 @@ export default function App() {
               component={SettingsStackScreen}
             />
             <Drawer.Screen
-              name={screens.newSightings[0]}
+              name={screens.newSightings}
               component={NewSightingStackScreen}
-            />
-            <Drawer.Screen
-              name={screens.newSightings[1]}
-              component={NewSighting2StackScreen}
-            />
-            <Drawer.Screen
-              name={screens.newSightings[2]}
-              component={NewSighting3StackScreen}
             />
             <Drawer.Screen
               name={screens.viewSighting}
