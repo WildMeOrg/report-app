@@ -112,57 +112,59 @@ function NewSightingForm({ navigation }) {
           </View>
         ) : null}
       </KeyboardAwareScrollView>
-      <View style={styles.buttonContainer}>
-        <View style={styles.horizontal}>
-          {formSection === 0 ? (
-            <View>
-              <TouchableOpacity>
-                <View style={[styles.button, globalStyles.invisible]}>
-                  <Text style={globalStyles.buttonText}>Back</Text>
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => setFormSection(1)}>
-                <View style={(globalStyles.button, styles.button)}>
-                  <Text style={globalStyles.buttonText}>Next </Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-          ) : null}
-          {formSection === 1 ? (
-            <View>
-              <TouchableOpacity onPress={() => setFormSection(0)}>
-                <View style={[styles.button, styles.buttonInactive]}>
-                  <Text style={globalStyles.buttonText}> Back </Text>
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => setFormSection(2)}>
-                <View style={styles.button}>
-                  <Text style={globalStyles.buttonText}>Next</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-          ) : null}
-          {formSection === 2 ? (
-            <View>
-              <TouchableOpacity onPress={() => setFormSection(1)}>
-                <View style={[styles.button, styles.buttonInactive]}>
-                  <Text style={globalStyles.buttonText}>Back</Text>
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  setFormSection(0);
-                  navigation.navigate(screens.home);
-                }}
-              >
-                <View style={styles.button}>
-                  <Text style={globalStyles.buttonText}>Upload</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-          ) : null}
+      {formSection === 0 ? (
+        <View style={styles.buttonContainer}>
+          <View style={styles.horizontal}>
+            <TouchableOpacity>
+              <View style={[styles.button, globalStyles.invisible]}>
+                <Text style={globalStyles.buttonText}>Back</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => setFormSection(1)}>
+              <View style={(globalStyles.button, styles.button)}>
+                <Text style={globalStyles.buttonText}>Next </Text>
+              </View>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
+      ) : null}
+      {formSection === 1 ? (
+        <View style={styles.buttonContainer}>
+          <View style={styles.horizontal}>
+            <TouchableOpacity onPress={() => setFormSection(0)}>
+              <View style={[styles.button, styles.buttonInactive]}>
+                <Text style={globalStyles.buttonText}> Back </Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => setFormSection(2)}>
+              <View style={styles.button}>
+                <Text style={globalStyles.buttonText}>Next</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        </View>
+      ) : null}
+      {formSection === 2 ? (
+        <View style={styles.buttonContainer}>
+          <View style={styles.horizontal}>
+            <TouchableOpacity onPress={() => setFormSection(1)}>
+              <View style={[styles.button, styles.buttonInactive]}>
+                <Text style={globalStyles.buttonText}>Back</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                setFormSection(0);
+                navigation.navigate(screens.home);
+              }}
+            >
+              <View style={styles.button}>
+                <Text style={globalStyles.buttonText}>Upload</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        </View>
+      ) : null}
     </View>
   );
 }
