@@ -61,7 +61,7 @@ export default function App() {
               component={SettingsStackScreen}
             />
             <Drawer.Screen
-              name={screens.newSightings}
+              name={screens.newSighting}
               component={NewSightingStackScreen}
             />
             <Drawer.Screen

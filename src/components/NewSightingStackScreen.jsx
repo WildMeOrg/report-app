@@ -37,10 +37,10 @@ function NewSightingForm({ navigation }) {
         scrollEnabled={true}
       >
         {formSection === 0 ? (
-          <React.Fragment>
+          <>
             <View style={styles.addNew}>
               <TouchableOpacity
-                onPress={() => navigation.navigate(screens.newSightings[0])}
+                onPress={() => navigation.navigate(screens.newSighting)}
               >
                 <Icon
                   name="cloud-upload"
@@ -55,18 +55,15 @@ function NewSightingForm({ navigation }) {
               </TouchableOpacity>
             </View>
             <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
-              {' '}
-              Title{' '}
+              Title
             </Text>
             <TextInput style={globalStyles.inputFields} autoCorrect={false} />
             <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
-              {' '}
-              Location{' '}
+              Location
             </Text>
             <TextInput style={globalStyles.inputFields} autoCorrect={false} />
             <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
-              {' '}
-              Sighting Context{' '}
+              Sighting Context
             </Text>
             <TextInput
               style={[globalStyles.inputFields, styles.multiLine]}
@@ -74,42 +71,36 @@ function NewSightingForm({ navigation }) {
               multiline={true}
               numberOfLines={5}
             />
-
             <View style={styles.keyboardView} />
-          </React.Fragment>
+          </>
         ) : null}
         {formSection === 1 ? (
-          <View>
+          <>
             <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
-              {' '}
-              Status{' '}
+              Status
             </Text>
             <TextInput style={globalStyles.inputFields} autoCorrect={false} />
             <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
-              {' '}
-              Relationships{' '}
+              Relationships
             </Text>
             <TextInput style={globalStyles.inputFields} autoCorrect={false} />
             <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
-              {' '}
-              Match Individual{' '}
+              Match Individual
             </Text>
             <TextInput style={globalStyles.inputFields} autoCorrect={false} />
-          </View>
+          </>
         ) : null}
         {formSection === 2 ? (
-          <View>
+          <>
             <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
-              {' '}
-              Photographer name{' '}
+              Photographer name
             </Text>
             <TextInput style={globalStyles.inputFields} autoCorrect={false} />
             <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
-              {' '}
-              Photographer email{' '}
+              Photographer email
             </Text>
             <TextInput style={globalStyles.inputFields} autoCorrect={false} />
-          </View>
+          </>
         ) : null}
       </KeyboardAwareScrollView>
       {formSection === 0 ? (
