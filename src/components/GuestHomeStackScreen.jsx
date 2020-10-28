@@ -17,8 +17,8 @@ export default function GuestHomeStackScreen({ navigation }) {
         headerTitleAlign: 'center',
         headerLeft: () => (
           <Icon
-            name="bars"
-            type="font-awesome"
+            name="menu"
+            type="feather"
             color={theme.black}
             onPress={() => navigation.toggleDrawer()}
             iconStyle={globalStyles.iconLeft}

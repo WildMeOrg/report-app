@@ -22,11 +22,14 @@ const ProfileScreen = ({ navigation }) => {
     <View style={styles.InfoView}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <Icon
-          name="more-vert"
-          type="materialicons"
+          name="ellipsis1"
+          type="antdesign"
           size={28}
           color={theme.black}
-          style={styles.editIcon}
+          style={[
+            styles.editIcon,
+            { transform: [{ rotateY: '0deg' }, { rotateZ: '90deg' }] },
+          ]}
           //add onPress eventually
         />
         <Image style={styles.image} source={profilePic} />
@@ -65,8 +68,8 @@ export default function ProfileStackScreen({ navigation }) {
         headerTitleAlign: 'center',
         headerLeft: () => (
           <Icon
-            name="bars"
-            type="font-awesome"
+            name="menu"
+            type="feather"
             color={theme.black}
             onPress={() => navigation.toggleDrawer()}
             iconStyle={styles.icon}
@@ -74,8 +77,8 @@ export default function ProfileStackScreen({ navigation }) {
         ),
         headerRight: () => (
           <Icon
-            name="times"
-            type="font-awesome"
+            name="x"
+            type="feather"
             color={theme.black}
             onPress={() => navigation.navigate(screens.home)}
             iconStyle={styles.icon2}

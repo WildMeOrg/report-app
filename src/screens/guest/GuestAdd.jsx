@@ -18,7 +18,7 @@ const GuestAdd = ({ navigation }) => {
       <View style={styles.darken}>
         <View style={styles.container}>
           <TouchableOpacity
-            onPress={() => navigation.navigate(screens.newSightings[0])}
+            onPress={() => navigation.navigate(screens.newSighting)}
             styles={styles.flexItem}
           >
             <View style={styles.button}>

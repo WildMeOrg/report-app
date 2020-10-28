@@ -19,7 +19,7 @@ export default function CustomDrawerContent(props) {
           <View style={styles.drawerHeaderItem}>
             <Icon
               name="user"
-              type="font-awesome"
+              type="antdesign"
               color={theme.black}
               iconStyle={styles.icon}
             />
@@ -34,7 +34,7 @@ export default function CustomDrawerContent(props) {
           <View style={styles.drawerListItem}>
             <Icon
               name="plus"
-              type="font-awesome"
+              type="antdesign"
               color={theme.black}
               iconStyle={styles.icon}
             />
@@ -47,8 +47,8 @@ export default function CustomDrawerContent(props) {
         label={() => (
           <View style={styles.drawerListItem}>
             <Icon
-              name="cog"
-              type="font-awesome"
+              name="setting"
+              type="antdesign"
               color={theme.black}
               iconStyle={styles.icon}
             />
@@ -62,8 +62,8 @@ export default function CustomDrawerContent(props) {
         label={() => (
           <View style={styles.drawerListItem}>
             <Icon
-              name="question-circle"
-              type="font-awesome"
+              name="questioncircleo"
+              type="antdesign"
               color={theme.black}
               iconStyle={styles.icon}
             />

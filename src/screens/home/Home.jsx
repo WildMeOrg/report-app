@@ -31,10 +31,11 @@ const SightingCard = (props) => {
           <Text style={cardElementStyles.sightingDate}>{props.date}</Text>
         </View>
         <Icon
-          name="more-vert"
-          type="materialicons"
+          name="ellipsis1"
+          type="antdesign"
           size={28}
           color={theme.black}
+          style={[{ transform: [{ rotateY: '0deg' }, { rotateZ: '90deg' }] }]}
         />
       </View>
     </View>

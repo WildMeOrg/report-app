@@ -15,8 +15,8 @@ export default function Settings({ navigation }) {
       >
         <Typography id="PROFILE" style={globalStyles.h2Text} />
         <Icon
-          name="chevron-right"
-          type="font-awesome"
+          name="right"
+          type="antdesign"
           color={theme.black}
           onPress={() => navigation.navigate(screens.profile)}
           iconStyle={styles.icon}
@@ -28,8 +28,8 @@ export default function Settings({ navigation }) {
       >
         <Typography id="NOTIFICATIONS" style={globalStyles.h2Text} />
         <Icon
-          name="chevron-right"
-          type="font-awesome"
+          name="right"
+          type="antdesign"
           color={theme.black}
           onPress={() => navigation.navigate(screens.notifications)}
           iconStyle={styles.icon}
@@ -41,8 +41,8 @@ export default function Settings({ navigation }) {
       >
         <Typography id="PRIVACY" style={globalStyles.h2Text} />
         <Icon
-          name="chevron-right"
-          type="font-awesome"
+          name="right"
+          type="antdesign"
           color={theme.black}
           onPress={() => navigation.toggleDrawer()}
           iconStyle={styles.icon}
@@ -54,8 +54,8 @@ export default function Settings({ navigation }) {
       >
         <Typography id="SECURITY" style={globalStyles.h2Text} />
         <Icon
-          name="chevron-right"
-          type="font-awesome"
+          name="right"
+          type="antdesign"
           color={theme.black}
           onPress={() => navigation.toggleDrawer()}
           iconStyle={styles.icon}
@@ -67,8 +67,8 @@ export default function Settings({ navigation }) {
       >
         <Typography id="HELP" style={globalStyles.h2Text} />
         <Icon
-          name="chevron-right"
-          type="font-awesome"
+          name="right"
+          type="antdesign"
           color={theme.black}
           onPress={() => navigation.toggleDrawer()}
           iconStyle={styles.icon}
