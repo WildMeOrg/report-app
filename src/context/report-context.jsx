@@ -13,21 +13,12 @@ const reducer = (state, action) => {
       break;
 
     case 'remove':
-      // TODO: change from for-loop into dictionary id
-      for (let i = 0; i < state.sightings.length; i++) {
-        if(state.sightings[i].id == action.targetID) {
-          state.sightings.splice(i, 1);
-        }
-      }
+      state.sightings = state.sightings.filter(sighting => sighting.id !== action.removeID);
       break;
 
     case 'update':
-      // TODO: change from for-loop into dictionary id
-      for (let i = 0; i < state.sightings.length; i++) {
-        if(state.sightings[i].id == action.targetID) {
-          state.sightings[i] = action.updatedSighting;            
-        }
-      }  
+      state.sightings = state.sightings.filter(sighting => sighting.id !== action.updateID);
+      state.sightings.push(action.newSighting);
       break;
 
     default:
@@ -37,6 +28,7 @@ const reducer = (state, action) => {
         10
       );
   }
+  return state;
 };
 
 export const ReportContextProvider = (props) => {
