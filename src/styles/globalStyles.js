@@ -9,6 +9,9 @@ export default StyleSheet.create({
   icon: {
     marginRight: 16,
   },
+  iconLeft: {
+    marginLeft: 16,
+  },
   h2Text: {
     fontFamily: 'Lato-Regular',
     fontSize: 16,
