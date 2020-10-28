@@ -1,8 +1,17 @@
+import Humpback from '../../assets/images/humpback.jpg';
+import Hummingbird from '../../assets/images/hummingbird.jpg';
+import RedPanda from '../../assets/images/redPanda.jpg';
+import Octopus from '../../assets/images/octopus.jpg';
+import WhaleShark from '../../assets/images/whaleshark.jpg';
+import Lizard from '../../assets/images/lizard.jpg';
+import Elephant from '../../assets/images/elephant.jpg';
+import Jaguar from '../../assets/images/jaguar.jpg';
+
 export default storage = {
   sightings: [
     {
       id: 1,
-      image: require('../../assets/humpback.jpg'),
+      image: Humpback,
       name: 'Humpback Whale',
       date: 'September 23rd, 2019',
       synced: true,
@@ -10,7 +19,7 @@ export default storage = {
     },
     {
       id: 2,
-      image: require('../../assets/hummingbird.jpg'),
+      image: Hummingbird,
       name: 'Anna\'s Hummingbird',
       date: 'September 23rd, 2019',
       synced: true,
@@ -18,7 +27,7 @@ export default storage = {
     },
     {
       id: 3,
-      image: require('../../assets/redPanda.jpg'),
+      image: RedPanda,
       name: 'Red Panda',
       date: 'September 23rd, 2019',
       synced: true,
@@ -26,7 +35,7 @@ export default storage = {
     },
     {
       id: 4,
-      image: require('../../assets/octopus.jpg'),
+      image: Octopus,
       name: 'Maldives Octopus',
       date: 'September 23rd, 2019',
       synced: true,
@@ -34,7 +43,7 @@ export default storage = {
     },
     {
       id: 5,
-      image: require('../../assets/whaleshark.jpg'),
+      image: WhaleShark,
       name: 'Whale Shark',
       date: 'September 23rd, 2019',
       synced: true,
@@ -42,7 +51,7 @@ export default storage = {
     },
     {
       id: 6,
-      image: require('../../assets/lizard.jpg'),
+      image: Lizard,
       name: 'Indonesian Forest Liza...',
       date: 'September 23rd, 2019',
       synced: true,
@@ -50,7 +59,7 @@ export default storage = {
     },
     {
       id: 7,
-      image: require('../../assets/elephant.jpg'),
+      image: Elephant,
       name: 'African Bush Elephant',
       date: 'September 23rd, 2019',
       synced: true,
@@ -58,7 +67,7 @@ export default storage = {
     },
     {
       id: 8,
-      image: require('../../assets/jaguar.jpg'),
+      image: Jaguar,
       name: 'North American Jaguar',
       date: 'September 23rd, 2019',
       synced: true,
@@ -66,3 +75,4 @@ export default storage = {
     },
   ],
 };
+

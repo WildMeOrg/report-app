@@ -12,7 +12,7 @@ import screens from '../constants/screens';
 import { Icon } from 'react-native-elements';
 import theme from '../constants/theme';
 import globalStyles from '../styles/globalStyles';
-import profilePic from '../../assets/joeShmo.jpg';
+import profilePic from '../../assets/images/joeShmo.jpg';
 
 const ProfileStack = createStackNavigator();
 

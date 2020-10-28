@@ -70,14 +70,6 @@ export default function App() {
                 component={NewSightingStackScreen}
               />
               <Drawer.Screen
-                name={screens.newSightings[1]}
-                component={NewSighting2StackScreen}
-              />
-              <Drawer.Screen
-                name={screens.newSightings[2]}
-                component={NewSighting3StackScreen}
-              />
-              <Drawer.Screen
                 name={screens.viewSighting}
                 component={ViewSightingStackScreen}
               />
