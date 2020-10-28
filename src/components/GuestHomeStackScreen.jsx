@@ -3,16 +3,16 @@ import { StyleSheet } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from 'react-native-elements';
 import screens from '../constants/screens';
-import Login from '../screens/login/Login';
+import GuestHome from '../screens/guest/GuestHome';
 import theme from '../constants/theme';
 import Typography from './Typography';
 import globalStyles from '../styles/globalStyles';
 
-const LoginStack = createStackNavigator();
+const GuestHomeStack = createStackNavigator();
 
-export default function LoginStackScreen({ navigation }) {
+export default function GuestHomeStackScreen({ navigation }) {
   return (
-    <LoginStack.Navigator
+    <GuestHomeStack.Navigator
       screenOptions={{
         headerTitleAlign: 'center',
         headerLeft: () => (
@@ -26,15 +26,15 @@ export default function LoginStackScreen({ navigation }) {
         ),
       }}
     >
-      <LoginStack.Screen
-        name={screens.login}
-        component={Login}
+      <GuestHomeStack.Screen
+        name={screens.guestHome}
+        component={GuestHome}
         options={{
           headerTitle: () => (
-            <Typography id="LOGIN" style={globalStyles.headerText} />
+            <Typography id="APP_NAME" style={globalStyles.headerText} />
           ),
         }}
       />
-    </LoginStack.Navigator>
+    </GuestHomeStack.Navigator>
   );
 }

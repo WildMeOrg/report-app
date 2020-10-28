@@ -127,7 +127,10 @@ const Login = ({ navigation }) => {
       </View>
 
       <View style={styles.guestView}>
-        <TouchableOpacity style={styles.guest}>
+        <TouchableOpacity
+          style={styles.guest}
+          onPress={() => navigation.navigate(screens.guestHome)}
+        >
           <Typography id="CONTINUE_AS_GUEST" style={globalStyles.basicText} />
         </TouchableOpacity>
       </View>

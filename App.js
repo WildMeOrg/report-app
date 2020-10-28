@@ -24,6 +24,8 @@ import CustomDrawerContent from './src/components/CustomDrawerContent';
 import SettingsStackScreen from './src/components/SettingsStackScreen';
 import NotificationsStackScreen from './src/components/NotificationsStackScreen';
 import getLocale from './src/utils/getLocale';
+import GuestHomeStackScreen from './src/components/GuestHomeStackScreen';
+import GuestAddStackScreen from './src/components/GuestAddStackScreen';
 
 const messageMap = {
   en: englishTranslations,
@@ -56,6 +58,14 @@ export default function App() {
             {/* As new screens are made, put them here to be able to view them */}
             <Drawer.Screen name={screens.home} component={HomeStackScreen} />
             <Drawer.Screen name={screens.login} component={LoginStackScreen} />
+            <Drawer.Screen
+              name={screens.guestHome}
+              component={GuestHomeStackScreen}
+            />
+            <Drawer.Screen
+              name={screens.guestAdd}
+              component={GuestAddStackScreen}
+            />
             <Drawer.Screen
               name={screens.setings}
               component={SettingsStackScreen}
