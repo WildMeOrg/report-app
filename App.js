@@ -17,12 +17,12 @@ import spanishTranslations from './locale/es.json';
 import HomeStackScreen from './src/components/HomeStackScreen';
 import LoginStackScreen from './src/components/LoginStackScreen';
 import NewSightingStackScreen from './src/components/NewSightingStackScreen';
-import NewSighting2StackScreen from './src/components/NewSighting2StackScreen';
-import NewSighting3StackScreen from './src/components/NewSighting3StackScreen';
 import ViewSightingStackScreen from './src/components/ViewSightingStackScreen';
+import ProfileStackScreen from './src/components/ProfileStackScreen';
 import screens from './src/constants/screens';
 import CustomDrawerContent from './src/components/CustomDrawerContent';
 import SettingsStackScreen from './src/components/SettingsStackScreen';
+import NotificationsStackScreen from './src/components/NotificationsStackScreen';
 import getLocale from './src/utils/getLocale';
 import GuestHomeStackScreen from './src/components/GuestHomeStackScreen';
 import GuestAddStackScreen from './src/components/GuestAddStackScreen';
@@ -71,20 +71,20 @@ export default function App() {
               component={SettingsStackScreen}
             />
             <Drawer.Screen
-              name={screens.newSightings[0]}
+              name={screens.newSighting}
               component={NewSightingStackScreen}
-            />
-            <Drawer.Screen
-              name={screens.newSightings[1]}
-              component={NewSighting2StackScreen}
-            />
-            <Drawer.Screen
-              name={screens.newSightings[2]}
-              component={NewSighting3StackScreen}
             />
             <Drawer.Screen
               name={screens.viewSighting}
               component={ViewSightingStackScreen}
+            />
+            <Drawer.Screen
+              name={screens.profile}
+              component={ProfileStackScreen}
+            />
+            <Drawer.Screen
+              name={screens.notifications}
+              component={NotificationsStackScreen}
             />
           </Drawer.Navigator>
         </NavigationContainer>

@@ -27,6 +27,7 @@ export default function CustomDrawerContent(props) {
             <Text style={styles.drawerHeaderName}>Joe Schmoe</Text>
           </View>
         )}
+        onPress={() => props.navigation.navigate(screens.profile)}
       />
       <DrawerItem
         label={() => (
@@ -40,7 +41,7 @@ export default function CustomDrawerContent(props) {
             <Typography id="NEW_SIGHTING" style={styles.drawerListText} />
           </View>
         )}
-        onPress={() => props.navigation.navigate(screens.newSightings[0])}
+        onPress={() => props.navigation.navigate(screens.newSighting)}
       />
       <DrawerItem
         label={() => (

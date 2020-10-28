@@ -125,7 +125,7 @@ const HomeScreen = ({ navigation }) => {
         </View>
         <TouchableOpacity
           style={bodyStyles.addNew}
-          onPress={() => navigation.navigate(screens.newSightings[0])}
+          onPress={() => navigation.navigate(screens.newSighting)}
         >
           <Typography id="NEW_SIGHTING" style={bodyStyles.addNewText} />
         </TouchableOpacity>
@@ -202,7 +202,6 @@ const cardElementStyles = StyleSheet.create({
   },
   sightingCard: {
     flexDirection: 'row',
-    marginVertical: 10,
     marginVertical: 10,
     width: '95%',
     height: 80,
