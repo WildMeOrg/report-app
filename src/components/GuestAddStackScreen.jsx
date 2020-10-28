@@ -32,7 +32,7 @@ export default function GuestAddStackScreen({ navigation }) {
         options={{
           // eslint-disable-next-line react/display-name
           headerTitle: () => (
-            <Typography id="LOGIN" style={globalStyles.headerText} />
+            <Typography id="APP_NAME" style={globalStyles.headerText} />
           ),
         }}
       />

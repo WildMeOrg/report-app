@@ -31,7 +31,7 @@ export default function GuestHomeStackScreen({ navigation }) {
         component={GuestHome}
         options={{
           headerTitle: () => (
-            <Typography id="LOGIN" style={globalStyles.headerText} />
+            <Typography id="APP_NAME" style={globalStyles.headerText} />
           ),
         }}
       />
