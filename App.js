@@ -56,28 +56,31 @@ export default function App() {
               drawerContent={(props) => <CustomDrawerContent {...props} />}
             >
               {/* As new screens are made, put them here to be able to view them */}
-            <Drawer.Screen name={screens.home} component={HomeStackScreen} />
-            <Drawer.Screen name={screens.login} component={LoginStackScreen} />
-            <Drawer.Screen
-              name={screens.setings}
-              component={SettingsStackScreen}
-            />
-            <Drawer.Screen
-              name={screens.newSighting}
-              component={NewSightingStackScreen}
-            />
-            <Drawer.Screen
-              name={screens.viewSighting}
-              component={ViewSightingStackScreen}
-            />
-            <Drawer.Screen
-              name={screens.profile}
-              component={ProfileStackScreen}
-            />
-            <Drawer.Screen
-              name={screens.notifications}
-              component={NotificationsStackScreen}
-            />
+              <Drawer.Screen name={screens.home} component={HomeStackScreen} />
+              <Drawer.Screen
+                name={screens.login}
+                component={LoginStackScreen}
+              />
+              <Drawer.Screen
+                name={screens.setings}
+                component={SettingsStackScreen}
+              />
+              <Drawer.Screen
+                name={screens.newSighting}
+                component={NewSightingStackScreen}
+              />
+              <Drawer.Screen
+                name={screens.viewSighting}
+                component={ViewSightingStackScreen}
+              />
+              <Drawer.Screen
+                name={screens.profile}
+                component={ProfileStackScreen}
+              />
+              <Drawer.Screen
+                name={screens.notifications}
+                component={NotificationsStackScreen}
+              />
             </Drawer.Navigator>
           </NavigationContainer>
         </IntlProvider>

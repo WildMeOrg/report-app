@@ -15,8 +15,6 @@ import { ReportContext } from '../../context/report-context';
  *      date  -- the date of the sighting displayed in smaller, lower text
  */
 const SightingCard = (props) => {
-  //const state = useContext(State);
-
   return (
     <View style={cardElementStyles.sightingCard}>
       <Image style={cardElementStyles.imageCover} source={props.image} />
