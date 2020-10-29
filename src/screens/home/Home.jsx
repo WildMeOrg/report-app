@@ -32,7 +32,7 @@ const SightingCard = (props) => {
         </View>
         <Icon
           name="more-vert"
-          type="materialicons"
+          type="material-icons"
           size={28}
           color={theme.black}
         />
@@ -117,8 +117,8 @@ const HomeScreen = ({ navigation }) => {
         <View style={bodyStyles.sortBy}>
           <Typography id="LAST_ADDED" style={globalStyles.h2Text} />
           <Icon
-            name="arrowdown"
-            type="antdesign"
+            name="arrow-downward"
+            type="material-icons"
             size={18}
             color={theme.black}
           />

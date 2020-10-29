@@ -18,14 +18,14 @@ const GuestAdd = ({ navigation }) => {
       <View style={styles.darken}>
         <View style={styles.container}>
           <TouchableOpacity
-            onPress={() => navigation.navigate(screens.newSightings[0])}
+            onPress={() => navigation.navigate(screens.newSighting)}
             styles={styles.flexItem}
           >
             <View style={styles.button}>
               <View style={styles.buttonText}>
                 <Icon
-                  name="plus"
-                  type="antdesign"
+                  name="add"
+                  type="material-icons"
                   size={18}
                   color={theme.white}
                 />

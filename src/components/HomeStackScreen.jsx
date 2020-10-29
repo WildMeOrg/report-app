@@ -21,8 +21,8 @@ export default function HomeStackScreen({ navigation }) {
           headerTitleAlign: 'center',
           headerLeft: () => (
             <Icon
-              name="bars"
-              type="font-awesome"
+              name="menu"
+              type="material-icons"
               color={theme.black}
               onPress={() => navigation.toggleDrawer()}
               iconStyle={headerStyles.iconLeft}
@@ -30,8 +30,8 @@ export default function HomeStackScreen({ navigation }) {
           ),
           headerRight: () => (
             <Icon
-              name="times"
-              type="font-awesome"
+              name="close"
+              type="material-icons"
               color={theme.black}
               onPress={() => setIsSearching(false)}
               iconStyle={globalStyles.icon}
@@ -64,8 +64,8 @@ export default function HomeStackScreen({ navigation }) {
           headerTitleAlign: 'center',
           headerLeft: () => (
             <Icon
-              name="bars"
-              type="font-awesome"
+              name="menu"
+              type="material-icons"
               color={theme.black}
               onPress={() => navigation.toggleDrawer()}
               iconStyle={headerStyles.iconLeft}
@@ -74,7 +74,7 @@ export default function HomeStackScreen({ navigation }) {
           headerRight: () => (
             <Icon
               name="search"
-              type="font-awesome"
+              type="material-icons"
               color={theme.black}
               onPress={() => setIsSearching(true)}
               iconStyle={headerStyles.iconRight}

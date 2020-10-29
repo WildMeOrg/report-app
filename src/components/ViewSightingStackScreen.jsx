@@ -45,8 +45,8 @@ export default function ViewSightingStackScreen({ navigation }) {
         headerTitleAlign: 'center',
         headerLeft: () => (
           <Icon
-            name="bars"
-            type="font-awesome"
+            name="menu"
+            type="material-icons"
             color={theme.black}
             onPress={() => navigation.toggleDrawer()}
             iconStyle={styles.icon}
@@ -54,8 +54,8 @@ export default function ViewSightingStackScreen({ navigation }) {
         ),
         headerRight: () => (
           <Icon
-            name="times"
-            type="font-awesome"
+            name="close"
+            type="material-icons"
             color={theme.black}
             onPress={() => navigation.navigate(screens.home)}
             iconStyle={styles.icon2}
