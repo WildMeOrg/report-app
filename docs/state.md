@@ -1,10 +1,10 @@
-## State
+# State
 
 State is written using React Context with Hooks. The implementation can be found in `/src/context/report-context`.
 
 
 
-### How to use:
+## How to use:
 
 To implement state into your file, you will need to imports the following:
 
@@ -25,23 +25,24 @@ The state also uses a reducer to manipulate state, which is also accessed throug
 
 
 
-### Items in State:
+## Items in State:
 
-* ###### `Sightings` -- the sighting objects used and created throughout the app
-  * `id` -- unique ID of the sighting.
-  * `image` -- the image associated with each sighting
-  * `name` -- the name of the animal/sighting
-  * `date` -- date of the sighting (change to ISO-8601)
-  * `synced` -- if the sighting has been synced with the server
-  * `inProgress` -- if the sighting is currently being uploaded to the server
+#### `Sightings` -- the sighting objects used and created throughout the app
+
+* `id` -- unique ID of the sighting.
+* `image` -- the image associated with each sighting
+* `name` -- the name of the animal/sighting
+* `date` -- date of the sighting (change to ISO-8601)
+* `synced` -- if the sighting has been synced with the server
+* `inProgress` -- if the sighting is currently being uploaded to the server
 
 
 
-### State Manipulation
+## State Manipulation
 
 To manipulate sightings, the reducer needs to be called through the dispatcher. The dispatcher requires a single object argument, with a required field of type, and other optional fields. The valid types and their corresponding data requirements are as follows:  
 
-#### **Add**
+### **add**
 
 * **Usage:**
 
@@ -56,7 +57,7 @@ To manipulate sightings, the reducer needs to be called through the dispatcher. 
 
   
 
-#### **remove**
+### **remove**
 
 * **Usage:**
 
@@ -71,7 +72,7 @@ To manipulate sightings, the reducer needs to be called through the dispatcher. 
 
 
 
-#### **update**
+### **update**
 
 * **Usage:**
 
