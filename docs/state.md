@@ -1,6 +1,6 @@
 # State
 
-State is written using React Context with Hooks. The implementation can be found in `/src/context/report-context`.
+State is written using [React Context](https://reactjs.org/docs/context.html) with [Hooks](https://reactjs.org/docs/hooks-reference.html). The implementation can be found in `/src/context/report-context`.
 
 
 
