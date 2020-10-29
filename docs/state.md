@@ -41,48 +41,47 @@ The state also uses a reducer to manipulate state, which is also accessed throug
 
 To manipulate sightings, the reducer needs to be called through the dispatcher. The dispatcher requires a single object argument, with a required field of type, and other optional fields. The valid types and their corresponding data requirements are as follows:  
 
-* **Add**
+#### **Add**
 
-  * **Usage:**
+* **Usage:**
 
-    ```jsx
-    dispatch({ 
-        type:       'add', 
-        newSighting: { SightingObject }
-    });
-    ```
+  ```jsx
+  dispatch({ 
+      type:       'add', 
+      newSighting: { SightingObject }
+  });
+  ```
 
-  * **Summary:** Simply pushes the Sighting in `newSighting` to the `sightings` array.
-
-    
-
-* **remove**
-
-  * **Usage:**
-
-    ```jsx
-    dispatch({
-    	type:    'remove',
-        removeID: IDNum
-    });
-    ```
-
-  * **Summary:** Removes the sighting with the target `removeID` from the `sightings` array.
+* **Summary:** Simply pushes the Sighting in `newSighting` to the `sightings` array.
 
   
 
-* **update**
+#### **remove**
 
-  * **Usage:**
+* **Usage:**
 
-    ```jsx
-    dispatch({
-    	type:       'remove',
-        newSighting: { SightingObject }, // [REQUIRED] The updated object
-        updateID:    IDNum               // [REQUIRED] The id of the sighting to be updated
-    });
-    ```
+  ```jsx
+  dispatch({
+  	type:    'remove',
+      removeID: IDNum
+  });
+  ```
 
-  * **Summary:** Replaces the old sighting, targeted with `updateID` with the `newSighting`.
+* **Summary:** Removes the sighting with the target `removeID` from the `sightings` array.
 
-  
+
+
+#### **update**
+
+* **Usage:**
+
+  ```jsx
+  dispatch({
+  	type:       'remove',
+      newSighting: { SightingObject }, // [REQUIRED] The updated object
+      updateID:    IDNum               // [REQUIRED] The id of the sighting to be updated
+  });
+  ```
+
+* **Summary:** Replaces the old sighting, targeted with `updateID` with the `newSighting`.
+
