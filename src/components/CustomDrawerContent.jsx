@@ -18,8 +18,8 @@ export default function CustomDrawerContent(props) {
         label={() => (
           <View style={styles.drawerHeaderItem}>
             <Icon
-              name="user"
-              type="antdesign"
+              name="person"
+              type="material-icons"
               color={theme.black}
               iconStyle={styles.icon}
             />
@@ -33,8 +33,8 @@ export default function CustomDrawerContent(props) {
         label={() => (
           <View style={styles.drawerListItem}>
             <Icon
-              name="plus"
-              type="antdesign"
+              name="add"
+              type="material-icons"
               color={theme.black}
               iconStyle={styles.icon}
             />
@@ -47,8 +47,8 @@ export default function CustomDrawerContent(props) {
         label={() => (
           <View style={styles.drawerListItem}>
             <Icon
-              name="setting"
-              type="antdesign"
+              name="settings"
+              type="material-icons"
               color={theme.black}
               iconStyle={styles.icon}
             />
@@ -62,8 +62,8 @@ export default function CustomDrawerContent(props) {
         label={() => (
           <View style={styles.drawerListItem}>
             <Icon
-              name="questioncircleo"
-              type="antdesign"
+              name="help"
+              type="material-icons"
               color={theme.black}
               iconStyle={styles.icon}
             />

@@ -17,7 +17,7 @@ export default function LoginStackScreen({ navigation }) {
         headerLeft: () => (
           <Icon
             name="menu"
-            type="feather"
+            type="material-icons"
             color={theme.black}
             onPress={() => navigation.toggleDrawer()}
             iconStyle={styles.icon}

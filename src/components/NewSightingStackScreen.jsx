@@ -43,8 +43,8 @@ function NewSightingForm({ navigation }) {
                 onPress={() => navigation.navigate(screens.newSighting)}
               >
                 <Icon
-                  name="cloud-upload"
-                  type="font-awesome"
+                  name="add-a-photo"
+                  type="material-icons"
                   color={theme.black}
                   iconStyle={styles.addText}
                   size={40}
@@ -167,8 +167,8 @@ export default function NewSightingStackScreen({ navigation }) {
         headerTitleAlign: 'center',
         headerRight: () => (
           <Icon
-            name="x"
-            type="feather"
+            name="close"
+            type="material-icons"
             color={theme.black}
             onPress={() => {
               navigation.navigate(screens.home);

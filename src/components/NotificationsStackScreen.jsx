@@ -34,8 +34,8 @@ const NotificationCard = (props) => {
       </View>
       <View>
         <Icon
-          name="x"
-          type="feather"
+          name="close"
+          type="material-icons"
           size={16}
           marginRight="4%"
           marginTop="15%"
@@ -130,7 +130,7 @@ export default function NotificationsStackScreen({ navigation }) {
         headerLeft: () => (
           <Icon
             name="menu"
-            type="feather"
+            type="material-icons"
             color={theme.black}
             onPress={() => navigation.toggleDrawer()}
             iconStyle={styles.icon}
@@ -138,8 +138,8 @@ export default function NotificationsStackScreen({ navigation }) {
         ),
         headerRight: () => (
           <Icon
-            name="x"
-            type="feather"
+            name="close"
+            type="material-icons"
             color={theme.black}
             onPress={() => navigation.navigate(screens.home)}
             iconStyle={styles.icon2}

@@ -46,7 +46,7 @@ export default function ViewSightingStackScreen({ navigation }) {
         headerLeft: () => (
           <Icon
             name="menu"
-            type="feather"
+            type="material-icons"
             color={theme.black}
             onPress={() => navigation.toggleDrawer()}
             iconStyle={styles.icon}
@@ -54,8 +54,8 @@ export default function ViewSightingStackScreen({ navigation }) {
         ),
         headerRight: () => (
           <Icon
-            name="x"
-            type="feather"
+            name="close"
+            type="material-icons"
             color={theme.black}
             onPress={() => navigation.navigate(screens.home)}
             iconStyle={styles.icon2}

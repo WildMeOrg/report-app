@@ -24,8 +24,8 @@ const GuestAdd = ({ navigation }) => {
             <View style={styles.button}>
               <View style={styles.buttonText}>
                 <Icon
-                  name="plus"
-                  type="antdesign"
+                  name="add"
+                  type="material-icons"
                   size={18}
                   color={theme.white}
                 />

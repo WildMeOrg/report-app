@@ -18,7 +18,7 @@ export default function GuestHomeStackScreen({ navigation }) {
         headerLeft: () => (
           <Icon
             name="menu"
-            type="feather"
+            type="material-icons"
             color={theme.black}
             onPress={() => navigation.toggleDrawer()}
             iconStyle={globalStyles.iconLeft}

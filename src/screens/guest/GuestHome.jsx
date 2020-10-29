@@ -42,8 +42,8 @@ const GuestHome = ({ navigation }) => {
               <View style={styles.buttonText}>
                 <Text style={[styles.contentText]}> Continue as guest </Text>
                 <Icon
-                  name="arrowright"
-                  type="antdesign"
+                  name="arrow-forward"
+                  type="material-icons"
                   size={18}
                   color={theme.white}
                 />
