@@ -12,10 +12,10 @@ import screens from '../constants/screens';
 import { Icon, ThemeConsumer } from 'react-native-elements';
 import theme from '../constants/theme';
 import globalStyles from '../styles/globalStyles';
-import Humpback from '../../assets/humpback.jpg';
-import Hummingbird from '../../assets/hummingbird.jpg';
-import RedPanda from '../../assets/redPanda.jpg';
-import Octopus from '../../assets/octopus.jpg';
+import Humpback from '../../assets/images/humpback.jpg';
+import Hummingbird from '../../assets/images/hummingbird.jpg';
+import RedPanda from '../../assets/images/redPanda.jpg';
+import Octopus from '../../assets/images/octopus.jpg';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const NotificationsStack = createStackNavigator();

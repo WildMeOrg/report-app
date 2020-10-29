@@ -3,7 +3,7 @@ import { Text, StyleSheet, Image, View, ScrollView } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import screens from '../constants/screens';
 import { Icon } from 'react-native-elements';
-import Humpback from '../../assets/humpback.jpg';
+import Humpback from '../../assets/images/humpback.jpg';
 import theme from '../constants/theme';
 import globalStyles from '../styles/globalStyles';
 import Typography from './Typography';
