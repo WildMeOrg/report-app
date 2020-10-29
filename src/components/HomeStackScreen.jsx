@@ -22,7 +22,7 @@ export default function HomeStackScreen({ navigation }) {
           headerLeft: () => (
             <Icon
               name="menu"
-              type="feather"
+              type="material-icons"
               color={theme.black}
               onPress={() => navigation.toggleDrawer()}
               iconStyle={headerStyles.iconLeft}
@@ -30,8 +30,8 @@ export default function HomeStackScreen({ navigation }) {
           ),
           headerRight: () => (
             <Icon
-              name="x"
-              type="feather"
+              name="close"
+              type="material-icons"
               color={theme.black}
               onPress={() => setIsSearching(false)}
               iconStyle={globalStyles.icon}
@@ -65,7 +65,7 @@ export default function HomeStackScreen({ navigation }) {
           headerLeft: () => (
             <Icon
               name="menu"
-              type="feather"
+              type="material-icons"
               color={theme.black}
               onPress={() => navigation.toggleDrawer()}
               iconStyle={headerStyles.iconLeft}
@@ -73,8 +73,8 @@ export default function HomeStackScreen({ navigation }) {
           ),
           headerRight: () => (
             <Icon
-              name="search1"
-              type="antdesign"
+              name="search"
+              type="material-icons"
               color={theme.black}
               onPress={() => setIsSearching(true)}
               iconStyle={headerStyles.iconRight}

@@ -31,11 +31,10 @@ const SightingCard = (props) => {
           <Text style={cardElementStyles.sightingDate}>{props.date}</Text>
         </View>
         <Icon
-          name="ellipsis1"
-          type="antdesign"
+          name="more-vert"
+          type="material-icons"
           size={28}
           color={theme.black}
-          style={[{ transform: [{ rotateY: '0deg' }, { rotateZ: '90deg' }] }]}
         />
       </View>
     </View>
@@ -118,8 +117,8 @@ const HomeScreen = ({ navigation }) => {
         <View style={bodyStyles.sortBy}>
           <Typography id="LAST_ADDED" style={globalStyles.h2Text} />
           <Icon
-            name="arrowdown"
-            type="antdesign"
+            name="arrow-downward"
+            type="material-icons"
             size={18}
             color={theme.black}
           />
