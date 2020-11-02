@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Text,
   View,
@@ -15,11 +15,61 @@ import screens from '../constants/screens';
 import theme from '../constants/theme';
 import globalStyles from '../styles/globalStyles';
 import styles from '../styles/newSightingStyles';
+import * as ImagePicker from 'expo-image-picker';
+import * as yup from 'yup';
 
 const NewSightingStack = createStackNavigator();
 
+const validationSchema = yup.object().shape({
+  title: yup.string().required('Title is required'),
+  location: yup.string().required('Location is required'),
+  sightingContext: yup
+    .string()
+    .required('Sighting Context is required')
+    .min(8, 'Sighting Context must be more than 8 charaters')
+    .max(255, 'Sighting Context must be less than 255 charaters'),
+  status: yup.string(),
+  relationships: yup.string(),
+  matchIndividual: yup.string(),
+  photographerName: yup
+    .string()
+    .required('Photographer Name is required')
+    .min(3, 'Photographer Name must be atleast 3 charaters')
+    .max(30, 'Photographer Name must be less than 30 charaters'),
+  photographerEmail: yup
+    .string()
+    .email('Photographer Email is not valid')
+    .required('Photographer Email is required'),
+});
+
 function NewSightingForm({ navigation }) {
   const [formSection, setFormSection] = useState(0);
+
+  useEffect(() => {
+    (async () => {
+      const { status } = await ImagePicker.requestCameraRollPermissionsAsync();
+      if (status !== 'granted') {
+        alert('Sorry, we need camera roll permissions in upload photos.');
+      }
+      6;
+    })();
+  }, []);
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      quality: 1,
+      exif: true,
+      allowsMultipleSelection: true,
+    });
+
+    console.log(result);
+
+    if (!result.cancelled) {
+      // setImage(result.uri);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -44,16 +94,19 @@ function NewSightingForm({ navigation }) {
           photographerName: '',
           photographerEmail: '',
         }}
-        onSubmit={(
-          values,
-          { setSubmitting, setErrors, setStatus, resetForm }
-        ) => {
+        validationSchema={validationSchema}
+        onSubmit={(values, { resetForm }) => {
           // console.log(values);
+
           Alert.alert('Form Answers', JSON.stringify(values));
           resetForm();
+
+          setFormSection(0);
+          navigation.navigate(screens.home);
         }}
       >
         {(formikProps) => {
+          // console.log(formikProps.erro);
           return (
             <>
               <KeyboardAwareScrollView
@@ -64,9 +117,7 @@ function NewSightingForm({ navigation }) {
                 {formSection === 0 && (
                   <>
                     <View style={styles.addNew}>
-                      <TouchableOpacity
-                        onPress={() => navigation.navigate(screens.newSighting)}
-                      >
+                      <TouchableOpacity onPress={pickImage}>
                         <Icon
                           name="cloud-upload"
                           type="font-awesome"
@@ -91,7 +142,19 @@ function NewSightingForm({ navigation }) {
                       autoCorrect={false}
                       onChangeText={formikProps.handleChange('title')}
                       value={formikProps.values.title}
+                      onBlur={formikProps.onBlur}
+                      isValid={
+                        formikProps.touched.title && !formikProps.errors.title
+                      }
+                      isInvalid={
+                        formikProps.touched.title && formikProps.errors.title
+                      }
                     />
+                    {formikProps.touched.title && formikProps.errors.title && (
+                      <Text style={globalStyles.errorText}>
+                        {formikProps.errors.title}
+                      </Text>
+                    )}
                     <Text
                       style={[globalStyles.h2Text, globalStyles.inputHeader]}
                     >
@@ -102,7 +165,22 @@ function NewSightingForm({ navigation }) {
                       autoCorrect={false}
                       onChangeText={formikProps.handleChange('location')}
                       value={formikProps.values.location}
+                      onBlur={formikProps.onBlur}
+                      isValid={
+                        formikProps.touched.location &&
+                        !formikProps.errors.location
+                      }
+                      isInvalid={
+                        formikProps.touched.location &&
+                        formikProps.errors.location
+                      }
                     />
+                    {formikProps.touched.location &&
+                      formikProps.errors.location && (
+                        <Text style={globalStyles.errorText}>
+                          {formikProps.errors.location}
+                        </Text>
+                      )}
                     <Text
                       style={[globalStyles.h2Text, globalStyles.inputHeader]}
                     >
@@ -115,7 +193,22 @@ function NewSightingForm({ navigation }) {
                       numberOfLines={5}
                       onChangeText={formikProps.handleChange('sightingContext')}
                       value={formikProps.values.sightingContext}
+                      onBlur={formikProps.onBlur}
+                      isValid={
+                        formikProps.touched.sightingContext &&
+                        !formikProps.errors.sightingContext
+                      }
+                      isInvalid={
+                        formikProps.touched.sightingContext &&
+                        formikProps.errors.sightingContext
+                      }
                     />
+                    {formikProps.touched.sightingContext &&
+                      formikProps.errors.sightingContext && (
+                        <Text style={globalStyles.errorText}>
+                          {formikProps.errors.sightingContext}
+                        </Text>
+                      )}
                     <View style={styles.keyboardView} />
                   </>
                 )}
@@ -131,7 +224,20 @@ function NewSightingForm({ navigation }) {
                       autoCorrect={false}
                       onChangeText={formikProps.handleChange('status')}
                       value={formikProps.values.status}
+                      onBlur={formikProps.onBlur}
+                      isValid={
+                        formikProps.touched.status && !formikProps.errors.status
+                      }
+                      isInvalid={
+                        formikProps.touched.status && formikProps.errors.status
+                      }
                     />
+                    {formikProps.touched.status &&
+                      formikProps.errors.status && (
+                        <Text style={globalStyles.errorText}>
+                          {formikProps.errors.status}
+                        </Text>
+                      )}
                     <Text
                       style={[globalStyles.h2Text, globalStyles.inputHeader]}
                     >
@@ -142,7 +248,22 @@ function NewSightingForm({ navigation }) {
                       autoCorrect={false}
                       onChangeText={formikProps.handleChange('relationships')}
                       value={formikProps.values.relationships}
+                      onBlur={formikProps.onBlur}
+                      isValid={
+                        formikProps.touched.relationships &&
+                        !formikProps.errors.relationships
+                      }
+                      isInvalid={
+                        formikProps.touched.relationships &&
+                        formikProps.errors.relationships
+                      }
                     />
+                    {formikProps.touched.relationships &&
+                      formikProps.errors.relationships && (
+                        <Text style={globalStyles.errorText}>
+                          {formikProps.errors.tirelationshipstle}
+                        </Text>
+                      )}
                     <Text
                       style={[globalStyles.h2Text, globalStyles.inputHeader]}
                     >
@@ -153,7 +274,22 @@ function NewSightingForm({ navigation }) {
                       autoCorrect={false}
                       onChangeText={formikProps.handleChange('matchIndividual')}
                       value={formikProps.values.matchIndividual}
+                      onBlur={formikProps.onBlur}
+                      isValid={
+                        formikProps.touched.matchIndividual &&
+                        !formikProps.errors.matchIndividual
+                      }
+                      isInvalid={
+                        formikProps.touched.matchIndividual &&
+                        formikProps.errors.matchIndividual
+                      }
                     />
+                    {formikProps.touched.matchIndividual &&
+                      formikProps.errors.matchIndividual && (
+                        <Text style={globalStyles.errorText}>
+                          {formikProps.errors.matchIndividual}
+                        </Text>
+                      )}
                   </>
                 )}
                 {formSection === 2 && (
@@ -170,7 +306,22 @@ function NewSightingForm({ navigation }) {
                         'photographerName'
                       )}
                       value={formikProps.values.photographerName}
+                      onBlur={formikProps.onBlur}
+                      isValid={
+                        formikProps.touched.photographerName &&
+                        !formikProps.errors.photographerName
+                      }
+                      isInvalid={
+                        formikProps.touched.photographerName &&
+                        formikProps.errors.photographerName
+                      }
                     />
+                    {formikProps.touched.photographerName &&
+                      formikProps.errors.photographerName && (
+                        <Text style={globalStyles.errorText}>
+                          {formikProps.errors.photographerName}
+                        </Text>
+                      )}
                     <Text
                       style={[globalStyles.h2Text, globalStyles.inputHeader]}
                     >
@@ -183,7 +334,22 @@ function NewSightingForm({ navigation }) {
                         'photographerEmail'
                       )}
                       value={formikProps.values.photographerEmail}
+                      onBlur={formikProps.onBlur}
+                      isValid={
+                        formikProps.touched.photographerEmail &&
+                        !formikProps.errors.photographerEmail
+                      }
+                      isInvalid={
+                        formikProps.touched.photographerEmail &&
+                        formikProps.errors.photographerEmail
+                      }
                     />
+                    {formikProps.touched.photographerEmail &&
+                      formikProps.errors.photographerEmail && (
+                        <Text style={globalStyles.errorText}>
+                          {formikProps.errors.photographerEmail}
+                        </Text>
+                      )}
                   </>
                 )}
               </KeyboardAwareScrollView>
@@ -230,9 +396,8 @@ function NewSightingForm({ navigation }) {
                     <TouchableOpacity
                       onPress={() => {
                         formikProps.handleSubmit();
-                        setFormSection(0);
-                        navigation.navigate(screens.home);
                       }}
+                      disabled={formikProps.isSubmitting}
                     >
                       <View style={styles.button}>
                         <Text style={globalStyles.buttonText}>Upload</Text>
