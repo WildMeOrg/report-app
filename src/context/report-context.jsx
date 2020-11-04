@@ -1,9 +1,12 @@
 import React, { useReducer, createContext } from 'react';
 import storage from './storage.js';
+import { AsyncStorage } from 'react-native';
 
 export const ReportContext = createContext();
 
 const initialState = storage;
+const specialKey = ['\\', '?', '*', '[', ']', '(', ')', '+'];
+AsyncStorage.setItem('REPORTS', JSON.stringify(storage));
 
 const reducer = (state, action) => {
   // TODO: add state documentation
@@ -24,6 +27,23 @@ const reducer = (state, action) => {
       );
       state.sightings.push(action.newSighting);
       break;
+
+    case 'search':
+      var literalText = action.text;
+      specialKey.map((key) => {
+        literalText = literalText.replace(key, '\\' + key);
+        console.log(key);
+        console.log(literalText);
+      });
+      return {
+        //TODO: figure out async storage to store and receive cards
+        sightings: storage.sightings.filter((sighting) =>
+          Object.keys(sighting).some(
+            (key) =>
+              sighting[key].toString().toLowerCase().search(literalText) !== -1
+          )
+        ),
+      };
 
     default:
       throw new Error(

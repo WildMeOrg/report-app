@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { StyleSheet } from 'react-native';
+import React, { useState, useContext } from 'react';
+import { StyleSheet, AsyncStorage } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { createStackNavigator } from '@react-navigation/stack';
 import screens from '../constants/screens';
@@ -8,11 +8,22 @@ import Typography from './Typography';
 import HomeScreen from '../screens/home/Home.jsx';
 import { TextInput } from 'react-native-gesture-handler';
 import globalStyles from '../styles/globalStyles';
+import { ReportContext } from '../context/report-context';
 
 const HomeStack = createStackNavigator();
 
 export default function HomeStackScreen({ navigation }) {
+  AsyncStorage.getItem('REPORTS', (err, result) => {
+    //console.log(JSON.parse(result).sightings[1].name);
+  });
   const [isSearching, setIsSearching] = useState(false);
+  const [state, dispatch] = useContext(ReportContext);
+  const searchFunc = (input) => {
+    dispatch({
+      type: 'search',
+      text: input,
+    });
+  };
 
   if (isSearching) {
     return (
@@ -33,7 +44,10 @@ export default function HomeStackScreen({ navigation }) {
               name="close"
               type="material-icons"
               color={theme.black}
-              onPress={() => setIsSearching(false)}
+              onPress={() => {
+                setIsSearching(false);
+                searchFunc('');
+              }}
               iconStyle={globalStyles.icon}
             />
           ),
@@ -49,7 +63,8 @@ export default function HomeStackScreen({ navigation }) {
                 autoFocus={true}
                 style={headerStyles.searchBar}
                 onChangeText={
-                  (text) => console.log(text) /*console.log for testing*/
+                  (text) =>
+                    searchFunc(text.toLowerCase()) /*console.log for testing*/
                 }
               />
             ),
