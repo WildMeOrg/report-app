@@ -1,11 +1,13 @@
 export default {
   home: 'Home',
   login: 'Login',
+  guestHome: 'GuestHome',
+  guestAdd: 'GuestAdd',
   loading: 'Loading',
   setings: 'Settings',
   newSighting: 'NewSighting',
-  newSighting2: 'NewSighting2',
-  newSighting3: 'NewSighting3',
-  newSightings: ['newSighting', 'newSighting2', 'newSighting3'],
+  newSightings: 'newSighting',
   viewSighting: 'View Sighting',
+  profile: 'Profile',
+  notifications: 'Notifications',
 };

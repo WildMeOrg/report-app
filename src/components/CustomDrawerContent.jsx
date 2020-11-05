@@ -18,8 +18,8 @@ export default function CustomDrawerContent(props) {
         label={() => (
           <View style={styles.drawerHeaderItem}>
             <Icon
-              name="user"
-              type="font-awesome"
+              name="person"
+              type="material-icons"
               color={theme.black}
               iconStyle={styles.icon}
             />
@@ -27,27 +27,28 @@ export default function CustomDrawerContent(props) {
             <Text style={styles.drawerHeaderName}>Joe Schmoe</Text>
           </View>
         )}
+        onPress={() => props.navigation.navigate(screens.profile)}
       />
       <DrawerItem
         label={() => (
           <View style={styles.drawerListItem}>
             <Icon
-              name="plus"
-              type="font-awesome"
+              name="add"
+              type="material-icons"
               color={theme.black}
               iconStyle={styles.icon}
             />
             <Typography id="NEW_SIGHTING" style={styles.drawerListText} />
           </View>
         )}
-        onPress={() => props.navigation.navigate(screens.newSightings[0])}
+        onPress={() => props.navigation.navigate(screens.newSighting)}
       />
       <DrawerItem
         label={() => (
           <View style={styles.drawerListItem}>
             <Icon
-              name="cog"
-              type="font-awesome"
+              name="settings"
+              type="material-icons"
               color={theme.black}
               iconStyle={styles.icon}
             />
@@ -61,8 +62,8 @@ export default function CustomDrawerContent(props) {
         label={() => (
           <View style={styles.drawerListItem}>
             <Icon
-              name="question-circle"
-              type="font-awesome"
+              name="help"
+              type="material-icons"
               color={theme.black}
               iconStyle={styles.icon}
             />

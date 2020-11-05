@@ -17,13 +17,16 @@ import spanishTranslations from './locale/es.json';
 import HomeStackScreen from './src/components/HomeStackScreen';
 import LoginStackScreen from './src/components/LoginStackScreen';
 import NewSightingStackScreen from './src/components/NewSightingStackScreen';
-import NewSighting2StackScreen from './src/components/NewSighting2StackScreen';
-import NewSighting3StackScreen from './src/components/NewSighting3StackScreen';
 import ViewSightingStackScreen from './src/components/ViewSightingStackScreen';
+import ProfileStackScreen from './src/components/ProfileStackScreen';
 import screens from './src/constants/screens';
 import CustomDrawerContent from './src/components/CustomDrawerContent';
 import SettingsStackScreen from './src/components/SettingsStackScreen';
+import NotificationsStackScreen from './src/components/NotificationsStackScreen';
 import getLocale from './src/utils/getLocale';
+import GuestHomeStackScreen from './src/components/GuestHomeStackScreen';
+import GuestAddStackScreen from './src/components/GuestAddStackScreen';
+import { ReportContextProvider } from './src/context/report-context';
 
 const messageMap = {
   en: englishTranslations,
@@ -44,37 +47,54 @@ export default function App() {
 
   if (fontsLoaded) {
     return (
-      <IntlProvider locale={locale} messages={messageMap[locale]} defaultLocale="en">
-        <NavigationContainer>
-          <Drawer.Navigator
-            drawerContent={(props) => <CustomDrawerContent {...props} />}
-          >
-            {/* As new screens are made, put them here to be able to view them */}
-            <Drawer.Screen name={screens.home} component={HomeStackScreen} />
-            <Drawer.Screen name={screens.login} component={LoginStackScreen} />
-            <Drawer.Screen
-              name={screens.setings}
-              component={SettingsStackScreen}
-            />
-            <Drawer.Screen
-              name={screens.newSightings[0]}
-              component={NewSightingStackScreen}
-            />
-            <Drawer.Screen
-              name={screens.newSightings[1]}
-              component={NewSighting2StackScreen}
-            />
-            <Drawer.Screen
-              name={screens.newSightings[2]}
-              component={NewSighting3StackScreen}
-            />
-            <Drawer.Screen
-              name={screens.viewSighting}
-              component={ViewSightingStackScreen}
-            />
-          </Drawer.Navigator>
-        </NavigationContainer>
-      </IntlProvider>
+      <ReportContextProvider>
+        <IntlProvider
+          locale={locale}
+          messages={messageMap[locale]}
+          defaultLocale="en"
+        >
+          <NavigationContainer>
+            <Drawer.Navigator
+              drawerContent={(props) => <CustomDrawerContent {...props} />}
+            >
+              {/* As new screens are made, put them here to be able to view them */}
+              <Drawer.Screen name={screens.home} component={HomeStackScreen} />
+              <Drawer.Screen
+                name={screens.login}
+                component={LoginStackScreen}
+              />
+              <Drawer.Screen
+                name={screens.guestHome}
+                component={GuestHomeStackScreen}
+              />
+              <Drawer.Screen
+                name={screens.guestAdd}
+                component={GuestAddStackScreen}
+              />
+              <Drawer.Screen
+                name={screens.setings}
+                component={SettingsStackScreen}
+              />
+              <Drawer.Screen
+                name={screens.newSighting}
+                component={NewSightingStackScreen}
+              />
+              <Drawer.Screen
+                name={screens.viewSighting}
+                component={ViewSightingStackScreen}
+              />
+              <Drawer.Screen
+                name={screens.profile}
+                component={ProfileStackScreen}
+              />
+              <Drawer.Screen
+                name={screens.notifications}
+                component={NotificationsStackScreen}
+              />
+            </Drawer.Navigator>
+          </NavigationContainer>
+        </IntlProvider>
+      </ReportContextProvider>
     );
   } else {
     return (
