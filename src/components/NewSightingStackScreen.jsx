@@ -96,9 +96,8 @@ function NewSightingForm({ navigation }) {
         }}
         validationSchema={validationSchema}
         onSubmit={(values, { resetForm }) => {
-          // console.log(values);
 
-          Alert.alert('Form Answers', JSON.stringify(values));
+          Alert.alert('Form Response', JSON.stringify(values, undefined, 4));
           resetForm();
 
           setFormSection(0);
