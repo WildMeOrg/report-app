@@ -420,8 +420,8 @@ export default function NewSightingStackScreen({ navigation }) {
         headerTitleAlign: 'center',
         headerRight: () => (
           <Icon
-            name="times"
-            type="font-awesome"
+            name="close"
+            type="material-icons"
             color={theme.black}
             onPress={() => {
               navigation.navigate(screens.home);

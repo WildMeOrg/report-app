@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { houstonUrl } from '../../constants/urls';
 import Loading from '../loading/Loading';
-import Logo from '../../../assets/logo.png';
+import Logo from '../../../assets/images/logo.png';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import theme from '../../constants/theme';
 import { baseUrl } from '../../constants/urls';
@@ -127,7 +127,10 @@ const Login = ({ navigation }) => {
       </View>
 
       <View style={styles.guestView}>
-        <TouchableOpacity style={styles.guest}>
+        <TouchableOpacity
+          style={styles.guest}
+          onPress={() => navigation.navigate(screens.guestHome)}
+        >
           <Typography id="CONTINUE_AS_GUEST" style={globalStyles.basicText} />
         </TouchableOpacity>
       </View>

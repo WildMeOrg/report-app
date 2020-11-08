@@ -3,7 +3,7 @@ import { Text, StyleSheet, Image, View, ScrollView } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import screens from '../constants/screens';
 import { Icon } from 'react-native-elements';
-import Humpback from '../../assets/humpback.jpg';
+import Humpback from '../../assets/images/humpback.jpg';
 import theme from '../constants/theme';
 import globalStyles from '../styles/globalStyles';
 import Typography from './Typography';
@@ -45,8 +45,8 @@ export default function ViewSightingStackScreen({ navigation }) {
         headerTitleAlign: 'center',
         headerLeft: () => (
           <Icon
-            name="bars"
-            type="font-awesome"
+            name="menu"
+            type="material-icons"
             color={theme.black}
             onPress={() => navigation.toggleDrawer()}
             iconStyle={styles.icon}
@@ -54,8 +54,8 @@ export default function ViewSightingStackScreen({ navigation }) {
         ),
         headerRight: () => (
           <Icon
-            name="times"
-            type="font-awesome"
+            name="close"
+            type="material-icons"
             color={theme.black}
             onPress={() => navigation.navigate(screens.home)}
             iconStyle={styles.icon2}

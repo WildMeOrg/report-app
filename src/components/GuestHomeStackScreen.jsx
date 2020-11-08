@@ -3,15 +3,16 @@ import { StyleSheet } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from 'react-native-elements';
 import screens from '../constants/screens';
-import Settings from '../screens/settings/Settings';
+import GuestHome from '../screens/guest/GuestHome';
 import theme from '../constants/theme';
 import Typography from './Typography';
+import globalStyles from '../styles/globalStyles';
 
-const LoginStack = createStackNavigator();
+const GuestHomeStack = createStackNavigator();
 
-export default function LoginStackScreen({ navigation }) {
+export default function GuestHomeStackScreen({ navigation }) {
   return (
-    <LoginStack.Navigator
+    <GuestHomeStack.Navigator
       screenOptions={{
         headerTitleAlign: 'center',
         headerLeft: () => (
@@ -20,29 +21,20 @@ export default function LoginStackScreen({ navigation }) {
             type="material-icons"
             color={theme.black}
             onPress={() => navigation.toggleDrawer()}
-            iconStyle={styles.icon}
+            iconStyle={globalStyles.iconLeft}
           />
         ),
       }}
     >
-      <LoginStack.Screen
-        name={screens.setings}
-        component={Settings}
+      <GuestHomeStack.Screen
+        name={screens.guestHome}
+        component={GuestHome}
         options={{
           headerTitle: () => (
-            <Typography style={styles.headerText} id="SETTINGS" />
+            <Typography id="APP_NAME" style={globalStyles.headerText} />
           ),
         }}
       />
-    </LoginStack.Navigator>
+    </GuestHomeStack.Navigator>
   );
 }
-
-const styles = StyleSheet.create({
-  headerText: {
-    fontSize: 14,
-  },
-  icon: {
-    marginLeft: 16,
-  },
-});

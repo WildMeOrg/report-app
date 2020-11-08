@@ -8,11 +8,6 @@ export default StyleSheet.create({
     backgroundColor: '#EDEDED',
     justifyContent: 'center',
   },
-  // innerStyle: {
-  //   height: 3,
-  //   backgroundColor: theme.primary,
-  //   width: '100%',
-  // },
   thirtyThree: {
     height: 3,
     backgroundColor: theme.primary,

@@ -12,7 +12,7 @@ import screens from '../constants/screens';
 import { Icon } from 'react-native-elements';
 import theme from '../constants/theme';
 import globalStyles from '../styles/globalStyles';
-import profilePic from '../../assets/joeShmo.jpg';
+import profilePic from '../../assets/images/joeShmo.jpg';
 
 const ProfileStack = createStackNavigator();
 
@@ -23,7 +23,7 @@ const ProfileScreen = ({ navigation }) => {
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <Icon
           name="more-vert"
-          type="materialicons"
+          type="material-icons"
           size={28}
           color={theme.black}
           style={styles.editIcon}
@@ -65,8 +65,8 @@ export default function ProfileStackScreen({ navigation }) {
         headerTitleAlign: 'center',
         headerLeft: () => (
           <Icon
-            name="bars"
-            type="font-awesome"
+            name="menu"
+            type="material-icons"
             color={theme.black}
             onPress={() => navigation.toggleDrawer()}
             iconStyle={styles.icon}
@@ -74,8 +74,8 @@ export default function ProfileStackScreen({ navigation }) {
         ),
         headerRight: () => (
           <Icon
-            name="times"
-            type="font-awesome"
+            name="close"
+            type="material-icons"
             color={theme.black}
             onPress={() => navigation.navigate(screens.home)}
             iconStyle={styles.icon2}
