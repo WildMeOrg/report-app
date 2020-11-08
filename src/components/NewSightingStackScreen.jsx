@@ -96,7 +96,6 @@ function NewSightingForm({ navigation }) {
         }}
         validationSchema={validationSchema}
         onSubmit={(values, { resetForm }) => {
-
           Alert.alert('Form Response', JSON.stringify(values, undefined, 4));
           resetForm();
 
@@ -105,7 +104,6 @@ function NewSightingForm({ navigation }) {
         }}
       >
         {(formikProps) => {
-          // console.log(formikProps.erro);
           return (
             <>
               <KeyboardAwareScrollView
