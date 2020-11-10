@@ -32,6 +32,8 @@ const reducer = (state, action) => {
       var literalText = action.text;
       specialKey.map((key) => {
         literalText = literalText.replace(key, '\\' + key);
+        //might need to remove other characters later on.
+        literalText = literalText.replace('\'','');
         console.log(key);
         console.log(literalText);
       });
@@ -40,7 +42,7 @@ const reducer = (state, action) => {
         sightings: storage.sightings.filter((sighting) =>
           Object.keys(sighting).some(
             (key) =>
-              sighting[key].toString().toLowerCase().search(literalText) !== -1
+              sighting[key].toString().toLowerCase().replace('\'','').search(literalText) !== -1
           )
         ),
       };
