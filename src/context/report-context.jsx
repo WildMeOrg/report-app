@@ -34,7 +34,6 @@ const reducer = (state, action) => {
         literalText = literalText.replace(key, '\\' + key);
         //might need to remove other characters later on.
         literalText = literalText.replace('\'', '');
-        console.log(literalText);
       });
       return {
         //TODO: figure out async storage to store and receive cards
