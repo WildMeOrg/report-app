@@ -123,10 +123,16 @@ function NewSightingForm({ navigation }) {
                           iconStyle={styles.addText}
                           size={40}
                         />
-                        <Typography id="ADD_IMAGES" style={globalStyles.inputHeader, styles.addText} />
+                        <Typography
+                          id="ADD_IMAGES"
+                          style={(globalStyles.inputHeader, styles.addText)}
+                        />
                       </TouchableOpacity>
                     </View>
-                    <Typography id="TITLE" style={globalStyles.h2Text, globalStyles.inputHeader} />
+                    <Typography
+                      id="TITLE"
+                      style={(globalStyles.h2Text, globalStyles.inputHeader)}
+                    />
                     <TextInput
                       style={globalStyles.inputFields}
                       autoCorrect={false}
@@ -145,7 +151,10 @@ function NewSightingForm({ navigation }) {
                         {formikProps.errors.title}
                       </Text>
                     )}
-                    <Typography id="LOCATION" style={globalStyles.h2Text, globalStyles.inputHeader} />
+                    <Typography
+                      id="LOCATION"
+                      style={(globalStyles.h2Text, globalStyles.inputHeader)}
+                    />
                     <TextInput
                       style={globalStyles.inputFields}
                       autoCorrect={false}
@@ -167,7 +176,10 @@ function NewSightingForm({ navigation }) {
                           {formikProps.errors.location}
                         </Text>
                       )}
-                      <Typography id="SIGHTING_CONTEXT" style={globalStyles.h2Text, globalStyles.inputHeader} />
+                    <Typography
+                      id="SIGHTING_CONTEXT"
+                      style={(globalStyles.h2Text, globalStyles.inputHeader)}
+                    />
                     <TextInput
                       style={[globalStyles.inputFields, styles.multiLine]}
                       autoCorrect={false}
@@ -196,7 +208,10 @@ function NewSightingForm({ navigation }) {
                 )}
                 {formSection === 1 && (
                   <>
-                    <Typography id="STATUS" style={globalStyles.h2Text, globalStyles.inputHeader} />
+                    <Typography
+                      id="STATUS"
+                      style={(globalStyles.h2Text, globalStyles.inputHeader)}
+                    />
                     <TextInput
                       style={globalStyles.inputFields}
                       autoCorrect={false}
@@ -216,7 +231,10 @@ function NewSightingForm({ navigation }) {
                           {formikProps.errors.status}
                         </Text>
                       )}
-                      <Typography id="RELATIONSHIPS" style={globalStyles.h2Text, globalStyles.inputHeader} />
+                    <Typography
+                      id="RELATIONSHIPS"
+                      style={(globalStyles.h2Text, globalStyles.inputHeader)}
+                    />
                     <TextInput
                       style={globalStyles.inputFields}
                       autoCorrect={false}
@@ -238,7 +256,10 @@ function NewSightingForm({ navigation }) {
                           {formikProps.errors.tirelationshipstle}
                         </Text>
                       )}
-                    <Typography id="MATCH_INDIVIDUAL" style={globalStyles.h2Text, globalStyles.inputHeader} />
+                    <Typography
+                      id="MATCH_INDIVIDUAL"
+                      style={(globalStyles.h2Text, globalStyles.inputHeader)}
+                    />
                     <TextInput
                       style={globalStyles.inputFields}
                       autoCorrect={false}
@@ -264,7 +285,10 @@ function NewSightingForm({ navigation }) {
                 )}
                 {formSection === 2 && (
                   <>
-                    <Typography id="PHOTOGRAPHER_NAME" style={globalStyles.h2Text, globalStyles.inputHeader} />
+                    <Typography
+                      id="PHOTOGRAPHER_NAME"
+                      style={(globalStyles.h2Text, globalStyles.inputHeader)}
+                    />
                     <TextInput
                       style={globalStyles.inputFields}
                       autoCorrect={false}
@@ -288,7 +312,10 @@ function NewSightingForm({ navigation }) {
                           {formikProps.errors.photographerName}
                         </Text>
                       )}
-                    <Typography id="PHOTOGRAPHER_EMAIL" style={globalStyles.h2Text, globalStyles.inputHeader} />
+                    <Typography
+                      id="PHOTOGRAPHER_EMAIL"
+                      style={(globalStyles.h2Text, globalStyles.inputHeader)}
+                    />
                     <TextInput
                       style={globalStyles.inputFields}
                       autoCorrect={false}
@@ -336,12 +363,12 @@ function NewSightingForm({ navigation }) {
                   <View style={styles.horizontal}>
                     <TouchableOpacity onPress={() => setFormSection(0)}>
                       <View style={[styles.button, styles.buttonInactive]}>
-                      <Typography id="BACK" style={globalStyles.buttonText} />
+                        <Typography id="BACK" style={globalStyles.buttonText} />
                       </View>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => setFormSection(2)}>
                       <View style={styles.button}>
-                      <Typography id="NEXT" style={globalStyles.buttonText} />
+                        <Typography id="NEXT" style={globalStyles.buttonText} />
                       </View>
                     </TouchableOpacity>
                   </View>
@@ -352,7 +379,7 @@ function NewSightingForm({ navigation }) {
                   <View style={styles.horizontal}>
                     <TouchableOpacity onPress={() => setFormSection(1)}>
                       <View style={[styles.button, styles.buttonInactive]}>
-                      <Typography id="BACK" style={globalStyles.buttonText} />
+                        <Typography id="BACK" style={globalStyles.buttonText} />
                       </View>
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -362,7 +389,10 @@ function NewSightingForm({ navigation }) {
                       disabled={formikProps.isSubmitting}
                     >
                       <View style={styles.button}>
-                      <Typography id="UPLOAD" style={globalStyles.buttonText} />
+                        <Typography
+                          id="UPLOAD"
+                          style={globalStyles.buttonText}
+                        />
                       </View>
                     </TouchableOpacity>
                   </View>
