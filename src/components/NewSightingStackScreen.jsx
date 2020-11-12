@@ -11,12 +11,13 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from 'react-native-elements';
 import { Formik } from 'formik';
+import * as ImagePicker from 'expo-image-picker';
+import * as yup from 'yup';
 import screens from '../constants/screens';
 import theme from '../constants/theme';
 import globalStyles from '../styles/globalStyles';
 import styles from '../styles/newSightingStyles';
-import * as ImagePicker from 'expo-image-picker';
-import * as yup from 'yup';
+import Typography from '../components/Typography';
 
 const NewSightingStack = createStackNavigator();
 
@@ -34,7 +35,7 @@ const validationSchema = yup.object().shape({
   photographerName: yup
     .string()
     .required('Photographer Name is required')
-    .min(3, 'Photographer Name must be atleast 3 charaters')
+    .min(3, 'Photographer Name must be at least 3 charaters')
     .max(30, 'Photographer Name must be less than 30 charaters'),
   photographerEmail: yup
     .string()
@@ -56,7 +57,7 @@ function NewSightingForm({ navigation }) {
   }, []);
 
   const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
+    const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       quality: 1,
@@ -109,7 +110,7 @@ function NewSightingForm({ navigation }) {
               <KeyboardAwareScrollView
                 resetScrollToCoords={{ x: 0, y: 0 }}
                 style={styles.keyboardView}
-                scrollEnabled={true}
+                scrollEnabled
               >
                 {formSection === 0 && (
                   <>
@@ -122,18 +123,10 @@ function NewSightingForm({ navigation }) {
                           iconStyle={styles.addText}
                           size={40}
                         />
-                        <Text
-                          style={[globalStyles.inputHeader, styles.addText]}
-                        >
-                          Add Images
-                        </Text>
+                        <Typography id="ADD_IMAGES" style={globalStyles.inputHeader, styles.addText} />
                       </TouchableOpacity>
                     </View>
-                    <Text
-                      style={[globalStyles.h2Text, globalStyles.inputHeader]}
-                    >
-                      Title
-                    </Text>
+                    <Typography id="TITLE" style={globalStyles.h2Text, globalStyles.inputHeader} />
                     <TextInput
                       style={globalStyles.inputFields}
                       autoCorrect={false}
@@ -152,11 +145,7 @@ function NewSightingForm({ navigation }) {
                         {formikProps.errors.title}
                       </Text>
                     )}
-                    <Text
-                      style={[globalStyles.h2Text, globalStyles.inputHeader]}
-                    >
-                      Location
-                    </Text>
+                    <Typography id="LOCATION" style={globalStyles.h2Text, globalStyles.inputHeader} />
                     <TextInput
                       style={globalStyles.inputFields}
                       autoCorrect={false}
@@ -178,15 +167,11 @@ function NewSightingForm({ navigation }) {
                           {formikProps.errors.location}
                         </Text>
                       )}
-                    <Text
-                      style={[globalStyles.h2Text, globalStyles.inputHeader]}
-                    >
-                      Sighting Context
-                    </Text>
+                      <Typography id="SIGHTING_CONTEXT" style={globalStyles.h2Text, globalStyles.inputHeader} />
                     <TextInput
                       style={[globalStyles.inputFields, styles.multiLine]}
                       autoCorrect={false}
-                      multiline={true}
+                      multiline
                       numberOfLines={5}
                       onChangeText={formikProps.handleChange('sightingContext')}
                       value={formikProps.values.sightingContext}
@@ -211,11 +196,7 @@ function NewSightingForm({ navigation }) {
                 )}
                 {formSection === 1 && (
                   <>
-                    <Text
-                      style={[globalStyles.h2Text, globalStyles.inputHeader]}
-                    >
-                      Status
-                    </Text>
+                    <Typography id="STATUS" style={globalStyles.h2Text, globalStyles.inputHeader} />
                     <TextInput
                       style={globalStyles.inputFields}
                       autoCorrect={false}
@@ -235,11 +216,7 @@ function NewSightingForm({ navigation }) {
                           {formikProps.errors.status}
                         </Text>
                       )}
-                    <Text
-                      style={[globalStyles.h2Text, globalStyles.inputHeader]}
-                    >
-                      Relationships
-                    </Text>
+                      <Typography id="RELATIONSHIPS" style={globalStyles.h2Text, globalStyles.inputHeader} />
                     <TextInput
                       style={globalStyles.inputFields}
                       autoCorrect={false}
@@ -261,11 +238,7 @@ function NewSightingForm({ navigation }) {
                           {formikProps.errors.tirelationshipstle}
                         </Text>
                       )}
-                    <Text
-                      style={[globalStyles.h2Text, globalStyles.inputHeader]}
-                    >
-                      Match Individual
-                    </Text>
+                    <Typography id="MATCH_INDIVIDUAL" style={globalStyles.h2Text, globalStyles.inputHeader} />
                     <TextInput
                       style={globalStyles.inputFields}
                       autoCorrect={false}
@@ -291,11 +264,7 @@ function NewSightingForm({ navigation }) {
                 )}
                 {formSection === 2 && (
                   <>
-                    <Text
-                      style={[globalStyles.h2Text, globalStyles.inputHeader]}
-                    >
-                      Photographer name
-                    </Text>
+                    <Typography id="PHOTOGRAPHER_NAME" style={globalStyles.h2Text, globalStyles.inputHeader} />
                     <TextInput
                       style={globalStyles.inputFields}
                       autoCorrect={false}
@@ -319,11 +288,7 @@ function NewSightingForm({ navigation }) {
                           {formikProps.errors.photographerName}
                         </Text>
                       )}
-                    <Text
-                      style={[globalStyles.h2Text, globalStyles.inputHeader]}
-                    >
-                      Photographer email
-                    </Text>
+                    <Typography id="PHOTOGRAPHER_EMAIL" style={globalStyles.h2Text, globalStyles.inputHeader} />
                     <TextInput
                       style={globalStyles.inputFields}
                       autoCorrect={false}
@@ -355,12 +320,12 @@ function NewSightingForm({ navigation }) {
                   <View style={styles.horizontal}>
                     <TouchableOpacity>
                       <View style={[styles.button, globalStyles.invisible]}>
-                        <Text style={globalStyles.buttonText}>Back</Text>
+                        <Typography id="BACK" style={globalStyles.buttonText} />
                       </View>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => setFormSection(1)}>
                       <View style={(globalStyles.button, styles.button)}>
-                        <Text style={globalStyles.buttonText}>Next </Text>
+                        <Typography id="NEXT" style={globalStyles.buttonText} />
                       </View>
                     </TouchableOpacity>
                   </View>
@@ -371,12 +336,12 @@ function NewSightingForm({ navigation }) {
                   <View style={styles.horizontal}>
                     <TouchableOpacity onPress={() => setFormSection(0)}>
                       <View style={[styles.button, styles.buttonInactive]}>
-                        <Text style={globalStyles.buttonText}> Back </Text>
+                      <Typography id="BACK" style={globalStyles.buttonText} />
                       </View>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => setFormSection(2)}>
                       <View style={styles.button}>
-                        <Text style={globalStyles.buttonText}>Next</Text>
+                      <Typography id="NEXT" style={globalStyles.buttonText} />
                       </View>
                     </TouchableOpacity>
                   </View>
@@ -387,7 +352,7 @@ function NewSightingForm({ navigation }) {
                   <View style={styles.horizontal}>
                     <TouchableOpacity onPress={() => setFormSection(1)}>
                       <View style={[styles.button, styles.buttonInactive]}>
-                        <Text style={globalStyles.buttonText}>Back</Text>
+                      <Typography id="BACK" style={globalStyles.buttonText} />
                       </View>
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -397,7 +362,7 @@ function NewSightingForm({ navigation }) {
                       disabled={formikProps.isSubmitting}
                     >
                       <View style={styles.button}>
-                        <Text style={globalStyles.buttonText}>Upload</Text>
+                      <Typography id="UPLOAD" style={globalStyles.buttonText} />
                       </View>
                     </TouchableOpacity>
                   </View>
@@ -434,7 +399,7 @@ export default function NewSightingStackScreen({ navigation }) {
         component={NewSightingForm}
         options={{
           headerTitle: () => (
-            <Text style={globalStyles.headerText}>Sighting Info</Text>
+            <Typography id="SIGHTING_INFO" style={globalStyles.headerText} />
           ),
         }}
       />
