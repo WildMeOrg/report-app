@@ -62,9 +62,10 @@ export default function HomeStackScreen({ navigation }) {
                 placeholder="Search"
                 autoFocus={true}
                 style={headerStyles.searchBar}
+                keyboardType={'ascii-capable'}
                 onChangeText={
                   (text) =>
-                    searchFunc(text.toLowerCase()) /*console.log for testing*/
+                    searchFunc(text)
                 }
               />
             ),
