@@ -1,15 +1,9 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React from 'react';
 import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import theme from '../../constants/theme';
-import { baseUrl } from '../../constants/urls';
-import AsyncStorage from '@react-native-community/async-storage';
 import screens from '../../constants/screens';
-import { ThemeConsumer } from 'react-native-elements';
-import globalStyles from '../../styles/globalStyles';
-import Typography from '../../components/Typography';
 import HumpbackTail from '../../../assets/humpbackTail.jpg';
 
 const GuestHome = ({ navigation }) => {

@@ -76,4 +76,11 @@ export default StyleSheet.create({
     alignSelf: 'center',
     margin: '5%',
   },
+  divider: {
+    marginHorizontal: '5%',
+    marginTop: 10,
+    borderBottomColor: '#2C2C2C',
+    borderBottomWidth: 0.5,
+    opacity: 0.5,
+  }
 });
