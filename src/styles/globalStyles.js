@@ -49,4 +49,10 @@ export default StyleSheet.create({
   invisible: {
     opacity: 0,
   },
+  errorText: {
+    color: 'red',
+    fontFamily: 'Lato-Regular',
+    marginHorizontal: '8%',
+    marginTop: 4
+  }
 });
