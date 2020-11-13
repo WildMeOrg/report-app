@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
   InfoText: {
     marginTop: 5,
     marginLeft: 20,
-    opacity: 0.5,
+    opacity: 0.75,
   },
   Title: {
     color: '#2c2c2c',
