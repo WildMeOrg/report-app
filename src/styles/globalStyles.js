@@ -4,7 +4,7 @@ import theme from '../constants/theme';
 export default StyleSheet.create({
   headerText: {
     fontFamily: 'Lato-Regular',
-    fontSize: 14,
+    fontSize: 20,
   },
   icon: {
     marginRight: 16,
@@ -14,7 +14,7 @@ export default StyleSheet.create({
   },
   h2Text: {
     fontFamily: 'Lato-Regular',
-    fontSize: 16,
+    fontSize: 18,
     color: theme.black,
   },
   buttonText: {

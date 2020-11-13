@@ -30,25 +30,25 @@ const ProfileScreen = ({ navigation }) => {
           //add onPress eventually
         />
         <Image style={styles.image} source={profilePic} />
-        <Text style={[globalStyles.headerText, styles.Name]}>Joe Schmoe</Text>
+        <Text style={[globalStyles.h2Text, styles.Name]}>Joe Schmoe</Text>
         <View style={styles.Divider} />
-        <Text style={[globalStyles.headerText, styles.InfoHeader]}>
+        <Text style={[globalStyles.h2Text, styles.InfoHeader]}>
           Organization
         </Text>
         <Text style={[globalStyles.basicText, styles.InfoText]}>
           The Schmoe Conservation
         </Text>
-        <Text style={[globalStyles.headerText, styles.InfoHeader]}>Email</Text>
+        <Text style={[globalStyles.h2Text, styles.InfoHeader]}>Email</Text>
         <Text style={[globalStyles.basicText, styles.InfoText]}>
           schmoe.joe@email.com
         </Text>
-        <Text style={[globalStyles.headerText, styles.InfoHeader]}>
+        <Text style={[globalStyles.h2Text, styles.InfoHeader]}>
           Phone Number
         </Text>
         <Text style={[globalStyles.basicText, styles.InfoText]}>
           (503)123-4567
         </Text>
-        <Text style={[globalStyles.headerText, styles.InfoHeader]}>
+        <Text style={[globalStyles.h2Text, styles.InfoHeader]}>
           Location
         </Text>
         <Text style={[globalStyles.basicText, styles.InfoText]}>
@@ -87,7 +87,7 @@ export default function ProfileStackScreen({ navigation }) {
         name={screens.profile}
         component={ProfileScreen}
         options={{
-          headerTitle: () => <Text style={styles.headerText}>Profile</Text>,
+          headerTitle: () => <Text style={globalStyles.headerText}>Profile</Text>,
         }}
       />
     </ProfileStack.Navigator>
@@ -95,10 +95,6 @@ export default function ProfileStackScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  headerText: {
-    fontFamily: 'Lato-Regular',
-    fontSize: 14,
-  },
   icon: {
     marginLeft: 16,
   },
@@ -129,12 +125,10 @@ const styles = StyleSheet.create({
   },
   InfoHeader: {
     color: '#2c2c2c',
-    fontSize: 24,
     marginTop: 20,
     marginLeft: 20,
   },
   InfoText: {
-    fontSize: 20,
     marginTop: 5,
     marginLeft: 20,
     opacity: 0.5,

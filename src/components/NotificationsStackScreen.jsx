@@ -152,7 +152,7 @@ export default function NotificationsStackScreen({ navigation }) {
         component={NotificationsScreen}
         options={{
           headerTitle: () => (
-            <Text style={styles.headerText}>Notifications</Text>
+            <Text style={globalStyles.headerText}>Notifications</Text>
           ),
         }}
       />
