@@ -82,33 +82,6 @@ function NewSightingForm({ navigation }) {
           ))}
         </View>
       );
-      // const componentPromises = (
-      //   <View>
-      //     {formFields['data']['response']['configuration'][
-      //       'site.custom.customFieldCategories'
-      //     ]['value'].map((cat) => (
-      //       <View key={cat.id}>
-      //         <View style={newSightingStyles.divider} />
-      //         <Text style={[globalStyles.h2Text, globalStyles.sectionHeader]}>
-      //           {cat['label']}
-      //         </Text>
-      //         <View style={newSightingStyles.divider} />
-      //         {formFields['data']['response']['configuration'][
-      //           sightingFormFields[cat.type]
-      //         ]['value']['definitions'].map((item) => (
-      //           <CustomField
-      //             key={item.id}
-      //             id={item.id}
-      //             required={item.required}
-      //             schema={item.schema}
-      //             name={item.name}
-      //             displayType={item.displayType}
-      //           />
-      //         ))}
-      //       </View>
-      //     ))}
-      //   </View>
-      // );
       setViews(componentPromises);
     }
   };
