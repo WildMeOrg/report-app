@@ -124,9 +124,9 @@ const NotificationsScreen = ({ navigation }) => {
             );
           })
         }
-      </View>
-      <View style={bodyStyles.unreadBanner}>
-        <Typography id="UNREAD" style={globalStyles.h2Text} />
+        <View style={bodyStyles.unreadBanner}>
+          <Typography id="UNREAD" style={globalStyles.h2Text} />
+        </View>
       </View>
       {notifications.filter(notification => notification.new === false)
         .map((notification) => {
@@ -187,7 +187,7 @@ export default function NotificationsStackScreen({ navigation }) {
 
 const bodyStyles = StyleSheet.create({
   unread: {
-    paddingBottom: 26,
+    marginBottom: 22,
     borderStyle: 'solid',
     borderWidth: 5,
     borderTopWidth: 5,
@@ -207,8 +207,8 @@ const bodyStyles = StyleSheet.create({
     borderColor: theme.primary,
     borderRadius: 20, 
     alignSelf: 'center',
-    marginTop: -21,
-    marginBottom: 10,
+    marginBottom: -20,
+    marginTop: 10,
   },
 });
 
