@@ -67,7 +67,7 @@ function NewSightingForm({ navigation }) {
               Sighting Context
             </Text>
             <TextInput
-              style={[globalStyles.inputFields, styles.multiLine]}
+              style={[globalStyles.inputFields, styles.multiLine, styles.bottomElement]}
               autoCorrect={false}
               multiline={true}
               numberOfLines={5}
@@ -88,7 +88,7 @@ function NewSightingForm({ navigation }) {
             <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
               Match Individual
             </Text>
-            <TextInput style={globalStyles.inputFields} autoCorrect={false} />
+            <TextInput style={styles.bottomElement, globalStyles.inputFields} autoCorrect={false} />
           </>
         ) : null}
         {formSection === 2 ? (
@@ -100,7 +100,7 @@ function NewSightingForm({ navigation }) {
             <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
               Photographer email
             </Text>
-            <TextInput style={globalStyles.inputFields} autoCorrect={false} />
+            <TextInput style={styles.bottomElement, globalStyles.inputFields} autoCorrect={false} />
           </>
         ) : null}
       </KeyboardAwareScrollView>

@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Button,
   Text,
   StyleSheet,
   Image,
@@ -17,54 +16,59 @@ import Hummingbird from '../../assets/images/hummingbird.jpg';
 import RedPanda from '../../assets/images/redPanda.jpg';
 import Octopus from '../../assets/images/octopus.jpg';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import Typography from '../components/Typography';
 
 const NotificationsStack = createStackNavigator();
 
+/** <SightingCard> : A functional component that creates the sighting cards on the homepage
+ *    @props
+ *      name  -- the name of the sighting displayed in larger, upper text
+ *      image -- the imported image to be used for the cover of the card
+ *      date  -- the date of the sighting displayed in smaller, lower text
+ */
 const NotificationCard = (props) => {
-  return (
-    <View style={notificationCardStyle.notificationCard}>
-      <Image style={notificationCardStyle.imageCover} source={props.image} />
-      <View style={notificationCardStyle.info}>
-        <Text style={[globalStyles.headerText, notificationCardStyle.title]}>
-          {props.title}: {props.name}
-        </Text>
-        <Text style={[globalStyles.basicText, notificationCardStyle.message]}>
-          {props.message}
-        </Text>
-      </View>
-      <View>
-        <Icon
-          name="close"
-          type="material-icons"
-          size={16}
-          marginRight="4%"
-          marginTop="15%"
-        />
-        {
-          /* Condiditonal icon if the notification has been seen */
-          newCheck(props.new)
-        }
-      </View>
-    </View>
-  );
-};
-
-function newCheck(val) {
-  if (val) {
+  if (props.new) {
     return (
-      <Icon
-        name="circle"
-        type="font-awesome"
-        size={14}
-        marginTop="40%"
-        marginRight="5%"
-        color={theme.primary}
-      />
-    );
+      <View style={cardElementStyles.new}>
+        <Image style={cardElementStyles.imageCover} source={props.image} />
+        <View style={cardElementStyles.sightingInfo}>
+          <View style={cardElementStyles.sightingText}>
+            <Text style={cardElementStyles.sightingTitle}>{props.title}: "{props.name}"</Text>
+            <Text style={cardElementStyles.sightingDate}>{props.message}</Text>
+          </View>
+          <View style={cardElementStyles.close}>
+            <Icon
+              name="close"
+              type="material-icons"
+              size={16}
+              marginTop={5}
+            />
+          </View>
+        </View>
+      </View>
+    )
   } else {
-    return null;
+    return (
+      <View style={cardElementStyles.old}>
+        <Image style={cardElementStyles.imageCover} source={props.image} />
+        <View style={cardElementStyles.sightingInfo}>
+          <View style={cardElementStyles.sightingText}>
+            <Text style={cardElementStyles.sightingTitle}>{props.title}: "{props.name}"</Text>
+            <Text style={cardElementStyles.sightingDate}>{props.message}</Text>
+          </View>
+          <View style={cardElementStyles.close}>
+            <Icon
+              name="close"
+              type="material-icons"
+              size={16}
+              marginTop={5}
+            />
+          </View>
+        </View>
+      </View>
+    )
   }
-}
+};
 
 const NotificationsScreen = ({ navigation }) => {
   var notifications = [
@@ -102,23 +106,44 @@ const NotificationsScreen = ({ navigation }) => {
     },
   ];
   return (
-    <View>
-      {/* to be continued */}
-      {notifications.map((notification) => {
-        return (
-          <TouchableOpacity key={notification.id}>
-            <NotificationCard
-              key={notification.id}
-              image={notification.image}
-              title={notification.title}
-              name={notification.name}
-              message={notification.message}
-              new={notification.new}
-            />
-          </TouchableOpacity>
-        );
-      })}
-    </View>
+    <ScrollView>
+      <View style={bodyStyles.unread}>
+        {notifications.filter(notification => notification.new === true)
+          .map((notification) => {
+            return (
+              <View key={notification.id}>
+                <NotificationCard
+                  key={notification.id}
+                  image={notification.image}
+                  title={notification.title}
+                  name={notification.name}
+                  message={notification.message}
+                  new={notification.new}
+                />
+              </View>
+            );
+          })
+        }
+      </View>
+      <View style={bodyStyles.unreadBanner}>
+        <Typography id="UNREAD" style={globalStyles.h2Text} />
+      </View>
+      {notifications.filter(notification => notification.new === false)
+        .map((notification) => {
+          return (
+            <View key={notification.id}>
+              <NotificationCard
+                key={notification.id}
+                image={notification.image}
+                title={notification.title}
+                name={notification.name}
+                message={notification.message}
+              />
+            </View>
+          );
+        })
+      }
+    </ScrollView>
   );
 };
 
@@ -159,6 +184,140 @@ export default function NotificationsStackScreen({ navigation }) {
     </NotificationsStack.Navigator>
   );
 }
+
+const bodyStyles = StyleSheet.create({
+  unread: {
+    paddingBottom: 26,
+    borderStyle: 'solid',
+    borderWidth: 5,
+    borderTopWidth: 5,
+    borderBottomLeftRadius: 16,
+    borderBottomRightRadius: 16,
+    borderColor: theme.primary,
+    // backgroundColor: theme.primary,
+  },
+  unreadBanner: {
+    backgroundColor: theme.primary,
+    fontWeight: 'bold',
+    color: theme.primary,
+    paddingVertical: 5,
+    paddingHorizontal: 35,
+    borderStyle: 'solid',
+    borderWidth: 4,
+    borderColor: theme.primary,
+    borderRadius: 20, 
+    alignSelf: 'center',
+    marginTop: -21,
+    marginBottom: 10,
+  },
+});
+
+const cardElementStyles = StyleSheet.create({
+  new: {
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: theme.primary,
+    borderRadius: 6,
+    flexDirection: 'row',
+    marginVertical: 7,
+    width: '90%',
+    height: 80,
+    justifyContent: 'center',
+    alignSelf: 'center',
+    backgroundColor: "white",
+    // iOS
+    shadowColor: theme.black,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2.6,
+    // Android
+    elevation: 3,
+  },
+  old: {
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: '#CCC',
+    borderRadius: 6,
+    flexDirection: 'row',
+    marginVertical: 7,
+    width: '90%',
+    height: 80,
+    justifyContent: 'center',
+    alignSelf: 'center',
+    backgroundColor: "white",
+    // iOS
+    shadowColor: theme.black,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2.6,
+    // Android
+    elevation: 3,
+  },
+  touchableOpacityHolder: {
+    width: '95%',
+  },
+  sightingCard: {
+    flexDirection: 'row',
+    marginVertical: 7,
+    width: '90%',
+    height: 80,
+    justifyContent: 'center',
+    alignSelf: 'center',
+    backgroundColor: "white",
+    // iOS
+    shadowColor: theme.black,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2.6,
+    // Android
+    elevation: 3,
+  },
+  sightingInfo: {
+    paddingLeft: 22,
+    paddingRight: 4,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    flex: 2.5,
+    alignItems: 'center',
+  },
+  imageCover: {
+    resizeMode: 'cover', // TODO: Fix to dynamically take up space in View
+    borderTopLeftRadius: 5,
+    borderBottomLeftRadius: 5,
+    height: 78,
+    flex: 1,
+    overflow: 'hidden',
+    alignSelf: 'center',
+  },
+  sightingText: {
+    justifyContent: 'space-around',
+    height: 36,
+  },
+  sightingTitle: {
+    fontSize: 18,
+    fontFamily: 'Lato-Regular',
+  },
+  sightingDate: {
+    fontSize: 12,
+    fontFamily: 'Lato-Regular',
+    color: '#777',
+  },
+  close: {
+    flexDirection: 'column',
+    height: '100%',
+    justifyContent: 'flex-start',
+  }
+});
+
 
 const notificationCardStyle = StyleSheet.create({
   notificationCard: {
