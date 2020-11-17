@@ -48,6 +48,6 @@ export default StyleSheet.create({
     color: 'red',
     fontFamily: 'Lato-Regular',
     marginHorizontal: '8%',
-    marginTop: 4
-  }
+    marginTop: 4,
+  },
 });
