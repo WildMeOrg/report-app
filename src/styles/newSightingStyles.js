@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import theme from '../constants/theme';
 
-const buttonPadding = 12
+const buttonPadding = 12;
 
 export default StyleSheet.create({
   progressBar: {
@@ -79,6 +79,6 @@ export default StyleSheet.create({
     margin: '5%',
   },
   bottomElement: {
-    marginBottom: (buttonPadding * 6 + 10),
+    marginBottom: buttonPadding * 6 + 10,
   },
 });

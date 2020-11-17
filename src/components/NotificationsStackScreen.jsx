@@ -36,14 +36,14 @@ const NotificationCard = (props) => {
             <Text style={cardElementStyles.sightingTitle}>{props.title}: "{props.name}"</Text>
             <Text style={cardElementStyles.sightingDate}>{props.message}</Text>
           </View>
-          <View style={cardElementStyles.close}>
+          <TouchableOpacity style={cardElementStyles.close}>
             <Icon
               name="close"
               type="material-icons"
               size={16}
               marginTop={5}
             />
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
     )
@@ -56,14 +56,14 @@ const NotificationCard = (props) => {
             <Text style={cardElementStyles.sightingTitle}>{props.title}: "{props.name}"</Text>
             <Text style={cardElementStyles.sightingDate}>{props.message}</Text>
           </View>
-          <View style={cardElementStyles.close}>
+          <TouchableOpacity style={cardElementStyles.close}>
             <Icon
               name="close"
               type="material-icons"
               size={16}
               marginTop={5}
             />
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
     )
@@ -158,7 +158,7 @@ export default function NotificationsStackScreen({ navigation }) {
             type="material-icons"
             color={theme.black}
             onPress={() => navigation.toggleDrawer()}
-            iconStyle={styles.icon}
+            iconStyle={bodyStyles.icon}
           />
         ),
         headerRight: () => (
@@ -167,7 +167,7 @@ export default function NotificationsStackScreen({ navigation }) {
             type="material-icons"
             color={theme.black}
             onPress={() => navigation.navigate(screens.home)}
-            iconStyle={styles.icon2}
+            iconStyle={bodyStyles.icon2}
           />
         ),
       }}
@@ -186,14 +186,20 @@ export default function NotificationsStackScreen({ navigation }) {
 }
 
 const bodyStyles = StyleSheet.create({
+  icon: {
+    marginLeft: 16,
+  },
+  icon2: {
+    marginRight: 16,
+  },
   unread: {
+    paddingTop: 5,
     marginBottom: 22,
     borderStyle: 'solid',
     borderWidth: 5,
-    borderTopWidth: 5,
-    borderBottomLeftRadius: 16,
-    borderBottomRightRadius: 16,
     borderColor: theme.primary,
+    borderBottomLeftRadius: 14,
+    borderBottomRightRadius: 14,
     // backgroundColor: theme.primary,
   },
   unreadBanner: {
@@ -316,104 +322,4 @@ const cardElementStyles = StyleSheet.create({
     height: '100%',
     justifyContent: 'flex-start',
   }
-});
-
-
-const notificationCardStyle = StyleSheet.create({
-  notificationCard: {
-    flexDirection: 'row',
-    width: '90%',
-    height: 80,
-    marginLeft: '5%',
-    marginTop: '2%',
-    marginBottom: '2%',
-    borderStyle: 'solid',
-    borderRadius: 6,
-    borderColor: '#2C2C2C',
-    borderWidth: 1,
-  },
-  imageCover: {
-    borderRadius: 6,
-    width: '25%',
-    height: '100%',
-    flexDirection: 'row',
-  },
-  info: {
-    paddingTop: 20,
-    paddingRight: 20,
-    alignItems: 'center',
-    flex: 2.5,
-  },
-  title: {
-    fontSize: 18,
-  },
-  message: {
-    fontSize: 16,
-  },
-});
-const styles = StyleSheet.create({
-  headerText: {
-    fontFamily: 'Lato-Regular',
-    fontSize: 14,
-  },
-  icon: {
-    marginLeft: 16,
-  },
-  icon2: {
-    marginRight: 16,
-  },
-  editIcon: {
-    marginTop: '2%',
-    marginLeft: '90%',
-  },
-  image: {
-    marginLeft: '20%',
-    width: 250,
-    height: 250,
-    alignItems: 'center',
-    borderRadius: 250 / 2,
-  },
-  InfoView: {
-    flex: 1,
-    marginBottom: 10,
-  },
-  Name: {
-    color: '#2c2c2c',
-    fontFamily: 'Lato-Regular',
-    fontSize: 28,
-    fontWeight: 'bold',
-    marginTop: 25,
-    marginLeft: '31%',
-  },
-  InfoHeader: {
-    color: '#2c2c2c',
-    fontFamily: 'Lato-Regular',
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginTop: 20,
-    marginLeft: 20,
-  },
-  InfoText: {
-    fontFamily: 'Lato-Regular',
-    fontSize: 18,
-    marginTop: 5,
-    marginLeft: 20,
-    opacity: 0.5,
-  },
-  Title: {
-    color: '#2c2c2c',
-    textAlign: 'center',
-    fontFamily: 'Lato-Regular',
-    fontSize: 22,
-    marginTop: 10,
-    fontWeight: 'bold',
-  },
-  Divider: {
-    marginLeft: 25,
-    marginTop: 10,
-    borderBottomColor: '#2C2C2C',
-    borderBottomWidth: 0.5,
-    width: 375,
-    opacity: 0.5,
-  },
 });
