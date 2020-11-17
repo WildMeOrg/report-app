@@ -38,7 +38,7 @@ const HomeScreen = ({ navigation }) => {
   const [state, dispatch] = useContext(ReportContext);
 
   return (
-    <View>
+    <View style={bodyStyles.parentView}>
       {/* TODO: Turn from ScrollView into something FlatView for performance in long term(?) */}
       <ScrollView contentContainerStyle={bodyStyles.content}>
         <View style={bodyStyles.sortBy}>
@@ -84,6 +84,10 @@ const HomeScreen = ({ navigation }) => {
 
 // TODO: Clean up explicit numbers and check on different displays
 const bodyStyles = StyleSheet.create({
+  parentView: {
+    height: '100%',
+    backgroundColor: theme.white,
+  },
   content: {
     flexDirection: 'column',
     alignItems: 'center',

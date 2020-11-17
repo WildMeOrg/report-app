@@ -13,12 +13,18 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
+    },
+    "android": {
+      "package": "com.WildMe.WildMeReport",
+      "permissions": ["ACCESS_COARSE_LOCATION","ACCESS_FINE_LOCATION"]
     }
   }
 }
