@@ -79,6 +79,7 @@ export default StyleSheet.create({
     margin: '5%',
   },
   bottomElement: {
-    marginBottom: buttonPadding * 6 + 10,
+    marginVertical: 20,
+    marginHorizontal: 10,
   },
 });

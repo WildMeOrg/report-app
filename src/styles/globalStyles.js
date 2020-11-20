@@ -32,7 +32,7 @@ export default StyleSheet.create({
     margin: '5%',
     marginBottom: '3%',
   },
-  inputFields: {
+  inputField: {
     textAlign: 'left',
     marginHorizontal: '5%',
     fontSize: 16,
@@ -40,6 +40,13 @@ export default StyleSheet.create({
     borderWidth: 1,
     borderRadius: 6,
     padding: '2%',
+    margin: 1,
+  },
+  inputInvalid: {
+    borderWidth: 2,
+    backgroundColor: '#ff2c2c16',
+    borderColor: '#ff2c2cff',
+    margin: 0,
   },
   invisible: {
     opacity: 0,

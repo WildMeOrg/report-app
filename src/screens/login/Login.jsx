@@ -81,7 +81,7 @@ const Login = ({ navigation }) => {
         />
 
         <TextInput
-          style={globalStyles.inputFields}
+          style={globalStyles.inputField}
           onChangeText={(input) => onChangeEmail(input)}
           value={email}
           autoCorrect={false}
@@ -96,7 +96,7 @@ const Login = ({ navigation }) => {
         />
 
         <TextInput
-          style={globalStyles.inputFields}
+          style={globalStyles.inputField}
           onChangeText={(input) => onChangePassword(input)}
           value={password}
           autoCorrect={false}
