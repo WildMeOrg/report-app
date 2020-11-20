@@ -114,7 +114,7 @@ export default function HomeStackScreen({ navigation }) {
 
 const headerStyles = StyleSheet.create({
   headerText: {
-    fontSize: 20,
+    fontSize: 24,
   },
   iconLeft: {
     marginLeft: 16,

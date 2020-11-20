@@ -68,7 +68,7 @@ export default function ViewSightingStackScreen({ navigation }) {
         component={ViewSightingScreen}
         options={{
           headerTitle: () => (
-            <Typography id="VIEW_SIGHTING" style={styles.headerText} />
+            <Typography id="VIEW_SIGHTING" style={globalStyles.headerText} />
           ),
         }}
       />

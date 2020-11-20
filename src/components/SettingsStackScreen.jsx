@@ -6,6 +6,7 @@ import screens from '../constants/screens';
 import Settings from '../screens/settings/Settings';
 import theme from '../constants/theme';
 import Typography from './Typography';
+import globalStyles from '../styles/globalStyles';
 
 const LoginStack = createStackNavigator();
 
@@ -20,7 +21,7 @@ export default function LoginStackScreen({ navigation }) {
             type="material-icons"
             color={theme.black}
             onPress={() => navigation.toggleDrawer()}
-            iconStyle={styles.icon}
+            iconStyle={globalStyles.iconLeft}
           />
         ),
       }}
@@ -30,19 +31,10 @@ export default function LoginStackScreen({ navigation }) {
         component={Settings}
         options={{
           headerTitle: () => (
-            <Typography style={styles.headerText} id="SETTINGS" />
+            <Typography style={globalStyles.headerText} id="SETTINGS" />
           ),
         }}
       />
     </LoginStack.Navigator>
   );
 }
-
-const styles = StyleSheet.create({
-  headerText: {
-    fontSize: 14,
-  },
-  icon: {
-    marginLeft: 16,
-  },
-});

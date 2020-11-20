@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { ScrollView, Text, View, StyleSheet, Image } from 'react-native';
+import { ScrollView, Text, View, StyleSheet, Image, Dimensions } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Typography from '../../components/Typography';
@@ -103,13 +103,10 @@ const bodyStyles = StyleSheet.create({
     justifyContent: 'space-between',
     alignSelf: 'flex-start',
   },
-  // sortByText: {
-  //   fontFamily: 'Lato-Regular',
-  //   fontSize: 16,
-  // },
   addNew: {
-    marginVertical: 11,
-    width: '94%',
+    marginTop: 15,
+    marginBottom: 10,
+    width: Dimensions.get('window').width*.9, // Looks dumb but is necessary
     padding: 25,
     justifyContent: 'center',
     borderStyle: 'dashed',
@@ -118,8 +115,6 @@ const bodyStyles = StyleSheet.create({
     borderRadius: 6,
   },
   addNewText: {
-    marginLeft: 75,
-    marginRight: 75,
     fontSize: 20,
     fontFamily: 'Lato-Regular',
     textAlign: 'center',
@@ -133,25 +128,25 @@ const cardElementStyles = StyleSheet.create({
   },
   sightingCard: {
     flexDirection: 'row',
-    marginVertical: 10,
+    marginVertical: 7,
     width: '95%',
     height: 80,
     justifyContent: 'center',
     borderStyle: 'solid',
     borderWidth: 1,
     borderColor: '#CCC',
+    backgroundColor: "white",
     borderRadius: 6,
-    // TODO: Relpace with react-native-shadow
     // iOS
     shadowColor: theme.black,
     shadowOffset: {
       width: 0,
       height: 2,
     },
-    shadowOpacity: 0.23,
-    shadowRadius: 2.62,
+    shadowOpacity: 0.25,
+    shadowRadius: 2.6,
     // Android
-    elevation: 2,
+    elevation: 3,
   },
   sightingInfo: {
     paddingLeft: 22,
@@ -163,8 +158,8 @@ const cardElementStyles = StyleSheet.create({
   },
   imageCover: {
     resizeMode: 'cover', // TODO: Fix to dynamically take up space in View
-    borderTopLeftRadius: 6,
-    borderBottomLeftRadius: 6,
+    borderTopLeftRadius: 5,
+    borderBottomLeftRadius: 5,
     height: 78,
     flex: 1,
     overflow: 'hidden',
