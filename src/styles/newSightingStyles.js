@@ -1,6 +1,8 @@
 import { StyleSheet } from 'react-native';
 import theme from '../constants/theme';
 
+const buttonPadding = 12;
+
 export default StyleSheet.create({
   progressBar: {
     width: '100%',
@@ -53,7 +55,7 @@ export default StyleSheet.create({
   },
   button: {
     backgroundColor: theme.primary,
-    paddingVertical: 12,
+    paddingVertical: buttonPadding,
     paddingHorizontal: 50,
     borderRadius: 20,
     margin: '5%',
@@ -82,5 +84,9 @@ export default StyleSheet.create({
     borderBottomColor: '#2C2C2C',
     borderBottomWidth: 0.5,
     opacity: 0.5,
-  }
+  },
+  bottomElement: {
+    marginVertical: 20,
+    marginHorizontal: 10,
+  },
 });

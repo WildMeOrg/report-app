@@ -79,10 +79,10 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: theme.primary,
-    alignSelf: 'flex-end',
+    alignSelf: 'center',
     marginBottom: '15%',
-    borderBottomLeftRadius: 30,
-    borderTopLeftRadius: 30,
+    borderRadius: 30,
+    borderRadius: 30,
   },
   buttonText: {
     marginHorizontal: '5%',

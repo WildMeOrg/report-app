@@ -62,7 +62,7 @@ export default function CustomDrawerContent(props) {
         label={() => (
           <View style={styles.drawerListItem}>
             <Icon
-              name="help"
+              name="help-outline"
               type="material-icons"
               color={theme.black}
               iconStyle={styles.icon}
@@ -75,6 +75,12 @@ export default function CustomDrawerContent(props) {
         style={styles.drawerItem}
         label={() => (
           <View style={styles.drawerListItem}>
+            <Icon
+              name="exit-to-app"
+              type="material-icons"
+              color={theme.black}
+              iconStyle={styles.icon}
+            />
             <Typography id="LOG_OUT" style={styles.drawerListText} />
           </View>
         )}
