@@ -31,7 +31,7 @@ export default function SelectionStackScreen({ navigation }) {
             type="material-icons"
             color={theme.black}
             onPress={() => navigation.navigate(screens.home)}
-            iconStyle={styles.icon2}
+            iconStyle={styles.closeButton}
           />
         ),
       }}
