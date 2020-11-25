@@ -1,5 +1,12 @@
 import React, { useContext, useState } from 'react';
-import { ScrollView, Text, View, StyleSheet, Image, Dimensions } from 'react-native';
+import {
+  ScrollView,
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  Dimensions,
+} from 'react-native';
 import { Icon } from 'react-native-elements';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Typography from '../../components/Typography';
@@ -106,7 +113,7 @@ const bodyStyles = StyleSheet.create({
   addNew: {
     marginTop: 15,
     marginBottom: 10,
-    width: Dimensions.get('window').width*.9, // Looks dumb but is necessary
+    width: Dimensions.get('window').width * 0.9, // Looks dumb but is necessary
     padding: 25,
     justifyContent: 'center',
     borderStyle: 'dashed',
@@ -135,7 +142,7 @@ const cardElementStyles = StyleSheet.create({
     borderStyle: 'solid',
     borderWidth: 1,
     borderColor: '#CCC',
-    backgroundColor: "white",
+    backgroundColor: 'white',
     borderRadius: 6,
     // iOS
     shadowColor: theme.black,
