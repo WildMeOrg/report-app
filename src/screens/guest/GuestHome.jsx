@@ -10,7 +10,7 @@ import screens from '../../constants/screens';
 import { ThemeConsumer } from 'react-native-elements';
 import globalStyles from '../../styles/globalStyles';
 import Typography from '../../components/Typography';
-import HumpbackTail from '../../../assets/humpbackTail.jpg';
+import HumpbackTail from '../../../assets/images/humpbackTail.jpg';
 
 const GuestHome = ({ navigation }) => {
   return (

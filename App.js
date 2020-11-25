@@ -26,6 +26,7 @@ import NotificationsStackScreen from './src/components/NotificationsStackScreen'
 import getLocale from './src/utils/getLocale';
 import GuestHomeStackScreen from './src/components/GuestHomeStackScreen';
 import GuestAddStackScreen from './src/components/GuestAddStackScreen';
+import SelectionStackScreen from './src/components/SelectionStackScreen';
 import { ReportContextProvider } from './src/context/report-context';
 
 const messageMap = {
@@ -90,6 +91,10 @@ export default function App() {
               <Drawer.Screen
                 name={screens.notifications}
                 component={NotificationsStackScreen}
+              />
+              <Drawer.Screen
+                name={screens.selection}
+                component={SelectionStackScreen}
               />
             </Drawer.Navigator>
           </NavigationContainer>
