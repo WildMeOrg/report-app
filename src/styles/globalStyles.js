@@ -32,6 +32,11 @@ export default StyleSheet.create({
     margin: '5%',
     marginBottom: '3%',
   },
+  subText: {
+    fontSize: 18,
+    marginHorizontal: '5%',
+    marginBottom: '3%',
+  },
   sectionHeader: {
     fontSize: 20,
     margin: '5%',

@@ -25,6 +25,8 @@ import sightingFormFields from '../constants/sightingFormFields';
 import CustomField from './CustomField.jsx';
 import newSightingStyles from '../styles/newSightingStyles';
 import Typography from '../components/Typography';
+import { useTheme } from '@react-navigation/native';
+// import standardFrom from '../components/fields/standardForm';
 
 const NewSightingStack = createStackNavigator();
 
@@ -51,10 +53,11 @@ const validationSchema = yup.object().shape({
 });
 
 function NewSightingForm({ navigation }) {
-  const [formSection, setFormSection] = useState(0);
-  const [formFields, setFormFields] = useState('');
-  const [views, setViews] = useState([]);
-  const [numCategories, setNumCategories] = useState(0);
+  const [formSection, setFormSection] = useState(0); //what is the current section/screen in the form
+  const [formFields, setFormFields] = useState(''); //all the custom fields
+  const [views, setViews] = useState([]); //the custom field view for each section
+  const [numCategories, setNumCategories] = useState(0); //number of custom field categories
+  const numStandardCategories = 4; //num categories in the standard form
 
   //gets data, sets formFields, calls form
   useEffect(
@@ -99,6 +102,7 @@ function NewSightingForm({ navigation }) {
           {formFields['data']['response']['configuration'][
             sightingFormFields[cat.type]
           ]['value']['definitions'].map((item) => (
+            // { item.schema != null && item.schema.category != cat.id) ? <></> :
             <CustomField
               key={item.id}
               id={item.id}
@@ -449,15 +453,10 @@ function NewSightingForm({ navigation }) {
                           />
                         </View>
                       </TouchableOpacity>
-                      <TouchableOpacity
-                        onPress={() => {
-                          formikProps.handleSubmit();
-                        }}
-                        disabled={formikProps.isSubmitting}
-                      >
+                      <TouchableOpacity onPress={() => setFormSection(3)}>
                         <View style={styles.button}>
                           <Typography
-                            id="UPLOAD"
+                            id="NEXT"
                             style={globalStyles.buttonText}
                           />
                         </View>
@@ -470,103 +469,54 @@ function NewSightingForm({ navigation }) {
                     <React.Suspense fallback="Loading views...">
                       <View>{views}</View>
                     </React.Suspense>
+                    {formSection > 2 && formSection < numCategories + 2 ? (
+                      <View style={[styles.horizontal, styles.bottomElement]}>
+                        <TouchableOpacity
+                          onPress={() => setFormSection(formSection - 1)}
+                        >
+                          <View style={[styles.button, styles.buttonInactive]}>
+                            <Text style={globalStyles.buttonText}> Back </Text>
+                          </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                          onPress={() => setFormSection(formSection + 1)}
+                        >
+                          <View style={styles.button}>
+                            <Text style={globalStyles.buttonText}>Next</Text>
+                          </View>
+                        </TouchableOpacity>
+                      </View>
+                    ) : null}
+                    {formSection === numCategories + 2 ? (
+                      <View style={[styles.horizontal, styles.bottomElement]}>
+                        <TouchableOpacity
+                          onPress={() => setFormSection(formSection - 1)}
+                        >
+                          <View style={[styles.button, styles.buttonInactive]}>
+                            <Typography
+                              id="BACK"
+                              style={globalStyles.buttonText}
+                            />
+                          </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                          onPress={() => {
+                            formikProps.handleSubmit();
+                          }}
+                          disabled={formikProps.isSubmitting}
+                        >
+                          <View style={styles.button}>
+                            <Typography
+                              id="UPLOAD"
+                              style={globalStyles.buttonText}
+                            />
+                          </View>
+                        </TouchableOpacity>
+                      </View>
+                    ) : null}
                   </>
                 ) : null}
               </KeyboardAwareScrollView>
-              {formSection === 0 && (
-                <View style={styles.buttonContainer}>
-                  <View style={styles.horizontal}>
-                    <TouchableOpacity>
-                      <View style={[styles.button, globalStyles.invisible]}>
-                        <Typography id="BACK" style={globalStyles.buttonText} />
-                      </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => setFormSection(1)}>
-                      <View style={(globalStyles.button, styles.button)}>
-                        <Typography id="NEXT" style={globalStyles.buttonText} />
-                      </View>
-                    </TouchableOpacity>
-                  </View>
-                </View>
-              )}
-              {formSection === 1 && (
-                <View style={styles.buttonContainer}>
-                  <View style={styles.horizontal}>
-                    <TouchableOpacity onPress={() => setFormSection(0)}>
-                      <View style={[styles.button, styles.buttonInactive]}>
-                        <Typography id="BACK" style={globalStyles.buttonText} />
-                      </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => setFormSection(2)}>
-                      <View style={styles.button}>
-                        <Typography id="NEXT" style={globalStyles.buttonText} />
-                      </View>
-                    </TouchableOpacity>
-                  </View>
-                </View>
-              )}
-              {formSection === 2 && (
-                <View style={styles.buttonContainer}>
-                  <View style={styles.horizontal}>
-                    <TouchableOpacity onPress={() => setFormSection(1)}>
-                      <View style={[styles.button, styles.buttonInactive]}>
-                        <Typography id="BACK" style={globalStyles.buttonText} />
-                      </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => setFormSection(3)}>
-                      <View style={styles.button}>
-                        <Typography id="NEXT" style={globalStyles.buttonText} />
-                      </View>
-                    </TouchableOpacity>
-                  </View>
-                </View>
-              )}
-              {formSection > 2 && formSection < numCategories + 2 ? (
-                <View style={styles.buttonContainer}>
-                  <View style={styles.horizontal}>
-                    <TouchableOpacity
-                      onPress={() => setFormSection(formSection - 1)}
-                    >
-                      <View style={[styles.button, styles.buttonInactive]}>
-                        <Text style={globalStyles.buttonText}> Back </Text>
-                      </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      onPress={() => setFormSection(formSection + 1)}
-                    >
-                      <View style={styles.button}>
-                        <Text style={globalStyles.buttonText}>Next</Text>
-                      </View>
-                    </TouchableOpacity>
-                  </View>
-                </View>
-              ) : null}
-              {formSection === numCategories + 2 ? (
-                <View style={styles.buttonContainer}>
-                  <View style={styles.horizontal}>
-                    <TouchableOpacity
-                      onPress={() => setFormSection(formSection - 1)}
-                    >
-                      <View style={[styles.button, styles.buttonInactive]}>
-                        <Typography id="BACK" style={globalStyles.buttonText} />
-                      </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      onPress={() => {
-                        formikProps.handleSubmit();
-                      }}
-                      disabled={formikProps.isSubmitting}
-                    >
-                      <View style={styles.button}>
-                        <Typography
-                          id="UPLOAD"
-                          style={globalStyles.buttonText}
-                        />
-                      </View>
-                    </TouchableOpacity>
-                  </View>
-                </View>
-              ) : null}
             </>
           );
         }}

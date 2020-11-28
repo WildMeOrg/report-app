@@ -11,13 +11,22 @@ export default function CustomField({ id, required, name, ...rest }) {
   const { schema } = rest;
   const displayName =
     schema != null && schema.label != null ? schema.label : name;
+  const description = schema != null ? schema.description : '';
 
   return (
-    // TODO: display description, required, name should be label, what if label doesn't exist
+    // TODO: Text should be Typography component
     <View>
       <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
         {displayName}
+        {required && ' *'}
       </Text>
+      {description != '' && (
+        <>
+          <Text style={[globalStyles.subText, globalStyles.basicText]}>
+            {description}
+          </Text>
+        </>
+      )}
       {/* LabeledInput contains the actual custom field for input */}
       <LabeledInput {...rest} />
     </View>

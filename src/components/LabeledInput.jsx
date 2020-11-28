@@ -20,6 +20,7 @@ export default function LabeledInput({ ...rest }) {
       ? schema.displayType
       : displayType;
 
+  // console.log(type);
   const FieldComponent = fieldList[type];
   if (FieldComponent) return <FieldComponent {...rest} />;
 
