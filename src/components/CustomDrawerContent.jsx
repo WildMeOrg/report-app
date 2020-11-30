@@ -58,6 +58,21 @@ export default function CustomDrawerContent(props) {
         onPress={() => props.navigation.navigate(screens.setings)}
       />
       <DrawerItem
+        style={styles.drawerItem}
+        label={() => (
+          <View style={styles.drawerListItem}>
+            <Icon
+              name="book"
+              type="material-icons"
+              color={theme.black}
+              iconStyle={styles.icon}
+            />
+            <Typography id="CHANGE_WILDBOOK" style={styles.drawerListText} />
+          </View>
+        )}
+        onPress={() => props.navigation.navigate(screens.selection)}
+      />
+      <DrawerItem
         style={styles.drawerItemEnd}
         label={() => (
           <View style={styles.drawerListItem}>

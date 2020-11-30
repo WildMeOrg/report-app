@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import {
   ScrollView,
   Text,
@@ -7,6 +7,7 @@ import {
   Image,
   Dimensions,
   Switch,
+  Alert,
 } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -16,12 +17,45 @@ import globalStyles from '../styles/globalStyles';
 import screens from '../constants/screens';
 import { ReportContext } from '../context/report-context';
 import selection from '../constants/wildbooks';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const WildbookCard = (props) => {
   //TODO use context to keep track of what wildbook
   //was authorized
+  const getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('loggedIn');
+      return jsonValue != null ? JSON.parse(jsonValue) : null;
+    } catch (e) {
+      // error reading value
+    }
+  };
+  const removeLogin = async () => {
+    try {
+      await AsyncStorage.removeItem('loggedIn');
+    } catch (e) {
+      // remove error
+    }
+  };
   const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+  const toggleSwitch = async (name) => {
+    const loggedInfo = await getData();
+    if (loggedInfo) {
+      if (isEnabled) {
+        setIsEnabled(false);
+        removeLogin();
+      } else if (name === loggedInfo.wildbook) {
+        setIsEnabled(true);
+      } else {
+        Alert.alert(`Already Signed into ${loggedInfo.wildbook}`);
+      }
+    } else {
+      props.nav.navigate('Login', {
+        screen: 'Login1',
+        params: { name: props.name },
+      });
+    }
+  };
   return (
     <View style={cardElementStyles.sightingCard}>
       <Image style={cardElementStyles.imageCover} source={props.image} />
@@ -31,20 +65,18 @@ const WildbookCard = (props) => {
         </View>
         <Switch
           // TODO use the theme colors
-          trackColor={{ true: '#41D06A', false: '#C4C4C4' }}
-          thumbColor={'#FFFFFF'}
-          onValueChange={toggleSwitch}
+          trackColor={{ true: theme.green, false: theme.lightGray }}
+          thumbColor={theme.white}
+          onValueChange={() => toggleSwitch(props.name)}
           value={isEnabled}
         />
       </View>
     </View>
   );
 };
-
 const SelectionScreen = ({ navigation }) => {
   return (
     <View style={bodyStyles.parentView}>
-      {/* TODO: Turn from ScrollView into something FlatView for performance in long term(?) */}
       <ScrollView contentContainerStyle={bodyStyles.content}>
         {selection.wildbooks.map((wildbook) => {
           return (
