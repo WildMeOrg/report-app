@@ -3,7 +3,7 @@ export default {
   white: '#ffffff',
   green: '#41D06A',
   blue: '#21BDC1',
-  lightGray: '#FFFFFF',
+  grey: '#AbA9A9',
 
   primary: '#CDABFD',
 };
