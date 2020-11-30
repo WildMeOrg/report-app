@@ -26,6 +26,7 @@ import CustomField from './CustomField.jsx';
 import newSightingStyles from '../styles/newSightingStyles';
 import Typography from '../components/Typography';
 import { useTheme } from '@react-navigation/native';
+import { get } from 'lodash-es';
 // import standardFrom from '../components/fields/standardForm';
 
 const NewSightingStack = createStackNavigator();
@@ -50,71 +51,64 @@ const validationSchema = yup.object().shape({
     .string()
     .email('Photographer Email is not valid')
     .required('Photographer Email is required'),
+  customFields: yup.string().required('This Field is Required'),
 });
 
 function NewSightingForm({ navigation }) {
   const [formSection, setFormSection] = useState(0); //what is the current section/screen in the form
-  const [formFields, setFormFields] = useState(''); //all the custom fields
+  //const [formFields, setFormFields] = useState(''); //all the custom fields
   const [views, setViews] = useState([]); //the custom field view for each section
   const [numCategories, setNumCategories] = useState(0); //number of custom field categories
-  const numStandardCategories = 4; //num categories in the standard form
+  // const numStandardCategories = 4; //num categories in the standard form
 
-  //gets data, sets formFields, calls form
-  useEffect(
-    () => {
-      async function fetchData() {
-        const value = await axios(
-          `${baseUrl}/api/v0/configuration/__bundle_setup`
+  const getConfig = async () => {
+    try {
+      const value = JSON.parse(await AsyncStorage.getItem('appConfiguration'));
+      if (value) {
+        //console.log(value);
+        setNumCategories(
+          value['site.custom.customFieldCategories']['value'].length
         );
-        await AsyncStorage.getItem('appConfiguration');
-        if (value !== null) {
-          setFormFields(value);
-          form();
-          setNumCategories(
-            value['data']['response']['configuration'][
-              'site.custom.customFieldCategories'
-            ]['value'].length
-          );
-        }
+        return value;
+        //setFormFields(value);
       }
-      fetchData();
-    },
-    [formFields],
-    numCategories
-  );
+    } catch (error) {}
+  };
 
   //sets views to display fields
-  const form = async () => {
-    if (
-      formFields !== '' &&
-      formSection - 3 < numCategories &&
-      formSection - 3 >= 0
-    ) {
-      const cat =
-        formFields['data']['response']['configuration'][
-          'site.custom.customFieldCategories'
-        ]['value'][formSection - 3];
-      const componentPromises = (
-        <View>
-          <Text style={[globalStyles.h2Text, globalStyles.sectionHeader]}>
-            {cat['label']}
-          </Text>
-          {formFields['data']['response']['configuration'][
-            sightingFormFields[cat.type]
-          ]['value']['definitions'].map((item) => (
-            // { item.schema != null && item.schema.category != cat.id) ? <></> :
-            <CustomField
-              key={item.id}
-              id={item.id}
-              required={item.required}
-              schema={item.schema}
-              name={item.name}
-              displayType={item.displayType}
-            />
-          ))}
-        </View>
+  const form = async (formikProps) => {
+    // console.log(formSection);
+    const formFields = await getConfig();
+    // console.log(formFields);
+    if (formFields) {
+      const customFields = [];
+      formFields['site.custom.customFieldCategories']['value'].map(
+        (category) => {
+          const componentPromises = (
+            <View>
+              <Text style={[globalStyles.h2Text, globalStyles.sectionHeader]}>
+                {category['label']}
+              </Text>
+              {formFields[sightingFormFields[category.type]]['value'][
+                'definitions'
+              ].map((item) => (
+                // { item.schema != null && item.schema.category != cat.id) ? <></> :
+                <CustomField
+                  key={item.id}
+                  id={item.id}
+                  required={item.required}
+                  schema={item.schema}
+                  name={item.name}
+                  displayType={item.displayType}
+                  props={formikProps}
+                />
+              ))}
+            </View>
+          );
+          customFields.push(componentPromises);
+        }
       );
-      setViews(componentPromises);
+      setViews(customFields);
     }
   };
 
@@ -170,6 +164,7 @@ function NewSightingForm({ navigation }) {
           matchIndividual: '',
           photographerName: '',
           photographerEmail: '',
+          customFields: '',
         }}
         validationSchema={validationSchema}
         onSubmit={(values, { resetForm }) => {
@@ -287,7 +282,9 @@ function NewSightingForm({ navigation }) {
                           />
                         </View>
                       </TouchableOpacity>
-                      <TouchableOpacity onPress={() => setFormSection(1)}>
+                      <TouchableOpacity
+                        onPress={() => [setFormSection(1), form(formikProps)]}
+                      >
                         <View style={(globalStyles.button, styles.button)}>
                           <Typography
                             id="NEXT"
@@ -467,7 +464,7 @@ function NewSightingForm({ navigation }) {
                 {formSection > 2 ? (
                   <>
                     <React.Suspense fallback="Loading views...">
-                      <View>{views}</View>
+                      <View>{views[formSection - 3]}</View>
                     </React.Suspense>
                     {formSection > 2 && formSection < numCategories + 2 ? (
                       <View style={[styles.horizontal, styles.bottomElement]}>
