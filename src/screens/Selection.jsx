@@ -22,6 +22,15 @@ import AsyncStorage from '@react-native-community/async-storage';
 const WildbookCard = (props) => {
   //TODO use context to keep track of what wildbook
   //was authorized
+  React.useEffect(() => {
+    const unsubscribe = props.nav.addListener('focus', () => {
+
+      //setIsEnabled(true);
+    });
+
+    return unsubscribe;
+  }, [props.nav]);
+
   const getData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem('loggedIn');
