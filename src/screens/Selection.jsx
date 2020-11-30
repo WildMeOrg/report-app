@@ -20,6 +20,7 @@ import selection from '../constants/wildbooks';
 import AsyncStorage from '@react-native-community/async-storage';
 
 const WildbookCard = (props) => {
+  const [isEnabled, setIsEnabled] = useState(false);
   //addListener is used to refresh the page when navigated to
   React.useEffect(() => {
     const unsubscribe = props.nav.addListener('focus', () => {
@@ -49,7 +50,6 @@ const WildbookCard = (props) => {
       setIsEnabled(false);
     }
   };
-  const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = async (name) => {
     const loggedInfo = await getData();
     if (loggedInfo) {
