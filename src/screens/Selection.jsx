@@ -65,7 +65,7 @@ const WildbookCard = (props) => {
         </View>
         <Switch
           // TODO use the theme colors
-          trackColor={{ true: theme.green, false: theme.lightGray }}
+          trackColor={{ true: theme.green, false: theme.grey }}
           thumbColor={theme.white}
           onValueChange={() => toggleSwitch(props.name)}
           value={isEnabled}
@@ -116,7 +116,7 @@ const bodyStyles = StyleSheet.create({
   addNew: {
     marginTop: 15,
     marginBottom: 10,
-    width: Dimensions.get('window').width * 0.9, // Looks dumb but is necessary
+    width: Dimensions.get('window').width * 0.9,
     padding: 25,
     justifyContent: 'center',
     borderStyle: 'dashed',
@@ -167,7 +167,7 @@ const cardElementStyles = StyleSheet.create({
     alignItems: 'center',
   },
   imageCover: {
-    resizeMode: 'cover', // TODO: Fix to dynamically take up space in View
+    resizeMode: 'cover',
     borderTopLeftRadius: 5,
     borderBottomLeftRadius: 5,
     height: 78,
