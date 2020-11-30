@@ -20,14 +20,11 @@ import selection from '../constants/wildbooks';
 import AsyncStorage from '@react-native-community/async-storage';
 
 const WildbookCard = (props) => {
-  //TODO use context to keep track of what wildbook
-  //was authorized
+  //addListener is used to refresh the page when navigated to
   React.useEffect(() => {
     const unsubscribe = props.nav.addListener('focus', () => {
-
-      //setIsEnabled(true);
+      defaultState();
     });
-
     return unsubscribe;
   }, [props.nav]);
 
@@ -46,6 +43,12 @@ const WildbookCard = (props) => {
       // remove error
     }
   };
+  const defaultState = async () => {
+    const loggedInfo = await getData();
+    if (!loggedInfo) {
+      setIsEnabled(false);
+    }
+  };
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = async (name) => {
     const loggedInfo = await getData();
@@ -59,6 +62,7 @@ const WildbookCard = (props) => {
         Alert.alert(`Already Signed into ${loggedInfo.wildbook}`);
       }
     } else {
+      setIsEnabled(true);
       props.nav.navigate('Login', {
         screen: 'Login1',
         params: { name: props.name },
