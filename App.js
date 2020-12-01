@@ -26,6 +26,7 @@ import NotificationsStackScreen from './src/components/NotificationsStackScreen'
 import getLocale from './src/utils/getLocale';
 import GuestHomeStackScreen from './src/components/GuestHomeStackScreen';
 import GuestAddStackScreen from './src/components/GuestAddStackScreen';
+import SelectionStackScreen from './src/components/SelectionStackScreen';
 import { ReportContextProvider } from './src/context/report-context';
 
 const messageMap = {
@@ -58,6 +59,10 @@ export default function App() {
               drawerContent={(props) => <CustomDrawerContent {...props} />}
             >
               {/* As new screens are made, put them here to be able to view them */}
+              <Drawer.Screen
+                name={screens.selection}
+                component={SelectionStackScreen}
+              />
               <Drawer.Screen name={screens.home} component={HomeStackScreen} />
               <Drawer.Screen
                 name={screens.login}

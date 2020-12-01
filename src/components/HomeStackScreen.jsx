@@ -63,10 +63,7 @@ export default function HomeStackScreen({ navigation }) {
                 autoFocus={true}
                 style={headerStyles.searchBar}
                 keyboardType={'ascii-capable'}
-                onChangeText={
-                  (text) =>
-                    searchFunc(text)
-                }
+                onChangeText={(text) => searchFunc(text)}
               />
             ),
           }}

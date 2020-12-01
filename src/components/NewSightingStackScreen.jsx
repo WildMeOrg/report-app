@@ -137,8 +137,9 @@ function NewSightingForm({ navigation }) {
                     <TextInput
                       style={[
                         globalStyles.inputField,
-                        (formikProps.touched.title && formikProps.errors.title && 
-                         globalStyles.inputInvalid),
+                        formikProps.touched.title &&
+                          formikProps.errors.title &&
+                          globalStyles.inputInvalid,
                       ]}
                       autoCorrect={false}
                       onChangeText={formikProps.handleChange('title')}
@@ -158,9 +159,9 @@ function NewSightingForm({ navigation }) {
                     <TextInput
                       style={[
                         globalStyles.inputField,
-                        (formikProps.touched.location &&
-                        formikProps.errors.location &&
-                        globalStyles.inputInvalid)
+                        formikProps.touched.location &&
+                          formikProps.errors.location &&
+                          globalStyles.inputInvalid,
                       ]}
                       autoCorrect={false}
                       onChangeText={formikProps.handleChange('location')}
@@ -181,11 +182,11 @@ function NewSightingForm({ navigation }) {
                     />
                     <TextInput
                       style={[
-                        globalStyles.inputField, 
-                        styles.multiLine, 
-                        (formikProps.touched.sightingContext &&
-                         formikProps.errors.sightingContext &&
-                         globalStyles.inputInvalid)
+                        globalStyles.inputField,
+                        styles.multiLine,
+                        formikProps.touched.sightingContext &&
+                          formikProps.errors.sightingContext &&
+                          globalStyles.inputInvalid,
                       ]}
                       autoCorrect={false}
                       multiline
@@ -205,12 +206,18 @@ function NewSightingForm({ navigation }) {
                     <View style={[styles.horizontal, styles.bottomElement]}>
                       <TouchableOpacity>
                         <View style={[styles.button, globalStyles.invisible]}>
-                          <Typography id="BACK" style={globalStyles.buttonText} />
+                          <Typography
+                            id="BACK"
+                            style={globalStyles.buttonText}
+                          />
                         </View>
                       </TouchableOpacity>
                       <TouchableOpacity onPress={() => setFormSection(1)}>
                         <View style={(globalStyles.button, styles.button)}>
-                          <Typography id="NEXT" style={globalStyles.buttonText} />
+                          <Typography
+                            id="NEXT"
+                            style={globalStyles.buttonText}
+                          />
                         </View>
                       </TouchableOpacity>
                     </View>
@@ -225,9 +232,9 @@ function NewSightingForm({ navigation }) {
                     <TextInput
                       style={[
                         globalStyles.inputField,
-                        (formikProps.touched.status &&
-                         formikProps.errors.status &&
-                         globalStyles.inputInvalid)
+                        formikProps.touched.status &&
+                          formikProps.errors.status &&
+                          globalStyles.inputInvalid,
                       ]}
                       autoCorrect={false}
                       onChangeText={formikProps.handleChange('status')}
@@ -247,9 +254,9 @@ function NewSightingForm({ navigation }) {
                     <TextInput
                       style={[
                         globalStyles.inputField,
-                        (formikProps.touched.status &&
+                        formikProps.touched.status &&
                           formikProps.errors.status &&
-                          globalStyles.inputInvalid)
+                          globalStyles.inputInvalid,
                       ]}
                       autoCorrect={false}
                       onChangeText={formikProps.handleChange('relationships')}
@@ -270,10 +277,10 @@ function NewSightingForm({ navigation }) {
                     />
                     <TextInput
                       style={[
-                        globalStyles.inputField, 
-                        (formikProps.touched.matchIndividual &&
-                         formikProps.errors.matchIndividual &&
-                         globalStyles.inputInvalid)
+                        globalStyles.inputField,
+                        formikProps.touched.matchIndividual &&
+                          formikProps.errors.matchIndividual &&
+                          globalStyles.inputInvalid,
                       ]}
                       autoCorrect={false}
                       onChangeText={formikProps.handleChange('matchIndividual')}
@@ -291,12 +298,18 @@ function NewSightingForm({ navigation }) {
                     <View style={[styles.horizontal, styles.bottomElement]}>
                       <TouchableOpacity onPress={() => setFormSection(0)}>
                         <View style={[styles.button, styles.buttonInactive]}>
-                          <Typography id="BACK" style={globalStyles.buttonText} />
+                          <Typography
+                            id="BACK"
+                            style={globalStyles.buttonText}
+                          />
                         </View>
                       </TouchableOpacity>
                       <TouchableOpacity onPress={() => setFormSection(2)}>
                         <View style={styles.button}>
-                          <Typography id="NEXT" style={globalStyles.buttonText} />
+                          <Typography
+                            id="NEXT"
+                            style={globalStyles.buttonText}
+                          />
                         </View>
                       </TouchableOpacity>
                     </View>
@@ -311,9 +324,9 @@ function NewSightingForm({ navigation }) {
                     <TextInput
                       style={[
                         globalStyles.inputField,
-                        (formikProps.touched.photographerName &&
+                        formikProps.touched.photographerName &&
                           formikProps.errors.photographerName &&
-                          globalStyles.inputInvalid)
+                          globalStyles.inputInvalid,
                       ]}
                       autoCorrect={false}
                       onChangeText={formikProps.handleChange(
@@ -336,10 +349,10 @@ function NewSightingForm({ navigation }) {
                     />
                     <TextInput
                       style={[
-                        globalStyles.inputField, 
-                        (formikProps.touched.photographerEmail &&
+                        globalStyles.inputField,
+                        formikProps.touched.photographerEmail &&
                           formikProps.errors.photographerEmail &&
-                          globalStyles.inputInvalid)
+                          globalStyles.inputInvalid,
                       ]}
                       autoCorrect={false}
                       onChangeText={formikProps.handleChange(
@@ -357,10 +370,12 @@ function NewSightingForm({ navigation }) {
                       }
                     />
                     <View style={[styles.horizontal, styles.bottomElement]}>
-
                       <TouchableOpacity onPress={() => setFormSection(1)}>
                         <View style={[styles.button, styles.buttonInactive]}>
-                          <Typography id="BACK" style={globalStyles.buttonText} />
+                          <Typography
+                            id="BACK"
+                            style={globalStyles.buttonText}
+                          />
                         </View>
                       </TouchableOpacity>
                       <TouchableOpacity

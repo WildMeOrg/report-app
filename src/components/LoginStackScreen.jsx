@@ -10,7 +10,8 @@ import globalStyles from '../styles/globalStyles';
 
 const LoginStack = createStackNavigator();
 
-export default function LoginStackScreen({ navigation }) {
+export default function LoginStackScreen({ navigation, route }) {
+  //console.log(route.state.routes[0].params.param);//params from selection page
   return (
     <LoginStack.Navigator
       screenOptions={{
@@ -27,7 +28,7 @@ export default function LoginStackScreen({ navigation }) {
       }}
     >
       <LoginStack.Screen
-        name={screens.login}
+        name="Login1"
         component={Login}
         options={{
           headerTitle: () => (

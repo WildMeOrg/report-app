@@ -20,7 +20,7 @@
   "SIGHTING_CONTEXT": "Sighting Context",
   "VIEW_SIGHTING": "View sighting",
   "SETTINGS": "Settings",
-  "ADD_IMAGES":"Add Images",
+  "ADD_IMAGES": "Add Images",
   "STATUS": "Satus",
   "RELATIONSHIPS": "Relationships",
   "MATCH_INDIVIDUAL": "Match Individual",
@@ -30,5 +30,7 @@
   "UPLOAD": "Upload",
   "NEXT": "Next",
   "SIGHTING_INFO": "Sighting Info",
-  "UNREAD": "Unread"
+  "UNREAD": "Unread",
+  "CHOOSE_WILDBOOK": "Choose a Wildbook:",
+  "CHANGE_WILDBOOK": "Change Wildbook"
 }

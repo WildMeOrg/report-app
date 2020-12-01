@@ -21,7 +21,7 @@ import { ThemeConsumer } from 'react-native-elements';
 import globalStyles from '../../styles/globalStyles';
 import Typography from '../../components/Typography';
 
-const Login = ({ navigation }) => {
+const Login = ({ navigation, route }) => {
   const [email, onChangeEmail] = useState('');
   const [password, onChangePassword] = useState('');
   const [responseData, onChangeResponseData] = useState('');
@@ -39,6 +39,14 @@ const Login = ({ navigation }) => {
         },
       });
       if (response.data != null) {
+        await AsyncStorage.setItem(
+          'loggedIn',
+          JSON.stringify({
+            wildbook: route.params.name,
+            loggedIn: 'true',
+          })
+        );
+        //console.log(AsyncStorage.getItem('loggesIn'));
         navigation.navigate(screens.home);
       }
       onChangeResponseData(JSON.stringify(response.data));
