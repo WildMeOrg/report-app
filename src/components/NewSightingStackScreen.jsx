@@ -187,7 +187,7 @@ function NewSightingForm({ navigation }) {
           photographerName: '',
           photographerEmail: '',
           customFields: {
-            testind_test_field: 'hello',
+            testind_test_field: '',
             fubark: '',
             default: '',
           },
