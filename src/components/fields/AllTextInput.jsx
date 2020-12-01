@@ -5,21 +5,20 @@ import globalStyles from '../../styles/globalStyles';
 import styles from '../../styles/newSightingStyles';
 
 export default function AllTextInput(rest) {
-  const { schema } = rest;
-  const { props } = rest;
+  // console.log('AllText');
+  // console.log(rest);
+  const { name, schema, props } = rest;
   // Right now this just handles string or longstring, stuff to handle integer/floats inputs should be added
   return (
     // <TextInput
-    //   style={[
-    //     globalStyles.inputField,
-    //     props.touched.title && props.errors.title && globalStyles.inputInvalid,
-    //   ]}
+    //   style={
+    //     schema.displayType !== 'longstring'
+    //       ? [globalStyles.inputField]
+    //       : [globalStyles.inputField, styles.multiLine]
+    //   }
     //   autoCorrect={false}
-    //   onChangeText={props.handleChange('title')}
-    //   value={props.values.title}
-    //   onBlur={props.onBlur}
-    //   isValid={props.touched.title && !props.errors.title}
-    //   isInvalid={props.touched.title && props.errors.title}
+    //   multiline={schema.displayType === 'longstring'}
+    //   rowsMax={schema.displayType === 'longstring' ? 5 : undefined}
     // />
     <TextInput
       style={
@@ -41,8 +40,28 @@ export default function AllTextInput(rest) {
       autoCorrect={false}
       multiline={schema.displayType === 'longstring'}
       rowsMax={schema.displayType === 'longstring' ? 5 : undefined}
-      onChangeText={props.handleChange('customFields')}
-      value={props.values.customFields}
+      onChangeText={(e) => [
+        console.log(props.values.customFields[name]),
+        console.log(e),
+        // props.values.customFields['default'],
+        props.handleChange({
+          ...props.values.customFields,
+          [name]: e,
+        }),
+      ]}
+      // onChangeText={(e) => [
+      //   console.log(props.values.customFields),
+      //   console.log(name),
+      //   console.log(props.values.customFields[name]),
+      //   props.handleChange(props.values.customFields[name]),
+      // ]}
+      // onChangeText={(e) =>
+      //   props.handleChange('customFields')({
+      //     ...props.values.customFields,
+      //     [name]: e.value,
+      //   })
+      // }
+      value={props.values.customFields[name] || ''}
       onBlur={props.onBlur}
       isValid={props.touched.customFields && !props.errors.customFields}
       isInvalid={props.touched.customFields && props.errors.customFields}

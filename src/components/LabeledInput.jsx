@@ -10,7 +10,9 @@ import AllTextInput from './fields/AllTextInput';
 import fieldList from './fields/fieldsList';
 import globalStyles from '../styles/globalStyles';
 
-export default function LabeledInput({ ...rest }) {
+export default function LabeledInput({ name, ...rest }) {
+  // console.log('LabeledInput ' + rest);
+  // console.log(rest);
   const { displayType } = rest;
   const { schema } = rest;
 
@@ -22,7 +24,7 @@ export default function LabeledInput({ ...rest }) {
 
   // console.log(type);
   const FieldComponent = fieldList[type];
-  if (FieldComponent) return <FieldComponent {...rest} />;
+  if (FieldComponent) return <FieldComponent name={name} {...rest} />;
 
   return (
     <Text style={[globalStyles.inputHeader, globalStyles.basicText]}>

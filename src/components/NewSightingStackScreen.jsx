@@ -60,6 +60,7 @@ function NewSightingForm({ navigation }) {
   const [views, setViews] = useState([]); //the custom field view for each section
   const [numCategories, setNumCategories] = useState(0); //number of custom field categories
   // const numStandardCategories = 4; //num categories in the standard form
+  const [props, setProps] = useState([]);
 
   const getConfig = async () => {
     try {
@@ -111,6 +112,27 @@ function NewSightingForm({ navigation }) {
       setViews(customFields);
     }
   };
+
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     getConfig();
+  //     if (props !== null) {
+  //       console.log('here');
+  //       form(props);
+  //     }
+  //   }
+  //   fetchData();
+  // }, [numCategories]);
+
+  // useEffect(() => {
+  //   console.log('here 1');
+  //   if (props) {
+  //     console.log('here');
+  //     form(props);
+  //   }
+  //   // form();
+  //   // console.log('here');
+  // }, [views, formSection]);
 
   useEffect(() => {
     (async () => {
@@ -164,7 +186,11 @@ function NewSightingForm({ navigation }) {
           matchIndividual: '',
           photographerName: '',
           photographerEmail: '',
-          customFields: '',
+          customFields: {
+            testind_test_field: 'hello',
+            fubark: '',
+            default: '',
+          },
         }}
         validationSchema={validationSchema}
         onSubmit={(values, { resetForm }) => {

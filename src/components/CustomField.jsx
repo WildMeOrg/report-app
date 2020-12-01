@@ -8,6 +8,8 @@ import styles from '../styles/newSightingStyles';
 import LabeledInput from './LabeledInput.jsx';
 
 export default function CustomField({ id, required, name, ...rest }) {
+  // console.log('CustomField ' + rest);
+  // console.log(rest);
   const { schema } = rest;
   const displayName =
     schema != null && schema.label != null ? schema.label : name;
@@ -28,7 +30,7 @@ export default function CustomField({ id, required, name, ...rest }) {
         </>
       )}
       {/* LabeledInput contains the actual custom field for input */}
-      <LabeledInput {...rest} />
+      <LabeledInput name={name} {...rest} />
     </View>
   );
 }
