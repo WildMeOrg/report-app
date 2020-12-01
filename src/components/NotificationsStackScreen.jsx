@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  Text,
-  StyleSheet,
-  Image,
-  View,
-  ScrollView,
-} from 'react-native';
+import { Text, StyleSheet, Image, View, ScrollView } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import screens from '../constants/screens';
 import { Icon, ThemeConsumer } from 'react-native-elements';
@@ -33,40 +27,34 @@ const NotificationCard = (props) => {
         <Image style={cardElementStyles.imageCover} source={props.image} />
         <View style={cardElementStyles.sightingInfo}>
           <View style={cardElementStyles.sightingText}>
-            <Text style={cardElementStyles.sightingTitle}>{props.title}: "{props.name}"</Text>
+            <Text style={cardElementStyles.sightingTitle}>
+              {props.title}: "{props.name}"
+            </Text>
             <Text style={cardElementStyles.sightingDate}>{props.message}</Text>
           </View>
           <TouchableOpacity style={cardElementStyles.close}>
-            <Icon
-              name="close"
-              type="material-icons"
-              size={16}
-              marginTop={5}
-            />
+            <Icon name="close" type="material-icons" size={16} marginTop={5} />
           </TouchableOpacity>
         </View>
       </View>
-    )
+    );
   } else {
     return (
       <View style={cardElementStyles.old}>
         <Image style={cardElementStyles.imageCover} source={props.image} />
         <View style={cardElementStyles.sightingInfo}>
           <View style={cardElementStyles.sightingText}>
-            <Text style={cardElementStyles.sightingTitle}>{props.title}: "{props.name}"</Text>
+            <Text style={cardElementStyles.sightingTitle}>
+              {props.title}: "{props.name}"
+            </Text>
             <Text style={cardElementStyles.sightingDate}>{props.message}</Text>
           </View>
           <TouchableOpacity style={cardElementStyles.close}>
-            <Icon
-              name="close"
-              type="material-icons"
-              size={16}
-              marginTop={5}
-            />
+            <Icon name="close" type="material-icons" size={16} marginTop={5} />
           </TouchableOpacity>
         </View>
       </View>
-    )
+    );
   }
 };
 
@@ -108,7 +96,8 @@ const NotificationsScreen = ({ navigation }) => {
   return (
     <ScrollView>
       <View style={bodyStyles.unread}>
-        {notifications.filter(notification => notification.new === true)
+        {notifications
+          .filter((notification) => notification.new === true)
           .map((notification) => {
             return (
               <View key={notification.id}>
@@ -122,13 +111,13 @@ const NotificationsScreen = ({ navigation }) => {
                 />
               </View>
             );
-          })
-        }
+          })}
         <View style={bodyStyles.unreadBanner}>
           <Typography id="UNREAD" style={globalStyles.h2Text} />
         </View>
       </View>
-      {notifications.filter(notification => notification.new === false)
+      {notifications
+        .filter((notification) => notification.new === false)
         .map((notification) => {
           return (
             <View key={notification.id}>
@@ -141,8 +130,7 @@ const NotificationsScreen = ({ navigation }) => {
               />
             </View>
           );
-        })
-      }
+        })}
     </ScrollView>
   );
 };
@@ -211,7 +199,7 @@ const bodyStyles = StyleSheet.create({
     borderStyle: 'solid',
     borderWidth: 4,
     borderColor: theme.primary,
-    borderRadius: 20, 
+    borderRadius: 20,
     alignSelf: 'center',
     marginBottom: -20,
     marginTop: 10,
@@ -230,7 +218,7 @@ const cardElementStyles = StyleSheet.create({
     height: 80,
     justifyContent: 'center',
     alignSelf: 'center',
-    backgroundColor: "white",
+    backgroundColor: 'white',
     // iOS
     shadowColor: theme.black,
     shadowOffset: {
@@ -253,7 +241,7 @@ const cardElementStyles = StyleSheet.create({
     height: 80,
     justifyContent: 'center',
     alignSelf: 'center',
-    backgroundColor: "white",
+    backgroundColor: 'white',
     // iOS
     shadowColor: theme.black,
     shadowOffset: {
@@ -275,7 +263,7 @@ const cardElementStyles = StyleSheet.create({
     height: 80,
     justifyContent: 'center',
     alignSelf: 'center',
-    backgroundColor: "white",
+    backgroundColor: 'white',
     // iOS
     shadowColor: theme.black,
     shadowOffset: {
@@ -321,5 +309,5 @@ const cardElementStyles = StyleSheet.create({
     flexDirection: 'column',
     height: '100%',
     justifyContent: 'flex-start',
-  }
+  },
 });

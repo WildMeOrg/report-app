@@ -4,7 +4,10 @@ import { Icon } from 'react-native-elements';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import theme from '../../constants/theme';
 import screens from '../../constants/screens';
-import HumpbackTail from '../../../assets/humpbackTail.jpg';
+import { ThemeConsumer } from 'react-native-elements';
+import globalStyles from '../../styles/globalStyles';
+import Typography from '../../components/Typography';
+import HumpbackTail from '../../../assets/images/humpbackTail.jpg';
 
 const GuestHome = ({ navigation }) => {
   return (

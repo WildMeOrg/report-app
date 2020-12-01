@@ -48,9 +48,7 @@ const ProfileScreen = ({ navigation }) => {
         <Text style={[globalStyles.basicText, styles.InfoText]}>
           (503)123-4567
         </Text>
-        <Text style={[globalStyles.h2Text, styles.InfoHeader]}>
-          Location
-        </Text>
+        <Text style={[globalStyles.h2Text, styles.InfoHeader]}>Location</Text>
         <Text style={[globalStyles.basicText, styles.InfoText]}>
           Portland, OR
         </Text>
@@ -87,7 +85,9 @@ export default function ProfileStackScreen({ navigation }) {
         name={screens.profile}
         component={ProfileScreen}
         options={{
-          headerTitle: () => <Text style={globalStyles.headerText}>Profile</Text>,
+          headerTitle: () => (
+            <Text style={globalStyles.headerText}>Profile</Text>
+          ),
         }}
       />
     </ProfileStack.Navigator>
