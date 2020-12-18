@@ -63,6 +63,17 @@ function NewSightingForm({ navigation }) {
   const [props, setProps] = useState([]);
 
   const getConfig = async () => {
+    //-----TESTING START-----//
+    try {
+      const settingsPacket = await axios(
+        `${baseUrl}/api/v0/configuration/__bundle_setup`
+      );
+      await AsyncStorage.setItem(
+        'appConfiguration',
+        JSON.stringify(settingsPacket.data.response.configuration)
+      );
+    } catch (settingsFetchError) {}
+    //-----TESTING END-----//
     try {
       const value = JSON.parse(await AsyncStorage.getItem('appConfiguration'));
       if (value) {
@@ -186,11 +197,7 @@ function NewSightingForm({ navigation }) {
           matchIndividual: '',
           photographerName: '',
           photographerEmail: '',
-          customFields: {
-            testind_test_field: '',
-            fubark: '',
-            default: '',
-          },
+          customFields: {},
         }}
         validationSchema={validationSchema}
         onSubmit={(values, { resetForm }) => {
@@ -495,14 +502,20 @@ function NewSightingForm({ navigation }) {
                     {formSection > 2 && formSection < numCategories + 2 ? (
                       <View style={[styles.horizontal, styles.bottomElement]}>
                         <TouchableOpacity
-                          onPress={() => setFormSection(formSection - 1)}
+                          onPress={() => [
+                            setFormSection(formSection - 1),
+                            form(formikProps),
+                          ]}
                         >
                           <View style={[styles.button, styles.buttonInactive]}>
                             <Text style={globalStyles.buttonText}> Back </Text>
                           </View>
                         </TouchableOpacity>
                         <TouchableOpacity
-                          onPress={() => setFormSection(formSection + 1)}
+                          onPress={() => [
+                            setFormSection(formSection + 1),
+                            form(formikProps),
+                          ]}
                         >
                           <View style={styles.button}>
                             <Text style={globalStyles.buttonText}>Next</Text>
@@ -513,7 +526,10 @@ function NewSightingForm({ navigation }) {
                     {formSection === numCategories + 2 ? (
                       <View style={[styles.horizontal, styles.bottomElement]}>
                         <TouchableOpacity
-                          onPress={() => setFormSection(formSection - 1)}
+                          onPress={() => [
+                            setFormSection(formSection - 1),
+                            form(formikProps),
+                          ]}
                         >
                           <View style={[styles.button, styles.buttonInactive]}>
                             <Typography
