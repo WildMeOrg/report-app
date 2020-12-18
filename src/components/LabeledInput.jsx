@@ -28,7 +28,7 @@ export default function LabeledInput({ name, ...rest }) {
 
   return (
     <Text style={[globalStyles.inputHeader, globalStyles.basicText]}>
-      Not Text Input
+      Not valid input
     </Text>
   );
 }
