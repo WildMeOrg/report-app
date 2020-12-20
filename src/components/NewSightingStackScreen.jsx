@@ -27,6 +27,8 @@ import newSightingStyles from '../styles/newSightingStyles';
 import Typography from '../components/Typography';
 import { useTheme } from '@react-navigation/native';
 import { get } from 'lodash-es';
+import DateTimePicker from '@react-native-community/datetimepicker';
+import { Button } from 'react-native';
 // import standardFrom from '../components/fields/standardForm';
 
 const NewSightingStack = createStackNavigator();
@@ -55,6 +57,30 @@ const validationSchema = yup.object().shape({
 });
 
 function NewSightingForm({ navigation }) {
+  //FOR TESTING PURPOSES ONLY
+  const [date, setDate] = useState(new Date());
+  const [mode, setMode] = useState('date');
+  const [show,setShow] = useState(false);
+  const showMode = (currMode) =>{
+    setShow(true);
+    setMode(currMode);
+  };
+  const showDatePicker = () => {
+    showMode('date');
+  };
+  const showTimePicker = () =>{
+    showMode('time');
+  };
+
+  function formatDate(date){
+    var options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric'};
+    return new Date(date).toLocaleDateString([],options);
+  }
+  const onChange = (event,selectedDate) => {
+    const currDate = selectedDate || date;
+    console.log(formatDate(currDate));
+  };
+ //END OF TEST
   const [formSection, setFormSection] = useState(0); //what is the current section/screen in the form
   //const [formFields, setFormFields] = useState(''); //all the custom fields
   const [views, setViews] = useState([]); //the custom field view for each section
@@ -474,6 +500,17 @@ function NewSightingForm({ navigation }) {
                         formikProps.errors.photographerEmail
                       }
                     />
+                    {/* FOR TESTING PURPOSES ONLY */}
+                    <Button style={styles.button} onPress={showDatePicker} title="Show date picker"/>
+                    <Button style={styles.button} onPress={showTimePicker} title="Show time picker"/>
+                    { show  && <DateTimePicker 
+                    value={date}
+                    display="default"
+                    mode={mode}
+                    onChange={onChange}
+                    />
+                    }
+                    {/* END TEST */}
                     <View style={[styles.horizontal, styles.bottomElement]}>
                       <TouchableOpacity onPress={() => setFormSection(1)}>
                         <View style={[styles.button, styles.buttonInactive]}>
