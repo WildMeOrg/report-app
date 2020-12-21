@@ -1,14 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-  Animated,
-  Alert,
-} from 'react-native';
+import { View, TextInput, TouchableOpacity, Animated } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import HideWithKeyboard from 'react-native-hide-with-keyboard';
+import AsyncStorage from '@react-native-community/async-storage';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from 'react-native-elements';
 import { Formik } from 'formik';
@@ -19,6 +12,7 @@ import theme from '../constants/theme';
 import globalStyles from '../styles/globalStyles';
 import styles from '../styles/newSightingStyles';
 import Typography from '../components/Typography';
+import NetInfo from '@react-native-community/netinfo';
 
 const NewSightingStack = createStackNavigator();
 
@@ -98,7 +92,34 @@ function NewSightingForm({ navigation }) {
         }}
         validationSchema={validationSchema}
         onSubmit={(values, { resetForm }) => {
-          Alert.alert('Form Response', JSON.stringify(values, undefined, 4));
+          let netInfo = null;
+          NetInfo.fetch().then((state) => {
+            netInfo = state;
+            if (netInfo.isInternetReachable) {
+              alert(
+                'Internet Reachable: ' + JSON.stringify(values, undefined, 4)
+              );
+            } else {
+              AsyncStorage.getItem('SightingSubmissions', (err, result) => {
+                if (result) {
+                  let updatedSubmissions = JSON.parse(result);
+                  updatedSubmissions.push(values);
+
+                  AsyncStorage.setItem(
+                    'SightingSubmissions',
+                    JSON.stringify(updatedSubmissions)
+                  );
+                } else {
+                  AsyncStorage.setItem(
+                    'SightingSubmissions',
+                    JSON.stringify([values])
+                  );
+                }
+              });
+              alert('No Internet', JSON.stringify(values, undefined, 4));
+            }
+          });
+
           resetForm();
 
           setFormSection(0);
@@ -137,8 +158,9 @@ function NewSightingForm({ navigation }) {
                     <TextInput
                       style={[
                         globalStyles.inputField,
-                        (formikProps.touched.title && formikProps.errors.title && 
-                         globalStyles.inputInvalid),
+                        formikProps.touched.title &&
+                          formikProps.errors.title &&
+                          globalStyles.inputInvalid,
                       ]}
                       autoCorrect={false}
                       onChangeText={formikProps.handleChange('title')}
@@ -158,9 +180,9 @@ function NewSightingForm({ navigation }) {
                     <TextInput
                       style={[
                         globalStyles.inputField,
-                        (formikProps.touched.location &&
-                        formikProps.errors.location &&
-                        globalStyles.inputInvalid)
+                        formikProps.touched.location &&
+                          formikProps.errors.location &&
+                          globalStyles.inputInvalid,
                       ]}
                       autoCorrect={false}
                       onChangeText={formikProps.handleChange('location')}
@@ -181,11 +203,11 @@ function NewSightingForm({ navigation }) {
                     />
                     <TextInput
                       style={[
-                        globalStyles.inputField, 
-                        styles.multiLine, 
-                        (formikProps.touched.sightingContext &&
-                         formikProps.errors.sightingContext &&
-                         globalStyles.inputInvalid)
+                        globalStyles.inputField,
+                        styles.multiLine,
+                        formikProps.touched.sightingContext &&
+                          formikProps.errors.sightingContext &&
+                          globalStyles.inputInvalid,
                       ]}
                       autoCorrect={false}
                       multiline
@@ -205,12 +227,18 @@ function NewSightingForm({ navigation }) {
                     <View style={[styles.horizontal, styles.bottomElement]}>
                       <TouchableOpacity>
                         <View style={[styles.button, globalStyles.invisible]}>
-                          <Typography id="BACK" style={globalStyles.buttonText} />
+                          <Typography
+                            id="BACK"
+                            style={globalStyles.buttonText}
+                          />
                         </View>
                       </TouchableOpacity>
                       <TouchableOpacity onPress={() => setFormSection(1)}>
                         <View style={(globalStyles.button, styles.button)}>
-                          <Typography id="NEXT" style={globalStyles.buttonText} />
+                          <Typography
+                            id="NEXT"
+                            style={globalStyles.buttonText}
+                          />
                         </View>
                       </TouchableOpacity>
                     </View>
@@ -225,9 +253,9 @@ function NewSightingForm({ navigation }) {
                     <TextInput
                       style={[
                         globalStyles.inputField,
-                        (formikProps.touched.status &&
-                         formikProps.errors.status &&
-                         globalStyles.inputInvalid)
+                        formikProps.touched.status &&
+                          formikProps.errors.status &&
+                          globalStyles.inputInvalid,
                       ]}
                       autoCorrect={false}
                       onChangeText={formikProps.handleChange('status')}
@@ -247,9 +275,9 @@ function NewSightingForm({ navigation }) {
                     <TextInput
                       style={[
                         globalStyles.inputField,
-                        (formikProps.touched.status &&
+                        formikProps.touched.status &&
                           formikProps.errors.status &&
-                          globalStyles.inputInvalid)
+                          globalStyles.inputInvalid,
                       ]}
                       autoCorrect={false}
                       onChangeText={formikProps.handleChange('relationships')}
@@ -270,10 +298,10 @@ function NewSightingForm({ navigation }) {
                     />
                     <TextInput
                       style={[
-                        globalStyles.inputField, 
-                        (formikProps.touched.matchIndividual &&
-                         formikProps.errors.matchIndividual &&
-                         globalStyles.inputInvalid)
+                        globalStyles.inputField,
+                        formikProps.touched.matchIndividual &&
+                          formikProps.errors.matchIndividual &&
+                          globalStyles.inputInvalid,
                       ]}
                       autoCorrect={false}
                       onChangeText={formikProps.handleChange('matchIndividual')}
@@ -291,12 +319,18 @@ function NewSightingForm({ navigation }) {
                     <View style={[styles.horizontal, styles.bottomElement]}>
                       <TouchableOpacity onPress={() => setFormSection(0)}>
                         <View style={[styles.button, styles.buttonInactive]}>
-                          <Typography id="BACK" style={globalStyles.buttonText} />
+                          <Typography
+                            id="BACK"
+                            style={globalStyles.buttonText}
+                          />
                         </View>
                       </TouchableOpacity>
                       <TouchableOpacity onPress={() => setFormSection(2)}>
                         <View style={styles.button}>
-                          <Typography id="NEXT" style={globalStyles.buttonText} />
+                          <Typography
+                            id="NEXT"
+                            style={globalStyles.buttonText}
+                          />
                         </View>
                       </TouchableOpacity>
                     </View>
@@ -311,9 +345,9 @@ function NewSightingForm({ navigation }) {
                     <TextInput
                       style={[
                         globalStyles.inputField,
-                        (formikProps.touched.photographerName &&
+                        formikProps.touched.photographerName &&
                           formikProps.errors.photographerName &&
-                          globalStyles.inputInvalid)
+                          globalStyles.inputInvalid,
                       ]}
                       autoCorrect={false}
                       onChangeText={formikProps.handleChange(
@@ -336,10 +370,10 @@ function NewSightingForm({ navigation }) {
                     />
                     <TextInput
                       style={[
-                        globalStyles.inputField, 
-                        (formikProps.touched.photographerEmail &&
+                        globalStyles.inputField,
+                        formikProps.touched.photographerEmail &&
                           formikProps.errors.photographerEmail &&
-                          globalStyles.inputInvalid)
+                          globalStyles.inputInvalid,
                       ]}
                       autoCorrect={false}
                       onChangeText={formikProps.handleChange(
@@ -357,10 +391,12 @@ function NewSightingForm({ navigation }) {
                       }
                     />
                     <View style={[styles.horizontal, styles.bottomElement]}>
-
                       <TouchableOpacity onPress={() => setFormSection(1)}>
                         <View style={[styles.button, styles.buttonInactive]}>
-                          <Typography id="BACK" style={globalStyles.buttonText} />
+                          <Typography
+                            id="BACK"
+                            style={globalStyles.buttonText}
+                          />
                         </View>
                       </TouchableOpacity>
                       <TouchableOpacity
