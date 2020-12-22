@@ -92,10 +92,8 @@ function NewSightingForm({ navigation }) {
         }}
         validationSchema={validationSchema}
         onSubmit={(values, { resetForm }) => {
-          let netInfo = null;
           NetInfo.fetch().then((state) => {
-            netInfo = state;
-            if (netInfo.isInternetReachable) {
+            if (state.isInternetReachable) {
               alert(
                 'Internet Reachable: ' + JSON.stringify(values, undefined, 4)
               );
