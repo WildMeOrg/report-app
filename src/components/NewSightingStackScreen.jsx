@@ -1,14 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-  Animated,
-  Alert,
-} from 'react-native';
+import { View, TextInput, TouchableOpacity, Animated } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import HideWithKeyboard from 'react-native-hide-with-keyboard';
+import AsyncStorage from '@react-native-community/async-storage';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from 'react-native-elements';
 import { Formik } from 'formik';
@@ -19,6 +12,7 @@ import theme from '../constants/theme';
 import globalStyles from '../styles/globalStyles';
 import styles from '../styles/newSightingStyles';
 import Typography from '../components/Typography';
+import NetInfo from '@react-native-community/netinfo';
 
 const NewSightingStack = createStackNavigator();
 
@@ -98,7 +92,32 @@ function NewSightingForm({ navigation }) {
         }}
         validationSchema={validationSchema}
         onSubmit={(values, { resetForm }) => {
-          Alert.alert('Form Response', JSON.stringify(values, undefined, 4));
+          NetInfo.fetch().then((state) => {
+            if (state.isInternetReachable) {
+              alert(
+                'Internet Reachable: ' + JSON.stringify(values, undefined, 4)
+              );
+            } else {
+              AsyncStorage.getItem('SightingSubmissions', (err, result) => {
+                if (result) {
+                  let updatedSubmissions = JSON.parse(result);
+                  updatedSubmissions.push(values);
+
+                  AsyncStorage.setItem(
+                    'SightingSubmissions',
+                    JSON.stringify(updatedSubmissions)
+                  );
+                } else {
+                  AsyncStorage.setItem(
+                    'SightingSubmissions',
+                    JSON.stringify([values])
+                  );
+                }
+              });
+              alert('No Internet', JSON.stringify(values, undefined, 4));
+            }
+          });
+
           resetForm();
 
           setFormSection(0);
