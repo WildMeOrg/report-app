@@ -1,5 +1,5 @@
 import AllTextInput from './AllTextInput.jsx';
-
+import DateInput from './DateInput.jsx';
 // Create NewComponent in the fields folder and import it
 // displayType: NewComponent
 const inputMap = {
@@ -7,6 +7,7 @@ const inputMap = {
   longstring: AllTextInput,
   integer: AllTextInput,
   floats: AllTextInput,
+  date: DateInput, 
 };
 
 export default inputMap;

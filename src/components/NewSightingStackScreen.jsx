@@ -27,7 +27,7 @@ import newSightingStyles from '../styles/newSightingStyles';
 import Typography from '../components/Typography';
 import { useTheme } from '@react-navigation/native';
 import { get } from 'lodash-es';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import DateTimePicker from '@react-native-community/datetimepicker'; //for testing
 import { Button } from 'react-native';
 // import standardFrom from '../components/fields/standardForm';
 
@@ -59,17 +59,30 @@ const validationSchema = yup.object().shape({
 function NewSightingForm({ navigation }) {
   //FOR TESTING PURPOSES ONLY
   const [date, setDate] = useState(new Date());
+  const [date2, setDate2] = useState(new Date());
   const [mode, setMode] = useState('date');
+  const [mode2, setMode2] = useState('date');
   const [show,setShow] = useState(false);
+  const [show2,setShow2] = useState(false);
   const showMode = (currMode) =>{
     setShow(true);
     setMode(currMode);
+  };
+  const showMode2 = (currMode) =>{
+    setShow2(true);
+    setMode2(currMode);
   };
   const showDatePicker = () => {
     showMode('date');
   };
   const showTimePicker = () =>{
     showMode('time');
+  };
+  const showDatePicker2 = () => {
+    showMode2('date');
+  };
+  const showTimePicker2 = () =>{
+    showMode2('time');
   };
 
   function formatDate(date){
@@ -78,9 +91,16 @@ function NewSightingForm({ navigation }) {
   }
   const onChange = (event,selectedDate) => {
     const currDate = selectedDate || date;
-    console.log(formatDate(currDate));
+    setShow(Platform.OS === 'ios');
+    setDate(currDate);
+  };
+  const onChange2 = (event,selectedDate) => {
+    const currDate = selectedDate || date2;
+    setShow2(Platform.OS === 'ios');
+    setDate2(currDate);
   };
  //END OF TEST
+
   const [formSection, setFormSection] = useState(0); //what is the current section/screen in the form
   //const [formFields, setFormFields] = useState(''); //all the custom fields
   const [views, setViews] = useState([]); //the custom field view for each section
@@ -501,15 +521,50 @@ function NewSightingForm({ navigation }) {
                       }
                     />
                     {/* FOR TESTING PURPOSES ONLY */}
-                    <Button style={styles.button} onPress={showDatePicker} title="Show date picker"/>
-                    <Button style={styles.button} onPress={showTimePicker} title="Show time picker"/>
-                    { show  && <DateTimePicker 
-                    value={date}
-                    display="default"
-                    mode={mode}
-                    onChange={onChange}
-                    />
-                    }
+                    {/* Date Input*/}
+                    {/* <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>Date: {formatDate(date)}</Text>
+                    <View style = {styles.horizontal}>
+                      <Text style={styles.dtpText}>Edit Date:</Text>
+                      <Icon name="today" type="material-icons" onPress={showDatePicker} raised={true} /> 
+                      <Text style={styles.dtpText}>Edit Time:</Text>
+                      <Icon name="schedule" type="material-icons" onPress={showTimePicker} raised={true}/> 
+                      { show  && <DateTimePicker 
+                      value={date}
+                      display="default"
+                      mode={mode}
+                      onChange={onChange}
+                      />
+                      }
+                    </View> */}
+                    {/*Date Range*/}
+                    <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>Start Date: {formatDate(date)}</Text>
+                    <View style = {styles.horizontal}>
+                      <Text style={styles.dtpText}>Edit Date:</Text>
+                      <Icon name="today" type="material-icons" onPress={showDatePicker} raised={true} /> 
+                      <Text style={styles.dtpText}>Edit Time:</Text>
+                      <Icon name="schedule" type="material-icons" onPress={showTimePicker} raised={true}/> 
+                      { show  && <DateTimePicker 
+                      value={date}
+                      display="default"
+                      mode={mode}
+                      onChange={onChange}
+                      />
+                      }
+                    </View>
+                    <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>End Date: {formatDate(date2)}</Text>
+                    <View style = {styles.horizontal}>
+                      <Text style={styles.dtpText}>Edit Date:</Text>
+                      <Icon name="today" type="material-icons" onPress={showDatePicker2} raised={true} /> 
+                      <Text style={styles.dtpText}>Edit Time:</Text>
+                      <Icon name="schedule" type="material-icons" onPress={showTimePicker2} raised={true}/> 
+                      { show2  && <DateTimePicker 
+                      value={date2}
+                      display="default"
+                      mode={mode}
+                      onChange={onChange2}
+                      />
+                      }
+                    </View>
                     {/* END TEST */}
                     <View style={[styles.horizontal, styles.bottomElement]}>
                       <TouchableOpacity onPress={() => setFormSection(1)}>
