@@ -5,6 +5,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import globalStyles from '../../styles/globalStyles';
 import styles from '../../styles/newSightingStyles';
 
+//TODO: this still needs to be tested
 export default function DateInput(rest){
   const {name, schema, props} = rest;
   const [date, setDate] = useState(new Date());

@@ -28,6 +28,7 @@ import Typography from '../components/Typography';
 import { useTheme } from '@react-navigation/native';
 import { get } from 'lodash-es';
 import DateTimePicker from '@react-native-community/datetimepicker'; //for testing
+import {Picker} from '@react-native-community/picker'; //for testing 
 import { Button } from 'react-native';
 // import standardFrom from '../components/fields/standardForm';
 
@@ -58,6 +59,7 @@ const validationSchema = yup.object().shape({
 
 function NewSightingForm({ navigation }) {
   //FOR TESTING PURPOSES ONLY
+  //Date time picker tests 
   const [date, setDate] = useState(new Date());
   const [date2, setDate2] = useState(new Date());
   const [mode, setMode] = useState('date');
@@ -84,7 +86,6 @@ function NewSightingForm({ navigation }) {
   const showTimePicker2 = () =>{
     showMode2('time');
   };
-
   function formatDate(date){
     var options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric'};
     return new Date(date).toLocaleDateString([],options);
@@ -99,6 +100,13 @@ function NewSightingForm({ navigation }) {
     setShow2(Platform.OS === 'ios');
     setDate2(currDate);
   };
+  //select constants
+  var selectOptions = [
+    {label: "hark", value: "hark" },
+    {label: "do not hark", value: "do not hark"},
+ ]
+  const [choice,setChoice] = useState(selectOptions[0].label); 
+
  //END OF TEST
 
   const [formSection, setFormSection] = useState(0); //what is the current section/screen in the form
@@ -537,7 +545,7 @@ function NewSightingForm({ navigation }) {
                       }
                     </View> */}
                     {/*Date Range*/}
-                    <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>Start Date: {formatDate(date)}</Text>
+                    {/* <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>Start Date: {formatDate(date)}</Text>
                     <View style = {styles.horizontal}>
                       <Text style={styles.dtpText}>Edit Date:</Text>
                       <Icon name="today" type="material-icons" onPress={showDatePicker} raised={true} /> 
@@ -564,6 +572,23 @@ function NewSightingForm({ navigation }) {
                       onChange={onChange2}
                       />
                       }
+                    </View> */}
+                    {/* Picker  */}
+                    <View style={globalStyles.horizontal}>
+                    <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>Choice: </Text>
+                      <Picker 
+                        selectedValue={choice}
+                        style={{height: 50, width: 200, margin: '5%'}}
+                        onValueChange={(itemValue) => setChoice(itemValue)}>
+                        {
+                          selectOptions.map((item) => 
+                          {
+                            return(
+                              <Picker.Item label={item.label} value={item.value} key={item}/>
+                            );
+                          })
+                        }
+                      </Picker>
                     </View>
                     {/* END TEST */}
                     <View style={[styles.horizontal, styles.bottomElement]}>

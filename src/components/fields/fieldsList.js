@@ -1,5 +1,7 @@
 import AllTextInput from './AllTextInput.jsx';
 import DateInput from './DateInput.jsx';
+import DateRangeInput from './DateRangeInput.jsx';
+import SelectInput from './SelectInput.jsx';
 // Create NewComponent in the fields folder and import it
 // displayType: NewComponent
 const inputMap = {
@@ -8,6 +10,8 @@ const inputMap = {
   integer: AllTextInput,
   floats: AllTextInput,
   date: DateInput, 
+  daterange: DateRangeInput,
+  select: SelectInput,
 };
 
 export default inputMap;
