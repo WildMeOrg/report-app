@@ -64,10 +64,16 @@ export default function AllTextInput(rest) {
       //   getIn(props.errors, `customFields.${name}`)
       // }
       isValid={
-        (props.touched.customFields && props.touched.customFields.name) && (!props.errors.customFields && !props.errors.customFields.name)
+        props.touched.customFields &&
+        props.touched.customFields.name &&
+        !props.errors.customFields &&
+        !props.errors.customFields.name
       }
       isInvalid={
-        (props.touched.customFields && props.touched.customFields.name) && (props.errors.customFields && props.errors.customFields.name)
+        props.touched.customFields &&
+        props.touched.customFields.name &&
+        props.errors.customFields &&
+        props.errors.customFields.name
       }
     />
   );
