@@ -3,7 +3,6 @@ import React from 'react';
 import { TextInput, Alert } from 'react-native';
 import globalStyles from '../../styles/globalStyles';
 import styles from '../../styles/newSightingStyles';
-import getIn from 'formik';
 
 export default function AllTextInput(rest) {
   // console.log('AllText');
@@ -33,6 +32,7 @@ export default function AllTextInput(rest) {
               globalStyles.inputField,
               props.touched.customFields &&
                 props.errors.customFields &&
+                props.errors.customFields[name] &&
                 globalStyles.inputInvalid,
             ]
           : [
@@ -40,6 +40,7 @@ export default function AllTextInput(rest) {
               styles.multiLine,
               props.touched.customFields &&
                 props.errors.customFields &&
+                props.errors.customFields[name] &&
                 globalStyles.inputInvalid,
             ]
       }
@@ -65,13 +66,11 @@ export default function AllTextInput(rest) {
       // }
       isValid={
         props.touched.customFields &&
-        props.touched.customFields.name &&
-        !props.errors.customFields &&
-        !props.errors.customFields.name
+        (!props.errors.customFields ||
+          (props.errors.customFields && !props.errors.customFields.name))
       }
       isInvalid={
         props.touched.customFields &&
-        props.touched.customFields.name &&
         props.errors.customFields &&
         props.errors.customFields.name
       }
