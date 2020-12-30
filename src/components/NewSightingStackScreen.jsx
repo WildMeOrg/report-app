@@ -29,6 +29,7 @@ import { useTheme } from '@react-navigation/native';
 import { get } from 'lodash-es';
 import DateTimePicker from '@react-native-community/datetimepicker'; //for testing
 import {Picker} from '@react-native-community/picker'; //for testing 
+import SelectMultiple from 'react-native-select-multiple'; //for testing 
 import { Button } from 'react-native';
 // import standardFrom from '../components/fields/standardForm';
 
@@ -101,12 +102,25 @@ function NewSightingForm({ navigation }) {
     setDate2(currDate);
   };
   //select constants
-  var selectOptions = [
+  const selectOptions = [
     {label: "hark", value: "hark" },
     {label: "do not hark", value: "do not hark"},
  ]
   const [choice,setChoice] = useState(selectOptions[0].label); 
-
+ //multiselect constants 
+  const multiSelectOptions = [
+    {label: "Choice 1", value: "Choice 1", key:"1"},
+    {label: "Choice 2", value: "Choice 2", key:"2"},
+    {label: "Choice 3", value: "Choice 3", key:"3"},
+    {label: "Choice 4", value: "Choice 4", key:"4"},
+  ] 
+  const [selectedItems,setSelectedItems] = useState([]);
+  const onSelectionsChange = (items) =>{
+    setSelectedItems(items);
+  }
+  //lat long constants 
+  const [lat,setLat] = useState(0.0);
+  const [long,setLong] = useState(0.0);
  //END OF TEST
 
   const [formSection, setFormSection] = useState(0); //what is the current section/screen in the form
@@ -530,7 +544,7 @@ function NewSightingForm({ navigation }) {
                     />
                     {/* FOR TESTING PURPOSES ONLY */}
                     {/* Date Input*/}
-                    {/* <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>Date: {formatDate(date)}</Text>
+                    <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>Date: {formatDate(date)}</Text>
                     <View style = {styles.horizontal}>
                       <Text style={styles.dtpText}>Edit Date:</Text>
                       <Icon name="today" type="material-icons" onPress={showDatePicker} raised={true} /> 
@@ -543,7 +557,7 @@ function NewSightingForm({ navigation }) {
                       onChange={onChange}
                       />
                       }
-                    </View> */}
+                    </View>
                     {/*Date Range*/}
                     {/* <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>Start Date: {formatDate(date)}</Text>
                     <View style = {styles.horizontal}>
@@ -589,6 +603,36 @@ function NewSightingForm({ navigation }) {
                           })
                         }
                       </Picker>
+                    </View>
+                    <View style={globalStyles.horizontal}>
+                    <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>MultiChoice: </Text>
+                      <SelectMultiple 
+                        items={multiSelectOptions}
+                        selectedItems={selectedItems}
+                        onSelectionsChange={onSelectionsChange}
+                        style={{margin: '5%'}}
+                      />
+                    </View>
+                    {/* Lat long  */}
+                    <View style={styles.horizontal}>
+                      <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>Lat: </Text>
+                      <TextInput
+                        style={[globalStyles.inputField,{width: '20%'}]}
+                        keyboardType={'numeric'}
+                        placeholder={'0.0'}
+                        autoCorrect={false}
+                        value={lat}
+                        onChangeText={(val) => setLat(val)}
+                      />
+                      <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>Long: </Text>
+                      <TextInput
+                        style={[globalStyles.inputField,{width: '20%'}]}
+                        keyboardType={'numeric'}
+                        placeholder={'0.0'}
+                        autoCorrect={false}
+                        value={long}
+                        onChangeText={(val) => setLong(val)}
+                      />
                     </View>
                     {/* END TEST */}
                     <View style={[styles.horizontal, styles.bottomElement]}>

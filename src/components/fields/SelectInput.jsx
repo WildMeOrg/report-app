@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Picker} from '@react-native-community/picker';
 import globalStyles from '../../styles/globalStyles';
 import styles from '../../styles/newSightingStyles';
@@ -6,7 +6,7 @@ import styles from '../../styles/newSightingStyles';
 export default function SelectInput(rest){
     //TODO Typography 
     //TODO possibly make a style for the picker?
-    //TODO test
+    //TODO validation 
     const {name, schema, props} = rest; 
     const [choice, setChoice] = useState(schema.choices[0].label);
     return(

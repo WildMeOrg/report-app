@@ -1,11 +1,11 @@
 //component that returns a DateTimePicker based on the given schema 
-import React, {Fragment} from 'react';
+import React, {Fragment,useState} from 'react';
 import { Icon } from 'react-native-elements';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import globalStyles from '../../styles/globalStyles';
 import styles from '../../styles/newSightingStyles';
 
-//TODO: this still needs to be tested
+//TODO: this still needs to be tested and validation added
 export default function DateInput(rest){
   const {name, schema, props} = rest;
   const [date, setDate] = useState(new Date());
@@ -33,7 +33,7 @@ export default function DateInput(rest){
     //console.log(formatDate(currDate));
   };
     return(
-        //TODO Typography 
+        //TODO Typography
         <Fragment>
             <View style= {styles.horizontal}>
             <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>Date: {formatDate(date)}</Text>

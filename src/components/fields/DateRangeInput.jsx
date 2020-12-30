@@ -1,11 +1,11 @@
 //component that returns 2 DateTimePickers based on the given schema 
-import React, {Fragment} from 'react';
+import React, {Fragment, useState} from 'react';
 import { Icon } from 'react-native-elements';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import globalStyles from '../../styles/globalStyles';
 import styles from '../../styles/newSightingStyles';
 
-//TODO: this still needs to be tested
+//TODO: this still needs to be tested and validated 
 export default function DateRangeInput(rest){
     const {name,schema,props} = rest;
     //start date constants 

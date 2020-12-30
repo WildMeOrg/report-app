@@ -1,6 +1,8 @@
 import AllTextInput from './AllTextInput.jsx';
 import DateInput from './DateInput.jsx';
 import DateRangeInput from './DateRangeInput.jsx';
+import LatLongInput from './LatLongInput.jsx';
+import MultiSelectInput from './MultiSelectInput.jsx';
 import SelectInput from './SelectInput.jsx';
 // Create NewComponent in the fields folder and import it
 // displayType: NewComponent
@@ -12,6 +14,8 @@ const inputMap = {
   date: DateInput, 
   daterange: DateRangeInput,
   select: SelectInput,
+  multiselect: MultiSelectInput,
+  latlong: LatLongInput,
 };
 
 export default inputMap;
