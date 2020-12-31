@@ -31,33 +31,6 @@ import { get } from 'lodash-es';
 
 const NewSightingStack = createStackNavigator();
 
-const validationSchema = yup.object().shape({
-  title: yup.string().required('Title is required'),
-  location: yup.string().required('Location is required'),
-  sightingContext: yup
-    .string()
-    .required('Sighting Context is required')
-    .min(8, 'Sighting Context must be more than 8 charaters')
-    .max(255, 'Sighting Context must be less than 255 charaters'),
-  status: yup.string(),
-  relationships: yup.string(),
-  matchIndividual: yup.string(),
-  photographerName: yup
-    .string()
-    .required('Photographer Name is required')
-    .min(3, 'Photographer Name must be at least 3 charaters')
-    .max(30, 'Photographer Name must be less than 30 charaters'),
-  photographerEmail: yup
-    .string()
-    .email('Photographer Email is not valid')
-    .required('Photographer Email is required'),
-  customFields: yup.object().shape({
-    testind_test_field: yup.string().required('This Field is Required'),
-    berryTypes: yup.string().required('This Field is Required'),
-    Magicness: yup.string().required('This Field is Required'),
-    testo: yup.string().required('This Field is Required'),
-  }),
-});
 
 function NewSightingForm({ navigation }) {
   const [formSection, setFormSection] = useState(0); //what is the current section/screen in the form
@@ -65,8 +38,37 @@ function NewSightingForm({ navigation }) {
   const [views, setViews] = useState([]); //the custom field view for each section
   const [numCategories, setNumCategories] = useState(0); //number of custom field categories
   // const numStandardCategories = 4; //num categories in the standard form
-  const [props, setProps] = useState([]);
-
+  const [customValidation, setCustomValidation] = useState('');
+  const validationSchema = yup.object().shape({
+    title: yup.string().required('Title is required'),
+    location: yup.string().required('Location is required'),
+    sightingContext: yup
+      .string()
+      .required('Sighting Context is required')
+      .min(8, 'Sighting Context must be more than 8 charaters')
+      .max(255, 'Sighting Context must be less than 255 charaters'),
+    status: yup.string(),
+    relationships: yup.string(),
+    matchIndividual: yup.string(),
+    photographerName: yup
+      .string()
+      .required('Photographer Name is required')
+      .min(3, 'Photographer Name must be at least 3 charaters')
+      .max(30, 'Photographer Name must be less than 30 charaters'),
+    photographerEmail: yup
+      .string()
+      .email('Photographer Email is not valid')
+      .required('Photographer Email is required'),
+    customFields: yup.object().shape(
+      customValidation
+      //   {
+      //   testind_test_field: yup.string().required('This Field is Required'),
+      //   berryTypes: yup.string().required('This Field is Required'),
+      //   Magicness: yup.string().required('This Field is Required'),
+      //   testo: yup.string().required('This Field is Required'),
+      //  }
+    ),
+  });
   const getConfig = async () => {
     //-----TESTING START-----//
     try {
@@ -96,14 +98,46 @@ function NewSightingForm({ navigation }) {
   const form = async (formikProps) => {
     // console.log(formSection);
     const appConfig = await getConfig();
+    const customRequiredFields = [];
     // console.log(formFields);
     if (appConfig) {
       const customFields = [];
       appConfig['site.custom.customFieldCategories']['value'].map(
         (category) => {
           customFields.push(category);
+          //console.log(category);
+          appConfig[sightingFormFields[category.type]]['value'][
+            'definitions'
+          ].map((field) => {
+            //console.log(field);
+            if (field.required) {
+              const customArray = [];
+              customArray.push(field.name);
+              customArray.push(field.type);
+              customRequiredFields.push(customArray);
+            }
+          });
         }
       );
+      //console.log(customValidation);
+      // const customArray = []
+      // appConfig['site.custom.customFieldCategories']['value'].map(
+      //   (category) => {
+      //     customFields.push(category);
+      //   }
+      // );
+      const test = customRequiredFields.reduce(
+        (obj, item) => ({
+          ...obj,
+          [item[0]]:
+            item[1] === 'string'
+              ? yup.string().required('This is Required')
+              : yup.number().required('This is Required'),
+        }),
+        {}
+      );
+      console.log(test);
+      setCustomValidation(test);
       setViews(customFields);
       setFormFields(appConfig);
     }
