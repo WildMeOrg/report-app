@@ -119,13 +119,13 @@ function NewSightingForm({ navigation }) {
     setSelectedItems(items);
   }
   //lat long constants 
-  const [lat,setLat] = useState(0.0);
-  const [long,setLong] = useState(0.0);
+  const [lat,setLat] = useState('0.0');
+  const [long,setLong] = useState('0.0');
   //area constants 
-  const [north,setNorth] = useState(0.0);
-  const [east,setEast] = useState(0.0);
-  const [south,setSouth] = useState(0.0);
-  const [west,setWest] = useState(0.0);
+  const [north,setNorth] = useState('0.0');
+  const [east,setEast] = useState('0.0');
+  const [south,setSouth] = useState('0.0');
+  const [west,setWest] = useState('0.0');
  //END OF TEST
 
   const [formSection, setFormSection] = useState(0); //what is the current section/screen in the form
