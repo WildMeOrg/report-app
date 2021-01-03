@@ -1,5 +1,6 @@
 //component that returns a DateTimePicker based on the given schema 
-import React, {Fragment,useState} from 'react';
+import { Text, View } from 'react-native';
+import React, {useState} from 'react';
 import { Icon } from 'react-native-elements';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import globalStyles from '../../styles/globalStyles';
@@ -34,7 +35,7 @@ export default function DateInput(rest){
   };
     return(
         //TODO Typography
-        <Fragment>
+        <View>
             <View style= {styles.horizontal}>
             <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>Date: {formatDate(date)}</Text>
                 <Text style={styles.dtpText}>Edit Date:</Text>
@@ -49,6 +50,6 @@ export default function DateInput(rest){
                 />
                 }
             </View>
-       </Fragment>
+          </View>
     );
 }

@@ -1,4 +1,6 @@
 import AllTextInput from './AllTextInput.jsx';
+import AreaInput from './AreaInput.jsx';
+import BooleanInput from './BooleanInput.jsx';
 import DateInput from './DateInput.jsx';
 import DateRangeInput from './DateRangeInput.jsx';
 import LatLongInput from './LatLongInput.jsx';
@@ -16,6 +18,8 @@ const inputMap = {
   select: SelectInput,
   multiselect: MultiSelectInput,
   latlong: LatLongInput,
+  boolean: BooleanInput,
+  area: AreaInput,
 };
 
 export default inputMap;

@@ -1,6 +1,6 @@
 //component that returns 2 DateTimePickers based on the given schema
 import { Text, View } from 'react-native';
-import React, { useState, useEffect } from 'react';
+import React, {useState} from 'react';
 import { Icon } from 'react-native-elements';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import globalStyles from '../../styles/globalStyles';

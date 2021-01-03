@@ -1,4 +1,5 @@
-import React, {Fragment, useState} from 'react';
+import { Text, View } from 'react-native';
+import React, {useState} from 'react';
 import {TextInput} from 'react-native';
 import globalStyles from '../../styles/globalStyles';
 import styles from '../../styles/newSightingStyles';

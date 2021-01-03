@@ -121,6 +121,11 @@ function NewSightingForm({ navigation }) {
   //lat long constants 
   const [lat,setLat] = useState(0.0);
   const [long,setLong] = useState(0.0);
+  //area constants 
+  const [north,setNorth] = useState(0.0);
+  const [east,setEast] = useState(0.0);
+  const [south,setSouth] = useState(0.0);
+  const [west,setWest] = useState(0.0);
  //END OF TEST
 
   const [formSection, setFormSection] = useState(0); //what is the current section/screen in the form
@@ -587,7 +592,7 @@ function NewSightingForm({ navigation }) {
                       />
                       }
                     </View> */}
-                    {/* Picker  */}
+                    {/* Select Input  */}
                     <View style={globalStyles.horizontal}>
                     <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>Choice: </Text>
                       <Picker 
@@ -633,6 +638,48 @@ function NewSightingForm({ navigation }) {
                         value={long}
                         onChangeText={(val) => setLong(val)}
                       />
+                    </View>
+                    {/* Area */}
+                    <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>Area Input:</Text>
+                    <View style={styles.horizontal}>
+                      <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>N:</Text>
+                        <TextInput
+                          style={[globalStyles.inputField,{width: '20%'}]}
+                          keyboardType={'numeric'}
+                          placeholder={'0.0'}
+                          autoCorrect={false}
+                          value={lat}
+                          onChangeText={(val) => setNorth(val)}
+                        />
+                        <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>E:</Text>
+                        <TextInput
+                          style={[globalStyles.inputField,{width: '20%'}]}
+                          keyboardType={'numeric'}
+                          placeholder={'0.0'}
+                          autoCorrect={false}
+                          value={long}
+                          onChangeText={(val) => setEast(val)}
+                        />
+                    </View>
+                    <View style={styles.horizontal}>
+                        <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>S:</Text>
+                        <TextInput
+                          style={[globalStyles.inputField,{width: '20%'}]}
+                          keyboardType={'numeric'}
+                          placeholder={'0.0'}
+                          autoCorrect={false}
+                          value={lat}
+                          onChangeText={(val) => setSouth(val)}
+                        />
+                        <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>W:</Text>
+                        <TextInput
+                          style={[globalStyles.inputField,{width: '20%'}]}
+                          keyboardType={'numeric'}
+                          placeholder={'0.0'}
+                          autoCorrect={false}
+                          value={long}
+                          onChangeText={(val) => setWest(val)}
+                        />
                     </View>
                     {/* END TEST */}
                     <View style={[styles.horizontal, styles.bottomElement]}>
