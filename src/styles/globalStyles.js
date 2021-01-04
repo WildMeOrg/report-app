@@ -17,6 +17,13 @@ export default StyleSheet.create({
     fontSize: 18,
     color: theme.black,
   },
+  h2TextInvalid: {
+    fontFamily: 'Lato-Regular',
+    fontSize: 18,
+    margin: '5%',
+    marginBottom: '3%',
+    color: theme.red,
+  },
   buttonText: {
     color: theme.white,
     fontSize: 16,

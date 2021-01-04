@@ -28,83 +28,88 @@ import Typography from '../components/Typography';
 import { useTheme } from '@react-navigation/native';
 import { get } from 'lodash-es';
 import DateTimePicker from '@react-native-community/datetimepicker'; //for testing
-import {Picker} from '@react-native-community/picker'; //for testing 
-import SelectMultiple from 'react-native-select-multiple'; //for testing 
+import { Picker } from '@react-native-community/picker'; //for testing
+import SelectMultiple from 'react-native-select-multiple'; //for testing
 import { Button } from 'react-native';
 // import standardFrom from '../components/fields/standardForm';
 
 const NewSightingStack = createStackNavigator();
 
-
 function NewSightingForm({ navigation }) {
   //FOR TESTING PURPOSES ONLY
-  //Date time picker tests 
+  //Date time picker tests
   const [date, setDate] = useState(new Date());
   const [date2, setDate2] = useState(new Date());
   const [mode, setMode] = useState('date');
   const [mode2, setMode2] = useState('date');
-  const [show,setShow] = useState(false);
-  const [show2,setShow2] = useState(false);
-  const showMode = (currMode) =>{
+  const [show, setShow] = useState(false);
+  const [show2, setShow2] = useState(false);
+  const showMode = (currMode) => {
     setShow(true);
     setMode(currMode);
   };
-  const showMode2 = (currMode) =>{
+  const showMode2 = (currMode) => {
     setShow2(true);
     setMode2(currMode);
   };
   const showDatePicker = () => {
     showMode('date');
   };
-  const showTimePicker = () =>{
+  const showTimePicker = () => {
     showMode('time');
   };
   const showDatePicker2 = () => {
     showMode2('date');
   };
-  const showTimePicker2 = () =>{
+  const showTimePicker2 = () => {
     showMode2('time');
   };
-  function formatDate(date){
-    var options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric'};
-    return new Date(date).toLocaleDateString([],options);
+  function formatDate(date) {
+    var options = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+    };
+    return new Date(date).toLocaleDateString([], options);
   }
-  const onChange = (event,selectedDate) => {
+  const onChange = (event, selectedDate) => {
     const currDate = selectedDate || date;
     setShow(Platform.OS === 'ios');
     setDate(currDate);
   };
-  const onChange2 = (event,selectedDate) => {
+  const onChange2 = (event, selectedDate) => {
     const currDate = selectedDate || date2;
     setShow2(Platform.OS === 'ios');
     setDate2(currDate);
   };
   //select constants
   const selectOptions = [
-    {label: "hark", value: "hark" },
-    {label: "do not hark", value: "do not hark"},
- ]
-  const [choice,setChoice] = useState(selectOptions[0].label); 
- //multiselect constants 
+    { label: 'hark', value: 'hark' },
+    { label: 'do not hark', value: 'do not hark' },
+  ];
+  const [choice, setChoice] = useState(selectOptions[0].label);
+  //multiselect constants
   const multiSelectOptions = [
-    {label: "Choice 1", value: "Choice 1", key:"1"},
-    {label: "Choice 2", value: "Choice 2", key:"2"},
-    {label: "Choice 3", value: "Choice 3", key:"3"},
-    {label: "Choice 4", value: "Choice 4", key:"4"},
-  ] 
-  const [selectedItems,setSelectedItems] = useState([]);
-  const onSelectionsChange = (items) =>{
+    { label: 'Choice 1', value: 'Choice 1', key: '1' },
+    { label: 'Choice 2', value: 'Choice 2', key: '2' },
+    { label: 'Choice 3', value: 'Choice 3', key: '3' },
+    { label: 'Choice 4', value: 'Choice 4', key: '4' },
+  ];
+  const [selectedItems, setSelectedItems] = useState([]);
+  const onSelectionsChange = (items) => {
     setSelectedItems(items);
-  }
-  //lat long constants 
-  const [lat,setLat] = useState('0.0');
-  const [long,setLong] = useState('0.0');
-  //area constants 
-  const [north,setNorth] = useState('0.0');
-  const [east,setEast] = useState('0.0');
-  const [south,setSouth] = useState('0.0');
-  const [west,setWest] = useState('0.0');
- //END OF TEST
+  };
+  //lat long constants
+  const [lat, setLat] = useState('0.0');
+  const [long, setLong] = useState('0.0');
+  //area constants
+  const [north, setNorth] = useState('0.0');
+  const [east, setEast] = useState('0.0');
+  const [south, setSouth] = useState('0.0');
+  const [west, setWest] = useState('0.0');
+  //END OF TEST
 
   const [formSection, setFormSection] = useState(0); //what is the current section/screen in the form
   const [formFields, setFormFields] = useState(''); //all the custom fields
@@ -327,15 +332,16 @@ function NewSightingForm({ navigation }) {
                     </View>
                     <Typography
                       id="TITLE"
-                      style={(globalStyles.h2Text, globalStyles.inputHeader)}
-                    />
-                    <TextInput
-                      style={[
-                        globalStyles.inputField,
+                      style={
+                        (globalStyles.h2Text,
+                        globalStyles.inputHeader,
                         formikProps.touched.title &&
                           formikProps.errors.title &&
-                          globalStyles.inputInvalid,
-                      ]}
+                          globalStyles.h2TextInvalid)
+                      }
+                    />
+                    <TextInput
+                      style={[globalStyles.inputField]}
                       autoCorrect={false}
                       onChangeText={formikProps.handleChange('title')}
                       value={formikProps.values.title}
@@ -349,15 +355,16 @@ function NewSightingForm({ navigation }) {
                     />
                     <Typography
                       id="LOCATION"
-                      style={(globalStyles.h2Text, globalStyles.inputHeader)}
+                      style={
+                        (globalStyles.h2Text,
+                        globalStyles.inputHeader,
+                        formikProps.touched.title &&
+                          formikProps.errors.title &&
+                          globalStyles.h2TextInvalid)
+                      }
                     />
                     <TextInput
-                      style={[
-                        globalStyles.inputField,
-                        formikProps.touched.location &&
-                          formikProps.errors.location &&
-                          globalStyles.inputInvalid,
-                      ]}
+                      style={[globalStyles.inputField]}
                       autoCorrect={false}
                       onChangeText={formikProps.handleChange('location')}
                       value={formikProps.values.location}
@@ -373,16 +380,16 @@ function NewSightingForm({ navigation }) {
                     />
                     <Typography
                       id="SIGHTING_CONTEXT"
-                      style={(globalStyles.h2Text, globalStyles.inputHeader)}
+                      style={
+                        (globalStyles.h2Text,
+                        globalStyles.inputHeader,
+                        formikProps.touched.title &&
+                          formikProps.errors.title &&
+                          globalStyles.h2TextInvalid)
+                      }
                     />
                     <TextInput
-                      style={[
-                        globalStyles.inputField,
-                        styles.multiLine,
-                        formikProps.touched.sightingContext &&
-                          formikProps.errors.sightingContext &&
-                          globalStyles.inputInvalid,
-                      ]}
+                      style={[globalStyles.inputField, styles.multiLine]}
                       autoCorrect={false}
                       multiline
                       numberOfLines={5}
@@ -516,15 +523,16 @@ function NewSightingForm({ navigation }) {
                   <>
                     <Typography
                       id="PHOTOGRAPHER_NAME"
-                      style={(globalStyles.h2Text, globalStyles.inputHeader)}
+                      style={
+                        (globalStyles.h2Text,
+                        globalStyles.inputHeader,
+                        formikProps.touched.title &&
+                          formikProps.errors.title &&
+                          globalStyles.h2TextInvalid)
+                      }
                     />
                     <TextInput
-                      style={[
-                        globalStyles.inputField,
-                        formikProps.touched.photographerName &&
-                          formikProps.errors.photographerName &&
-                          globalStyles.inputInvalid,
-                      ]}
+                      style={[globalStyles.inputField]}
                       autoCorrect={false}
                       onChangeText={formikProps.handleChange(
                         'photographerName'
@@ -542,15 +550,16 @@ function NewSightingForm({ navigation }) {
                     />
                     <Typography
                       id="PHOTOGRAPHER_EMAIL"
-                      style={(globalStyles.h2Text, globalStyles.inputHeader)}
+                      style={
+                        (globalStyles.h2Text,
+                        globalStyles.inputHeader,
+                        formikProps.touched.title &&
+                          formikProps.errors.title &&
+                          globalStyles.h2TextInvalid)
+                      }
                     />
                     <TextInput
-                      style={[
-                        globalStyles.inputField,
-                        formikProps.touched.photographerEmail &&
-                          formikProps.errors.photographerEmail &&
-                          globalStyles.inputInvalid,
-                      ]}
+                      style={[globalStyles.inputField]}
                       autoCorrect={false}
                       onChangeText={formikProps.handleChange(
                         'photographerEmail'
@@ -568,19 +577,34 @@ function NewSightingForm({ navigation }) {
                     />
                     {/* FOR TESTING PURPOSES ONLY */}
                     {/* Date Input*/}
-                    <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>Date: {formatDate(date)}</Text>
-                    <View style = {styles.horizontal}>
+                    <Text
+                      style={[globalStyles.h2Text, globalStyles.inputHeader]}
+                    >
+                      Date: {formatDate(date)}
+                    </Text>
+                    <View style={styles.horizontal}>
                       <Text style={styles.dtpText}>Edit Date:</Text>
-                      <Icon name="today" type="material-icons" onPress={showDatePicker} raised={true} /> 
-                      <Text style={styles.dtpText}>Edit Time:</Text>
-                      <Icon name="schedule" type="material-icons" onPress={showTimePicker} raised={true}/> 
-                      { show  && <DateTimePicker 
-                      value={date}
-                      display="default"
-                      mode={mode}
-                      onChange={onChange}
+                      <Icon
+                        name="today"
+                        type="material-icons"
+                        onPress={showDatePicker}
+                        raised={true}
                       />
-                      }
+                      <Text style={styles.dtpText}>Edit Time:</Text>
+                      <Icon
+                        name="schedule"
+                        type="material-icons"
+                        onPress={showTimePicker}
+                        raised={true}
+                      />
+                      {show && (
+                        <DateTimePicker
+                          value={date}
+                          display="default"
+                          mode={mode}
+                          onChange={onChange}
+                        />
+                      )}
                     </View>
                     {/*Date Range*/}
                     {/* <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>Start Date: {formatDate(date)}</Text>
@@ -613,44 +637,62 @@ function NewSightingForm({ navigation }) {
                     </View> */}
                     {/* Select Input  */}
                     <View style={globalStyles.horizontal}>
-                    <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>Choice: </Text>
-                      <Picker 
+                      <Text
+                        style={[globalStyles.h2Text, globalStyles.inputHeader]}
+                      >
+                        Choice:{' '}
+                      </Text>
+                      <Picker
                         selectedValue={choice}
-                        style={{height: 50, width: 200, margin: '5%'}}
-                        onValueChange={(itemValue) => setChoice(itemValue)}>
-                        {
-                          selectOptions.map((item) => 
-                          {
-                            return(
-                              <Picker.Item label={item.label} value={item.value} key={item}/>
-                            );
-                          })
-                        }
+                        style={{ height: 50, width: 200, margin: '5%' }}
+                        onValueChange={(itemValue) => setChoice(itemValue)}
+                      >
+                        {selectOptions.map((item) => {
+                          return (
+                            <Picker.Item
+                              label={item.label}
+                              value={item.value}
+                              key={item}
+                            />
+                          );
+                        })}
                       </Picker>
                     </View>
                     <View style={globalStyles.horizontal}>
-                    <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>MultiChoice: </Text>
-                      <SelectMultiple 
+                      <Text
+                        style={[globalStyles.h2Text, globalStyles.inputHeader]}
+                      >
+                        MultiChoice:{' '}
+                      </Text>
+                      <SelectMultiple
                         items={multiSelectOptions}
                         selectedItems={selectedItems}
                         onSelectionsChange={onSelectionsChange}
-                        style={{margin: '5%'}}
+                        style={{ margin: '5%' }}
                       />
                     </View>
                     {/* Lat long  */}
                     <View style={styles.horizontal}>
-                      <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>Lat: </Text>
+                      <Text
+                        style={[globalStyles.h2Text, globalStyles.inputHeader]}
+                      >
+                        Lat:{' '}
+                      </Text>
                       <TextInput
-                        style={[globalStyles.inputField,{width: '20%'}]}
+                        style={[globalStyles.inputField, { width: '20%' }]}
                         keyboardType={'numeric'}
                         placeholder={'0.0'}
                         autoCorrect={false}
                         value={lat}
                         onChangeText={(val) => setLat(val)}
                       />
-                      <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>Long: </Text>
+                      <Text
+                        style={[globalStyles.h2Text, globalStyles.inputHeader]}
+                      >
+                        Long:{' '}
+                      </Text>
                       <TextInput
-                        style={[globalStyles.inputField,{width: '20%'}]}
+                        style={[globalStyles.inputField, { width: '20%' }]}
                         keyboardType={'numeric'}
                         placeholder={'0.0'}
                         autoCorrect={false}
@@ -659,46 +701,66 @@ function NewSightingForm({ navigation }) {
                       />
                     </View>
                     {/* Area */}
-                    <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>Area Input:</Text>
+                    <Text
+                      style={[globalStyles.h2Text, globalStyles.inputHeader]}
+                    >
+                      Area Input:
+                    </Text>
                     <View style={styles.horizontal}>
-                      <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>N:</Text>
-                        <TextInput
-                          style={[globalStyles.inputField,{width: '20%'}]}
-                          keyboardType={'numeric'}
-                          placeholder={'0.0'}
-                          autoCorrect={false}
-                          value={lat}
-                          onChangeText={(val) => setNorth(val)}
-                        />
-                        <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>E:</Text>
-                        <TextInput
-                          style={[globalStyles.inputField,{width: '20%'}]}
-                          keyboardType={'numeric'}
-                          placeholder={'0.0'}
-                          autoCorrect={false}
-                          value={long}
-                          onChangeText={(val) => setEast(val)}
-                        />
+                      <Text
+                        style={[globalStyles.h2Text, globalStyles.inputHeader]}
+                      >
+                        N:
+                      </Text>
+                      <TextInput
+                        style={[globalStyles.inputField, { width: '20%' }]}
+                        keyboardType={'numeric'}
+                        placeholder={'0.0'}
+                        autoCorrect={false}
+                        value={lat}
+                        onChangeText={(val) => setNorth(val)}
+                      />
+                      <Text
+                        style={[globalStyles.h2Text, globalStyles.inputHeader]}
+                      >
+                        E:
+                      </Text>
+                      <TextInput
+                        style={[globalStyles.inputField, { width: '20%' }]}
+                        keyboardType={'numeric'}
+                        placeholder={'0.0'}
+                        autoCorrect={false}
+                        value={long}
+                        onChangeText={(val) => setEast(val)}
+                      />
                     </View>
                     <View style={styles.horizontal}>
-                        <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>S:</Text>
-                        <TextInput
-                          style={[globalStyles.inputField,{width: '20%'}]}
-                          keyboardType={'numeric'}
-                          placeholder={'0.0'}
-                          autoCorrect={false}
-                          value={lat}
-                          onChangeText={(val) => setSouth(val)}
-                        />
-                        <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>W:</Text>
-                        <TextInput
-                          style={[globalStyles.inputField,{width: '20%'}]}
-                          keyboardType={'numeric'}
-                          placeholder={'0.0'}
-                          autoCorrect={false}
-                          value={long}
-                          onChangeText={(val) => setWest(val)}
-                        />
+                      <Text
+                        style={[globalStyles.h2Text, globalStyles.inputHeader]}
+                      >
+                        S:
+                      </Text>
+                      <TextInput
+                        style={[globalStyles.inputField, { width: '20%' }]}
+                        keyboardType={'numeric'}
+                        placeholder={'0.0'}
+                        autoCorrect={false}
+                        value={lat}
+                        onChangeText={(val) => setSouth(val)}
+                      />
+                      <Text
+                        style={[globalStyles.h2Text, globalStyles.inputHeader]}
+                      >
+                        W:
+                      </Text>
+                      <TextInput
+                        style={[globalStyles.inputField, { width: '20%' }]}
+                        keyboardType={'numeric'}
+                        placeholder={'0.0'}
+                        autoCorrect={false}
+                        value={long}
+                        onChangeText={(val) => setWest(val)}
+                      />
                     </View>
                     {/* END TEST */}
                     <View style={[styles.horizontal, styles.bottomElement]}>

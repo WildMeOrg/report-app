@@ -10,7 +10,7 @@ import LabeledInput from './LabeledInput.jsx';
 export default function CustomField({ id, required, name, ...rest }) {
   // console.log('CustomField ' + rest);
   // console.log(rest);
-  const { schema } = rest;
+  const { schema, props } = rest;
   const displayName =
     schema != null && schema.label != null ? schema.label : name;
   const description = schema != null ? schema.description : '';
@@ -18,7 +18,16 @@ export default function CustomField({ id, required, name, ...rest }) {
   return (
     // TODO: Text should be Typography component
     <View>
-      <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
+      <Text
+        style={[
+          globalStyles.h2Text,
+          globalStyles.inputHeader,
+          props.touched.customFields &&
+            props.errors.customFields &&
+            props.errors.customFields[name] &&
+            globalStyles.h2TextInvalid,
+        ]}
+      >
         {displayName}
         {required && ' *'}
       </Text>
@@ -30,7 +39,7 @@ export default function CustomField({ id, required, name, ...rest }) {
         </>
       )}
       {/* LabeledInput contains the actual custom field for input */}
-      <LabeledInput name={name} {...rest} />
+      <LabeledInput name={name} props={props} {...rest} />
     </View>
   );
 }

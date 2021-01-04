@@ -10,7 +10,7 @@ import AllTextInput from './fields/AllTextInput';
 import fieldList from './fields/fieldsList';
 import globalStyles from '../styles/globalStyles';
 
-export default function LabeledInput({ name, ...rest }) {
+export default function LabeledInput({ name, props, ...rest }) {
   // console.log('LabeledInput ' + rest);
   // console.log(rest);
   const { displayType } = rest;
@@ -24,7 +24,8 @@ export default function LabeledInput({ name, ...rest }) {
 
   // console.log(type);
   const FieldComponent = fieldList[type];
-  if (FieldComponent) return <FieldComponent name={name} {...rest} />;
+  if (FieldComponent)
+    return <FieldComponent name={name} props={props} {...rest} />;
 
   return (
     <Text style={[globalStyles.inputHeader, globalStyles.basicText]}>
