@@ -123,10 +123,10 @@ function NewSightingForm({ navigation }) {
   const [lat,setLat] = useState('0.0');
   const [long,setLong] = useState('0.0');
   //area constants 
-  const [north,setNorth] = useState(0.0);
-  const [east,setEast] = useState(0.0);
-  const [south,setSouth] = useState(0.0);
-  const [west,setWest] = useState(0.0);
+  const [north,setNorth] = useState('0.0');
+  const [east,setEast] = useState('0.0');
+  const [south,setSouth] = useState('0.0');
+  const [west,setWest] = useState('0.0');
   //file function
   const [file,setFile] = useState();
   const[fileName,setFileName] = useState();

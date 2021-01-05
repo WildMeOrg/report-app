@@ -3,6 +3,7 @@ import AreaInput from './AreaInput.jsx';
 import BooleanInput from './BooleanInput.jsx';
 import DateInput from './DateInput.jsx';
 import DateRangeInput from './DateRangeInput.jsx';
+import FileInput from './FileInput.jsx';
 import LatLongInput from './LatLongInput.jsx';
 import MultiSelectInput from './MultiSelectInput.jsx';
 import SelectInput from './SelectInput.jsx';
@@ -20,6 +21,7 @@ const inputMap = {
   latlong: LatLongInput,
   boolean: BooleanInput,
   area: AreaInput,
+  file: FileInput,
 };
 
 export default inputMap;
