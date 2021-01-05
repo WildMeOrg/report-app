@@ -30,6 +30,7 @@ import { get } from 'lodash-es';
 import DateTimePicker from '@react-native-community/datetimepicker'; //for testing
 import {Picker} from '@react-native-community/picker'; //for testing 
 import SelectMultiple from 'react-native-select-multiple'; //for testing 
+import * as DocumentPicker from 'expo-document-picker'; //for testing 
 import { Button } from 'react-native';
 // import standardFrom from '../components/fields/standardForm';
 
@@ -59,7 +60,7 @@ const validationSchema = yup.object().shape({
 });
 
 function NewSightingForm({ navigation }) {
-  //FOR TESTING PURPOSES ONLY
+  //FOR CUSTOM FIELD TESTING PURPOSES ONLY
   //Date time picker tests 
   const [date, setDate] = useState(new Date());
   const [date2, setDate2] = useState(new Date());
@@ -126,7 +127,22 @@ function NewSightingForm({ navigation }) {
   const [east,setEast] = useState(0.0);
   const [south,setSouth] = useState(0.0);
   const [west,setWest] = useState(0.0);
- //END OF TEST
+  //file function
+  const [file,setFile] = useState();
+  const[fileName,setFileName] = useState();
+  const getFile = async() => {
+    const res =  await DocumentPicker.getDocumentAsync({});
+    console.log(res);
+    if(res.type !== "cancel"){
+      setFile(res);
+      setFileName(res.name);
+    }
+  }
+  const deleteFile = () => {
+    setFile();
+    setFileName();
+  }
+ //END OF CUSTOM FIELD TEST
 
   const [formSection, setFormSection] = useState(0); //what is the current section/screen in the form
   //const [formFields, setFormFields] = useState(''); //all the custom fields
@@ -626,7 +642,7 @@ function NewSightingForm({ navigation }) {
                         keyboardType={'numeric'}
                         placeholder={'0.0'}
                         autoCorrect={false}
-                        value={lat}
+                        value={lat.toString()}
                         onChangeText={(val) => setLat(val)}
                       />
                       <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>Long: </Text>
@@ -635,7 +651,7 @@ function NewSightingForm({ navigation }) {
                         keyboardType={'numeric'}
                         placeholder={'0.0'}
                         autoCorrect={false}
-                        value={long}
+                        value={long.toString()}
                         onChangeText={(val) => setLong(val)}
                       />
                     </View>
@@ -648,7 +664,7 @@ function NewSightingForm({ navigation }) {
                           keyboardType={'numeric'}
                           placeholder={'0.0'}
                           autoCorrect={false}
-                          value={lat}
+                          value={north.toString()}
                           onChangeText={(val) => setNorth(val)}
                         />
                         <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>E:</Text>
@@ -657,7 +673,7 @@ function NewSightingForm({ navigation }) {
                           keyboardType={'numeric'}
                           placeholder={'0.0'}
                           autoCorrect={false}
-                          value={long}
+                          value={east.toString()}
                           onChangeText={(val) => setEast(val)}
                         />
                     </View>
@@ -668,7 +684,7 @@ function NewSightingForm({ navigation }) {
                           keyboardType={'numeric'}
                           placeholder={'0.0'}
                           autoCorrect={false}
-                          value={lat}
+                          value={south.toString()}
                           onChangeText={(val) => setSouth(val)}
                         />
                         <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>W:</Text>
@@ -677,9 +693,15 @@ function NewSightingForm({ navigation }) {
                           keyboardType={'numeric'}
                           placeholder={'0.0'}
                           autoCorrect={false}
-                          value={long}
+                          value={west.toString()}
                           onChangeText={(val) => setWest(val)}
                         />
+                    </View>
+                    {/* File Input  */}
+                    <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
+                    <Text style={[globalStyles.h2Text, globalStyles.inputHeader]} numberOfLines={1}> Add File: {fileName}</Text>
+                    <Icon name="note-add" type="material-icons" onPress={getFile} style={{paddingHorizontal: 10}} raised={true}/>
+                    <Icon name="remove-circle" type="material-icons" onPress={deleteFile} raised={true}/>
                     </View>
                     {/* END TEST */}
                     <View style={[styles.horizontal, styles.bottomElement]}>
