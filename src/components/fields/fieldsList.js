@@ -13,7 +13,7 @@ const inputMap = {
   longstring: AllTextInput,
   integer: AllTextInput,
   floats: AllTextInput,
-  date: DateInput, 
+  date: DateInput,
   daterange: DateRangeInput,
   select: SelectInput,
   multiselect: MultiSelectInput,
