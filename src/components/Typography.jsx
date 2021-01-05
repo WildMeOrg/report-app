@@ -7,7 +7,8 @@ export default function Typography({ id, style, ...rest }) {
     fontFamily: 'Lato-Regular',
   };
 
-  const mergedStyles = { ...defaultStyles, ...style };
+  const mergedStyles = [defaultStyles];
+  mergedStyles.push(style);
 
   return (
     <Text style={mergedStyles} {...rest}>

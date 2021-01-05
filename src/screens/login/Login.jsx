@@ -58,7 +58,7 @@ const Login = ({ navigation, route }) => {
 
     try {
       const settingsPacket = await axios(
-        `${baseUrl}/api/v0/configuration/__bundle_setup`
+        `${baseUrl}/api/v1/configuration/default/__bundle_setup`
       );
       await AsyncStorage.setItem(
         'appConfiguration',

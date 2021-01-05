@@ -1,6 +1,6 @@
 //component that returns 2 DateTimePickers based on the given schema
 import { Text, View } from 'react-native';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Icon } from 'react-native-elements';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import globalStyles from '../../styles/globalStyles';
@@ -77,8 +77,19 @@ export default function DateRangeInput(rest) {
           onPress={showTimePickerStart}
           raised={true}
         />
+      </View>
+      <View
+        style={{
+          marginHorizontal: '5%',
+          borderColor: '#2c2c2c80',
+          alignContent: 'center',
+          borderWidth: 1,
+          borderRadius: 6,
+        }}
+      >
         {showStart && (
           <DateTimePicker
+            style={{ flex: 1 }}
             value={dateStart}
             display="default"
             mode={modeStart}

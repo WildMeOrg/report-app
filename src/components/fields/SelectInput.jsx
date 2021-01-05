@@ -14,7 +14,8 @@ export default function SelectInput(rest) {
     <Picker
       //selectedValue={choice}
       selectedValue={props.values.customFields[name]}
-      style={{ height: 50, width: 200, margin: '5%' }}
+      //style={{ height: '50%', width: '50%', margin: '5%' }}
+      style={{ marginHorizontal: '5%' }}
       //onValueChange={(itemValue) => setChoice(itemValue)}
       onValueChange={props.handleChange(`customFields.${name}`)}
       onBlur={props.onBlur}

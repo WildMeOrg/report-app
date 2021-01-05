@@ -151,7 +151,7 @@ function NewSightingForm({ navigation }) {
     //-----TESTING START-----//
     try {
       const settingsPacket = await axios(
-        `${baseUrl}/api/v0/configuration/__bundle_setup`
+        `${baseUrl}/api/v1/configuration/default/__bundle_setup`
       );
       await AsyncStorage.setItem(
         'appConfiguration',
@@ -332,13 +332,13 @@ function NewSightingForm({ navigation }) {
                     </View>
                     <Typography
                       id="TITLE"
-                      style={
-                        (globalStyles.h2Text,
+                      style={[
+                        globalStyles.h2Text,
                         globalStyles.inputHeader,
                         formikProps.touched.title &&
                           formikProps.errors.title &&
-                          globalStyles.h2TextInvalid)
-                      }
+                          globalStyles.h2TextInvalid,
+                      ]}
                     />
                     <TextInput
                       style={[globalStyles.inputField]}
@@ -355,13 +355,13 @@ function NewSightingForm({ navigation }) {
                     />
                     <Typography
                       id="LOCATION"
-                      style={
-                        (globalStyles.h2Text,
+                      style={[
+                        globalStyles.h2Text,
                         globalStyles.inputHeader,
                         formikProps.touched.title &&
                           formikProps.errors.title &&
-                          globalStyles.h2TextInvalid)
-                      }
+                          globalStyles.h2TextInvalid,
+                      ]}
                     />
                     <TextInput
                       style={[globalStyles.inputField]}
@@ -380,13 +380,13 @@ function NewSightingForm({ navigation }) {
                     />
                     <Typography
                       id="SIGHTING_CONTEXT"
-                      style={
-                        (globalStyles.h2Text,
+                      style={[
+                        globalStyles.h2Text,
                         globalStyles.inputHeader,
                         formikProps.touched.title &&
                           formikProps.errors.title &&
-                          globalStyles.h2TextInvalid)
-                      }
+                          globalStyles.h2TextInvalid,
+                      ]}
                     />
                     <TextInput
                       style={[globalStyles.inputField, styles.multiLine]}
@@ -523,13 +523,13 @@ function NewSightingForm({ navigation }) {
                   <>
                     <Typography
                       id="PHOTOGRAPHER_NAME"
-                      style={
-                        (globalStyles.h2Text,
+                      style={[
+                        globalStyles.h2Text,
                         globalStyles.inputHeader,
                         formikProps.touched.title &&
                           formikProps.errors.title &&
-                          globalStyles.h2TextInvalid)
-                      }
+                          globalStyles.h2TextInvalid,
+                      ]}
                     />
                     <TextInput
                       style={[globalStyles.inputField]}
@@ -550,13 +550,13 @@ function NewSightingForm({ navigation }) {
                     />
                     <Typography
                       id="PHOTOGRAPHER_EMAIL"
-                      style={
-                        (globalStyles.h2Text,
+                      style={[
+                        globalStyles.h2Text,
                         globalStyles.inputHeader,
                         formikProps.touched.title &&
                           formikProps.errors.title &&
-                          globalStyles.h2TextInvalid)
-                      }
+                          globalStyles.h2TextInvalid,
+                      ]}
                     />
                     <TextInput
                       style={[globalStyles.inputField]}
