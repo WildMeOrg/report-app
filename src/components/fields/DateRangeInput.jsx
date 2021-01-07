@@ -115,8 +115,19 @@ export default function DateRangeInput(rest) {
           onPress={showTimePickerEnd}
           raised={true}
         />
+      </View>
+      <View
+        style={{
+          marginHorizontal: '5%',
+          borderColor: '#2c2c2c80',
+          alignContent: 'center',
+          borderWidth: 1,
+          borderRadius: 6,
+        }}
+      >
         {showEnd && (
           <DateTimePicker
+            style={{ flex: 1 }}
             value={dateEnd}
             display="default"
             mode={modeEnd}

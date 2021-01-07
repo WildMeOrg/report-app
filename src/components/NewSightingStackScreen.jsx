@@ -88,6 +88,8 @@ function NewSightingForm({ navigation }) {
   const selectOptions = [
     { label: 'hark', value: 'hark' },
     { label: 'do not hark', value: 'do not hark' },
+    { label: 'hark2', value: 'hark2' },
+    { label: 'hark3', value: 'hark3' },
   ];
   const [choice, setChoice] = useState(selectOptions[0].label);
   //multiselect constants
@@ -644,7 +646,11 @@ function NewSightingForm({ navigation }) {
                       </Text>
                       <Picker
                         selectedValue={choice}
-                        style={{ height: 50, width: 200, margin: '5%' }}
+                        style={{
+                          marginHorizontal: '5%',
+                          borderColor: '#808080',
+                          borderWidth: 1,
+                        }}
                         onValueChange={(itemValue) => setChoice(itemValue)}
                       >
                         {selectOptions.map((item) => {
