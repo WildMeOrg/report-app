@@ -5,6 +5,7 @@ import { Icon } from 'react-native-elements';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import globalStyles from '../../styles/globalStyles';
 import styles from '../../styles/newSightingStyles';
+import theme from '../../constants/theme';
 
 //TODO: this still needs to be tested and validated
 export default function DateRangeInput(rest) {
@@ -81,15 +82,26 @@ export default function DateRangeInput(rest) {
       <View
         style={{
           marginHorizontal: '5%',
-          borderColor: '#2c2c2c80',
-          alignContent: 'center',
+          height: '10%',
+          justifyContent: 'center',
+          alignItems: 'center',
+          borderColor: theme.black,
           borderWidth: 1,
           borderRadius: 6,
         }}
       >
         {showStart && (
           <DateTimePicker
-            style={{ flex: 1 }}
+            style={{
+              flex: 1,
+              height: '20%',
+              justifyContent: 'center',
+              alignItems: 'flex-start',
+              paddingHorizontal: '20%',
+              borderColor: theme.red,
+              borderWidth: 1,
+              borderRadius: 6,
+            }}
             value={dateStart}
             display="default"
             mode={modeStart}
