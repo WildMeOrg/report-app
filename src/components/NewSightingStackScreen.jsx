@@ -107,7 +107,7 @@ function NewSightingForm({ navigation }) {
     {label: "hark", value: "hark" },
     {label: "do not hark", value: "do not hark"},
  ]
-  const [choice,setChoice] = useState(selectOptions[0].label); 
+  const [choice,setChoice] = useState(); 
  //multiselect constants 
   const multiSelectOptions = [
     {label: "Choice 1", value: "Choice 1", key:"1"},
@@ -141,6 +141,43 @@ function NewSightingForm({ navigation }) {
   const deleteFile = () => {
     setFile();
     setFileName();
+  }
+  //location id data replica  (other variables omitted)
+  const locationOptions = {
+    locationID: [
+      {
+        locationID:[
+          {
+            locationID:[
+              {
+                locationID: [],
+                name:"22fas",
+                id: "740ec3d1-40b3-4338-8c1f-3ea73b3af893"
+              }
+            ],
+            name:"Lewa",
+            id:"Lewa"
+          },
+          {
+            locationID:[],
+            name:"Ol Pejetera",
+            id:"Ol Pejetera",
+          }
+        ],
+        name:"Niger",
+        id: "Niger"
+      },
+      {
+        locationID:[],
+        name:"Chad",
+        id: "Chad"
+      },
+      {
+        locationID:[],
+        name:"Nambia",
+        id: "Nambia"
+      }
+    ]
   }
  //END OF CUSTOM FIELD TEST
 
@@ -702,6 +739,38 @@ function NewSightingForm({ navigation }) {
                     <Text style={[globalStyles.h2Text, globalStyles.inputHeader]} numberOfLines={1}> Add File: {fileName}</Text>
                     <Icon name="note-add" type="material-icons" onPress={getFile} style={{paddingHorizontal: 10}} raised={true}/>
                     <Icon name="remove-circle" type="material-icons" onPress={deleteFile} raised={true}/>
+                    </View>
+                    {/* Location ID */}
+                    <View style={globalStyles.horizontal}>
+                    <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>Location ID: </Text>
+                      <Picker 
+                        selectedValue={choice}
+                        style={{height: 50, width: 200, margin: '5%'}}
+                        onValueChange={(itemValue) => setChoice(itemValue)}>
+                        {
+                          locationOptions.locationID.map((item) => 
+                          {
+                            //no children 
+                            if(item.locationID.length === 0){
+                              return(
+                                <Picker.Item label={item.name} value={item.id} key={item.id}/>
+                              );  
+                            }
+                            //TODO possibly need to change this in case of multiple levels of children 
+                            //has children 
+                            else{
+                             var itemArray = [];
+                             var parent = <Picker.Item label={item.name} value={item.id} key={item.locationID.id}/>;
+                             itemArray.push(parent);
+                             for(var i = 0; i < item.locationID.length; i++){
+                               var child = <Picker.Item label={" ".repeat(10)+item.locationID[i].name} value={item.locationID[i].id} key={item.locationID[i].id}/>; 
+                               itemArray.push(child);
+                             }
+                             return(itemArray);
+                            }
+                          })
+                        }
+                      </Picker>
                     </View>
                     {/* END TEST */}
                     <View style={[styles.horizontal, styles.bottomElement]}>

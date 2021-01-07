@@ -8,7 +8,7 @@ export default function SelectInput(rest) {
   //TODO possibly make a style for the picker?
   //TODO validation
   const { name, schema, props } = rest;
-  const [choice, setChoice] = useState(schema.choices[0].label);
+  const [choice, setChoice] = useState();
   return (
     <Picker
       selectedValue={choice}
