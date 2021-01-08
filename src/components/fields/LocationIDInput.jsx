@@ -15,22 +15,32 @@ export default function locationIDInput(rest){
         {
           locationID.map((item) => 
           {
-            //no children 
+            function printChildren(childrenArray,itemArray, depth){
+              for( var i=0 ; i < childrenArray.length; i++ ){
+                if(childrenArray === 0 ){
+                  var child = <Picker.Item label={" ".repeat(5*depth)+childrenArray[i].name} value={childrenArray[i].id} key={childrenArray[i].id}/>;
+                  itemArray.push(child);
+                }
+                else{
+                  var parent = <Picker.Item label={" ".repeat(5*depth)+childrenArray[i].name} value={childrenArray[i].id} key={childrenArray[i].id}/>;
+                  itemArray.push(parent);
+                  printChildren(childrenArray[i].locationID,itemArray, depth + 1);
+                }
+              }
+            }
+            // //no children 
             if(item.locationID.length === 0){
               return(
                 <Picker.Item label={item.name} value={item.id} key={item.id}/>
               );  
             }
-            //TODO possibly need to change this in case of multiple levels of children 
-            //has children 
+            // //has children 
             else{
              var itemArray = [];
              var parent = <Picker.Item label={item.name} value={item.id} key={item.locationID.id}/>;
              itemArray.push(parent);
-             for(var i = 0; i < item.locationID.length; i++){
-               var child = <Picker.Item label={" ".repeat(10)+item.locationID[i].name} value={item.locationID[i].id} key={item.locationID[i].id}/>; 
-               itemArray.push(child);
-             }
+             var depth = 1;
+             printChildren(item.locationID, itemArray, depth);
              return(itemArray);
             }
           })
