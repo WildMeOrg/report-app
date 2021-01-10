@@ -113,6 +113,7 @@ function NewSightingForm({ navigation }) {
   const [west, setWest] = useState('0.0');
   //END OF TEST
 
+  const errorData = 'Error no data';
   const [formSection, setFormSection] = useState(0); //what is the current section/screen in the form
   const [formFields, setFormFields] = useState(''); //all the custom fields
   const [views, setViews] = useState([]); //the custom field view for each section
@@ -179,7 +180,7 @@ function NewSightingForm({ navigation }) {
     // console.log(formSection);
     const appConfig = await getConfig();
     const customRequiredFields = [];
-    // console.log(formFields);
+    console.log(appConfig);
     if (appConfig) {
       const customFields = [];
       appConfig['site.custom.customFieldCategories']['value'].map(
@@ -800,22 +801,31 @@ function NewSightingForm({ navigation }) {
                             globalStyles.sectionHeader,
                           ]}
                         >
-                          {views[formSection - 3]['label']}
+                          {views[0]
+                            ? views[formSection - 3]['label']
+                            : errorData}
+                          {/* {views[formSection - 3]['label']} */}
                         </Text>
-                        {formFields[
-                          sightingFormFields[views[formSection - 3].type]
-                        ]['value']['definitions'].map((item) => (
-                          // { item.schema != null && item.schema.category != cat.id) ? <></> :
-                          <CustomField
-                            key={item.id}
-                            id={item.id}
-                            required={item.required}
-                            schema={item.schema}
-                            name={item.name}
-                            displayType={item.displayType}
-                            props={formikProps}
-                          />
-                        ))}
+                        {views[0] ? (
+                          formFields[
+                            //   sightingFormFields[views[formSection - 3].type]
+                            // ]['value']['definitions'].map((item) => (
+                            sightingFormFields[views[formSection - 3].type]
+                          ]['value']['definitions'].map((item) => (
+                            // { item.schema != null && item.schema.category != cat.id) ? <></> :
+                            <CustomField
+                              key={item.id}
+                              id={item.id}
+                              required={item.required}
+                              schema={item.schema}
+                              name={item.name}
+                              displayType={item.displayType}
+                              props={formikProps}
+                            />
+                          ))
+                        ) : (
+                          <Text style={globalStyles.subText}>{errorData}</Text>
+                        )}
                       </View>
                     </React.Suspense>
                     {formSection > 2 && formSection < numCategories + 2 ? (
