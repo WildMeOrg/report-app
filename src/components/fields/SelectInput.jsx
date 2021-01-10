@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Picker } from '@react-native-community/picker';
 import globalStyles from '../../styles/globalStyles';
 import styles from '../../styles/newSightingStyles';
-import DropDownPicker from 'react-native-dropdown-picker';
+//import DropDownPicker from 'react-native-dropdown-picker';
 
 export default function SelectInput(rest) {
   //TODO Typography

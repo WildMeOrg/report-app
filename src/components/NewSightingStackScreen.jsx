@@ -31,6 +31,7 @@ import DateTimePicker from '@react-native-community/datetimepicker'; //for testi
 import { Picker } from '@react-native-community/picker'; //for testing
 import SelectMultiple from 'react-native-select-multiple'; //for testing
 import { Button } from 'react-native';
+import testSettingsPacket from '../constants/testSettingsPacket';
 // import standardFrom from '../components/fields/standardForm';
 
 const NewSightingStack = createStackNavigator();
@@ -153,12 +154,13 @@ function NewSightingForm({ navigation }) {
   const getConfig = async () => {
     //-----TESTING START-----//
     try {
-      const settingsPacket = await axios(
-        `${baseUrl}/api/v1/configuration/default/__bundle_setup`
-      );
+      // const settingsPacket = await axios(
+      //   `${baseUrl}/api/v1/configuration/default/__bundle_setup`
+      // );
       await AsyncStorage.setItem(
         'appConfiguration',
-        JSON.stringify(settingsPacket.data.response.configuration)
+        //JSON.stringify(settingsPacket.data.response.configuration)
+        JSON.stringify(testSettingsPacket)
       );
     } catch (settingsFetchError) {}
     //-----TESTING END-----//
