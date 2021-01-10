@@ -23,7 +23,7 @@ export default function SelectInput(rest) {
       //selectedValue={choice}
       selectedValue={props.values.customFields[name]}
       //style={{ height: '50%', width: '50%', margin: '5%' }}
-      style={{ marginHorizontal: '5%', backgroundColor: '#808080' }}
+      style={{ marginHorizontal: '5%' }}
       //onValueChange={(itemValue) => setChoice(itemValue)}
       onValueChange={props.handleChange(`customFields.${name}`)}
       onBlur={props.onBlur}

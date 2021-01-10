@@ -16,6 +16,7 @@ export default StyleSheet.create({
     fontFamily: 'Lato-Regular',
     fontSize: 18,
     color: theme.black,
+    fontStyle: 'normal',
   },
   h2TextInvalid: {
     fontFamily: 'Lato-Regular',
@@ -38,6 +39,7 @@ export default StyleSheet.create({
     fontSize: 18,
     margin: '5%',
     marginBottom: '3%',
+    fontStyle: 'normal'
   },
   subText: {
     fontSize: 18,

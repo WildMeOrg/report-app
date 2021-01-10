@@ -18,18 +18,19 @@ export default function CustomField({ id, required, name, ...rest }) {
   return (
     // TODO: Text should be Typography component
     <View>
-      <Text
-        style={[
-          globalStyles.h2Text,
-          globalStyles.inputHeader,
-          props.touched.customFields &&
+      <Text style={[globalStyles.inputHeader, globalStyles.h2Text]}>
+        <Text>
+          {displayName}
+          {required && ' *'}
+        </Text>
+        <Text
+          style={[globalStyles.h2TextInvalid, { fontFamily: 'Lato-Italic' }]}
+        >
+          {props.touched.customFields &&
             props.errors.customFields &&
             props.errors.customFields[name] &&
-            globalStyles.h2TextInvalid,
-        ]}
-      >
-        {displayName}
-        {required && ' *'}
+            ' This Field is Required'}
+        </Text>
       </Text>
       {description != '' && (
         <>
