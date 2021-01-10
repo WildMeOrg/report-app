@@ -9,7 +9,6 @@ import {
   Alert,
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import HideWithKeyboard from 'react-native-hide-with-keyboard';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from 'react-native-elements';
 import { Formik } from 'formik';
@@ -33,6 +32,7 @@ import SelectMultiple from 'react-native-select-multiple'; //for testing
 import { Button } from 'react-native';
 import testSettingsPacket from '../constants/testSettingsPacket';
 // import standardFrom from '../components/fields/standardForm';
+import NetInfo from '@react-native-community/netinfo';
 
 const NewSightingStack = createStackNavigator();
 
@@ -303,7 +303,32 @@ function NewSightingForm({ navigation }) {
         }}
         validationSchema={validationSchema}
         onSubmit={(values, { resetForm }) => {
-          Alert.alert('Form Response', JSON.stringify(values, undefined, 4));
+          NetInfo.fetch().then((state) => {
+            if (state.isInternetReachable) {
+              alert(
+                'Internet Reachable: ' + JSON.stringify(values, undefined, 4)
+              );
+            } else {
+              AsyncStorage.getItem('SightingSubmissions', (err, result) => {
+                if (result) {
+                  let updatedSubmissions = JSON.parse(result);
+                  updatedSubmissions.push(values);
+
+                  AsyncStorage.setItem(
+                    'SightingSubmissions',
+                    JSON.stringify(updatedSubmissions)
+                  );
+                } else {
+                  AsyncStorage.setItem(
+                    'SightingSubmissions',
+                    JSON.stringify([values])
+                  );
+                }
+              });
+              alert('No Internet', JSON.stringify(values, undefined, 4));
+            }
+          });
+
           resetForm();
 
           setFormSection(0);
