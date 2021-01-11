@@ -5,6 +5,7 @@ import DateInput from './DateInput.jsx';
 import DateRangeInput from './DateRangeInput.jsx';
 import FileInput from './FileInput.jsx';
 import LatLongInput from './LatLongInput.jsx';
+import locationIDInput from './LocationIDInput.jsx';
 import MultiSelectInput from './MultiSelectInput.jsx';
 import SelectInput from './SelectInput.jsx';
 // Create NewComponent in the fields folder and import it
@@ -22,6 +23,8 @@ const inputMap = {
   boolean: BooleanInput,
   area: AreaInput,
   file: FileInput,
+  locationIds: locationIDInput,
+  individual: AllTextInput, 
 };
 
 export default inputMap;
