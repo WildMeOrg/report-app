@@ -44,7 +44,39 @@ function NewSightingForm({ navigation }) {
   const [numCategories, setNumCategories] = useState(0); //number of custom field categories
   // const numStandardCategories = 4; //num categories in the standard form
   const [customValidation, setCustomValidation] = useState('');
-  const validationSchema = yup.object().shape({
+
+  // const validationSchema = yup.object().shape({
+  //   title: yup.string().required('Title is required'),
+  //   location: yup.string().required('Location is required'),
+  //   sightingContext: yup
+  //     .string()
+  //     .required('Sighting Context is required')
+  //     .min(8, 'Sighting Context must be more than 8 charaters')
+  //     .max(255, 'Sighting Context must be less than 255 charaters'),
+  //   status: yup.string(),
+  //   relationships: yup.string(),
+  //   matchIndividual: yup.string(),
+  //   photographerName: yup
+  //     .string()
+  //     .required('Photographer Name is required')
+  //     .min(3, 'Photographer Name must be at least 3 charaters')
+  //     .max(30, 'Photographer Name must be less than 30 charaters'),
+  //   photographerEmail: yup
+  //     .string()
+  //     .email('Photographer Email is not valid')
+  //     .required('Photographer Email is required'),
+  //   customFields: yup.object().shape(
+  //     customValidation[formSection - 3]
+  //     //   {
+  //     //   testind_test_field: yup.string().required('This Field is Required'),
+  //     //   berryTypes: yup.string().required('This Field is Required'),
+  //     //   Magicness: yup.string().required('This Field is Required'),
+  //     //   testo: yup.string().required('This Field is Required'),
+  //     //  }
+  //   ),
+  // });
+  const validationSchema = [];
+  const firstPageSchema = yup.object().shape({
     title: yup.string().required('Title is required'),
     location: yup.string().required('Location is required'),
     sightingContext: yup
@@ -52,9 +84,15 @@ function NewSightingForm({ navigation }) {
       .required('Sighting Context is required')
       .min(8, 'Sighting Context must be more than 8 charaters')
       .max(255, 'Sighting Context must be less than 255 charaters'),
+  });
+  validationSchema.push(firstPageSchema);
+  const secondPageSchema = yup.object().shape({
     status: yup.string(),
     relationships: yup.string(),
     matchIndividual: yup.string(),
+  });
+  validationSchema.push(secondPageSchema);
+  const thirdPageSchema = yup.object().shape({
     photographerName: yup
       .string()
       .required('Photographer Name is required')
@@ -64,16 +102,13 @@ function NewSightingForm({ navigation }) {
       .string()
       .email('Photographer Email is not valid')
       .required('Photographer Email is required'),
-    customFields: yup.object().shape(
-      customValidation
-      //   {
-      //   testind_test_field: yup.string().required('This Field is Required'),
-      //   berryTypes: yup.string().required('This Field is Required'),
-      //   Magicness: yup.string().required('This Field is Required'),
-      //   testo: yup.string().required('This Field is Required'),
-      //  }
-    ),
   });
+  validationSchema.push(thirdPageSchema);
+  const customPageSchema = yup.object().shape({
+    customFields: yup.object().shape(customValidation[formSection - 3]),
+  });
+  validationSchema.push(customPageSchema);
+
   const getConfig = async () => {
     //-----TESTING START-----//
     try {
@@ -112,6 +147,7 @@ function NewSightingForm({ navigation }) {
         (category) => {
           customFields.push(category);
           //console.log(category);
+          const categoryValidation = [];
           appConfig[sightingFormFields[category.type]]['value'][
             'definitions'
           ].map((field) => {
@@ -120,11 +156,28 @@ function NewSightingForm({ navigation }) {
               const customArray = [];
               customArray.push(field.name);
               customArray.push(field.type);
-              customRequiredFields.push(customArray);
+              // customRequiredFields.push(customArray);
+              categoryValidation.push(customArray);
             }
           });
+          if (categoryValidation) {
+            const test = categoryValidation.reduce(
+              (obj, item) => ({
+                ...obj,
+                [item[0]]:
+                  item[1] === 'string'
+                    ? yup.string().required('This is Required')
+                    : yup.number().required('This is Required'),
+              }),
+              {}
+            );
+            customRequiredFields.push(test);
+          } else {
+            customRequiredFields.push({});
+          }
         }
       );
+
       //console.log(customValidation);
       // const customArray = []
       // appConfig['site.custom.customFieldCategories']['value'].map(
@@ -132,18 +185,19 @@ function NewSightingForm({ navigation }) {
       //     customFields.push(category);
       //   }
       // );
-      const test = customRequiredFields.reduce(
-        (obj, item) => ({
-          ...obj,
-          [item[0]]:
-            item[1] === 'string'
-              ? yup.string().required('This is Required')
-              : yup.number().required('This is Required'),
-        }),
-        {}
-      );
-      //console.log(test);
-      setCustomValidation(test);
+
+      // const test = customRequiredFields.reduce(
+      //   (obj, item) => ({
+      //     ...obj,
+      //     [item[0]]:
+      //       item[1] === 'string'
+      //         ? yup.string().required('This is Required')
+      //         : yup.number().required('This is Required'),
+      //   }),
+      //   {}
+      // );
+      console.log(customRequiredFields);
+      setCustomValidation(customRequiredFields);
       setViews(customFields);
       setFormFields(appConfig);
     }
@@ -224,37 +278,44 @@ function NewSightingForm({ navigation }) {
           photographerEmail: '',
           customFields: {},
         }}
-        validationSchema={validationSchema}
-        onSubmit={(values, { resetForm }) => {
-          NetInfo.fetch().then((state) => {
-            if (state.isInternetReachable) {
-              alert(
-                'Internet Reachable: ' + JSON.stringify(values, undefined, 4)
-              );
-            } else {
-              AsyncStorage.getItem('SightingSubmissions', (err, result) => {
-                if (result) {
-                  let updatedSubmissions = JSON.parse(result);
-                  updatedSubmissions.push(values);
+        validationSchema={validationSchema[formSection > 3 ? 3 : formSection]}
+        onSubmit={(values, { resetForm }, formikProps) => {
+          if (formSection === numCategories + 2) {
+            NetInfo.fetch().then((state) => {
+              // NetInfo.addEventListener('connectionChange', (state) => {
+              console.log(state);
+              if (state.isInternetReachable) {
+                alert(
+                  'Internet Reachable: ' + JSON.stringify(values, undefined, 4)
+                );
+              } else {
+                AsyncStorage.getItem('SightingSubmissions', (err, result) => {
+                  if (result) {
+                    let updatedSubmissions = JSON.parse(result);
+                    updatedSubmissions.push(values);
 
-                  AsyncStorage.setItem(
-                    'SightingSubmissions',
-                    JSON.stringify(updatedSubmissions)
-                  );
-                } else {
-                  AsyncStorage.setItem(
-                    'SightingSubmissions',
-                    JSON.stringify([values])
-                  );
-                }
-              });
-              alert('No Internet', JSON.stringify(values, undefined, 4));
-            }
-          });
-          //resetForm();
+                    AsyncStorage.setItem(
+                      'SightingSubmissions',
+                      JSON.stringify(updatedSubmissions)
+                    );
+                  } else {
+                    AsyncStorage.setItem(
+                      'SightingSubmissions',
+                      JSON.stringify([values])
+                    );
+                  }
+                });
+                alert('No Internet', JSON.stringify(values, undefined, 4));
+              }
+            });
+            resetForm();
 
-          //setFormSection(0);
-          //navigation.navigate(screens.home);
+            setFormSection(0);
+            navigation.navigate(screens.home);
+          } else {
+            setFormSection(formSection + 1);
+            console.log(formikProps);
+          }
         }}
       >
         {(formikProps) => {
@@ -369,9 +430,11 @@ function NewSightingForm({ navigation }) {
                       <TouchableOpacity
                         //onPress={() => [setFormSection(1), form(formikProps)]}
                         onPress={() => [
-                          console.log(formikProps.touched),
-                          console.log(formikProps.errors),
+                          //console.log(formikProps.touched),
+                          //console.log(formikProps.errors),
                           formikProps.handleSubmit(),
+                          formikProps.setSubmitting(false),
+                          form(formikProps),
                         ]}
                       >
                         <View style={(globalStyles.button, styles.button)}>
@@ -465,7 +528,12 @@ function NewSightingForm({ navigation }) {
                           />
                         </View>
                       </TouchableOpacity>
-                      <TouchableOpacity onPress={() => setFormSection(2)}>
+                      <TouchableOpacity
+                        onPress={() => [
+                          formikProps.handleSubmit(),
+                          formikProps.setSubmitting(false),
+                        ]}
+                      >
                         <View style={styles.button}>
                           <Typography
                             id="NEXT"
@@ -541,7 +609,12 @@ function NewSightingForm({ navigation }) {
                           />
                         </View>
                       </TouchableOpacity>
-                      <TouchableOpacity onPress={() => setFormSection(3)}>
+                      <TouchableOpacity
+                        onPress={() => [
+                          formikProps.handleSubmit(),
+                          formikProps.setSubmitting(false),
+                        ]}
+                      >
                         <View style={styles.button}>
                           <Typography
                             id="NEXT"
@@ -604,7 +677,8 @@ function NewSightingForm({ navigation }) {
                         </TouchableOpacity>
                         <TouchableOpacity
                           onPress={() => [
-                            setFormSection(formSection + 1),
+                            formikProps.handleSubmit(),
+                            formikProps.setSubmitting(false),
                             form(formikProps),
                           ]}
                         >
