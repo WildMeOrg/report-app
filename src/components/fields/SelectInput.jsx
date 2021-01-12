@@ -26,7 +26,7 @@ export default function SelectInput(rest) {
       style={{ marginHorizontal: '5%' }}
       //onValueChange={(itemValue) => setChoice(itemValue)}
       onValueChange={props.handleChange(`customFields.${name}`)}
-      onBlur={props.onBlur}
+      onBlur={props.handleBlur(`customFields.${name}`)}
       isValid={
         props.touched.customFields &&
         (!props.errors.customFields ||

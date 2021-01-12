@@ -42,7 +42,7 @@ export default function AllTextInput(rest) {
       //   })
       // }
       value={props.values.customFields[name]}
-      onBlur={props.onBlur}
+      onBlur={props.handleBlur(`customFields.${name}`)}
       // isValid={
       //   getIn(props.touched, `customFields.${name}`) &&
       //   !getIn(props.errors, `customFields.${name}`)

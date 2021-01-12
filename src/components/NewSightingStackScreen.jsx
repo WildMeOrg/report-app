@@ -182,7 +182,7 @@ function NewSightingForm({ navigation }) {
     // console.log(formSection);
     const appConfig = await getConfig();
     const customRequiredFields = [];
-    console.log(appConfig);
+    //console.log(appConfig);
     if (appConfig) {
       const customFields = [];
       appConfig['site.custom.customFieldCategories']['value'].map(
@@ -219,7 +219,7 @@ function NewSightingForm({ navigation }) {
         }),
         {}
       );
-      console.log(test);
+      //console.log(test);
       setCustomValidation(test);
       setViews(customFields);
       setFormFields(appConfig);
@@ -328,11 +328,10 @@ function NewSightingForm({ navigation }) {
               alert('No Internet', JSON.stringify(values, undefined, 4));
             }
           });
+          //resetForm();
 
-          resetForm();
-
-          setFormSection(0);
-          navigation.navigate(screens.home);
+          //setFormSection(0);
+          //navigation.navigate(screens.home);
         }}
       >
         {(formikProps) => {
@@ -375,7 +374,7 @@ function NewSightingForm({ navigation }) {
                       autoCorrect={false}
                       onChangeText={formikProps.handleChange('title')}
                       value={formikProps.values.title}
-                      onBlur={formikProps.onBlur}
+                      onBlur={formikProps.handleBlur('title')}
                       isValid={
                         formikProps.touched.title && !formikProps.errors.title
                       }
@@ -388,8 +387,8 @@ function NewSightingForm({ navigation }) {
                       style={[
                         globalStyles.h2Text,
                         globalStyles.inputHeader,
-                        formikProps.touched.title &&
-                          formikProps.errors.title &&
+                        formikProps.touched.location &&
+                          formikProps.errors.location &&
                           globalStyles.h2TextInvalid,
                       ]}
                     />
@@ -398,7 +397,7 @@ function NewSightingForm({ navigation }) {
                       autoCorrect={false}
                       onChangeText={formikProps.handleChange('location')}
                       value={formikProps.values.location}
-                      onBlur={formikProps.onBlur}
+                      onBlur={formikProps.handleBlur('location')}
                       isValid={
                         formikProps.touched.location &&
                         !formikProps.errors.location
@@ -413,8 +412,8 @@ function NewSightingForm({ navigation }) {
                       style={[
                         globalStyles.h2Text,
                         globalStyles.inputHeader,
-                        formikProps.touched.title &&
-                          formikProps.errors.title &&
+                        formikProps.touched.sightingContext &&
+                          formikProps.errors.sightingContext &&
                           globalStyles.h2TextInvalid,
                       ]}
                     />
@@ -425,7 +424,7 @@ function NewSightingForm({ navigation }) {
                       numberOfLines={5}
                       onChangeText={formikProps.handleChange('sightingContext')}
                       value={formikProps.values.sightingContext}
-                      onBlur={formikProps.onBlur}
+                      onBlur={formikProps.handleBlur('sightingContext')}
                       isValid={
                         formikProps.touched.sightingContext &&
                         !formikProps.errors.sightingContext
@@ -445,7 +444,12 @@ function NewSightingForm({ navigation }) {
                         </View>
                       </TouchableOpacity>
                       <TouchableOpacity
-                        onPress={() => [setFormSection(1), form(formikProps)]}
+                        //onPress={() => [setFormSection(1), form(formikProps)]}
+                        onPress={() => [
+                          console.log(formikProps.touched),
+                          console.log(formikProps.errors),
+                          formikProps.handleSubmit(),
+                        ]}
                       >
                         <View style={(globalStyles.button, styles.button)}>
                           <Typography
@@ -473,7 +477,7 @@ function NewSightingForm({ navigation }) {
                       autoCorrect={false}
                       onChangeText={formikProps.handleChange('status')}
                       value={formikProps.values.status}
-                      onBlur={formikProps.onBlur}
+                      onBlur={formikProps.handleBlur('status')}
                       isValid={
                         formikProps.touched.status && !formikProps.errors.status
                       }
@@ -488,14 +492,14 @@ function NewSightingForm({ navigation }) {
                     <TextInput
                       style={[
                         globalStyles.inputField,
-                        formikProps.touched.status &&
-                          formikProps.errors.status &&
+                        formikProps.touched.relationships &&
+                          formikProps.errors.relationships &&
                           globalStyles.inputInvalid,
                       ]}
                       autoCorrect={false}
                       onChangeText={formikProps.handleChange('relationships')}
                       value={formikProps.values.relationships}
-                      onBlur={formikProps.onBlur}
+                      onBlur={formikProps.handleBlur('relationships')}
                       isValid={
                         formikProps.touched.relationships &&
                         !formikProps.errors.relationships
@@ -519,7 +523,7 @@ function NewSightingForm({ navigation }) {
                       autoCorrect={false}
                       onChangeText={formikProps.handleChange('matchIndividual')}
                       value={formikProps.values.matchIndividual}
-                      onBlur={formikProps.onBlur}
+                      onBlur={formikProps.handleBlur('matchIndividual')}
                       isValid={
                         formikProps.touched.matchIndividual &&
                         !formikProps.errors.matchIndividual
@@ -556,8 +560,8 @@ function NewSightingForm({ navigation }) {
                       style={[
                         globalStyles.h2Text,
                         globalStyles.inputHeader,
-                        formikProps.touched.title &&
-                          formikProps.errors.title &&
+                        formikProps.touched.photographerName &&
+                          formikProps.errors.photographerName &&
                           globalStyles.h2TextInvalid,
                       ]}
                     />
@@ -568,7 +572,7 @@ function NewSightingForm({ navigation }) {
                         'photographerName'
                       )}
                       value={formikProps.values.photographerName}
-                      onBlur={formikProps.onBlur}
+                      onBlur={formikProps.handleBlur('photographerName')}
                       isValid={
                         formikProps.touched.photographerName &&
                         !formikProps.errors.photographerName
@@ -583,8 +587,8 @@ function NewSightingForm({ navigation }) {
                       style={[
                         globalStyles.h2Text,
                         globalStyles.inputHeader,
-                        formikProps.touched.title &&
-                          formikProps.errors.title &&
+                        formikProps.touched.photographerEmail &&
+                          formikProps.errors.photographerEmail &&
                           globalStyles.h2TextInvalid,
                       ]}
                     />
@@ -595,7 +599,7 @@ function NewSightingForm({ navigation }) {
                         'photographerEmail'
                       )}
                       value={formikProps.values.photographerEmail}
-                      onBlur={formikProps.onBlur}
+                      onBlur={formikProps.handleBlur('photographerEmail')}
                       isValid={
                         formikProps.touched.photographerEmail &&
                         !formikProps.errors.photographerEmail
