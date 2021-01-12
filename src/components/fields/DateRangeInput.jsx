@@ -6,6 +6,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import globalStyles from '../../styles/globalStyles';
 import styles from '../../styles/newSightingStyles';
 import theme from '../../constants/theme';
+import { onChange } from 'react-native-reanimated';
 
 //TODO: this still needs to be tested and validated
 export default function DateRangeInput(rest) {
@@ -15,7 +16,11 @@ export default function DateRangeInput(rest) {
   const [modeStart, setModeStart] = useState('date');
   const [showStart, setShowStart] = useState(false);
   const showModeStart = (currMode) => {
-    setShowStart(true);
+    if (showStart) {
+      setShowStart(false);
+    } else {
+      setShowStart(true);
+    }
     setModeStart(currMode);
   };
   const showDatePickerStart = () => {
@@ -34,7 +39,11 @@ export default function DateRangeInput(rest) {
   const [modeEnd, setModeEnd] = useState('date');
   const [showEnd, setShowEnd] = useState(false);
   const showModeEnd = (currMode) => {
-    setShowEnd(true);
+    if (showEnd) {
+      setShowEnd(false);
+    } else {
+      setShowEnd(true);
+    }
     setModeEnd(currMode);
   };
   const showDatePickerEnd = () => {
@@ -82,25 +91,22 @@ export default function DateRangeInput(rest) {
       <View
         style={{
           marginHorizontal: '5%',
-          height: '10%',
-          justifyContent: 'center',
-          alignItems: 'center',
-          borderColor: theme.black,
-          borderWidth: 1,
-          borderRadius: 6,
+          //alignItems: 'center',
+          // borderColor: theme.black,
+          // borderWidth: 1,
+          // borderRadius: 6,
         }}
       >
         {showStart && (
           <DateTimePicker
             style={{
               flex: 1,
-              height: '20%',
-              justifyContent: 'center',
+              //justifyContent: 'center',
               alignItems: 'flex-start',
               paddingHorizontal: '20%',
-              borderColor: theme.red,
-              borderWidth: 1,
-              borderRadius: 6,
+              // borderColor: theme.red,
+              // borderWidth: 1,
+              // borderRadius: 6,
             }}
             value={dateStart}
             display="default"
@@ -131,15 +137,24 @@ export default function DateRangeInput(rest) {
       <View
         style={{
           marginHorizontal: '5%',
-          borderColor: '#2c2c2c80',
-          alignContent: 'center',
-          borderWidth: 1,
-          borderRadius: 6,
+          justifyContent: 'center',
+          //alignItems: 'center',
+          // borderColor: theme.black,
+          // borderWidth: 1,
+          // borderRadius: 6,
         }}
       >
         {showEnd && (
           <DateTimePicker
-            style={{ flex: 1 }}
+            style={{
+              flex: 1,
+              justifyContent: 'center',
+              alignItems: 'flex-start',
+              paddingHorizontal: '20%',
+              // borderColor: theme.red,
+              // borderWidth: 1,
+              // borderRadius: 6,
+            }}
             value={dateEnd}
             display="default"
             mode={modeEnd}
