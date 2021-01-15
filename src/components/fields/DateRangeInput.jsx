@@ -5,6 +5,7 @@ import { Icon } from 'react-native-elements';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import globalStyles from '../../styles/globalStyles';
 import styles from '../../styles/newSightingStyles';
+import Typography from '../../components/Typography';
 
 //TODO: this still needs to be tested and validated
 export default function DateRangeInput(rest) {
@@ -63,14 +64,14 @@ export default function DateRangeInput(rest) {
         Start Date: {formatDate(dateStart)}
       </Text>
       <View style={styles.horizontal}>
-        <Text style={styles.dtpText}>Edit Date:</Text>
+        <Typography id="EDIT_DATE" style={styles.dtpText}/>
         <Icon
           name="today"
           type="material-icons"
           onPress={showDatePickerStart}
           raised={true}
         />
-        <Text style={styles.dtpText}>Edit Time:</Text>
+        <Typography id="EDIT_TIME" style={styles.dtpText}/>
         <Icon
           name="schedule"
           type="material-icons"
@@ -90,14 +91,14 @@ export default function DateRangeInput(rest) {
         End Date: {formatDate(dateEnd)}
       </Text>
       <View style={styles.horizontal}>
-        <Text style={styles.dtpText}>Edit Date:</Text>
+        <Typography id="EDIT_DATE" style={styles.dtpText}/>
         <Icon
           name="today"
           type="material-icons"
           onPress={showDatePickerEnd}
           raised={true}
         />
-        <Text style={styles.dtpText}>Edit Time:</Text>
+        <Typography id="EDIT_TIME" style={styles.dtpText}/>
         <Icon
           name="schedule"
           type="material-icons"

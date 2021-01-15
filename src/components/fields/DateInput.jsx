@@ -5,6 +5,7 @@ import { Icon } from 'react-native-elements';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import globalStyles from '../../styles/globalStyles';
 import styles from '../../styles/newSightingStyles';
+import Typography from '../../components/Typography';
 
 //TODO: this still needs to be tested and validation added
 export default function DateInput(rest){
@@ -38,9 +39,9 @@ export default function DateInput(rest){
         <View>
             <View style= {styles.horizontal}>
             <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>Date: {formatDate(date)}</Text>
-                <Text style={styles.dtpText}>Edit Date:</Text>
+                <Typography id="EDIT_DATE" style={styles.dtpText}/>
                 <Icon name="today" type="material-icons" onPress={showDatePicker} raised={true} /> 
-                <Text style={styles.dtpText}>Edit Time:</Text>
+                <Typography id="EDIT_TIME" style={styles.dtpText}/>
                 <Icon name="schedule" type="material-icons" onPress={showTimePicker} raised={true}/> 
                 { show  && <DateTimePicker 
                 value={date}

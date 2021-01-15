@@ -604,9 +604,11 @@ function NewSightingForm({ navigation }) {
                     {/* Date Input*/}
                     <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>Date: {formatDate(date)}</Text>
                     <View style = {styles.horizontal}>
-                      <Text style={styles.dtpText}>Edit Date:</Text>
+                      {/* <Text style={styles.dtpText}>Edit Date:</Text> */}
+                      <Typography id="EDIT_DATE" style={styles.dtpText}/>
                       <Icon name="today" type="material-icons" onPress={showDatePicker} raised={true} /> 
-                      <Text style={styles.dtpText}>Edit Time:</Text>
+                      {/* <Text style={styles.dtpText}>Edit Time:</Text> */}
+                      <Typography id="EDIT_TIME" style={styles.dtpText}/>
                       <Icon name="schedule" type="material-icons" onPress={showTimePicker} raised={true}/> 
                       { show  && <DateTimePicker 
                       value={date}
