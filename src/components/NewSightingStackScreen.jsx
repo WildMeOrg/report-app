@@ -27,8 +27,9 @@ import Typography from '../components/Typography';
 import { useTheme } from '@react-navigation/native';
 import { get } from 'lodash-es';
 import DateTimePicker from '@react-native-community/datetimepicker'; //for testing
-import { Picker } from '@react-native-community/picker'; //for testing
-import SelectMultiple from 'react-native-select-multiple'; //for testing
+import {Picker} from '@react-native-community/picker'; //for testing 
+import SelectMultiple from 'react-native-select-multiple'; //for testing 
+import * as DocumentPicker from 'expo-document-picker'; //for testing 
 import { Button } from 'react-native';
 import testSettingsPacket from '../constants/testSettingsPacket';
 // import standardFrom from '../components/fields/standardForm';

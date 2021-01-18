@@ -6,10 +6,10 @@ import styles from '../../styles/newSightingStyles';
 
 export default function AreaInput(rest){
     const {name,schema,props} = rest;
-    const [north,setNorth] = useState(0.0);
-    const [east,setEast] = useState(0.0);
-    const [south,setSouth] = useState(0.0);
-    const [west,setWest] = useState(0.0);
+    const [north,setNorth] = useState('0.0');
+    const [east,setEast] = useState('0.0');
+    const [south,setSouth] = useState('0.0');
+    const [west,setWest] = useState('0.0');
     //TODO test
     return(
         <View>
