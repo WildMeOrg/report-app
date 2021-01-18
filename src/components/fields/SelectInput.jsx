@@ -9,7 +9,7 @@ export default function SelectInput(rest) {
   //TODO possibly make a style for the picker?
   //TODO validation
   const { name, schema, props } = rest;
-  console.log(props);
+  //console.log(props);
   const [choice, setChoice] = useState(schema.choices[0].label);
   return (
     // //error: undefined evaluating 'item.label.length'
@@ -26,7 +26,7 @@ export default function SelectInput(rest) {
       style={{ marginHorizontal: '5%' }}
       //onValueChange={(itemValue) => setChoice(itemValue)}
       onValueChange={props.handleChange(`customFields.${name}`)}
-      onBlur={props.onBlur}
+      onBlur={props.handleBlur(`customFields.${name}`)}
       isValid={
         props.touched.customFields &&
         (!props.errors.customFields ||

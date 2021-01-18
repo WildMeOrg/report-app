@@ -29,6 +29,7 @@ import { get } from 'lodash-es';
 import DateTimePicker from '@react-native-community/datetimepicker'; //for testing
 import { Picker } from '@react-native-community/picker'; //for testing
 import SelectMultiple from 'react-native-select-multiple'; //for testing
+import * as DocumentPicker from 'expo-document-picker'; //for testing
 import { Button } from 'react-native';
 import testSettingsPacket from '../constants/testSettingsPacket';
 // import standardFrom from '../components/fields/standardForm';
@@ -37,83 +38,6 @@ import NetInfo from '@react-native-community/netinfo';
 const NewSightingStack = createStackNavigator();
 
 function NewSightingForm({ navigation }) {
-  //FOR TESTING PURPOSES ONLY
-  //Date time picker tests
-  const [date, setDate] = useState(new Date());
-  const [date2, setDate2] = useState(new Date());
-  const [mode, setMode] = useState('date');
-  const [mode2, setMode2] = useState('date');
-  const [show, setShow] = useState(false);
-  const [show2, setShow2] = useState(false);
-  const showMode = (currMode) => {
-    setShow(true);
-    setMode(currMode);
-  };
-  const showMode2 = (currMode) => {
-    setShow2(true);
-    setMode2(currMode);
-  };
-  const showDatePicker = () => {
-    showMode('date');
-  };
-  const showTimePicker = () => {
-    showMode('time');
-  };
-  const showDatePicker2 = () => {
-    showMode2('date');
-  };
-  const showTimePicker2 = () => {
-    showMode2('time');
-  };
-  function formatDate(date) {
-    var options = {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric',
-    };
-    return new Date(date).toLocaleDateString([], options);
-  }
-  const onChange = (event, selectedDate) => {
-    const currDate = selectedDate || date;
-    setShow(Platform.OS === 'ios');
-    setDate(currDate);
-  };
-  const onChange2 = (event, selectedDate) => {
-    const currDate = selectedDate || date2;
-    setShow2(Platform.OS === 'ios');
-    setDate2(currDate);
-  };
-  //select constants
-  const selectOptions = [
-    { label: 'hark', value: 'hark' },
-    { label: 'do not hark', value: 'do not hark' },
-    { label: 'hark2', value: 'hark2' },
-    { label: 'hark3', value: 'hark3' },
-  ];
-  const [choice, setChoice] = useState(selectOptions[0].label);
-  //multiselect constants
-  const multiSelectOptions = [
-    { label: 'Choice 1', value: 'Choice 1', key: '1' },
-    { label: 'Choice 2', value: 'Choice 2', key: '2' },
-    { label: 'Choice 3', value: 'Choice 3', key: '3' },
-    { label: 'Choice 4', value: 'Choice 4', key: '4' },
-  ];
-  const [selectedItems, setSelectedItems] = useState([]);
-  const onSelectionsChange = (items) => {
-    setSelectedItems(items);
-  };
-  //lat long constants
-  const [lat, setLat] = useState('0.0');
-  const [long, setLong] = useState('0.0');
-  //area constants
-  const [north, setNorth] = useState('0.0');
-  const [east, setEast] = useState('0.0');
-  const [south, setSouth] = useState('0.0');
-  const [west, setWest] = useState('0.0');
-  //END OF TEST
-
   const errorData = 'Error no data';
   const [formSection, setFormSection] = useState(0); //what is the current section/screen in the form
   const [formFields, setFormFields] = useState(''); //all the custom fields
@@ -121,7 +45,39 @@ function NewSightingForm({ navigation }) {
   const [numCategories, setNumCategories] = useState(0); //number of custom field categories
   // const numStandardCategories = 4; //num categories in the standard form
   const [customValidation, setCustomValidation] = useState('');
-  const validationSchema = yup.object().shape({
+
+  // const validationSchema = yup.object().shape({
+  //   title: yup.string().required('Title is required'),
+  //   location: yup.string().required('Location is required'),
+  //   sightingContext: yup
+  //     .string()
+  //     .required('Sighting Context is required')
+  //     .min(8, 'Sighting Context must be more than 8 charaters')
+  //     .max(255, 'Sighting Context must be less than 255 charaters'),
+  //   status: yup.string(),
+  //   relationships: yup.string(),
+  //   matchIndividual: yup.string(),
+  //   photographerName: yup
+  //     .string()
+  //     .required('Photographer Name is required')
+  //     .min(3, 'Photographer Name must be at least 3 charaters')
+  //     .max(30, 'Photographer Name must be less than 30 charaters'),
+  //   photographerEmail: yup
+  //     .string()
+  //     .email('Photographer Email is not valid')
+  //     .required('Photographer Email is required'),
+  //   customFields: yup.object().shape(
+  //     customValidation[formSection - 3]
+  //     //   {
+  //     //   testind_test_field: yup.string().required('This Field is Required'),
+  //     //   berryTypes: yup.string().required('This Field is Required'),
+  //     //   Magicness: yup.string().required('This Field is Required'),
+  //     //   testo: yup.string().required('This Field is Required'),
+  //     //  }
+  //   ),
+  // });
+  const validationSchema = [];
+  const firstPageSchema = yup.object().shape({
     title: yup.string().required('Title is required'),
     location: yup.string().required('Location is required'),
     sightingContext: yup
@@ -129,9 +85,15 @@ function NewSightingForm({ navigation }) {
       .required('Sighting Context is required')
       .min(8, 'Sighting Context must be more than 8 charaters')
       .max(255, 'Sighting Context must be less than 255 charaters'),
+  });
+  validationSchema.push(firstPageSchema);
+  const secondPageSchema = yup.object().shape({
     status: yup.string(),
     relationships: yup.string(),
     matchIndividual: yup.string(),
+  });
+  validationSchema.push(secondPageSchema);
+  const thirdPageSchema = yup.object().shape({
     photographerName: yup
       .string()
       .required('Photographer Name is required')
@@ -141,16 +103,13 @@ function NewSightingForm({ navigation }) {
       .string()
       .email('Photographer Email is not valid')
       .required('Photographer Email is required'),
-    customFields: yup.object().shape(
-      customValidation
-      //   {
-      //   testind_test_field: yup.string().required('This Field is Required'),
-      //   berryTypes: yup.string().required('This Field is Required'),
-      //   Magicness: yup.string().required('This Field is Required'),
-      //   testo: yup.string().required('This Field is Required'),
-      //  }
-    ),
   });
+  validationSchema.push(thirdPageSchema);
+  const customPageSchema = yup.object().shape({
+    customFields: yup.object().shape(customValidation[formSection - 3]),
+  });
+  validationSchema.push(customPageSchema);
+
   const getConfig = async () => {
     //-----TESTING START-----//
     try {
@@ -182,13 +141,14 @@ function NewSightingForm({ navigation }) {
     // console.log(formSection);
     const appConfig = await getConfig();
     const customRequiredFields = [];
-    console.log(appConfig);
+    //console.log(appConfig);
     if (appConfig) {
       const customFields = [];
       appConfig['site.custom.customFieldCategories']['value'].map(
         (category) => {
           customFields.push(category);
           //console.log(category);
+          const categoryValidation = [];
           appConfig[sightingFormFields[category.type]]['value'][
             'definitions'
           ].map((field) => {
@@ -197,11 +157,28 @@ function NewSightingForm({ navigation }) {
               const customArray = [];
               customArray.push(field.name);
               customArray.push(field.type);
-              customRequiredFields.push(customArray);
+              // customRequiredFields.push(customArray);
+              categoryValidation.push(customArray);
             }
           });
+          if (categoryValidation) {
+            const test = categoryValidation.reduce(
+              (obj, item) => ({
+                ...obj,
+                [item[0]]:
+                  item[1] === 'string'
+                    ? yup.string().required('This is Required')
+                    : yup.number().required('This is Required'),
+              }),
+              {}
+            );
+            customRequiredFields.push(test);
+          } else {
+            customRequiredFields.push({});
+          }
         }
       );
+
       //console.log(customValidation);
       // const customArray = []
       // appConfig['site.custom.customFieldCategories']['value'].map(
@@ -209,18 +186,19 @@ function NewSightingForm({ navigation }) {
       //     customFields.push(category);
       //   }
       // );
-      const test = customRequiredFields.reduce(
-        (obj, item) => ({
-          ...obj,
-          [item[0]]:
-            item[1] === 'string'
-              ? yup.string().required('This is Required')
-              : yup.number().required('This is Required'),
-        }),
-        {}
-      );
-      console.log(test);
-      setCustomValidation(test);
+
+      // const test = customRequiredFields.reduce(
+      //   (obj, item) => ({
+      //     ...obj,
+      //     [item[0]]:
+      //       item[1] === 'string'
+      //         ? yup.string().required('This is Required')
+      //         : yup.number().required('This is Required'),
+      //   }),
+      //   {}
+      // );
+      console.log(customRequiredFields);
+      setCustomValidation(customRequiredFields);
       setViews(customFields);
       setFormFields(appConfig);
     }
@@ -301,38 +279,44 @@ function NewSightingForm({ navigation }) {
           photographerEmail: '',
           customFields: {},
         }}
-        validationSchema={validationSchema}
-        onSubmit={(values, { resetForm }) => {
-          NetInfo.fetch().then((state) => {
-            if (state.isInternetReachable) {
-              alert(
-                'Internet Reachable: ' + JSON.stringify(values, undefined, 4)
-              );
-            } else {
-              AsyncStorage.getItem('SightingSubmissions', (err, result) => {
-                if (result) {
-                  let updatedSubmissions = JSON.parse(result);
-                  updatedSubmissions.push(values);
+        validationSchema={validationSchema[formSection > 3 ? 3 : formSection]}
+        onSubmit={(values, { resetForm }, formikProps) => {
+          if (formSection === numCategories + 2) {
+            NetInfo.fetch().then((state) => {
+              // NetInfo.addEventListener('connectionChange', (state) => {
+              console.log(state);
+              if (state.isInternetReachable) {
+                alert(
+                  'Internet Reachable: ' + JSON.stringify(values, undefined, 4)
+                );
+              } else {
+                AsyncStorage.getItem('SightingSubmissions', (err, result) => {
+                  if (result) {
+                    let updatedSubmissions = JSON.parse(result);
+                    updatedSubmissions.push(values);
 
-                  AsyncStorage.setItem(
-                    'SightingSubmissions',
-                    JSON.stringify(updatedSubmissions)
-                  );
-                } else {
-                  AsyncStorage.setItem(
-                    'SightingSubmissions',
-                    JSON.stringify([values])
-                  );
-                }
-              });
-              alert('No Internet', JSON.stringify(values, undefined, 4));
-            }
-          });
+                    AsyncStorage.setItem(
+                      'SightingSubmissions',
+                      JSON.stringify(updatedSubmissions)
+                    );
+                  } else {
+                    AsyncStorage.setItem(
+                      'SightingSubmissions',
+                      JSON.stringify([values])
+                    );
+                  }
+                });
+                alert('No Internet', JSON.stringify(values, undefined, 4));
+              }
+            });
+            resetForm();
 
-          resetForm();
-
-          setFormSection(0);
-          navigation.navigate(screens.home);
+            setFormSection(0);
+            navigation.navigate(screens.home);
+          } else {
+            setFormSection(formSection + 1);
+            console.log(formikProps);
+          }
         }}
       >
         {(formikProps) => {
@@ -375,7 +359,7 @@ function NewSightingForm({ navigation }) {
                       autoCorrect={false}
                       onChangeText={formikProps.handleChange('title')}
                       value={formikProps.values.title}
-                      onBlur={formikProps.onBlur}
+                      onBlur={formikProps.handleBlur('title')}
                       isValid={
                         formikProps.touched.title && !formikProps.errors.title
                       }
@@ -388,8 +372,8 @@ function NewSightingForm({ navigation }) {
                       style={[
                         globalStyles.h2Text,
                         globalStyles.inputHeader,
-                        formikProps.touched.title &&
-                          formikProps.errors.title &&
+                        formikProps.touched.location &&
+                          formikProps.errors.location &&
                           globalStyles.h2TextInvalid,
                       ]}
                     />
@@ -398,7 +382,7 @@ function NewSightingForm({ navigation }) {
                       autoCorrect={false}
                       onChangeText={formikProps.handleChange('location')}
                       value={formikProps.values.location}
-                      onBlur={formikProps.onBlur}
+                      onBlur={formikProps.handleBlur('location')}
                       isValid={
                         formikProps.touched.location &&
                         !formikProps.errors.location
@@ -413,8 +397,8 @@ function NewSightingForm({ navigation }) {
                       style={[
                         globalStyles.h2Text,
                         globalStyles.inputHeader,
-                        formikProps.touched.title &&
-                          formikProps.errors.title &&
+                        formikProps.touched.sightingContext &&
+                          formikProps.errors.sightingContext &&
                           globalStyles.h2TextInvalid,
                       ]}
                     />
@@ -425,7 +409,7 @@ function NewSightingForm({ navigation }) {
                       numberOfLines={5}
                       onChangeText={formikProps.handleChange('sightingContext')}
                       value={formikProps.values.sightingContext}
-                      onBlur={formikProps.onBlur}
+                      onBlur={formikProps.handleBlur('sightingContext')}
                       isValid={
                         formikProps.touched.sightingContext &&
                         !formikProps.errors.sightingContext
@@ -445,7 +429,14 @@ function NewSightingForm({ navigation }) {
                         </View>
                       </TouchableOpacity>
                       <TouchableOpacity
-                        onPress={() => [setFormSection(1), form(formikProps)]}
+                        //onPress={() => [setFormSection(1), form(formikProps)]}
+                        onPress={() => [
+                          //console.log(formikProps.touched),
+                          //console.log(formikProps.errors),
+                          formikProps.handleSubmit(),
+                          formikProps.setSubmitting(false),
+                          form(formikProps),
+                        ]}
                       >
                         <View style={(globalStyles.button, styles.button)}>
                           <Typography
@@ -473,7 +464,7 @@ function NewSightingForm({ navigation }) {
                       autoCorrect={false}
                       onChangeText={formikProps.handleChange('status')}
                       value={formikProps.values.status}
-                      onBlur={formikProps.onBlur}
+                      onBlur={formikProps.handleBlur('status')}
                       isValid={
                         formikProps.touched.status && !formikProps.errors.status
                       }
@@ -488,14 +479,14 @@ function NewSightingForm({ navigation }) {
                     <TextInput
                       style={[
                         globalStyles.inputField,
-                        formikProps.touched.status &&
-                          formikProps.errors.status &&
+                        formikProps.touched.relationships &&
+                          formikProps.errors.relationships &&
                           globalStyles.inputInvalid,
                       ]}
                       autoCorrect={false}
                       onChangeText={formikProps.handleChange('relationships')}
                       value={formikProps.values.relationships}
-                      onBlur={formikProps.onBlur}
+                      onBlur={formikProps.handleBlur('relationships')}
                       isValid={
                         formikProps.touched.relationships &&
                         !formikProps.errors.relationships
@@ -519,7 +510,7 @@ function NewSightingForm({ navigation }) {
                       autoCorrect={false}
                       onChangeText={formikProps.handleChange('matchIndividual')}
                       value={formikProps.values.matchIndividual}
-                      onBlur={formikProps.onBlur}
+                      onBlur={formikProps.handleBlur('matchIndividual')}
                       isValid={
                         formikProps.touched.matchIndividual &&
                         !formikProps.errors.matchIndividual
@@ -538,7 +529,12 @@ function NewSightingForm({ navigation }) {
                           />
                         </View>
                       </TouchableOpacity>
-                      <TouchableOpacity onPress={() => setFormSection(2)}>
+                      <TouchableOpacity
+                        onPress={() => [
+                          formikProps.handleSubmit(),
+                          formikProps.setSubmitting(false),
+                        ]}
+                      >
                         <View style={styles.button}>
                           <Typography
                             id="NEXT"
@@ -556,8 +552,8 @@ function NewSightingForm({ navigation }) {
                       style={[
                         globalStyles.h2Text,
                         globalStyles.inputHeader,
-                        formikProps.touched.title &&
-                          formikProps.errors.title &&
+                        formikProps.touched.photographerName &&
+                          formikProps.errors.photographerName &&
                           globalStyles.h2TextInvalid,
                       ]}
                     />
@@ -568,7 +564,7 @@ function NewSightingForm({ navigation }) {
                         'photographerName'
                       )}
                       value={formikProps.values.photographerName}
-                      onBlur={formikProps.onBlur}
+                      onBlur={formikProps.handleBlur('photographerName')}
                       isValid={
                         formikProps.touched.photographerName &&
                         !formikProps.errors.photographerName
@@ -583,8 +579,8 @@ function NewSightingForm({ navigation }) {
                       style={[
                         globalStyles.h2Text,
                         globalStyles.inputHeader,
-                        formikProps.touched.title &&
-                          formikProps.errors.title &&
+                        formikProps.touched.photographerEmail &&
+                          formikProps.errors.photographerEmail &&
                           globalStyles.h2TextInvalid,
                       ]}
                     />
@@ -595,7 +591,7 @@ function NewSightingForm({ navigation }) {
                         'photographerEmail'
                       )}
                       value={formikProps.values.photographerEmail}
-                      onBlur={formikProps.onBlur}
+                      onBlur={formikProps.handleBlur('photographerEmail')}
                       isValid={
                         formikProps.touched.photographerEmail &&
                         !formikProps.errors.photographerEmail
@@ -614,7 +610,12 @@ function NewSightingForm({ navigation }) {
                           />
                         </View>
                       </TouchableOpacity>
-                      <TouchableOpacity onPress={() => setFormSection(3)}>
+                      <TouchableOpacity
+                        onPress={() => [
+                          formikProps.handleSubmit(),
+                          formikProps.setSubmitting(false),
+                        ]}
+                      >
                         <View style={styles.button}>
                           <Typography
                             id="NEXT"
@@ -656,6 +657,9 @@ function NewSightingForm({ navigation }) {
                               name={item.name}
                               displayType={item.displayType}
                               props={formikProps}
+                              locationID={
+                                formFields['site.custom.regions']['value']['locationID']
+                              }
                             />
                           ))
                         ) : (
@@ -677,7 +681,8 @@ function NewSightingForm({ navigation }) {
                         </TouchableOpacity>
                         <TouchableOpacity
                           onPress={() => [
-                            setFormSection(formSection + 1),
+                            formikProps.handleSubmit(),
+                            formikProps.setSubmitting(false),
                             form(formikProps),
                           ]}
                         >

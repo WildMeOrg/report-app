@@ -60,17 +60,10 @@ export default StyleSheet.create({
     borderRadius: 20,
     margin: '5%',
   },
-  // used for the testing datetimepicker 
-  button2: {
-    backgroundColor: theme.primary,
-    paddingVertical: buttonPadding,
-    paddingHorizontal: 20,
-    borderRadius: 20,
-    margin: '5%',
-  },
-  dtpText:{
+  // used for the testing datetimepicker
+  dtpText: {
     paddingTop: 20,
-    fontSize: 16,    
+    fontSize: 16,
     fontFamily: 'Lato-Regular',
   },
   //
