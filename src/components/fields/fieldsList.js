@@ -24,7 +24,7 @@ const inputMap = {
   area: AreaInput,
   file: FileInput,
   locationIds: locationIDInput,
-  individual: AllTextInput, 
+  individual: AllTextInput,
 };
 
 export default inputMap;

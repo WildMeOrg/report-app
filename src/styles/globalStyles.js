@@ -39,7 +39,7 @@ export default StyleSheet.create({
     fontSize: 18,
     margin: '5%',
     marginBottom: '3%',
-    fontStyle: 'normal'
+    fontStyle: 'normal',
   },
   subText: {
     fontSize: 18,

@@ -74,14 +74,14 @@ export default function DateRangeInput(rest) {
         Start Date: {formatDate(dateStart)}
       </Text>
       <View style={styles.horizontal}>
-        <Typography id="EDIT_DATE" style={styles.dtpText}/>
+        <Typography id="EDIT_DATE" style={styles.dtpText} />
         <Icon
           name="today"
           type="material-icons"
           onPress={showDatePickerStart}
           raised={true}
         />
-        <Typography id="EDIT_TIME" style={styles.dtpText}/>
+        <Typography id="EDIT_TIME" style={styles.dtpText} />
         <Icon
           name="schedule"
           type="material-icons"
@@ -120,14 +120,14 @@ export default function DateRangeInput(rest) {
         End Date: {formatDate(dateEnd)}
       </Text>
       <View style={styles.horizontal}>
-        <Typography id="EDIT_DATE" style={styles.dtpText}/>
+        <Typography id="EDIT_DATE" style={styles.dtpText} />
         <Icon
           name="today"
           type="material-icons"
           onPress={showDatePickerEnd}
           raised={true}
         />
-        <Typography id="EDIT_TIME" style={styles.dtpText}/>
+        <Typography id="EDIT_TIME" style={styles.dtpText} />
         <Icon
           name="schedule"
           type="material-icons"
