@@ -23,7 +23,8 @@ export default function SelectInput(rest) {
       //selectedValue={choice}
       selectedValue={props.values.customFields[name]}
       //style={{ height: '50%', width: '50%', margin: '5%' }}
-      style={{ marginHorizontal: '5%' }}
+      style={{ marginHorizontal: '5%', height: 125 }}
+      itemStyle={{height: 125}}
       //onValueChange={(itemValue) => setChoice(itemValue)}
       onValueChange={props.handleChange(`customFields.${name}`)}
       onBlur={props.handleBlur(`customFields.${name}`)}
@@ -38,6 +39,11 @@ export default function SelectInput(rest) {
         props.errors.customFields.name
       }
     >
+      <Picker.Item
+        label="Please Select An Option"
+        value="Default Option"
+        key="0"
+      />
       {schema.choices.map((item) => {
         return (
           <Picker.Item label={item.label} value={item.value} key={item.id} />

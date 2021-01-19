@@ -12,9 +12,9 @@ export default function AreaInput(rest) {
   const [west, setWest] = useState('0.0');
   //TODO test
   return (
-    <View>
+    <View style={{flexDirection: 'column', flex: 1}}>
       <View style={styles.horizontal}>
-        <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>N:</Text>
+        <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>North:</Text>
         <TextInput
           style={[globalStyles.inputField, { width: '20%' }]}
           keyboardType={'numeric'}
@@ -23,7 +23,7 @@ export default function AreaInput(rest) {
           value={north}
           onChangeText={(val) => setNorth(val)}
         />
-        <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>E:</Text>
+        <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>East:</Text>
         <TextInput
           style={[globalStyles.inputField, { width: '20%' }]}
           keyboardType={'numeric'}
@@ -34,7 +34,7 @@ export default function AreaInput(rest) {
         />
       </View>
       <View style={styles.horizontal}>
-        <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>S:</Text>
+        <Text style={[globalStyles.h2Text, globalStyles.inputHeader, {paddingRight: '1%'}]}>South:</Text>
         <TextInput
           style={[globalStyles.inputField, { width: '20%' }]}
           keyboardType={'numeric'}
@@ -43,7 +43,7 @@ export default function AreaInput(rest) {
           value={south}
           onChangeText={(val) => setSouth(val)}
         />
-        <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>W:</Text>
+        <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>West:</Text>
         <TextInput
           style={[globalStyles.inputField, { width: '20%' }]}
           keyboardType={'numeric'}
