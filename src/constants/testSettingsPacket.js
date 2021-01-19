@@ -101,7 +101,7 @@ export default {
           className: 'org.ecocean.MarkedIndividual',
           id: 'c32e690c-e308-4362-82d5-bc97579e0c7f',
           type: 'string',
-          required: true,
+          required: false,
         },
         {
           schema: {
