@@ -179,6 +179,8 @@ function NewSightingForm({ navigation }) {
       }
     ]
   }
+  //feetmeters variable 
+  const [feetmeters,setFeetMeters] = useState('0.0');
  //END OF CUSTOM FIELD TEST
 
   const [formSection, setFormSection] = useState(0); //what is the current section/screen in the form
@@ -782,6 +784,26 @@ function NewSightingForm({ navigation }) {
                             }
                           })
                         }
+                      </Picker>
+                    </View>
+                     {/* feetmeters*/}
+                    <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
+                    <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>Feet/Meter: </Text>
+                     <TextInput
+                          style={[globalStyles.inputField,{width: '20%'}]}
+                          textAlign={'right'}
+                          keyboardType={'numeric'}
+                          placeholder={'0.0'}
+                          autoCorrect={false}
+                          value={feetmeters.toString()}
+                          onChangeText={(val) => setFeetMeters(val)}
+                        />
+                      <Picker 
+                        selectedValue={choice}
+                        style={{height: 50, width: 125}}
+                        onValueChange={(itemValue) => setChoice(itemValue)}>
+                        <Picker.Item label={"Feet"} value={"Feet"} />
+                        <Picker.Item label={"Meters"} value={"Meters"} />
                       </Picker>
                     </View>
                     {/* END TEST */}
