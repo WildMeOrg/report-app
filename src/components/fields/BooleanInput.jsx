@@ -10,7 +10,7 @@ export default function BooleanInput(rest) {
   return (
     <Picker
       selectedValue={choice}
-      style={{ height: 50, width: 200, margin: '5%' }}
+      style={{ marginHorizontal: '5%' }}
       onValueChange={(itemValue) => setChoice(itemValue)}
     >
       <Picker.Item label={'False'} value={false} key={0} />
