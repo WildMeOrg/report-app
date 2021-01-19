@@ -10,6 +10,7 @@ import Typography from '../../components/Typography';
 //TODO: this still needs to be tested and validation added
 export default function DateInput(rest) {
   const { name, schema, props } = rest;
+  console.log(props);
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
@@ -36,11 +37,20 @@ export default function DateInput(rest) {
       hour: 'numeric',
       minute: 'numeric',
     };
-    return new Date(date).toLocaleDateString([], options);
+    if (props.values.customFields[name]) {
+      return new Date(props.values.customFields[name]).toLocaleDateString(
+        [],
+        options
+      );
+    } else {
+      return new Date(date).toLocaleDateString([], options);
+    }
   }
   const onChange = (event, selectedDate) => {
     const currDate = selectedDate || date;
     setShow(Platform.OS === 'ios');
+    props.setFieldValue(`customFields.${name}`, currDate);
+    //setDate(props.values.customFields[name]);
     setDate(currDate);
     //console.log(formatDate(currDate));
   };
@@ -66,25 +76,26 @@ export default function DateInput(rest) {
             onPress={showTimePicker}
             raised={true}
           />
-          </View>
-          {show && (
-            <DateTimePicker
-              style={{
-                flex: 1,
-                marginHorizontal: '5%',
-                //justifyContent: 'center',
-                alignItems: 'flex-start',
-                paddingHorizontal: '20%',
-                // borderColor: theme.red,
-                // borderWidth: 1,
-                // borderRadius: 6,
-              }}
-              value={date}
-              display="default"
-              mode={mode}
-              onChange={onChange}
-            />
-          )}
+        </View>
+        {show && (
+          <DateTimePicker
+            style={{
+              flex: 1,
+              marginHorizontal: '5%',
+              //justifyContent: 'center',
+              alignItems: 'flex-start',
+              paddingHorizontal: '20%',
+              // borderColor: theme.red,
+              // borderWidth: 1,
+              // borderRadius: 6,
+            }}
+            value={props.values.customFields[name] || date}
+            display="default"
+            mode={mode}
+            onBlur={props.handleBlur(`customFields.${name}`)}
+            onChange={onChange}
+          />
+        )}
       </View>
     </View>
   );

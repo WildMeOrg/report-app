@@ -28,16 +28,6 @@ export default function SelectInput(rest) {
       //onValueChange={(itemValue) => setChoice(itemValue)}
       onValueChange={props.handleChange(`customFields.${name}`)}
       onBlur={props.handleBlur(`customFields.${name}`)}
-      isValid={
-        props.touched.customFields &&
-        (!props.errors.customFields ||
-          (props.errors.customFields && !props.errors.customFields.name))
-      }
-      isInvalid={
-        props.touched.customFields &&
-        props.errors.customFields &&
-        props.errors.customFields.name
-      }
     >
       <Picker.Item
         label="Please Select An Option"

@@ -12,10 +12,15 @@ import Typography from '../../components/Typography';
 //TODO: this still needs to be tested and validated
 export default function DateRangeInput(rest) {
   const { name, schema, props } = rest;
+  console.log(props);
   //start date constants
   const [dateStart, setDateStart] = useState(new Date());
   const [modeStart, setModeStart] = useState('date');
   const [showStart, setShowStart] = useState(false);
+  //end date constants
+  const [dateEnd, setDateEnd] = useState(new Date());
+  const [modeEnd, setModeEnd] = useState('date');
+  const [showEnd, setShowEnd] = useState(false);
   const showModeStart = (currMode) => {
     if (showStart) {
       setShowStart(false);
@@ -33,12 +38,10 @@ export default function DateRangeInput(rest) {
   const onChangeStart = (event, selectedDate) => {
     const currDate = selectedDate || dateStart;
     setShowStart(Platform.OS === 'ios');
+    props.setFieldValue(`customFields.${name}`, [currDate, dateEnd]);
     setDateStart(currDate);
   };
-  //end date constants
-  const [dateEnd, setDateEnd] = useState(new Date());
-  const [modeEnd, setModeEnd] = useState('date');
-  const [showEnd, setShowEnd] = useState(false);
+
   const showModeEnd = (currMode) => {
     if (showEnd) {
       setShowEnd(false);
@@ -56,9 +59,10 @@ export default function DateRangeInput(rest) {
   const onChangeEnd = (event, selectedDate) => {
     const currDate = selectedDate || dateEnd;
     setShowEnd(Platform.OS === 'ios');
+    props.setFieldValue(`customFields.${name}`, [dateStart, currDate]);
     setDateEnd(currDate);
   };
-  function formatDate(date) {
+  function formatDate(date, num) {
     var options = {
       year: 'numeric',
       month: 'long',
@@ -66,12 +70,22 @@ export default function DateRangeInput(rest) {
       hour: 'numeric',
       minute: 'numeric',
     };
-    return new Date(date).toLocaleDateString([], options);
+    if (
+      props.values.customFields[name] &&
+      props.values.customFields[name][num]
+    ) {
+      return new Date(props.values.customFields[name][num]).toLocaleDateString(
+        [],
+        options
+      );
+    } else {
+      return new Date(date).toLocaleDateString([], options);
+    }
   }
   return (
     <View>
       <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
-        Start Date: {formatDate(dateStart)}
+        Start Date: {formatDate(dateStart, 0)}
       </Text>
       <View style={styles.horizontal}>
         <Typography id="EDIT_DATE" style={styles.dtpText} />
@@ -109,15 +123,20 @@ export default function DateRangeInput(rest) {
               // borderWidth: 1,
               // borderRadius: 6,
             }}
-            value={dateStart}
+            value={
+              (props.values.customFields[name] &&
+                props.values.customFields[name][0]) ||
+              dateStart
+            }
             display="default"
             mode={modeStart}
+            onBlur={props.handleBlur(`customFields.${name}`)}
             onChange={onChangeStart}
           />
         )}
       </View>
       <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
-        End Date: {formatDate(dateEnd)}
+        End Date: {formatDate(dateEnd, 1)}
       </Text>
       <View style={styles.horizontal}>
         <Typography id="EDIT_DATE" style={styles.dtpText} />
@@ -156,9 +175,14 @@ export default function DateRangeInput(rest) {
               // borderWidth: 1,
               // borderRadius: 6,
             }}
-            value={dateEnd}
+            value={
+              (props.values.customFields[name] &&
+                props.values.customFields[name][1]) ||
+              dateEnd
+            }
             display="default"
             mode={modeEnd}
+            onBlur={props.handleBlur(`customFields.${name}`)}
             onChange={onChangeEnd}
           />
         )}

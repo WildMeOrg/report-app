@@ -101,7 +101,7 @@ export default {
           className: 'org.ecocean.MarkedIndividual',
           id: 'c32e690c-e308-4362-82d5-bc97579e0c7f',
           type: 'string',
-          required: false,
+          required: true,
         },
         {
           schema: {
@@ -179,13 +179,13 @@ export default {
             description: 'Snarkin about',
             label: 'Date Range',
           },
-          name: 'newguy',
+          name: 'daterange',
           multiple: true,
           timeCreated: 1602869336242,
           className: 'org.ecocean.Encounter',
           id: '165c3695-8eee-4a60-a9e9-eba4dacba4d0',
           type: 'string',
-          required: false,
+          required: true,
         },
         {
           schema: {
@@ -390,11 +390,11 @@ export default {
             ],
           },
           multiple: true,
-          name: 'Multi Select',
+          name: 'MultiSelect',
           className: 'org.ecocean.Occurrence',
           id: 'c4131e13-42dd-4eb9-ad2c-40cde2835949',
-          type: 'double',
-          required: false,
+          type: 'string',
+          required: true,
         },
         {
           schema: {
@@ -434,7 +434,7 @@ export default {
           className: 'org.ecocean.Occurrence',
           id: '1a701d24-83eb-4ae9-a0ca-9210b85f0c60',
           type: 'string',
-          required: false,
+          required: true,
         },
         {
           schema: {

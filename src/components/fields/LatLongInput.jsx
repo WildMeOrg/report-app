@@ -16,8 +16,18 @@ export default function LatLongInput(rest) {
         keyboardType={'numeric'}
         placeholder={'0.0'}
         autoCorrect={false}
-        value={lat}
-        onChangeText={(val) => setLat(val)}
+        value={
+          (props.values.customFields[name] &&
+            props.values.customFields[name][0]) ||
+          lat
+        }
+        onBlur={props.handleBlur(`customFields.${name}`)}
+        onChangeText={(val) => {
+          [
+            setLat(val),
+            props.setFieldValue(`customFields.${name}`, [val, long]),
+          ];
+        }}
       />
       <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
         Long:{' '}
@@ -27,8 +37,18 @@ export default function LatLongInput(rest) {
         keyboardType={'numeric'}
         placeholder={'0.0'}
         autoCorrect={false}
-        value={long}
-        onChangeText={(val) => setLong(val)}
+        value={
+          (props.values.customFields[name] &&
+            props.values.customFields[name][1]) ||
+          long
+        }
+        onBlur={props.handleBlur(`customFields.${name}`)}
+        onChangeText={(val) => {
+          [
+            setLong(val),
+            props.setFieldValue(`customFields.${name}`, [lat, val]),
+          ];
+        }}
       />
     </View>
   );

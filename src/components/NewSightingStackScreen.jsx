@@ -77,14 +77,20 @@ function NewSightingForm({ navigation }) {
   //   ),
   // });
   const validationSchema = [];
+  // const firstPageSchema = yup.object().shape({
+  //   title: yup.string().required('Title is required'),
+  //   location: yup.string().required('Location is required'),
+  //   sightingContext: yup
+  //     .string()
+  //     .required('Sighting Context is required')
+  //     .min(8, 'Sighting Context must be more than 8 charaters')
+  //     .max(255, 'Sighting Context must be less than 255 charaters'),
+  // });
   const firstPageSchema = yup.object().shape({
-    title: yup.string().required('Title is required'),
-    location: yup.string().required('Location is required'),
+    title: yup.string(),
+    location: yup.string(),
     sightingContext: yup
-      .string()
-      .required('Sighting Context is required')
-      .min(8, 'Sighting Context must be more than 8 charaters')
-      .max(255, 'Sighting Context must be less than 255 charaters'),
+      .string(),
   });
   validationSchema.push(firstPageSchema);
   const secondPageSchema = yup.object().shape({
@@ -93,16 +99,22 @@ function NewSightingForm({ navigation }) {
     matchIndividual: yup.string(),
   });
   validationSchema.push(secondPageSchema);
+  // const thirdPageSchema = yup.object().shape({
+  //   photographerName: yup
+  //     .string()
+  //     .required('Photographer Name is required')
+  //     .min(3, 'Photographer Name must be at least 3 charaters')
+  //     .max(30, 'Photographer Name must be less than 30 charaters'),
+  //   photographerEmail: yup
+  //     .string()
+  //     .email('Photographer Email is not valid')
+  //     .required('Photographer Email is required'),
+  // });
   const thirdPageSchema = yup.object().shape({
     photographerName: yup
-      .string()
-      .required('Photographer Name is required')
-      .min(3, 'Photographer Name must be at least 3 charaters')
-      .max(30, 'Photographer Name must be less than 30 charaters'),
+      .string(),
     photographerEmail: yup
-      .string()
-      .email('Photographer Email is not valid')
-      .required('Photographer Email is required'),
+      .string(),
   });
   validationSchema.push(thirdPageSchema);
   const customPageSchema = yup.object().shape({
