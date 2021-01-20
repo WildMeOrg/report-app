@@ -12,7 +12,7 @@ import Typography from '../../components/Typography';
 //TODO: this still needs to be tested and validated
 export default function DateRangeInput(rest) {
   const { name, schema, props } = rest;
-  console.log(props);
+  // console.log(props);
   //start date constants
   const [dateStart, setDateStart] = useState(new Date());
   const [modeStart, setModeStart] = useState('date');

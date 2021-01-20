@@ -7,7 +7,7 @@ import { View } from 'react-native';
 
 export default function MultiSelectInput(rest) {
   const { name, schema, props } = rest;
-  console.log(props);
+  // console.log(props);
   //TODO possibly fix the warnings that appear in expo
   //TODO possibly add a constraint on num of choices if needed
   //TODO typeography & validation

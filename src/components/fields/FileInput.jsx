@@ -16,11 +16,13 @@ export default function FileInput(rest) {
     if (res.type !== 'cancel') {
       setFile(res);
       setFileName(res.name);
+      props.setFieldValue(`customFields.${name}`, res);
     }
   };
   const deleteFile = () => {
     setFile();
     setFileName('');
+    props.setFieldValue(`customFields.${name}`, null);
   };
 
   return (
@@ -29,8 +31,10 @@ export default function FileInput(rest) {
         style={[globalStyles.h2Text, globalStyles.inputHeader]}
         numberOfLines={1}
       >
-        {' '}
-        Add File: {fileName}
+        Add File:{' '}
+        {(props.values.customFields[name] &&
+          props.values.customFields[name].name) ||
+          fileName}
       </Text>
       <Icon
         name="note-add"
