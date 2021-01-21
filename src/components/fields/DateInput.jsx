@@ -80,14 +80,11 @@ export default function DateInput(rest) {
         {show && (
           <DateTimePicker
             style={{
+              height: 80,
               flex: 1,
               marginHorizontal: '5%',
-              //justifyContent: 'center',
               alignItems: 'flex-start',
               paddingHorizontal: '20%',
-              // borderColor: theme.red,
-              // borderWidth: 1,
-              // borderRadius: 6,
             }}
             value={props.values.customFields[name] || date}
             display="default"
