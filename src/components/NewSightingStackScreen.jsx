@@ -89,8 +89,7 @@ function NewSightingForm({ navigation }) {
   const firstPageSchema = yup.object().shape({
     title: yup.string(),
     location: yup.string(),
-    sightingContext: yup
-      .string(),
+    sightingContext: yup.string(),
   });
   validationSchema.push(firstPageSchema);
   const secondPageSchema = yup.object().shape({
@@ -111,10 +110,8 @@ function NewSightingForm({ navigation }) {
   //     .required('Photographer Email is required'),
   // });
   const thirdPageSchema = yup.object().shape({
-    photographerName: yup
-      .string(),
-    photographerEmail: yup
-      .string(),
+    photographerName: yup.string(),
+    photographerEmail: yup.string(),
   });
   validationSchema.push(thirdPageSchema);
   const customPageSchema = yup.object().shape({
@@ -670,7 +667,9 @@ function NewSightingForm({ navigation }) {
                               displayType={item.displayType}
                               props={formikProps}
                               locationID={
-                                formFields['site.custom.regions']['value']['locationID']
+                                formFields['site.custom.regions']['value'][
+                                  'locationID'
+                                ]
                               }
                             />
                           ))
