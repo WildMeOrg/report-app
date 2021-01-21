@@ -3,6 +3,7 @@ import AreaInput from './AreaInput.jsx';
 import BooleanInput from './BooleanInput.jsx';
 import DateInput from './DateInput.jsx';
 import DateRangeInput from './DateRangeInput.jsx';
+import FeetMetersInput from './FeetMetersInput.jsx';
 import FileInput from './FileInput.jsx';
 import LatLongInput from './LatLongInput.jsx';
 import locationIDInput from './LocationIDInput.jsx';
@@ -24,7 +25,8 @@ const inputMap = {
   area: AreaInput,
   file: FileInput,
   locationIds: locationIDInput,
-  individual: AllTextInput,
+  individual: AllTextInput, 
+  feetmeters: FeetMetersInput,
 };
 
 export default inputMap;
