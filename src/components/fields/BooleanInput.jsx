@@ -5,8 +5,8 @@ import styles from '../../styles/newSightingStyles';
 
 export default function BooleanInput(rest) {
   const { name, schema, props } = rest;
-  console.log('here');
-  console.log(props.values);
+  // console.log('here');
+  // console.log(props.values);
   const [choice, setChoice] = useState(false);
   //TODO test
   return (

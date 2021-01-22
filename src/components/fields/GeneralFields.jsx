@@ -14,74 +14,77 @@ import * as ImagePicker from 'expo-image-picker';
 import globalStyles from '../../styles/globalStyles';
 import styles from '../../styles/newSightingStyles';
 import Typography from '../../components/Typography';
+import theme from '../../constants/theme';
 
-export default function GeneralFields() {
-  // Right now this just handles string or longstring, stuff to handle integer/floats inputs should be added
+export default function GeneralFields(input) {
+  const { formikProps } = input;
   return (
-    // <View>
-    //   <Typography
-    //     id="TITLE"
-    //     style={(globalStyles.h2Text, globalStyles.inputHeader)}
-    //   />
-    //   <TextInput
-    //     style={[
-    //       globalStyles.inputField,
-    //       formikProps.touched.title &&
-    //         formikProps.errors.title &&
-    //         globalStyles.inputInvalid,
-    //     ]}
-    //     autoCorrect={false}
-    //     onChangeText={formikProps.handleChange('title')}
-    //     value={formikProps.values.title}
-    //     onBlur={formikProps.onBlur}
-    //     isValid={formikProps.touched.title && !formikProps.errors.title}
-    //     isInvalid={formikProps.touched.title && formikProps.errors.title}
-    //   />
-    //   <Typography
-    //     id="LOCATION"
-    //     style={(globalStyles.h2Text, globalStyles.inputHeader)}
-    //   />
-    //   <TextInput
-    //     style={[
-    //       globalStyles.inputField,
-    //       formikProps.touched.location &&
-    //         formikProps.errors.location &&
-    //         globalStyles.inputInvalid,
-    //     ]}
-    //     autoCorrect={false}
-    //     onChangeText={formikProps.handleChange('location')}
-    //     value={formikProps.values.location}
-    //     onBlur={formikProps.onBlur}
-    //     isValid={formikProps.touched.location && !formikProps.errors.location}
-    //     isInvalid={formikProps.touched.location && formikProps.errors.location}
-    //   />
-    //   <Typography
-    //     id="SIGHTING_CONTEXT"
-    //     style={(globalStyles.h2Text, globalStyles.inputHeader)}
-    //   />
-    //   <TextInput
-    //     style={[
-    //       globalStyles.inputField,
-    //       styles.multiLine,
-    //       formikProps.touched.sightingContext &&
-    //         formikProps.errors.sightingContext &&
-    //         globalStyles.inputInvalid,
-    //     ]}
-    //     autoCorrect={false}
-    //     multiline
-    //     numberOfLines={5}
-    //     onChangeText={formikProps.handleChange('sightingContext')}
-    //     value={formikProps.values.sightingContext}
-    //     onBlur={formikProps.onBlur}
-    //     isValid={
-    //       formikProps.touched.sightingContext &&
-    //       !formikProps.errors.sightingContext
-    //     }
-    //     isInvalid={
-    //       formikProps.touched.sightingContext &&
-    //       formikProps.errors.sightingContext
-    //     }
-    //   />
-    // </View>
+    <View>
+      <Typography
+        id="TITLE"
+        style={[
+          globalStyles.h2Text,
+          globalStyles.inputHeader,
+          formikProps.touched.title &&
+            formikProps.errors.title &&
+            globalStyles.h2TextInvalid,
+        ]}
+      />
+      <TextInput
+        style={[globalStyles.inputField]}
+        autoCorrect={false}
+        onChangeText={formikProps.handleChange('title')}
+        value={formikProps.values.title}
+        onBlur={formikProps.handleBlur('title')}
+        isValid={formikProps.touched.title && !formikProps.errors.title}
+        isInvalid={formikProps.touched.title && formikProps.errors.title}
+      />
+      <Typography
+        id="LOCATION"
+        style={[
+          globalStyles.h2Text,
+          globalStyles.inputHeader,
+          formikProps.touched.location &&
+            formikProps.errors.location &&
+            globalStyles.h2TextInvalid,
+        ]}
+      />
+      <TextInput
+        style={[globalStyles.inputField]}
+        autoCorrect={false}
+        onChangeText={formikProps.handleChange('location')}
+        value={formikProps.values.location}
+        onBlur={formikProps.handleBlur('location')}
+        isValid={formikProps.touched.location && !formikProps.errors.location}
+        isInvalid={formikProps.touched.location && formikProps.errors.location}
+      />
+      <Typography
+        id="SIGHTING_CONTEXT"
+        style={[
+          globalStyles.h2Text,
+          globalStyles.inputHeader,
+          formikProps.touched.sightingContext &&
+            formikProps.errors.sightingContext &&
+            globalStyles.h2TextInvalid,
+        ]}
+      />
+      <TextInput
+        style={[globalStyles.inputField, styles.multiLine]}
+        autoCorrect={false}
+        multiline
+        numberOfLines={5}
+        onChangeText={formikProps.handleChange('sightingContext')}
+        value={formikProps.values.sightingContext}
+        onBlur={formikProps.handleBlur('sightingContext')}
+        isValid={
+          formikProps.touched.sightingContext &&
+          !formikProps.errors.sightingContext
+        }
+        isInvalid={
+          formikProps.touched.sightingContext &&
+          formikProps.errors.sightingContext
+        }
+      />
+    </View>
   );
 }

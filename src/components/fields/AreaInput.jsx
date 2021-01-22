@@ -6,7 +6,7 @@ import styles from '../../styles/newSightingStyles';
 
 export default function AreaInput(rest) {
   const { name, schema, props } = rest;
-  console.log(props.values);
+  // console.log(props.values);
   const [north, setNorth] = useState('0.0');
   const [east, setEast] = useState('0.0');
   const [south, setSouth] = useState('0.0');

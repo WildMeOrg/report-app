@@ -10,7 +10,7 @@ import Typography from '../../components/Typography';
 //TODO: this still needs to be tested and validation added
 export default function DateInput(rest) {
   const { name, schema, props } = rest;
-  console.log(props);
+  // console.log(props);
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);

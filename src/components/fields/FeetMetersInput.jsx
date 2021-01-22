@@ -7,7 +7,7 @@ import { View, TextInput } from 'react-native';
 
 export default function FeetMetersInput(rest) {
   const { name, schema, props } = rest;
-  console.log(props);
+  // console.log(props);
   const [choice, setChoice] = useState('Feet');
   const [measurement, setMeasurement] = useState(
     round((props.values.customFields[name] || 0) * 3.28084, 2).toString()
