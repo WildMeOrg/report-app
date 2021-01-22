@@ -25,7 +25,7 @@ const inputMap = {
   area: AreaInput,
   file: FileInput,
   locationIds: locationIDInput,
-  individual: AllTextInput, 
+  individual: AllTextInput,
   feetmeters: FeetMetersInput,
 };
 

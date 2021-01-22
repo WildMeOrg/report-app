@@ -6,7 +6,6 @@ import styles from '../../styles/newSightingStyles';
 
 export default function AreaInput(rest) {
   const { name, schema, props } = rest;
-  // console.log(props.values);
   const [north, setNorth] = useState('0.0');
   const [east, setEast] = useState('0.0');
   const [south, setSouth] = useState('0.0');
@@ -23,8 +22,6 @@ export default function AreaInput(rest) {
           keyboardType={'numeric'}
           placeholder={'0.0'}
           autoCorrect={false}
-          // value={north}
-          // onChangeText={(val) => setNorth(val)}
           value={
             (props.values.customFields[name] &&
               props.values.customFields[name]['north']) ||

@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import {
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-  Animated,
-  Alert,
-} from 'react-native';
+import { Text, View, TouchableOpacity, Animated } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from 'react-native-elements';
@@ -22,15 +14,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { baseUrl } from '../constants/urls';
 import sightingFormFields from '../constants/sightingFormFields';
 import CustomField from './CustomField.jsx';
-import newSightingStyles from '../styles/newSightingStyles';
 import Typography from '../components/Typography';
-import { useTheme } from '@react-navigation/native';
-import { get } from 'lodash-es';
-import DateTimePicker from '@react-native-community/datetimepicker'; //for testing
-import { Picker } from '@react-native-community/picker'; //for testing
-import SelectMultiple from 'react-native-select-multiple'; //for testing
-import * as DocumentPicker from 'expo-document-picker'; //for testing
-import { Button } from 'react-native';
 import testSettingsPacket from '../constants/testSettingsPacket';
 // import standardForm from '../components/fields/standardForm';
 import NetInfo from '@react-native-community/netinfo';
@@ -46,39 +30,8 @@ function NewSightingForm({ navigation }) {
   const [formFields, setFormFields] = useState(''); //all the custom fields
   const [views, setViews] = useState([]); //the custom field view for each section
   const [numCategories, setNumCategories] = useState(0); //number of custom field categories
-  // const numStandardCategories = 4; //num categories in the standard form
   const [customValidation, setCustomValidation] = useState('');
 
-  // const validationSchema = yup.object().shape({
-  //   title: yup.string().required('Title is required'),
-  //   location: yup.string().required('Location is required'),
-  //   sightingContext: yup
-  //     .string()
-  //     .required('Sighting Context is required')
-  //     .min(8, 'Sighting Context must be more than 8 charaters')
-  //     .max(255, 'Sighting Context must be less than 255 charaters'),
-  //   status: yup.string(),
-  //   relationships: yup.string(),
-  //   matchIndividual: yup.string(),
-  //   photographerName: yup
-  //     .string()
-  //     .required('Photographer Name is required')
-  //     .min(3, 'Photographer Name must be at least 3 charaters')
-  //     .max(30, 'Photographer Name must be less than 30 charaters'),
-  //   photographerEmail: yup
-  //     .string()
-  //     .email('Photographer Email is not valid')
-  //     .required('Photographer Email is required'),
-  //   customFields: yup.object().shape(
-  //     customValidation[formSection - 3]
-  //     //   {
-  //     //   testind_test_field: yup.string().required('This Field is Required'),
-  //     //   berryTypes: yup.string().required('This Field is Required'),
-  //     //   Magicness: yup.string().required('This Field is Required'),
-  //     //   testo: yup.string().required('This Field is Required'),
-  //     //  }
-  //   ),
-  // });
   const validationSchema = [];
   const firstPageSchema = yup.object().shape({
     title: yup.string().required('Title is required'),
@@ -141,26 +94,21 @@ function NewSightingForm({ navigation }) {
 
   //sets views to display fields
   const form = async (formikProps) => {
-    // console.log(formSection);
     const appConfig = await getConfig();
     const customRequiredFields = [];
-    //console.log(appConfig);
     if (appConfig) {
       const customFields = [];
       appConfig['site.custom.customFieldCategories']['value'].map(
         (category) => {
           customFields.push(category);
-          //console.log(category);
           const categoryValidation = [];
           appConfig[sightingFormFields[category.type]]['value'][
             'definitions'
           ].map((field) => {
-            //console.log(field);
             if (field.required) {
               const customArray = [];
               customArray.push(field.name);
               customArray.push(field.type);
-              // customRequiredFields.push(customArray);
               categoryValidation.push(customArray);
             }
           });
@@ -181,8 +129,6 @@ function NewSightingForm({ navigation }) {
           }
         }
       );
-
-      console.log(customRequiredFields);
       setCustomValidation(customRequiredFields);
       setViews(customFields);
       setFormFields(appConfig);
@@ -207,9 +153,6 @@ function NewSightingForm({ navigation }) {
       exif: true,
       allowsMultipleSelection: true,
     });
-
-    console.log(result);
-
     if (!result.cancelled) {
       // setImage(result.uri);
     }
@@ -247,7 +190,6 @@ function NewSightingForm({ navigation }) {
         onSubmit={(values, { resetForm }, formikProps) => {
           if (formSection === numCategories + 2) {
             NetInfo.fetch().then((state) => {
-              // NetInfo.addEventListener('connectionChange', (state) => {
               console.log(state);
               if (state.isInternetReachable) {
                 alert(
@@ -279,7 +221,6 @@ function NewSightingForm({ navigation }) {
             navigation.navigate(screens.home);
           } else {
             setFormSection(formSection + 1);
-            console.log(formikProps);
           }
         }}
       >
@@ -319,7 +260,6 @@ function NewSightingForm({ navigation }) {
                         </View>
                       </TouchableOpacity>
                       <TouchableOpacity
-                        //onPress={() => [setFormSection(1), form(formikProps)]}
                         onPress={() => [
                           formikProps.handleSubmit(),
                           formikProps.setSubmitting(false),
@@ -395,7 +335,6 @@ function NewSightingForm({ navigation }) {
                 {formSection > 2 ? (
                   <>
                     <React.Suspense fallback="Loading Views...">
-                      {/* <View>{views[formSection - 3]}</View> */}
                       <View>
                         <Text
                           style={[
@@ -406,15 +345,11 @@ function NewSightingForm({ navigation }) {
                           {views[0]
                             ? views[formSection - 3]['label']
                             : errorData}
-                          {/* {views[formSection - 3]['label']} */}
                         </Text>
                         {views[0] ? (
                           formFields[
-                            //   sightingFormFields[views[formSection - 3].type]
-                            // ]['value']['definitions'].map((item) => (
                             sightingFormFields[views[formSection - 3].type]
                           ]['value']['definitions'].map((item) => (
-                            // { item.schema != null && item.schema.category != cat.id) ? <></> :
                             <CustomField
                               key={item.id}
                               id={item.id}

@@ -160,7 +160,7 @@ export default {
           id: '1b62470c-890e-4665-8153-6ebefce10d189',
           type: 'double',
           required: true,
-        }
+        },
       ],
     },
     version: 1606695633877,
@@ -267,7 +267,7 @@ export default {
   'site.general.testimonial': {
     id: 'site.general.testimonial',
     value:
-      'I didn\'t see the Wilderbeest, but I heard it. I\'ve never been more sure of anything in my life.',
+      "I didn't see the Wilderbeest, but I heard it. I've never been more sure of anything in my life.",
     version: 1606695633871,
   },
   'site.look.darkBackgroundLogo': {

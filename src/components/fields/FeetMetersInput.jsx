@@ -7,7 +7,6 @@ import { View, TextInput } from 'react-native';
 
 export default function FeetMetersInput(rest) {
   const { name, schema, props } = rest;
-  // console.log(props);
   const [choice, setChoice] = useState('Feet');
   const [measurement, setMeasurement] = useState(
     round((props.values.customFields[name] || 0) * 3.28084, 2).toString()
@@ -25,11 +24,11 @@ export default function FeetMetersInput(rest) {
   const onPickerChange = (value) => {
     if (choice === 'Meters') {
       setMeasurement(
-        round(props.values.customFields[name] * 3.28084, 2).toString()
+        round(props.values.customFields[name] || 0 * 3.28084, 2).toString()
       );
       setChoice(value);
     } else {
-      setMeasurement(round(props.values.customFields[name], 2).toString());
+      setMeasurement(round(props.values.customFields[name] || 0, 2).toString());
       setChoice(value);
     }
   };

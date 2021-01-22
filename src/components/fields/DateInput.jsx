@@ -7,10 +7,8 @@ import globalStyles from '../../styles/globalStyles';
 import styles from '../../styles/newSightingStyles';
 import Typography from '../../components/Typography';
 
-//TODO: this still needs to be tested and validation added
 export default function DateInput(rest) {
   const { name, schema, props } = rest;
-  // console.log(props);
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
@@ -50,9 +48,7 @@ export default function DateInput(rest) {
     const currDate = selectedDate || date;
     setShow(Platform.OS === 'ios');
     props.setFieldValue(`customFields.${name}`, currDate);
-    //setDate(props.values.customFields[name]);
     setDate(currDate);
-    //console.log(formatDate(currDate));
   };
   return (
     //TODO Typography

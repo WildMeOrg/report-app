@@ -34,5 +34,6 @@
   "CHOOSE_WILDBOOK": "Choose a Wildbook:",
   "CHANGE_WILDBOOK": "Change Wildbook",
   "EDIT_DATE":"Edit Date:",
-  "EDIT_TIME":"Edit Time:"
+  "EDIT_TIME":"Edit Time:",
+  "FIELD_REQUIRED": "This Field is Required",
 }

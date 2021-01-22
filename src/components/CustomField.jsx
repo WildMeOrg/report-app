@@ -6,31 +6,32 @@ import theme from '../constants/theme';
 import globalStyles from '../styles/globalStyles';
 import styles from '../styles/newSightingStyles';
 import LabeledInput from './LabeledInput.jsx';
+import Typography from './Typography';
 
 export default function CustomField({ id, required, name, ...rest }) {
-  // console.log('CustomField ' + rest);
-  // console.log(rest);
   const { schema, props } = rest;
   const displayName =
     schema != null && schema.label != null ? schema.label : name;
   const description = schema != null ? schema.description : '';
 
   return (
-    // TODO: Text should be Typography component
     <View>
       <Text style={[globalStyles.inputHeader, globalStyles.h2Text]}>
         <Text>
           {displayName}
-          {required && ' *'}
+          {required && ' * '}
         </Text>
-        <Text
-          style={[globalStyles.h2TextInvalid, { fontFamily: 'Lato-Italic' }]}
-        >
-          {props.touched.customFields &&
-            props.errors.customFields &&
-            props.errors.customFields[name] &&
-            ' This Field is Required'}
-        </Text>
+        {props.touched.customFields &&
+          props.errors.customFields &&
+          props.errors.customFields[name] && (
+            <Typography
+              id="FIELD_REQUIRED"
+              style={[
+                globalStyles.h2TextInvalid,
+                { fontFamily: 'Lato-Italic' },
+              ]}
+            />
+          )}
       </Text>
       {description != '' && (
         <>

@@ -9,10 +9,8 @@ import theme from '../../constants/theme';
 import { onChange } from 'react-native-reanimated';
 import Typography from '../../components/Typography';
 
-//TODO: this still needs to be tested and validated
 export default function DateRangeInput(rest) {
   const { name, schema, props } = rest;
-  // console.log(props);
   //start date constants
   const [dateStart, setDateStart] = useState(new Date());
   const [modeStart, setModeStart] = useState('date');
@@ -106,22 +104,14 @@ export default function DateRangeInput(rest) {
       <View
         style={{
           marginHorizontal: '5%',
-          //alignItems: 'center',
-          // borderColor: theme.black,
-          // borderWidth: 1,
-          // borderRadius: 6,
         }}
       >
         {showStart && (
           <DateTimePicker
             style={{
               flex: 1,
-              //justifyContent: 'center',
               alignItems: 'flex-start',
               paddingHorizontal: '20%',
-              // borderColor: theme.red,
-              // borderWidth: 1,
-              // borderRadius: 6,
             }}
             value={
               (props.values.customFields[name] &&
@@ -158,10 +148,6 @@ export default function DateRangeInput(rest) {
         style={{
           marginHorizontal: '5%',
           justifyContent: 'center',
-          //alignItems: 'center',
-          // borderColor: theme.black,
-          // borderWidth: 1,
-          // borderRadius: 6,
         }}
       >
         {showEnd && (
@@ -171,9 +157,6 @@ export default function DateRangeInput(rest) {
               justifyContent: 'center',
               alignItems: 'flex-start',
               paddingHorizontal: '20%',
-              // borderColor: theme.red,
-              // borderWidth: 1,
-              // borderRadius: 6,
             }}
             value={
               (props.values.customFields[name] &&

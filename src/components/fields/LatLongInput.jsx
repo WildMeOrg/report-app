@@ -8,7 +8,7 @@ export default function LatLongInput(rest) {
   const [lat, setLat] = useState('0.0');
   const [long, setLong] = useState('0.0');
   return (
-    //TODO typography and validation
+    //TODO typography
     <View style={styles.horizontal}>
       <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>Lat: </Text>
       <TextInput

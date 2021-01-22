@@ -1,13 +1,6 @@
 // Component that returns a TextInput based on the given schema
 import React from 'react';
-import {
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-  Animated,
-  Alert,
-} from 'react-native';
+import { Text, View, TextInput } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { Formik } from 'formik';
 import * as ImagePicker from 'expo-image-picker';
@@ -20,16 +13,15 @@ export default function GeneralFields(input) {
   const { formikProps } = input;
   return (
     <View>
-      <Typography
-        id="TITLE"
-        style={[
-          globalStyles.h2Text,
-          globalStyles.inputHeader,
-          formikProps.touched.title &&
-            formikProps.errors.title &&
-            globalStyles.h2TextInvalid,
-        ]}
-      />
+      <Text style={[globalStyles.inputHeader, globalStyles.h2Text]}>
+        <Typography id="TITLE" required={true} />
+        {formikProps.touched.title && formikProps.errors.title && (
+          <Typography
+            id="FIELD_REQUIRED"
+            style={[globalStyles.h2TextInvalid, { fontFamily: 'Lato-Italic' }]}
+          />
+        )}
+      </Text>
       <TextInput
         style={[globalStyles.inputField]}
         autoCorrect={false}
@@ -39,16 +31,15 @@ export default function GeneralFields(input) {
         isValid={formikProps.touched.title && !formikProps.errors.title}
         isInvalid={formikProps.touched.title && formikProps.errors.title}
       />
-      <Typography
-        id="LOCATION"
-        style={[
-          globalStyles.h2Text,
-          globalStyles.inputHeader,
-          formikProps.touched.location &&
-            formikProps.errors.location &&
-            globalStyles.h2TextInvalid,
-        ]}
-      />
+      <Text style={[globalStyles.inputHeader, globalStyles.h2Text]}>
+        <Typography id="LOCATION" required={true} />
+        {formikProps.touched.location && formikProps.errors.location && (
+          <Typography
+            id="FIELD_REQUIRED"
+            style={[globalStyles.h2TextInvalid, { fontFamily: 'Lato-Italic' }]}
+          />
+        )}
+      </Text>
       <TextInput
         style={[globalStyles.inputField]}
         autoCorrect={false}
@@ -58,16 +49,19 @@ export default function GeneralFields(input) {
         isValid={formikProps.touched.location && !formikProps.errors.location}
         isInvalid={formikProps.touched.location && formikProps.errors.location}
       />
-      <Typography
-        id="SIGHTING_CONTEXT"
-        style={[
-          globalStyles.h2Text,
-          globalStyles.inputHeader,
-          formikProps.touched.sightingContext &&
-            formikProps.errors.sightingContext &&
-            globalStyles.h2TextInvalid,
-        ]}
-      />
+      <Text style={[globalStyles.inputHeader, globalStyles.h2Text]}>
+        <Typography id="SIGHTING_CONTEXT" required={true} />
+        {formikProps.touched.sightingContext &&
+          formikProps.errors.sightingContext && (
+            <Typography
+              id="FIELD_REQUIRED"
+              style={[
+                globalStyles.h2TextInvalid,
+                { fontFamily: 'Lato-Italic' },
+              ]}
+            />
+          )}
+      </Text>
       <TextInput
         style={[globalStyles.inputField, styles.multiLine]}
         autoCorrect={false}

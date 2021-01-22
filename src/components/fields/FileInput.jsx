@@ -6,13 +6,11 @@ import globalStyles from '../../styles/globalStyles';
 import styles from '../../styles/newSightingStyles';
 
 export default function FileInput(rest) {
-  //TODO testing & validation
   const { name, schema, props } = rest;
   const [file, setFile] = useState(); //file to be used
   const [fileName, setFileName] = useState('');
   const getFile = async () => {
     const res = await DocumentPicker.getDocumentAsync({});
-    console.log(res);
     if (res.type !== 'cancel') {
       setFile(res);
       setFileName(res.name);

@@ -46,7 +46,6 @@ const Login = ({ navigation, route }) => {
             loggedIn: 'true',
           })
         );
-        //console.log(AsyncStorage.getItem('loggesIn'));
         navigation.navigate(screens.home);
       }
       onChangeResponseData(JSON.stringify(response.data));

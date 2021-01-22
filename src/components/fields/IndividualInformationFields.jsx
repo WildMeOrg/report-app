@@ -1,13 +1,6 @@
 // Component that returns a TextInput based on the given schema
 import React from 'react';
-import {
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-  Animated,
-  Alert,
-} from 'react-native';
+import { Text, View, TextInput } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { Formik } from 'formik';
 import * as ImagePicker from 'expo-image-picker';
@@ -21,16 +14,19 @@ export default function IndividualInformation(input) {
 
   return (
     <View>
-      <Typography
-        id="PHOTOGRAPHER_NAME"
-        style={[
-          globalStyles.h2Text,
-          globalStyles.inputHeader,
-          formikProps.touched.photographerName &&
-            formikProps.errors.photographerName &&
-            globalStyles.h2TextInvalid,
-        ]}
-      />
+      <Text style={[globalStyles.inputHeader, globalStyles.h2Text]}>
+        <Typography id="PHOTOGRAPHER_NAME" required={true} />
+        {formikProps.touched.photographerName &&
+          formikProps.errors.photographerName && (
+            <Typography
+              id="FIELD_REQUIRED"
+              style={[
+                globalStyles.h2TextInvalid,
+                { fontFamily: 'Lato-Italic' },
+              ]}
+            />
+          )}
+      </Text>
       <TextInput
         style={[globalStyles.inputField]}
         autoCorrect={false}
@@ -46,16 +42,19 @@ export default function IndividualInformation(input) {
           formikProps.errors.photographerName
         }
       />
-      <Typography
-        id="PHOTOGRAPHER_EMAIL"
-        style={[
-          globalStyles.h2Text,
-          globalStyles.inputHeader,
-          formikProps.touched.photographerEmail &&
-            formikProps.errors.photographerEmail &&
-            globalStyles.h2TextInvalid,
-        ]}
-      />
+      <Text style={[globalStyles.inputHeader, globalStyles.h2Text]}>
+        <Typography id="PHOTOGRAPHER_EMAIL" required={true} />
+        {formikProps.touched.photographerEmail &&
+          formikProps.errors.photographerEmail && (
+            <Typography
+              id="FIELD_REQUIRED"
+              style={[
+                globalStyles.h2TextInvalid,
+                { fontFamily: 'Lato-Italic' },
+              ]}
+            />
+          )}
+      </Text>
       <TextInput
         style={[globalStyles.inputField]}
         autoCorrect={false}
