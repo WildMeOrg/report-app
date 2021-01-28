@@ -5,14 +5,13 @@ import screens from '../constants/screens';
 import theme from '../constants/theme';
 import globalStyles from '../styles/globalStyles';
 import styles from '../styles/newSightingStyles';
-import LabeledInput from './LabeledInput.jsx';
+import LabeledInput from './LabeledInput';
 import Typography from './Typography';
 
 export default function CustomField({ id, required, name, ...rest }) {
   const { schema, props } = rest;
-  const displayName =
-    schema != null && schema.label != null ? schema.label : name;
-  const description = schema != null ? schema.description : '';
+  const displayName = schema && schema.label || name;
+  const description = schema && schema.description || '';
 
   return (
     <View>

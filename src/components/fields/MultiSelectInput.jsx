@@ -7,17 +7,11 @@ import { View } from 'react-native';
 
 export default function MultiSelectInput(rest) {
   const { name, schema, props } = rest;
-  //TODO possibly fix the warnings that appear in expo
-  //TODO possibly add a constraint on num of choices if needed
-  //TODO typeography & validation
-  const multiSelectOptions = schema.choices; //could be wrong
+  const multiSelectOptions = schema.choices;
   const [selectedOptions, setSelectedOptions] = useState([]);
   const onSelectionsChange = (items) => {
     props.setFieldValue('customFields.MULTI_TEMP', items);
-    const values = [];
-    items.map((item) => {
-      values.push(item.value);
-    });
+    const values = items.map(item => item.value);
     props.setFieldValue(`customFields.${name}`, values);
     setSelectedOptions(items);
   };

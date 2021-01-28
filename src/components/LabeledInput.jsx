@@ -15,7 +15,7 @@ export default function LabeledInput({ name, props, ...rest }) {
   const { schema } = rest;
 
   const type =
-    schema != null && schema.displayType != null
+    schema !== null && schema.displayType !== null
       ? schema.displayType
       : displayType;
   const FieldComponent = fieldList[type];

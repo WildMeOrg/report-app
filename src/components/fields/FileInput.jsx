@@ -39,13 +39,13 @@ export default function FileInput(rest) {
         type="material-icons"
         onPress={getFile}
         style={{ paddingHorizontal: 10 }}
-        raised={true}
+        raised
       />
       <Icon
         name="remove-circle"
         type="material-icons"
         onPress={deleteFile}
-        raised={true}
+        raised
       />
     </View>
   );
