@@ -46,7 +46,6 @@ const Login = ({ navigation, route }) => {
             loggedIn: 'true',
           })
         );
-        //console.log(AsyncStorage.getItem('loggesIn'));
         navigation.navigate(screens.home);
       }
       onChangeResponseData(JSON.stringify(response.data));
@@ -58,7 +57,7 @@ const Login = ({ navigation, route }) => {
 
     try {
       const settingsPacket = await axios(
-        `${baseUrl}/api/v0/configuration/__bundle_setup`
+        `${baseUrl}/api/v1/configuration/default/__bundle_setup`
       );
       await AsyncStorage.setItem(
         'appConfiguration',

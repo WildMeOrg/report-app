@@ -40,6 +40,7 @@ const loadFonts = () =>
   Font.loadAsync({
     'Lato-Regular': require('./assets/fonts/Lato/Lato-Regular.ttf'),
     'Lato-Bold': require('./assets/fonts/Lato/Lato-Bold.ttf'),
+    'Lato-Italic': require('./assets/fonts/Lato/Lato-Italic.ttf'),
   });
 
 export default function App() {

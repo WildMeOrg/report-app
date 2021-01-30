@@ -16,6 +16,14 @@ export default StyleSheet.create({
     fontFamily: 'Lato-Regular',
     fontSize: 18,
     color: theme.black,
+    fontStyle: 'normal',
+  },
+  h2TextInvalid: {
+    fontFamily: 'Lato-Regular',
+    fontSize: 18,
+    margin: '5%',
+    marginBottom: '3%',
+    color: theme.red,
   },
   buttonText: {
     color: theme.white,
@@ -29,6 +37,17 @@ export default StyleSheet.create({
   },
   inputHeader: {
     fontSize: 18,
+    margin: '5%',
+    marginBottom: '3%',
+    fontStyle: 'normal',
+  },
+  subText: {
+    fontSize: 18,
+    marginHorizontal: '5%',
+    marginBottom: '3%',
+  },
+  sectionHeader: {
+    fontSize: 20,
     margin: '5%',
     marginBottom: '3%',
   },

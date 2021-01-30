@@ -21,7 +21,7 @@
   "VIEW_SIGHTING": "View sighting",
   "SETTINGS": "Settings",
   "ADD_IMAGES": "Add Images",
-  "STATUS": "Satus",
+  "STATUS": "Status",
   "RELATIONSHIPS": "Relationships",
   "MATCH_INDIVIDUAL": "Match Individual",
   "PHOTOGRAPHER_NAME": "Photographer Name",
@@ -32,5 +32,8 @@
   "SIGHTING_INFO": "Sighting Info",
   "UNREAD": "Unread",
   "CHOOSE_WILDBOOK": "Choose a Wildbook:",
-  "CHANGE_WILDBOOK": "Change Wildbook"
+  "CHANGE_WILDBOOK": "Change Wildbook",
+  "EDIT_DATE":"Edit Date:",
+  "EDIT_TIME":"Edit Time:",
+  "FIELD_REQUIRED": "This Field is Required",
 }
