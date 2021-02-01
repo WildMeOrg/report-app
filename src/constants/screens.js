@@ -10,5 +10,6 @@ export default {
   viewSighting: 'View Sighting',
   profile: 'Profile',
   notifications: 'Notifications',
+  imageBrowser: 'SelectImages',
   selection: 'Selection',
 };

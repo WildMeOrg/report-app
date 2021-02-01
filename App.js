@@ -28,6 +28,7 @@ import GuestHomeStackScreen from './src/components/GuestHomeStackScreen';
 import GuestAddStackScreen from './src/components/GuestAddStackScreen';
 import SelectionStackScreen from './src/components/SelectionStackScreen';
 import { ReportContextProvider } from './src/context/report-context';
+import ImageBrowserStackScreen from './src/components/ImageBrowserStack';
 
 const messageMap = {
   en: englishTranslations,
@@ -92,6 +93,10 @@ export default function App() {
               <Drawer.Screen
                 name={screens.profile}
                 component={ProfileStackScreen}
+              />
+              <Drawer.Screen
+                name={screens.imageBrowser}
+                component={ImageBrowserStackScreen}
               />
               <Drawer.Screen
                 name={screens.notifications}
