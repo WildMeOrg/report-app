@@ -25,6 +25,7 @@ export default function BooleanInput(rest) {
     <Switch
       trackColor={{ true: theme.green, false: theme.grey }}
       thumbColor={theme.white}
+      style={{ marginHorizontal: '5%' }}
       onValueChange={() => setChoice(!choice)}
       value={choice}
     />
