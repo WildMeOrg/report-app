@@ -98,18 +98,26 @@ function NewSightingForm({ navigation }) {
     const customRequiredFields = [];
     if (appConfig) {
       const customFields = [];
+      // const fieldsByCategory = {};
       appConfig['site.custom.customFieldCategories']['value'].map(
         (category) => {
           customFields.push(category);
           const categoryValidation = [];
+          // const fields = [];
           appConfig[sightingFormFields[category.type]]['value'][
             'definitions'
           ].map((field) => {
-            if (field.required) {
+            if (
+              field.schema &&
+              field.schema.category &&
+              field.schema.category === category.id &&
+              field.required
+            ) {
               const customArray = [];
               customArray.push(field.name);
               customArray.push(field.type);
               categoryValidation.push(customArray);
+              // fields.add(field);
             }
           });
           if (categoryValidation) {
@@ -124,11 +132,13 @@ function NewSightingForm({ navigation }) {
               {}
             );
             customRequiredFields.push(test);
+            // fieldsByCategory.push({ category: fields });
           } else {
             customRequiredFields.push({});
           }
         }
       );
+      // console.log(fieldsByCategory);
       setCustomValidation(customRequiredFields);
       setViews(customFields);
       setFormFields(appConfig);
@@ -342,29 +352,37 @@ function NewSightingForm({ navigation }) {
                             globalStyles.sectionHeader,
                           ]}
                         >
-                          {views[0]
+                          {views[formSection - 3]
                             ? views[formSection - 3]['label']
                             : errorData}
                         </Text>
-                        {views[0] ? (
+                        {views[formSection - 3] ? (
                           formFields[
                             sightingFormFields[views[formSection - 3].type]
-                          ]['value']['definitions'].map((item) => (
-                            <CustomField
-                              key={item.id}
-                              id={item.id}
-                              required={item.required}
-                              schema={item.schema}
-                              name={item.name}
-                              displayType={item.displayType}
-                              props={formikProps}
-                              locationID={
-                                formFields['site.custom.regions']['value'][
-                                  'locationID'
-                                ]
-                              }
-                            />
-                          ))
+                          ]['value']['definitions'].map((item) => {
+                            if (
+                              item.schema &&
+                              item.schema.category &&
+                              item.schema.category === views[formSection - 3].id
+                            ) {
+                              return (
+                                <CustomField
+                                  key={item.id}
+                                  id={item.id}
+                                  required={item.required}
+                                  schema={item.schema}
+                                  name={item.name}
+                                  displayType={item.displayType}
+                                  props={formikProps}
+                                  locationID={
+                                    formFields['site.custom.regions']['value'][
+                                      'locationID'
+                                    ]
+                                  }
+                                />
+                              );
+                            }
+                          })
                         ) : (
                           <Text style={globalStyles.subText}>{errorData}</Text>
                         )}
