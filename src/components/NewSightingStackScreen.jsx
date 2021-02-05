@@ -27,6 +27,8 @@ const NewSightingStack = createStackNavigator();
 
 function NewSightingForm({ navigation }) {
   const errorData = 'Error no data';
+  const settingsPacket = useAsyncStorage('appConfiguration');
+  const sightingSubmissions = useAsyncStorage('SightingSubmissions');
   const [formSection, setFormSection] = useState(0); //what is the current section/screen in the form
   const [formFields, setFormFields] = useState(''); //all the custom fields
   const [views, setViews] = useState([]); //the custom field view for each section
@@ -78,16 +80,17 @@ function NewSightingForm({ navigation }) {
         //JSON.stringify(settingsPacket.data.response.configuration)
         JSON.stringify(testSettingsPacket)
       );
-    } catch (settingsFetchError) {}
+    } catch (settingsFetchError) {
+      console.error(settingsFetchError);
+    }
     //-----TESTING END-----//
     try {
-      const value = useAsyncStorage('appConfiguration');
-      if (value) {
-        //console.log(value);
+      if (settingsPacket) {
+        //console.log(settingsPacket);
         setNumCategories(
-          value['site.custom.customFieldCategories']['value'].length
+          settingsPacket['site.custom.customFieldCategories']['value'].length
         );
-        return value;
+        return settingsPacket;
         //setFormFields(value);
       }
     } catch (error) {
@@ -199,22 +202,19 @@ function NewSightingForm({ navigation }) {
                   'Internet Reachable: ' + JSON.stringify(values, undefined, 4)
                 );
               } else {
-                AsyncStorage.getItem('SightingSubmissions', (err, result) => {
-                  if (result) {
-                    let updatedSubmissions = JSON.parse(result);
-                    updatedSubmissions.push(values);
-
-                    AsyncStorage.setItem(
-                      'SightingSubmissions',
-                      JSON.stringify(updatedSubmissions)
-                    );
-                  } else {
-                    AsyncStorage.setItem(
-                      'SightingSubmissions',
-                      JSON.stringify([values])
-                    );
-                  }
-                });
+                if (sightingSubmissions) {
+                  let updatedSubmissions = sightingSubmissions;
+                  updatedSubmissions.push(values);
+                  AsyncStorage.setItem(
+                    'SightingSubmissions',
+                    JSON.stringify(updatedSubmissions)
+                  );
+                } else {
+                  AsyncStorage.setItem(
+                    'SightingSubmissions',
+                    JSON.stringify([values])
+                  );
+                }
                 alert('No Internet', JSON.stringify(values, undefined, 4));
               }
             });
