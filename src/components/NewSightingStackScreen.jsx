@@ -21,6 +21,7 @@ import NetInfo from '@react-native-community/netinfo';
 import GeneralFields from '../components/fields/GeneralFields';
 import SightingDetailsFields from '../components/fields/SightingDetailsFields';
 import IndividualInformationFields from './fields/IndividualInformationFields';
+import useAsyncStorage from '../hooks/useAsyncStorage';
 
 const NewSightingStack = createStackNavigator();
 
@@ -80,7 +81,7 @@ function NewSightingForm({ navigation }) {
     } catch (settingsFetchError) {}
     //-----TESTING END-----//
     try {
-      const value = JSON.parse(await AsyncStorage.getItem('appConfiguration'));
+      const value = useAsyncStorage('appConfiguration');
       if (value) {
         //console.log(value);
         setNumCategories(
@@ -89,7 +90,9 @@ function NewSightingForm({ navigation }) {
         return value;
         //setFormFields(value);
       }
-    } catch (error) {}
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   //sets views to display fields

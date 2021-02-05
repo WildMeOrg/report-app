@@ -18,8 +18,11 @@ import screens from '../constants/screens';
 import { ReportContext } from '../context/report-context';
 import selection from '../constants/wildbooks';
 import AsyncStorage from '@react-native-community/async-storage';
+import useAsyncStorage from '../hooks/useAsyncStorage'
 
 const WildbookCard = (props) => {
+  const jsonValue = useAsyncStorage('loggedIn');
+  console.log(jsonValue);
   const [isEnabled, setIsEnabled] = useState(false);
   //addListener is used to refresh the page when navigated to
   React.useEffect(() => {
@@ -31,8 +34,8 @@ const WildbookCard = (props) => {
 
   const getData = async () => {
     try {
-      const jsonValue = await AsyncStorage.getItem('loggedIn');
-      return jsonValue != null ? JSON.parse(jsonValue) : null;
+      //const jsonValue = await AsyncStorage.getItem('loggedIn');
+      return jsonValue != null ? jsonValue : null;
     } catch (e) {
       // error reading value
     }
