@@ -18,7 +18,7 @@ import screens from '../constants/screens';
 import { ReportContext } from '../context/report-context';
 import selection from '../constants/wildbooks';
 import AsyncStorage from '@react-native-community/async-storage';
-import useAsyncStorage from '../hooks/useAsyncStorage'
+import useAsyncStorage from '../hooks/useAsyncStorage';
 
 const WildbookCard = (props) => {
   const loggedInfo = useAsyncStorage('loggedIn');
