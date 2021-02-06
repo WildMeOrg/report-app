@@ -27,7 +27,7 @@ const NewSightingStack = createStackNavigator();
 function NewSightingForm({ navigation }) {
   const errorData = 'Error no data';
   const [formSection, setFormSection] = useState(0); //what is the current section/screen in the form
-  const [formFields, setFormFields] = useState(''); //all the custom fields
+  const [formFields, setFormFields] = useState({}); //all the custom fields
   const [views, setViews] = useState([]); //the custom field view for each section
   const [numCategories, setNumCategories] = useState(0); //number of custom field categories
   const [customValidation, setCustomValidation] = useState('');
@@ -83,9 +83,6 @@ function NewSightingForm({ navigation }) {
       const value = JSON.parse(await AsyncStorage.getItem('appConfiguration'));
       if (value) {
         //console.log(value);
-        setNumCategories(
-          value['site.custom.customFieldCategories']['value'].length
-        );
         return value;
         //setFormFields(value);
       }
@@ -98,28 +95,32 @@ function NewSightingForm({ navigation }) {
     const customRequiredFields = [];
     if (appConfig) {
       const customFields = [];
-      // const fieldsByCategory = {};
+      const fieldsByCategory = {};
       appConfig['site.custom.customFieldCategories']['value'].map(
         (category) => {
-          customFields.push(category);
           const categoryValidation = [];
-          // const fields = [];
+          const fields = [];
           appConfig[sightingFormFields[category.type]]['value'][
             'definitions'
           ].map((field) => {
             if (
               field.schema &&
               field.schema.category &&
-              field.schema.category === category.id &&
-              field.required
+              field.schema.category === category.id
             ) {
-              const customArray = [];
-              customArray.push(field.name);
-              customArray.push(field.type);
-              categoryValidation.push(customArray);
-              // fields.add(field);
+              fields.push(field);
+              if (field.required) {
+                const customArray = [];
+                customArray.push(field.name);
+                customArray.push(field.type);
+                categoryValidation.push(customArray);
+              }
             }
           });
+          if (fields.length > 0) {
+            fieldsByCategory[category.label] = fields;
+            customFields.push(category);
+          }
           if (categoryValidation) {
             const test = categoryValidation.reduce(
               (obj, item) => ({
@@ -132,16 +133,18 @@ function NewSightingForm({ navigation }) {
               {}
             );
             customRequiredFields.push(test);
-            // fieldsByCategory.push({ category: fields });
           } else {
             customRequiredFields.push({});
           }
         }
       );
-      // console.log(fieldsByCategory);
+      console.log(fieldsByCategory);
+      fieldsByCategory['Regions'] = appConfig['site.custom.regions'];
       setCustomValidation(customRequiredFields);
       setViews(customFields);
-      setFormFields(appConfig);
+      // setFormFields(appConfig);
+      setNumCategories(views.length);
+      setFormFields(fieldsByCategory);
     }
   };
 
@@ -356,33 +359,38 @@ function NewSightingForm({ navigation }) {
                             ? views[formSection - 3]['label']
                             : errorData}
                         </Text>
-                        {views[formSection - 3] ? (
+                        {/* {views[formSection - 3] ? (
                           formFields[
                             sightingFormFields[views[formSection - 3].type]
-                          ]['value']['definitions'].map((item) => {
-                            if (
-                              item.schema &&
-                              item.schema.category &&
-                              item.schema.category === views[formSection - 3].id
-                            ) {
-                              return (
-                                <CustomField
-                                  key={item.id}
-                                  id={item.id}
-                                  required={item.required}
-                                  schema={item.schema}
-                                  name={item.name}
-                                  displayType={item.displayType}
-                                  props={formikProps}
-                                  locationID={
-                                    formFields['site.custom.regions']['value'][
-                                      'locationID'
-                                    ]
-                                  }
-                                />
-                              );
+                          ]['value']['definitions'].map((item) => { */}
+                        {views[formSection - 3] ? (
+                          formFields[views[formSection - 3]['label']].map(
+                            (item) => {
+                              if (
+                                item.schema &&
+                                item.schema.category &&
+                                item.schema.category ===
+                                  views[formSection - 3].id
+                              ) {
+                                return (
+                                  <CustomField
+                                    key={item.id}
+                                    id={item.id}
+                                    required={item.required}
+                                    schema={item.schema}
+                                    name={item.name}
+                                    displayType={item.displayType}
+                                    props={formikProps}
+                                    locationID={
+                                      formFields['Regions']['value'][
+                                        'locationID'
+                                      ]
+                                    }
+                                  />
+                                );
+                              }
                             }
-                          })
+                          )
                         ) : (
                           <Text style={globalStyles.subText}>{errorData}</Text>
                         )}
