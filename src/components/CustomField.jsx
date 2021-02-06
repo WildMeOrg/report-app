@@ -10,8 +10,8 @@ import Typography from './Typography';
 
 export default function CustomField({ id, required, name, ...rest }) {
   const { schema, props } = rest;
-  const displayName = schema && schema.label || name;
-  const description = schema && schema.description || '';
+  const displayName = (schema && schema.label) || name;
+  const description = (schema && schema.description) || '';
 
   return (
     <View>
