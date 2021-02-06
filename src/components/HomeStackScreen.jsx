@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { StyleSheet, AsyncStorage } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { createStackNavigator } from '@react-navigation/stack';
 import screens from '../constants/screens';
@@ -8,14 +8,15 @@ import Typography from './Typography';
 import HomeScreen from '../screens/home/Home.jsx';
 import { TextInput } from 'react-native-gesture-handler';
 import globalStyles from '../styles/globalStyles';
+import AsyncStorage from '@react-native-community/async-storage';
 import { ReportContext } from '../context/report-context';
 
 const HomeStack = createStackNavigator();
 
 export default function HomeStackScreen({ navigation }) {
-  AsyncStorage.getItem('REPORTS', (err, result) => {
-    //console.log(JSON.parse(result).sightings[1].name);
-  });
+  // AsyncStorage.getItem('REPORTS', (err, result) => {
+  //   //console.log(JSON.parse(result).sightings[1].name);
+  // });
   const [isSearching, setIsSearching] = useState(false);
   const [state, dispatch] = useContext(ReportContext);
   const searchFunc = (input) => {

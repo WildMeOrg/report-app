@@ -11,7 +11,7 @@ export default function MultiSelectInput(rest) {
   const [selectedOptions, setSelectedOptions] = useState([]);
   const onSelectionsChange = (items) => {
     props.setFieldValue('customFields.MULTI_TEMP', items);
-    const values = items.map(item => item.value);
+    const values = items.map((item) => item.value);
     props.setFieldValue(`customFields.${name}`, values);
     setSelectedOptions(items);
   };
