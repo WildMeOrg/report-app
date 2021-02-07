@@ -29,9 +29,9 @@ function NewSightingForm({ navigation }) {
   const errorData = 'Error no data';
   const settingsPacket = useAsyncStorage('appConfiguration');
   const sightingSubmissions = useAsyncStorage('SightingSubmissions');
-  const [formSection, setFormSection] = useState(0); //what is the current section/screen in the form
-  const [formFields, setFormFields] = useState({}); //all the custom fields
-  const [views, setViews] = useState([]); //the custom field view for each section
+  const [formSection, setFormSection] = useState(0); //what is the current section/screen
+  const [formFields, setFormFields] = useState({}); //all the custom fields for each category
+  const [views, setViews] = useState([]); //the different custom field sections
   const [numCategories, setNumCategories] = useState(0); //number of custom field categories
   const [customValidation, setCustomValidation] = useState('');
 
@@ -147,13 +147,11 @@ function NewSightingForm({ navigation }) {
           }
         }
       );
-      console.log(fieldsByCategory);
       fieldsByCategory['Regions'] = appConfig['site.custom.regions'];
-      setCustomValidation(customRequiredFields);
-      setViews(customFields);
-      // setFormFields(appConfig);
-      setNumCategories(views.length);
-      setFormFields(fieldsByCategory);
+      setCustomValidation(customRequiredFields); // validation
+      setViews(customFields); // category titles for custom fields
+      setNumCategories(customFields.length); // number of screens for custom fields
+      setFormFields(fieldsByCategory); // fields based on each category
     }
   };
 
@@ -212,7 +210,7 @@ function NewSightingForm({ navigation }) {
         onSubmit={(values, { resetForm }, formikProps) => {
           if (formSection === numCategories + 2) {
             NetInfo.fetch().then((state) => {
-              console.log(state);
+              // console.log(state);
               if (state.isInternetReachable) {
                 alert(
                   'Internet Reachable: ' + JSON.stringify(values, undefined, 4)
