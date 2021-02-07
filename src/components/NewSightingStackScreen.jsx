@@ -363,10 +363,6 @@ function NewSightingForm({ navigation }) {
                             ? views[formSection - 3]['label']
                             : errorData}
                         </Text>
-                        {/* {views[formSection - 3] ? (
-                          formFields[
-                            sightingFormFields[views[formSection - 3].type]
-                          ]['value']['definitions'].map((item) => { */}
                         {views[formSection - 3] ? (
                           formFields[views[formSection - 3]['label']].map(
                             (item) => {
