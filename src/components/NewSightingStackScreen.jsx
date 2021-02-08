@@ -29,9 +29,9 @@ function NewSightingForm({ navigation }) {
   const errorData = 'Error no data';
   const settingsPacket = useAsyncStorage('appConfiguration');
   const sightingSubmissions = useAsyncStorage('SightingSubmissions');
-  const [formSection, setFormSection] = useState(0); //what is the current section/screen in the form
-  const [formFields, setFormFields] = useState(''); //all the custom fields
-  const [views, setViews] = useState([]); //the custom field view for each section
+  const [formSection, setFormSection] = useState(0); //what is the current section/screen
+  const [formFields, setFormFields] = useState({}); //all the custom fields for each category
+  const [views, setViews] = useState([]); //the different custom field sections
   const [numCategories, setNumCategories] = useState(0); //number of custom field categories
   const [customValidation, setCustomValidation] = useState('');
 
@@ -104,20 +104,30 @@ function NewSightingForm({ navigation }) {
     const customRequiredFields = [];
     if (appConfig) {
       const customFields = [];
+      const fieldsByCategory = {};
       appConfig['site.custom.customFieldCategories']['value'].map(
         (category) => {
-          customFields.push(category);
-          const categoryValidation = [];
-          appConfig[sightingFormFields[category.type]]['value'][
-            'definitions'
-          ].map((field) => {
-            if (field.required) {
-              const customArray = [];
-              customArray.push(field.name);
-              customArray.push(field.type);
-              categoryValidation.push(customArray);
-            }
+          const fieldDefinitions =
+            appConfig[sightingFormFields[category.type]]['value'][
+              'definitions'
+            ];
+          const fields = fieldDefinitions.filter((field) => {
+            return (
+              field.schema &&
+              field.schema.category &&
+              field.schema.category === category.id
+            );
           });
+          const requiredFieldDefinitions = fields.filter(
+            (field) => field.required
+          );
+          const categoryValidation = requiredFieldDefinitions.map((field) => {
+            return [field.name, field.type];
+          });
+          if (fields.length > 0) {
+            fieldsByCategory[category.label] = fields;
+            customFields.push(category);
+          }
           if (categoryValidation) {
             const test = categoryValidation.reduce(
               (obj, item) => ({
@@ -135,9 +145,11 @@ function NewSightingForm({ navigation }) {
           }
         }
       );
-      setCustomValidation(customRequiredFields);
-      setViews(customFields);
-      setFormFields(appConfig);
+      fieldsByCategory['Regions'] = appConfig['site.custom.regions'];
+      setCustomValidation(customRequiredFields); // validation
+      setViews(customFields); // category titles for custom fields
+      setNumCategories(customFields.length); // number of screens for custom fields
+      setFormFields(fieldsByCategory); // fields based on each category
     }
   };
 
@@ -196,7 +208,7 @@ function NewSightingForm({ navigation }) {
         onSubmit={(values, { resetForm }, formikProps) => {
           if (formSection === numCategories + 2) {
             NetInfo.fetch().then((state) => {
-              console.log(state);
+              // console.log(state);
               if (state.isInternetReachable) {
                 alert(
                   'Internet Reachable: ' + JSON.stringify(values, undefined, 4)
@@ -345,29 +357,38 @@ function NewSightingForm({ navigation }) {
                             globalStyles.sectionHeader,
                           ]}
                         >
-                          {views[0]
+                          {views[formSection - 3]
                             ? views[formSection - 3]['label']
                             : errorData}
                         </Text>
-                        {views[0] ? (
-                          formFields[
-                            sightingFormFields[views[formSection - 3].type]
-                          ]['value']['definitions'].map((item) => (
-                            <CustomField
-                              key={item.id}
-                              id={item.id}
-                              required={item.required}
-                              schema={item.schema}
-                              name={item.name}
-                              displayType={item.displayType}
-                              props={formikProps}
-                              locationID={
-                                formFields['site.custom.regions']['value'][
-                                  'locationID'
-                                ]
+                        {views[formSection - 3] ? (
+                          formFields[views[formSection - 3]['label']].map(
+                            (item) => {
+                              if (
+                                item.schema &&
+                                item.schema.category &&
+                                item.schema.category ===
+                                  views[formSection - 3].id
+                              ) {
+                                return (
+                                  <CustomField
+                                    key={item.id}
+                                    id={item.id}
+                                    required={item.required}
+                                    schema={item.schema}
+                                    name={item.name}
+                                    displayType={item.displayType}
+                                    props={formikProps}
+                                    locationID={
+                                      formFields['Regions']['value'][
+                                        'locationID'
+                                      ]
+                                    }
+                                  />
+                                );
                               }
-                            />
-                          ))
+                            }
+                          )
                         ) : (
                           <Text style={globalStyles.subText}>{errorData}</Text>
                         )}
