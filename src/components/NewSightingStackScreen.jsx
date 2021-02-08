@@ -107,24 +107,22 @@ function NewSightingForm({ navigation }) {
       const fieldsByCategory = {};
       appConfig['site.custom.customFieldCategories']['value'].map(
         (category) => {
-          const categoryValidation = [];
-          const fields = [];
-          appConfig[sightingFormFields[category.type]]['value'][
-            'definitions'
-          ].map((field) => {
-            if (
+          const fieldDefinitions =
+            appConfig[sightingFormFields[category.type]]['value'][
+              'definitions'
+            ];
+          const fields = fieldDefinitions.filter((field) => {
+            return (
               field.schema &&
               field.schema.category &&
               field.schema.category === category.id
-            ) {
-              fields.push(field);
-              if (field.required) {
-                const customArray = [];
-                customArray.push(field.name);
-                customArray.push(field.type);
-                categoryValidation.push(customArray);
-              }
-            }
+            );
+          });
+          const requiredFieldDefinitions = fields.filter(
+            (field) => field.required
+          );
+          const categoryValidation = requiredFieldDefinitions.map((field) => {
+            return [field.name, field.type];
           });
           if (fields.length > 0) {
             fieldsByCategory[category.label] = fields;
