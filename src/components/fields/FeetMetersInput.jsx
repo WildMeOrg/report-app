@@ -24,7 +24,7 @@ export default function FeetMetersInput(rest) {
   const onPickerChange = (value) => {
     if (choice === 'Meters') {
       setMeasurement(
-        round(props.values.customFields[name] || 0 * 3.28084, 2).toString()
+        round((props.values.customFields[name] || 0) * 3.28084, 2).toString()
       );
       setChoice(value);
     } else {
