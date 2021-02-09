@@ -7,7 +7,6 @@ import theme from '../../constants/theme';
 export default function BooleanInput(rest) {
   const { name, schema, props } = rest;
   const [choice, setChoice] = useState(false);
-  console.log(props);
   return (
     <Switch
       trackColor={{ true: theme.green, false: theme.grey }}
