@@ -60,6 +60,13 @@ export default StyleSheet.create({
     borderRadius: 20,
     margin: '5%',
   },
+  // used for the testing datetimepicker
+  dtpText: {
+    paddingTop: 20,
+    fontSize: 16,
+    fontFamily: 'Lato-Regular',
+  },
+  //
   buttonInactive: {
     backgroundColor: '#CACACA',
   },
@@ -77,6 +84,13 @@ export default StyleSheet.create({
     bottom: 0,
     alignSelf: 'center',
     margin: '5%',
+  },
+  divider: {
+    marginHorizontal: '5%',
+    marginTop: 10,
+    borderBottomColor: '#2C2C2C',
+    borderBottomWidth: 0.5,
+    opacity: 0.5,
   },
   bottomElement: {
     marginVertical: 20,
