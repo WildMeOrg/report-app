@@ -73,6 +73,21 @@ export default function CustomDrawerContent(props) {
         onPress={() => props.navigation.navigate(screens.selection)}
       />
       <DrawerItem
+        style={styles.drawerItem}
+        label={() => (
+          <View style={styles.drawerListItem}>
+            <Icon
+              name="archive"
+              type="material-icons"
+              color={theme.black}
+              iconStyle={styles.icon}
+            />
+            <Typography id="LOCAL_SIGHTINGS" style={styles.drawerListText} />
+          </View>
+        )}
+        onPress={() => props.navigation.navigate(screens.localSigthing)}
+      />
+      <DrawerItem
         style={styles.drawerItemEnd}
         label={() => (
           <View style={styles.drawerListItem}>

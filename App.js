@@ -28,6 +28,7 @@ import GuestHomeStackScreen from './src/components/GuestHomeStackScreen';
 import GuestAddStackScreen from './src/components/GuestAddStackScreen';
 import SelectionStackScreen from './src/components/SelectionStackScreen';
 import { ReportContextProvider } from './src/context/report-context';
+import ViewLocalSightingStackSreen from './src/components/ViewLocalSightingStackScreen';
 
 const messageMap = {
   en: englishTranslations,
@@ -95,6 +96,10 @@ export default function App() {
               <Drawer.Screen
                 name={screens.notifications}
                 component={NotificationsStackScreen}
+              />
+              <Drawer.Screen
+                name={screens.localSigthing}
+                component={ViewLocalSightingStackSreen}
               />
             </Drawer.Navigator>
           </NavigationContainer>
