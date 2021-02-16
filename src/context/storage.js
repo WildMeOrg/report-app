@@ -8,6 +8,7 @@ import Elephant from '../../assets/images/elephant.jpg';
 import Jaguar from '../../assets/images/jaguar.jpg';
 
 export default storage = {
+  //dummy data for testing 
   sightings: [
     {
       id: 1,
@@ -26,6 +27,10 @@ export default storage = {
       image: Hummingbird,
       name: "Anna's Hummingbird",
       date: 'October 23rd, 2019',
+      species: 'Hummingbird',
+      Title: 'Humming',
+      Location: 'Beaverton OR',
+      Context: 'A Cute Little Bird',
       synced: true,
       inProgress: false,
     },
@@ -34,6 +39,10 @@ export default storage = {
       image: RedPanda,
       name: 'Red Panda',
       date: 'September 23rd, 2019',
+      species: 'Red Panda',
+      Title: 'Pabu',
+      Location: 'China',
+      Context: 'Its that pet from LoK',
       synced: true,
       inProgress: false,
     },
@@ -78,4 +87,5 @@ export default storage = {
       inProgress: false,
     },
   ],
+  currentCard: null, 
 };

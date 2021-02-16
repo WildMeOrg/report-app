@@ -11,16 +11,22 @@ import { ReportContext } from '../context/report-context';
 
 const ViewSightingStack = createStackNavigator();
 
-const ViewSightingScreen = ({ Navigation }) => {
+const ViewSightingScreen = ({ navigation }) => {
   const[state, dispactch] = useContext(ReportContext); 
-  //TODO, currently only gets the first object in the JSON
-  const sighting = state.sightings[0]; 
+  const curCard = state.currentCard; 
+  var sighting = state.sightings.filter((item) =>
+     {
+       if(item.id === curCard){
+         return item; 
+       }
+     }
+   )[0];
     var fieldsArray = []; // to be used for custom fields 
-    console.log(sighting);
+    //console.log(sighting);
     return(
         //hardcoded to be replaced for later
         <View style={styles.InfoView}>
-          <Image style={styles.image} source={Humpback} />
+          <Image style={styles.image} source={sighting.image} />
             <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
             <Text style={globalStyles.inputHeader}>{sighting.name}</Text>
             <Text style={[globalStyles.basicText, styles.InfoText]}>{sighting.date}</Text>

@@ -48,6 +48,11 @@ const reducer = (state, action) => {
           )
         ),
       };
+    case 'viewSighting' : 
+      var card = action.text; 
+      state.currentCard = card;
+     // console.log(state.currentCard);
+      break;
 
     default:
       throw new Error(
