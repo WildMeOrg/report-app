@@ -11,44 +11,46 @@ import { ReportContext } from '../context/report-context';
 
 const ViewSightingStack = createStackNavigator();
 
-const ViewSightingScreen = ({ navigation }) => {
-  const[state, dispactch] = useContext(ReportContext); 
-  const curCard = state.currentCard; 
-  var sighting = state.sightings.filter((item) =>
-     {
-       if(item.id === curCard){
-         return item; 
-       }
-     }
-   )[0];
-    var fieldsArray = []; // to be used for custom fields 
-    //console.log(sighting);
-    return(
-        //hardcoded to be replaced for later
-        <View style={styles.InfoView}>
-          <Image style={styles.image} source={sighting.image} />
-            <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-            <Text style={globalStyles.inputHeader}>{sighting.name}</Text>
-            <Text style={[globalStyles.basicText, styles.InfoText]}>{sighting.date}</Text>
-            <View style={styles.Divider} />
-            <Typography id="SPECIES" style={globalStyles.inputHeader} />
-            <Text style={[globalStyles.basicText, styles.InfoText]}>
-              {sighting.species}
-            </Text>
-            <Typography id="TITLE" style={globalStyles.inputHeader} />
-            <Text style={[globalStyles.basicText, styles.InfoText]}>{sighting.Title}</Text>
-            <Typography id="LOCATION" style={globalStyles.inputHeader} />
-            <Text style={[globalStyles.basicText, styles.InfoText]}>
-              {sighting.Location}
-            </Text>
-            <Typography id="SIGHTING_CONTEXT" style={globalStyles.inputHeader} />
-            <Text style={[globalStyles.basicText, styles.InfoText]}>
-              {sighting.Context}
-            </Text>
-            </ScrollView>
-        </View>
-    );
-}
+const ViewSightingScreen = ({ navigation, route }) => {
+  const [state, dispatch] = useContext(ReportContext);
+  var fieldsArray = []; // to be used for custom fields
+
+  var sighting = state.sightings.filter((item) => {
+    if (item.id === route.params.id) {
+      return item;
+    }
+  })[0];
+
+  return (
+    //hardcoded to be replaced for later
+    <View style={styles.InfoView}>
+      <Image style={styles.image} source={sighting.image} />
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <Text style={globalStyles.inputHeader}>{sighting.name}</Text>
+        <Text style={[globalStyles.basicText, styles.InfoText]}>
+          {sighting.date}
+        </Text>
+        <View style={styles.Divider} />
+        <Typography id="SPECIES" style={globalStyles.inputHeader} />
+        <Text style={[globalStyles.basicText, styles.InfoText]}>
+          {sighting.species}
+        </Text>
+        <Typography id="TITLE" style={globalStyles.inputHeader} />
+        <Text style={[globalStyles.basicText, styles.InfoText]}>
+          {sighting.Title}
+        </Text>
+        <Typography id="LOCATION" style={globalStyles.inputHeader} />
+        <Text style={[globalStyles.basicText, styles.InfoText]}>
+          {sighting.Location}
+        </Text>
+        <Typography id="SIGHTING_CONTEXT" style={globalStyles.inputHeader} />
+        <Text style={[globalStyles.basicText, styles.InfoText]}>
+          {sighting.Context}
+        </Text>
+      </ScrollView>
+    </View>
+  );
+};
 export default function ViewSightingStackScreen({ navigation }) {
   return (
     <ViewSightingStack.Navigator

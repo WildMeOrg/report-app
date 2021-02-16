@@ -87,5 +87,4 @@ export default storage = {
       inProgress: false,
     },
   ],
-  currentCard: null, 
 };
