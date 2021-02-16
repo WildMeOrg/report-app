@@ -12,11 +12,11 @@ import globalStyles from '../styles/globalStyles';
 import styles from '../styles/newSightingStyles';
 import AsyncStorage from '@react-native-community/async-storage';
 import { baseUrl } from '../constants/urls';
-import sightingFormFields from '../constants/sightingFormFields';
+import sightingFormFields from './fields/sightingFormFields';
 import CustomField from './CustomField.jsx';
 import Typography from '../components/Typography';
 import testSettingsPacket from '../constants/testSettingsPacket';
-// import standardForm from '../components/fields/standardForm';
+import generalValidationSchema from './fields/validationSchema';
 import NetInfo from '@react-native-community/netinfo';
 import GeneralFields from '../components/fields/GeneralFields';
 import SightingDetailsFields from '../components/fields/SightingDetailsFields';
@@ -34,38 +34,16 @@ function NewSightingForm({ navigation }) {
   const [views, setViews] = useState([]); //the different custom field sections
   const [numCategories, setNumCategories] = useState(0); //number of custom field categories
   const [customValidation, setCustomValidation] = useState('');
+  const numGeneralForm = 3; //there are 3 general form screens
 
   const validationSchema = [];
-  const firstPageSchema = yup.object().shape({
-    title: yup.string().required('Title is required'),
-    location: yup.string().required('Location is required'),
-    sightingContext: yup
-      .string()
-      .required('Sighting Context is required')
-      .min(8, 'Sighting Context must be more than 8 charaters')
-      .max(255, 'Sighting Context must be less than 255 charaters'),
+  generalValidationSchema.map((schema) => {
+    validationSchema.push(schema);
   });
-  validationSchema.push(firstPageSchema);
-  const secondPageSchema = yup.object().shape({
-    status: yup.string(),
-    relationships: yup.string(),
-    matchIndividual: yup.string(),
-  });
-  validationSchema.push(secondPageSchema);
-  const thirdPageSchema = yup.object().shape({
-    photographerName: yup
-      .string()
-      .required('Photographer Name is required')
-      .min(3, 'Photographer Name must be at least 3 charaters')
-      .max(30, 'Photographer Name must be less than 30 charaters'),
-    photographerEmail: yup
-      .string()
-      .email('Photographer Email is not valid')
-      .required('Photographer Email is required'),
-  });
-  validationSchema.push(thirdPageSchema);
   const customPageSchema = yup.object().shape({
-    customFields: yup.object().shape(customValidation[formSection - 3]),
+    customFields: yup
+      .object()
+      .shape(customValidation[formSection - numGeneralForm]),
   });
   validationSchema.push(customPageSchema);
 
@@ -204,7 +182,11 @@ function NewSightingForm({ navigation }) {
           photographerEmail: '',
           customFields: {},
         }}
-        validationSchema={validationSchema[formSection > 3 ? 3 : formSection]}
+        validationSchema={
+          validationSchema[
+            formSection > numGeneralForm ? numGeneralForm : formSection
+          ]
+        }
         onSubmit={(values, { resetForm }, formikProps) => {
           if (formSection === numCategories + 2) {
             NetInfo.fetch().then((state) => {
@@ -357,38 +339,36 @@ function NewSightingForm({ navigation }) {
                             globalStyles.sectionHeader,
                           ]}
                         >
-                          {views[formSection - 3]
-                            ? views[formSection - 3]['label']
+                          {views[formSection - numGeneralForm]
+                            ? views[formSection - numGeneralForm]['label']
                             : errorData}
                         </Text>
-                        {views[formSection - 3] ? (
-                          formFields[views[formSection - 3]['label']].map(
-                            (item) => {
-                              if (
-                                item.schema &&
-                                item.schema.category &&
-                                item.schema.category ===
-                                  views[formSection - 3].id
-                              ) {
-                                return (
-                                  <CustomField
-                                    key={item.id}
-                                    id={item.id}
-                                    required={item.required}
-                                    schema={item.schema}
-                                    name={item.name}
-                                    displayType={item.displayType}
-                                    props={formikProps}
-                                    locationID={
-                                      formFields['Regions']['value'][
-                                        'locationID'
-                                      ]
-                                    }
-                                  />
-                                );
-                              }
+                        {views[formSection - numGeneralForm] ? (
+                          formFields[
+                            views[formSection - numGeneralForm]['label']
+                          ].map((item) => {
+                            if (
+                              item.schema &&
+                              item.schema.category &&
+                              item.schema.category ===
+                                views[formSection - numGeneralForm].id
+                            ) {
+                              return (
+                                <CustomField
+                                  key={item.id}
+                                  id={item.id}
+                                  required={item.required}
+                                  schema={item.schema}
+                                  name={item.name}
+                                  displayType={item.displayType}
+                                  props={formikProps}
+                                  locationID={
+                                    formFields['Regions']['value']['locationID']
+                                  }
+                                />
+                              );
                             }
-                          )
+                          })
                         ) : (
                           <Text style={globalStyles.subText}>{errorData}</Text>
                         )}
@@ -419,7 +399,7 @@ function NewSightingForm({ navigation }) {
                         </TouchableOpacity>
                       </View>
                     ) : null}
-                    {formSection === numCategories + 2 ? (
+                    {formSection === numCategories + (numGeneralForm - 1) ? (
                       <View style={[styles.horizontal, styles.bottomElement]}>
                         <TouchableOpacity
                           onPress={() => [
