@@ -1,23 +1,26 @@
-import React from 'react'
+import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import theme from '../../constants/theme';
-import placeholderImage from '../../../assets/images/elephant.jpg'
+import placeholderImage from '../../../assets/images/elephant.jpg';
 
 export default function Sighting(props) {
-  console.log({props});
   return (
     <View>
       <View style={cardElementStyles.sightingCard}>
         <Image style={cardElementStyles.imageCover} source={placeholderImage} />
         <View style={cardElementStyles.sightingInfo}>
           <View style={cardElementStyles.sightingText}>
-            <Text style={cardElementStyles.sightingTitle}>{props.sighting.title}</Text>
-            <Text style={cardElementStyles.sightingDate}>{props.sighting.location}</Text>
+            <Text style={cardElementStyles.sightingTitle}>
+              {props.sighting.title}
+            </Text>
+            <Text style={cardElementStyles.sightingDate}>
+              {props.sighting.location}
+            </Text>
           </View>
         </View>
       </View>
     </View>
-  )
+  );
 }
 
 const cardElementStyles = StyleSheet.create({
@@ -59,7 +62,7 @@ const cardElementStyles = StyleSheet.create({
     height: 36,
   },
   imageCover: {
-    resizeMode: 'cover', // TODO: Fix to dynamically take up space in View
+    resizeMode: 'cover',
     borderTopLeftRadius: 5,
     borderBottomLeftRadius: 5,
     height: 78,
