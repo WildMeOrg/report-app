@@ -64,18 +64,18 @@ const WildbookCard = (props) => {
   return (
     <View style={cardElementStyles.sightingCard}>
       <Image style={cardElementStyles.imageCover} source={props.image} />
-      <View style={cardElementStyles.sightingInfo}>
+      {/* <View style={cardElementStyles.sightingInfo}> */}
         <View style={cardElementStyles.sightingText}>
           <Text style={cardElementStyles.sightingTitle}>{props.name}</Text>
         </View>
-        <Switch
+        {/* <Switch
           // TODO use the theme colors
           trackColor={{ true: theme.green, false: theme.grey }}
           thumbColor={theme.white}
           onValueChange={() => toggleSwitch(props.name)}
           value={isEnabled}
-        />
-      </View>
+        /> */}
+      {/* </View> */}
     </View>
   );
 };
@@ -85,12 +85,23 @@ const SelectionScreen = ({ navigation }) => {
       <ScrollView contentContainerStyle={bodyStyles.content}>
         {selection.wildbooks.map((wildbook) => {
           return (
-            <WildbookCard
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate('Login', {
+                  screen: 'Login1',
+                  params: { name: wildbook.name },
+                })
+              }
+              style={cardElementStyles.touchableOpacityHolder}
               key={wildbook.id}
-              image={wildbook.logo}
-              name={wildbook.name}
-              nav={navigation}
-            />
+            >
+              <WildbookCard
+                key={wildbook.id}
+                image={wildbook.logo}
+                name={wildbook.name}
+                nav={navigation}
+              />
+            </TouchableOpacity>
           );
         })}
       </ScrollView>
@@ -103,11 +114,19 @@ const bodyStyles = StyleSheet.create({
     backgroundColor: theme.white,
   },
   content: {
-    flexDirection: 'column',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
     overflow: 'visible',
-    paddingBottom: 5,
+    padding: 5,
+    marginVertical: '5%',
     backgroundColor: theme.white,
+    // flexDirection: 'column',
+    // alignItems: 'center',
+    // overflow: 'visible',
+    // paddingBottom: 5,
+    // backgroundColor: theme.white,
   },
   sortBy: {
     width: '100%',
@@ -139,13 +158,14 @@ const bodyStyles = StyleSheet.create({
 
 const cardElementStyles = StyleSheet.create({
   touchableOpacityHolder: {
-    width: '95%',
+    // width: '5%',
+    width: 150,
   },
   sightingCard: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     marginVertical: 7,
-    width: '95%',
-    height: 80,
+    width: '100%',
+    height: 175,
     justifyContent: 'center',
     borderStyle: 'solid',
     borderWidth: 1,
@@ -163,35 +183,39 @@ const cardElementStyles = StyleSheet.create({
     // Android
     elevation: 3,
   },
-  sightingInfo: {
-    paddingLeft: 22,
-    paddingRight: 4,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    flex: 2.5,
-    alignItems: 'center',
-  },
+  // sightingInfo: {
+  //   paddingLeft: 22,
+  //   paddingRight: 4,
+  //   flexDirection: 'row',
+  //   justifyContent: 'space-between',
+  //   flex: 2.5,
+  //   alignItems: 'center',
+  // },
   imageCover: {
     resizeMode: 'cover',
-    borderTopLeftRadius: 5,
-    borderBottomLeftRadius: 5,
-    height: 78,
+    width: '100%',
+    // borderTopLeftRadius: 5,
+    // borderBottomLeftRadius: 5,
+    height: '50%',
     flex: 1,
-    overflow: 'hidden',
-    alignSelf: 'center',
+    // overflow: 'hidden',
+    alignSelf: 'flex-start',
   },
   sightingText: {
-    justifyContent: 'space-around',
+    justifyContent: 'center',
     height: 36,
+    marginVertical: '5%',
   },
   sightingTitle: {
     fontSize: 18,
     fontFamily: 'Lato-Regular',
+    justifyContent: 'center',
+    textAlign: 'center',
   },
-  sightingDate: {
-    fontSize: 12,
-    fontFamily: 'Lato-Regular',
-    color: '#777',
-  },
+  // sightingDate: {
+  //   fontSize: 12,
+  //   fontFamily: 'Lato-Regular',
+  //   color: '#777',
+  // },
 });
 export default SelectionScreen;
