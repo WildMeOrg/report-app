@@ -20,9 +20,13 @@ const ViewSightingScreen = ({ navigation, route }) => {
       return item;
     }
   })[0];
-
+  //This is a bandage for a wierd search bar bug. 
+  //console.log(sighting);
+  if(sighting === undefined){
+    return null;
+  }
   return (
-    //hardcoded to be replaced for later
+    //TODO need to add customfields sections 
     <View style={styles.InfoView}>
       <Image style={styles.image} source={sighting.image} />
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
