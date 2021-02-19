@@ -24,32 +24,28 @@ export default function locationIDInput(rest) {
       >
         {locationID.map((item) => {
           function printChildren(childrenArray, itemArray, depth) {
-            for (var i = 0; i < childrenArray.length; i++) {
-              if (childrenArray === 0) {
+            childrenArray.map((childItem, i) => {
+              if (!childrenArray.length) {
                 var child = (
                   <Picker.Item
-                    label={' '.repeat(5 * depth) + childrenArray[i].name}
-                    value={childrenArray[i].id}
-                    key={childrenArray[i].id}
+                    label={' '.repeat(5 * depth) + childItem.name}
+                    value={childItem.id}
+                    key={childItem.id}
                   />
                 );
                 itemArray.push(child);
               } else {
                 var parent = (
                   <Picker.Item
-                    label={' '.repeat(5 * depth) + childrenArray[i].name}
-                    value={childrenArray[i].id}
-                    key={childrenArray[i].id}
+                    label={' '.repeat(5 * depth) + childItem.name}
+                    value={childItem.id}
+                    key={childItem.id}
                   />
                 );
                 itemArray.push(parent);
-                printChildren(
-                  childrenArray[i].locationID,
-                  itemArray,
-                  depth + 1
-                );
+                printChildren(childItem.locationID, itemArray, depth + 1);
               }
-            }
+            });
           }
           // //no children
           if (item.locationID.length === 0) {

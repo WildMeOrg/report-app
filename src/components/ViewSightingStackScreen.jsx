@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Text, StyleSheet, Image, View, ScrollView } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import screens from '../constants/screens';
@@ -7,37 +7,54 @@ import Humpback from '../../assets/images/humpback.jpg';
 import theme from '../constants/theme';
 import globalStyles from '../styles/globalStyles';
 import Typography from './Typography';
+import { ReportContext } from '../context/report-context';
 
 const ViewSightingStack = createStackNavigator();
 
-const ViewSightingScreen = ({ Navigation }) => {
+const ViewSightingScreen = ({ navigation, route }) => {
+  const [state, dispatch] = useContext(ReportContext);
+  var fieldsArray = []; // to be used for custom fields
+
+  var sighting = state.sightings.filter((item) => {
+    if (item.id === route.params.id) {
+      return item;
+    }
+  })[0];
+  //This is a bandage for a wierd search bar bug. 
+  //console.log(sighting);
+  if(sighting === undefined){
+    return null;
+  }
   return (
-    //hardcoded to be replaced for later
+    //TODO need to add customfields sections 
     <View style={styles.InfoView}>
-      <Image style={styles.image} source={Humpback} />
+      <Image style={styles.image} source={sighting.image} />
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <Text style={globalStyles.inputHeader}>Humpback</Text>
-        <Text style={[globalStyles.basicText, styles.InfoText]}>9/20/2020</Text>
+        <Text style={globalStyles.inputHeader}>{sighting.name}</Text>
+        <Text style={[globalStyles.basicText, styles.InfoText]}>
+          {sighting.date}
+        </Text>
         <View style={styles.Divider} />
         <Typography id="SPECIES" style={globalStyles.inputHeader} />
         <Text style={[globalStyles.basicText, styles.InfoText]}>
-          Humpback Whale
+          {sighting.species}
         </Text>
         <Typography id="TITLE" style={globalStyles.inputHeader} />
-        <Text style={[globalStyles.basicText, styles.InfoText]}>Humpy</Text>
+        <Text style={[globalStyles.basicText, styles.InfoText]}>
+          {sighting.Title}
+        </Text>
         <Typography id="LOCATION" style={globalStyles.inputHeader} />
         <Text style={[globalStyles.basicText, styles.InfoText]}>
-          Portland, OR
+          {sighting.Location}
         </Text>
         <Typography id="SIGHTING_CONTEXT" style={globalStyles.inputHeader} />
         <Text style={[globalStyles.basicText, styles.InfoText]}>
-          I saw it. The thing was absolutly massive bro.
+          {sighting.Context}
         </Text>
       </ScrollView>
     </View>
   );
 };
-
 export default function ViewSightingStackScreen({ navigation }) {
   return (
     <ViewSightingStack.Navigator
