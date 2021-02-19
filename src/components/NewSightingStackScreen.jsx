@@ -234,10 +234,11 @@ function NewSightingForm({ navigation }) {
               >
                 {formSection === 0 && (
                   <>
-                    <View style={styles.addNew}>
-                      <TouchableOpacity
-                        onPress={navigation.navigate(screens.imageBrowser)}
-                      >
+                    <View
+                      style={styles.addNew}
+                      onPress={navigation.navigate(screens.imageBrowser)}
+                    >
+                      <TouchableOpacity>
                         <Icon
                           name="cloud-upload"
                           type="font-awesome"
