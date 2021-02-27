@@ -43,7 +43,6 @@ const SightingCard = (props) => {
 
 const HomeScreen = ({ navigation }) => {
   const [state, dispatch] = useContext(ReportContext);
-
   return (
     <View style={bodyStyles.parentView}>
       {/* TODO: Turn from ScrollView into something FlatView for performance in long term(?) */}
@@ -67,10 +66,13 @@ const HomeScreen = ({ navigation }) => {
           // Procedurally generate the cards from the sightings array
           state.sightings.map((sighting) => {
             return (
-              //TODO:  change the onPress depending on the sighting card
-              //currently they all go to the same card
               <TouchableOpacity
-                onPress={() => navigation.navigate(screens.viewSighting)}
+                onPress={() => [
+                  navigation.navigate(screens.viewSighting, {
+                    screen: screens.viewSighting,
+                    params: { id: sighting.id },
+                  }),
+                ]}
                 style={cardElementStyles.touchableOpacityHolder}
                 key={sighting.id}
               >
