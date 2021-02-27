@@ -62,9 +62,20 @@ const WildbookCard = (props) => {
     }
   };
   return (
-    <View style={cardElementStyles.sightingCard}>
-      <Image style={cardElementStyles.imageCover} source={props.image} />
-      {/* <View style={cardElementStyles.sightingInfo}> */}
+    <TouchableOpacity
+      onPress={
+        () => toggleSwitch(props.name)
+        // navigation.navigate('Login', {
+        //   screen: 'Login1',
+        //   params: { name: wildbook.name },
+        // })
+      }
+      style={cardElementStyles.touchableOpacityHolder}
+      key={props.id}
+    >
+      <View style={cardElementStyles.sightingCard}>
+        <Image style={cardElementStyles.imageCover} source={props.image} />
+        {/* <View style={cardElementStyles.sightingInfo}> */}
         <View style={cardElementStyles.sightingText}>
           <Text style={cardElementStyles.sightingTitle}>{props.name}</Text>
         </View>
@@ -75,8 +86,9 @@ const WildbookCard = (props) => {
           onValueChange={() => toggleSwitch(props.name)}
           value={isEnabled}
         /> */}
-      {/* </View> */}
-    </View>
+        {/* </View> */}
+      </View>
+    </TouchableOpacity>
   );
 };
 const SelectionScreen = ({ navigation }) => {
@@ -85,23 +97,23 @@ const SelectionScreen = ({ navigation }) => {
       <ScrollView contentContainerStyle={bodyStyles.content}>
         {selection.wildbooks.map((wildbook) => {
           return (
-            <TouchableOpacity
-              onPress={() =>
-                navigation.navigate('Login', {
-                  screen: 'Login1',
-                  params: { name: wildbook.name },
-                })
-              }
-              style={cardElementStyles.touchableOpacityHolder}
+            // <TouchableOpacity
+            //   onPress={() =>
+            //     navigation.navigate('Login', {
+            //       screen: 'Login1',
+            //       params: { name: wildbook.name },
+            //     })
+            //   }
+            //   style={cardElementStyles.touchableOpacityHolder}
+            //   key={wildbook.id}
+            // >
+            <WildbookCard
               key={wildbook.id}
-            >
-              <WildbookCard
-                key={wildbook.id}
-                image={wildbook.logo}
-                name={wildbook.name}
-                nav={navigation}
-              />
-            </TouchableOpacity>
+              image={wildbook.logo}
+              name={wildbook.name}
+              nav={navigation}
+            />
+            // </TouchableOpacity>
           );
         })}
       </ScrollView>
