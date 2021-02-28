@@ -8,6 +8,7 @@ import theme from '../constants/theme';
 import globalStyles from '../styles/globalStyles';
 import Typography from './Typography';
 import { ReportContext } from '../context/report-context';
+import {SliderBox} from "react-native-image-slider-box";
 
 const ViewSightingStack = createStackNavigator();
 
@@ -28,7 +29,8 @@ const ViewSightingScreen = ({ navigation, route }) => {
   return (
     //TODO need to add customfields sections 
     <View style={styles.InfoView}>
-      <Image style={styles.image} source={sighting.image} />
+      {/* <Image style={styles.image} source={sighting.image} /> */}
+      <SliderBox images={sighting.image} sliderBoxHeight={250}/>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <Text style={globalStyles.inputHeader}>{sighting.name}</Text>
         <Text style={[globalStyles.basicText, styles.InfoText]}>

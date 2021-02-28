@@ -12,7 +12,7 @@ export default storage = {
   sightings: [
     {
       id: 1,
-      image: Humpback,
+      image: [Humpback, WhaleShark], //used to test image slider 
       name: 'Humpback Whale',
       date: 'September 23rd, 2019',
       species: 'Humpback Whale',
@@ -24,7 +24,7 @@ export default storage = {
     },
     {
       id: 2,
-      image: Hummingbird,
+      image: [Hummingbird],
       name: "Anna's Hummingbird",
       date: 'October 23rd, 2019',
       species: 'Hummingbird',
@@ -36,7 +36,7 @@ export default storage = {
     },
     {
       id: 3,
-      image: RedPanda,
+      image: [RedPanda],
       name: 'Red Panda',
       date: 'September 23rd, 2019',
       species: 'Red Panda',
@@ -48,7 +48,7 @@ export default storage = {
     },
     {
       id: 4,
-      image: Octopus,
+      image: [Octopus],
       name: 'Maldives Octopus',
       date: 'November 23rd, 2019',
       species: 'Octopus',
@@ -60,7 +60,7 @@ export default storage = {
     },
     {
       id: 5,
-      image: WhaleShark,
+      image: [WhaleShark],
       name: 'Whale Shark',
       date: 'September 23rd, 2019',
       species: 'Whale Shark',
@@ -72,7 +72,7 @@ export default storage = {
     },
     {
       id: 6,
-      image: Lizard,
+      image: [Lizard],
       name: 'Indonesian Forest Liza...',
       date: 'September 23rd, 2019',
       species: 'Indonesian Forest Lizard',
@@ -84,7 +84,7 @@ export default storage = {
     },
     {
       id: 7,
-      image: Elephant,
+      image: [Elephant],
       name: 'African Bush Elephant',
       date: 'September 23rd, 2019',
       species: 'African Bush Elephant',
@@ -96,7 +96,7 @@ export default storage = {
     },
     {
       id: 8,
-      image: Jaguar,
+      image: [Jaguar],
       name: 'North American Jaguar',
       date: 'September 23rd, 2019',
       species: 'North American Jaguar',
