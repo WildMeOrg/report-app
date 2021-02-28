@@ -27,48 +27,69 @@ const Login = ({ navigation, route }) => {
   const [responseData, onChangeResponseData] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
+  const emailTest = 'j@w.o';
+  const passwordTest = '123';
+
   const authenticate = async (email, password) => {
+    console.log('here1');
     setIsLoading(true);
-    try {
-      const response = await axios.request({
-        url: `${houstonUrl}/api/v1/auth/sessions`,
-        method: 'post',
-        data: {
-          email,
-          password,
-        },
-      });
-      if (response.data != null) {
-        await AsyncStorage.setItem(
-          'loggedIn',
-          JSON.stringify({
-            wildbook: route.params.name,
-            loggedIn: 'true',
-          })
-        );
-        navigation.navigate(screens.home);
-      }
-      onChangeResponseData(JSON.stringify(response.data));
-    } catch (loginError) {
-      onChangeResponseData(loginError.name + ': ' + loginError.message);
+    console.log(email);
+    console.log(password);
+    if (email === emailTest && password === passwordTest) {
+      console.log('here');
+      await AsyncStorage.setItem(
+        'loggedIn',
+        JSON.stringify({
+          wildbook: 'WhaleWatch',
+          loggedIn: 'true',
+        })
+      );
+      navigation.navigate(screens.home);
+    } else {
       setIsLoading(false);
       return;
     }
 
-    try {
-      const settingsPacket = await axios(
-        `${baseUrl}/api/v1/configuration/default/__bundle_setup`
-      );
-      await AsyncStorage.setItem(
-        'appConfiguration',
-        JSON.stringify(settingsPacket.data.response.configuration)
-      );
-    } catch (settingsFetchError) {
-      onChangeResponseData(
-        settingsFetchError.name + ': ' + settingsFetchError.message
-      );
-    }
-    setIsLoading(false);
+    // try {
+    //   const response = await axios.request({
+    //     url: `${houstonUrl}/api/v1/auth/sessions`,
+    //     method: 'post',
+    //     data: {
+    //       email,
+    //       password,
+    //     },
+    //   });
+    //   if (response.data != null) {
+    //     await AsyncStorage.setItem(
+    //       'loggedIn',
+    //       JSON.stringify({
+    //         wildbook: route.params.name,
+    //         loggedIn: 'true',
+    //       })
+    //     );
+    //     navigation.navigate(screens.home);
+    //   }
+    //   onChangeResponseData(JSON.stringify(response.data));
+    // } catch (loginError) {
+    //   onChangeResponseData(loginError.name + ': ' + loginError.message);
+    //   setIsLoading(false);
+    //   return;
+    // }
+
+    // try {
+    //   const settingsPacket = await axios(
+    //     `${baseUrl}/api/v1/configuration/default/__bundle_setup`
+    //   );
+    //   await AsyncStorage.setItem(
+    //     'appConfiguration',
+    //     JSON.stringify(settingsPacket.data.response.configuration)
+    //   );
+    // } catch (settingsFetchError) {
+    //   onChangeResponseData(
+    //     settingsFetchError.name + ': ' + settingsFetchError.message
+    //   );
+    // }
+    // setIsLoading(false);
   };
 
   return isLoading ? (

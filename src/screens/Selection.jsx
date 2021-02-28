@@ -44,12 +44,12 @@ const WildbookCard = (props) => {
     }
   };
   const toggleSwitch = async (name) => {
+    console.log(name);
     if (loggedInfo) {
-      if (isEnabled) {
-        setIsEnabled(false);
-        removeLogin();
-      } else if (name === loggedInfo.wildbook) {
+      console.log(loggedInfo.wildbook);
+      if (name === loggedInfo.wildbook) {
         setIsEnabled(true);
+        props.nav.navigate(screens.home);
       } else {
         Alert.alert(`Already Signed into ${loggedInfo.wildbook}`);
       }
@@ -60,6 +60,22 @@ const WildbookCard = (props) => {
         params: { name: props.name },
       });
     }
+    // if (loggedInfo) {
+    //   if (isEnabled) {
+    //     setIsEnabled(false);
+    //     removeLogin();
+    //   } else if (name === loggedInfo.wildbook) {
+    //     setIsEnabled(true);
+    //   } else {
+    //     Alert.alert(`Already Signed into ${loggedInfo.wildbook}`);
+    //   }
+    // } else {
+    //   setIsEnabled(true);
+    //   props.nav.navigate('Login', {
+    //     screen: 'Login1',
+    //     params: { name: props.name },
+    //   });
+    // }
   };
   return (
     <TouchableOpacity
@@ -73,11 +89,35 @@ const WildbookCard = (props) => {
       style={cardElementStyles.touchableOpacityHolder}
       key={props.id}
     >
-      <View style={cardElementStyles.sightingCard}>
-        <Image style={cardElementStyles.imageCover} source={props.image} />
+      <View
+        style={
+          isEnabled
+            ? cardElementStyles.sightingCard
+            : [
+                cardElementStyles.sightingCard,
+                { backgroundColor: theme.lightGrey },
+              ]
+        }
+      >
+        <Image
+          style={
+            isEnabled
+              ? cardElementStyles.imageCover
+              : [cardElementStyles.imageCover, { opacity: 0.5 }]
+          }
+          source={props.image}
+        />
         {/* <View style={cardElementStyles.sightingInfo}> */}
         <View style={cardElementStyles.sightingText}>
-          <Text style={cardElementStyles.sightingTitle}>{props.name}</Text>
+          <Text
+            style={
+              isEnabled
+                ? cardElementStyles.sightingTitle
+                : [cardElementStyles.sightingTitle, { opacity: 0.5 }]
+            }
+          >
+            {props.name}
+          </Text>
         </View>
         {/* <Switch
           // TODO use the theme colors
