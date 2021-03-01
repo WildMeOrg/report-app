@@ -32,7 +32,7 @@ export default function localSightings() {
   return (
     <View style={{ flex: 1 }}>
       <ScrollView style={{ flex: 1 }}>
-        {storedSightings != null ? (
+        {storedSightings !== null ? (
           storedSightings.map((sighting, index) => (
             <Sighting sighting={sighting} key={index} sightingIndex={index} />
           ))

@@ -60,7 +60,6 @@ const HomeScreen = ({ navigation }) => {
               `Sent ${storedSightings.length} locally saved sighting(s) to the server`
             );
             AsyncStorage.removeItem('SightingSubmissions');
-            storedSightings = null;
           } else {
             alert('No Internet, try again later.');
           }
