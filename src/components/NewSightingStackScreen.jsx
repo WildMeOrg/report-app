@@ -4,6 +4,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from 'react-native-elements';
 import { Formik } from 'formik';
+import Uppy from '@uppy/core';
 import * as ImagePicker from 'expo-image-picker';
 import * as yup from 'yup';
 import screens from '../constants/screens';
@@ -142,6 +143,11 @@ function NewSightingForm({ navigation }) {
   }, []);
 
   const pickImage = async () => {
+    const uppy = new Uppy({
+      restrictions: {
+        allowedFileTypes: ['.png'],
+      }
+    });
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
@@ -149,6 +155,12 @@ function NewSightingForm({ navigation }) {
       exif: true,
       allowsMultipleSelection: true,
     });
+    console.log(result);
+    uppy.addFile({
+      source: 'file input',
+      name: "test_file",
+      data: result,
+    })
     if (!result.cancelled) {
       // setImage(result.uri);
     }
