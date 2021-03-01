@@ -39,7 +39,7 @@ export default function localSightings() {
         ) : (
           <Text>
             {' '}
-            There are currently no stighting stores locally on the device.
+            There are currently no sightings stored locally on the device.
           </Text>
         )}
       </ScrollView>
