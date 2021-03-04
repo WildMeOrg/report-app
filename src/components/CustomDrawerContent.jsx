@@ -1,16 +1,33 @@
-import React from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import {
   DrawerContentScrollView,
   DrawerItemList,
   DrawerItem,
+  Alert,
 } from '@react-navigation/drawer';
 import { Icon } from 'react-native-elements';
 import screens from '../constants/screens';
 import theme from '../constants/theme';
 import Typography from './Typography';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default function CustomDrawerContent(props) {
+  // React.useEffect(() => {
+  //   const unsubscribe = props.navigation.addListener('focus', () => {
+  //     Alert.alert('Refreshed');
+  //   });
+  //   return unsubscribe;
+  // }, [props.navigation]);
+  const removeLogin = async () => {
+    try {
+      await AsyncStorage.removeItem('loggedIn');
+      console.log('removed loggedin');
+      //loggedInfo = null;
+    } catch (e) {
+      console.error(e);
+    }
+  };
   return (
     <DrawerContentScrollView {...props}>
       <DrawerItem
@@ -99,7 +116,10 @@ export default function CustomDrawerContent(props) {
             <Typography id="LOG_OUT" style={styles.drawerListText} />
           </View>
         )}
-        onPress={() => props.navigation.navigate(screens.login)}
+        onPress={() => [
+          removeLogin(),
+          props.navigation.navigate(screens.selection),
+        ]}
       />
       {/* Until all screens are linked together this allow us to go to each screen */}
       <DrawerItemList {...props} />

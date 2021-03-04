@@ -21,15 +21,35 @@ import AsyncStorage from '@react-native-community/async-storage';
 import useAsyncStorage from '../hooks/useAsyncStorage';
 
 const WildbookCard = (props) => {
+  console.log('Wildbookcard');
+  // const loggedInfo = props.loggedInfo;
   const loggedInfo = useAsyncStorage('loggedIn');
   const [isEnabled, setIsEnabled] = useState(false);
+  console.log('wildbook: ' + props.name);
+  if (loggedInfo) {
+    console.log('wildbook: ' + loggedInfo.wildbook);
+  }
+  useEffect(() => {
+    setIsEnabled(loggedInfo && loggedInfo.wildbook === props.name);
+  }, [loggedInfo]);
+  // const loggedInfo = useAsyncStorage('loggedIn');
+  // console.log(loggedInfo);
+  // if (loggedInfo) {
+  //   console.log(loggedInfo.wildbook);
+  //   console.log(loggedInfo && loggedInfo.wildbook === props.name);
+  // }
+  // console.log('props name: ' + props.name);
+  // const [isEnabled, setIsEnabled] = useState(
+  //   loggedInfo && loggedInfo.wildbook === props.name
+  // );
+  // console.log(props.name + ': ' + isEnabled);
   //addListener is used to refresh the page when navigated to
-  React.useEffect(() => {
-    const unsubscribe = props.nav.addListener('focus', () => {
-      defaultState();
-    });
-    return unsubscribe;
-  }, [props.nav]);
+  // React.useEffect(() => {
+  //   const unsubscribe = props.nav.addListener('focus', () => {
+  //     defaultState();
+  //   });
+  //   return unsubscribe;
+  // }, [props.nav]);
   const removeLogin = async () => {
     try {
       await AsyncStorage.removeItem('loggedIn');
@@ -38,14 +58,18 @@ const WildbookCard = (props) => {
       console.error(e);
     }
   };
-  const defaultState = async () => {
-    if (!loggedInfo) {
-      setIsEnabled(false);
-    }
-  };
+  // const defaultState = async () => {
+  //   console.log('in defaultState');
+  //   if (!loggedInfo) {
+  //     setIsEnabled(false);
+  //   } else if (loggedInfo && loggedInfo.wildbook === props.name) {
+  //     setIsEnabled(true);
+  //   }
+  // };
   const toggleSwitch = async (name) => {
-    console.log(name);
+    // console.log(name);
     if (loggedInfo) {
+      console.log('loggedInfo');
       console.log(loggedInfo.wildbook);
       if (name === loggedInfo.wildbook) {
         setIsEnabled(true);
@@ -54,6 +78,7 @@ const WildbookCard = (props) => {
         Alert.alert(`Already Signed into ${loggedInfo.wildbook}`);
       }
     } else {
+      console.log('else');
       setIsEnabled(true);
       props.nav.navigate('Login', {
         screen: 'Login1',
@@ -132,6 +157,12 @@ const WildbookCard = (props) => {
   );
 };
 const SelectionScreen = ({ navigation }) => {
+  // const [loggedInfo, setLoggedInfo] = useState(useAsyncStorage('loggedIn'));
+  // console.log('loggedinfo: ' + (loggedInfo && loggedInfo.wildbook));
+  // useEffect(() => {
+  //   setLoggedInfo(loggedInfo);
+  // }, [loggedInfo]);
+  console.log('in selection screen');
   return (
     <View style={bodyStyles.parentView}>
       <ScrollView contentContainerStyle={bodyStyles.content}>
@@ -152,6 +183,7 @@ const SelectionScreen = ({ navigation }) => {
               image={wildbook.logo}
               name={wildbook.name}
               nav={navigation}
+              // loggedInfo={loggedInfo}
             />
             // </TouchableOpacity>
           );
