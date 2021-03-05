@@ -21,20 +21,37 @@ import AsyncStorage from '@react-native-community/async-storage';
 import useAsyncStorage from '../hooks/useAsyncStorage';
 
 const WildbookCard = (props) => {
-  console.log('Wildbookcard');
-  // const loggedInfo = props.loggedInfo;
-  const loggedInfo = useAsyncStorage('loggedIn');
-  const [isEnabled, setIsEnabled] = useState(false);
-  console.log('wildbook: ' + props.name);
-  if (loggedInfo) {
-    console.log('wildbook: ' + loggedInfo.wildbook);
-  }
+  // console.log('Wildbookcard');
+  const loggedInfo = props.loggedInfo;
+  // const [loggedInfo, setLoggedInfo] = useState(useAsyncStorage('loggedIn'));
+  // console.log(loggedInfo);
+  // const loggedInfo = !props.removeLogin ? useAsyncStorage('loggedIn') : null;
+  // const removeLogin = async () => {
+  //   try {
+  //     await AsyncStorage.removeItem('loggedIn');
+  //     setLoggedInfo(null);
+  //   } catch (e) {
+  //     console.error(e);
+  //   }
+  // };
+  // if (props.removeLog) {
+  //   console.log('going to remove login');
+  //   removeLogin();
+  // }
+  // const [isEnabled, setIsEnabled] = useState(false);
+  const [isEnabled, setIsEnabled] = useState(
+    loggedInfo && loggedInfo.wildbook === props.name
+  );
+  // console.log('wildbook: ' + props.name);
+  // if (loggedInfo) {
+  //   console.log('wildbook: ' + loggedInfo.wildbook);
+  // }
   useEffect(() => {
     setIsEnabled(loggedInfo && loggedInfo.wildbook === props.name);
   }, [loggedInfo]);
   // const loggedInfo = useAsyncStorage('loggedIn');
   // console.log(loggedInfo);
-  // if (loggedInfo) {
+  // if (loggedInfo) {}
   //   console.log(loggedInfo.wildbook);
   //   console.log(loggedInfo && loggedInfo.wildbook === props.name);
   // }
@@ -50,14 +67,7 @@ const WildbookCard = (props) => {
   //   });
   //   return unsubscribe;
   // }, [props.nav]);
-  const removeLogin = async () => {
-    try {
-      await AsyncStorage.removeItem('loggedIn');
-      //loggedInfo = null;
-    } catch (e) {
-      console.error(e);
-    }
-  };
+
   // const defaultState = async () => {
   //   console.log('in defaultState');
   //   if (!loggedInfo) {
@@ -67,7 +77,8 @@ const WildbookCard = (props) => {
   //   }
   // };
   const toggleSwitch = async (name) => {
-    // console.log(name);
+    console.log('toggle switch: ' + name);
+    console.log(loggedInfo);
     if (loggedInfo) {
       console.log('loggedInfo');
       console.log(loggedInfo.wildbook);
@@ -79,10 +90,10 @@ const WildbookCard = (props) => {
       }
     } else {
       console.log('else');
-      setIsEnabled(true);
+      // setIsEnabled(true);
       props.nav.navigate('Login', {
         screen: 'Login1',
-        params: { name: props.name },
+        params: { name: name },
       });
     }
     // if (loggedInfo) {
@@ -156,13 +167,43 @@ const WildbookCard = (props) => {
     </TouchableOpacity>
   );
 };
-const SelectionScreen = ({ navigation }) => {
+const SelectionScreen = ({ navigation, route }) => {
   // const [loggedInfo, setLoggedInfo] = useState(useAsyncStorage('loggedIn'));
   // console.log('loggedinfo: ' + (loggedInfo && loggedInfo.wildbook));
   // useEffect(() => {
   //   setLoggedInfo(loggedInfo);
   // }, [loggedInfo]);
+  // const removeLog;
+  // console.log('selection screen');
+  // if (route && route.params && route.params.notLoggedIn) {
+  //   console.log('here');
+  //   try {
+  //     AsyncStorage.removeItem('loggedIn');
+  //     //loggedInfo = null;
+  //   } catch (e) {
+  //     console.error(e);
+  //   }
+  // }
   console.log('in selection screen');
+  console.log(route);
+  const removeLogin = async () => {
+    try {
+      await AsyncStorage.removeItem('loggedIn');
+    } catch (e) {
+      console.error(e);
+    }
+  };
+  if (route && route.params && route.params.notLoggedIn) {
+    console.log('going to remove login');
+    removeLogin();
+  }
+  const loggedInfo =
+    route && route.params && route.params.notLoggedIn
+      ? null
+      : useAsyncStorage('loggedIn');
+  // console.log(useAsyncStorage('loggedIn'));
+  // console.log(loggedInfo);
+
   return (
     <View style={bodyStyles.parentView}>
       <ScrollView contentContainerStyle={bodyStyles.content}>
@@ -183,7 +224,8 @@ const SelectionScreen = ({ navigation }) => {
               image={wildbook.logo}
               name={wildbook.name}
               nav={navigation}
-              // loggedInfo={loggedInfo}
+              // removeLog={route && route.params && route.params.notLoggedIn}
+              loggedInfo={loggedInfo}
             />
             // </TouchableOpacity>
           );

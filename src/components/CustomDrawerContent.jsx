@@ -11,6 +11,7 @@ import screens from '../constants/screens';
 import theme from '../constants/theme';
 import Typography from './Typography';
 import AsyncStorage from '@react-native-community/async-storage';
+import useAsyncStorage from '../hooks/useAsyncStorage';
 
 export default function CustomDrawerContent(props) {
   // React.useEffect(() => {
@@ -19,6 +20,13 @@ export default function CustomDrawerContent(props) {
   //   });
   //   return unsubscribe;
   // }, [props.navigation]);
+  //
+  // const fetchLoggin = async () => {
+  //   console.log('fetching');
+  //   useAsyncStorage('loggedIn');
+  //   // console.log(useAsyncStorage('loggedIn'));
+  // };
+  useAsyncStorage('loggedIn');
   const removeLogin = async () => {
     try {
       await AsyncStorage.removeItem('loggedIn');
@@ -87,7 +95,13 @@ export default function CustomDrawerContent(props) {
             <Typography id="CHANGE_WILDBOOK" style={styles.drawerListText} />
           </View>
         )}
-        onPress={() => props.navigation.navigate(screens.selection)}
+        onPress={() => [
+          // fetchLoggin(),
+          props.navigation.navigate(screens.selection, {
+            screen: screens.selection,
+            params: { notLoggedIn: false },
+          }),
+        ]}
       />
       <DrawerItem
         style={styles.drawerItemEnd}
@@ -117,8 +131,11 @@ export default function CustomDrawerContent(props) {
           </View>
         )}
         onPress={() => [
-          removeLogin(),
-          props.navigation.navigate(screens.selection),
+          // removeLogin(),
+          props.navigation.navigate(screens.selection, {
+            screen: screens.selection,
+            params: { notLoggedIn: true },
+          }),
         ]}
       />
       {/* Until all screens are linked together this allow us to go to each screen */}

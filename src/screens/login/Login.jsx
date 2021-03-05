@@ -30,13 +30,17 @@ const Login = ({ navigation, route }) => {
   const emailTest = 'j@w.o';
   const passwordTest = '123';
 
+  console.log('in Login');
+  console.log(email);
+  console.log(isLoading);
+
   const authenticate = async (email, password) => {
-    console.log('here1');
+    console.log('in authenticate');
     setIsLoading(true);
     console.log(email);
     console.log(password);
     if (email === emailTest && password === passwordTest) {
-      console.log('here');
+      console.log('correct input');
       await AsyncStorage.setItem(
         'loggedIn',
         JSON.stringify({
@@ -44,6 +48,7 @@ const Login = ({ navigation, route }) => {
           loggedIn: 'true',
         })
       );
+      setIsLoading(false);
       navigation.navigate(screens.home);
     } else {
       setIsLoading(false);
