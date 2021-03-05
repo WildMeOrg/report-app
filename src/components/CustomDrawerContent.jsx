@@ -26,16 +26,18 @@ export default function CustomDrawerContent(props) {
   //   useAsyncStorage('loggedIn');
   //   // console.log(useAsyncStorage('loggedIn'));
   // };
-  useAsyncStorage('loggedIn');
-  const removeLogin = async () => {
-    try {
-      await AsyncStorage.removeItem('loggedIn');
-      console.log('removed loggedin');
-      //loggedInfo = null;
-    } catch (e) {
-      console.error(e);
-    }
-  };
+  console.log('drawer nav');
+  const loggin = useAsyncStorage('loggedIn');
+  console.log(loggin);
+  // const removeLogin = async () => {
+  //   try {
+  //     await AsyncStorage.removeItem('loggedIn');
+  //     console.log('removed loggedin');
+  //     //loggedInfo = null;
+  //   } catch (e) {
+  //     console.error(e);
+  //   }
+  // };
   return (
     <DrawerContentScrollView {...props}>
       <DrawerItem
@@ -99,7 +101,7 @@ export default function CustomDrawerContent(props) {
           // fetchLoggin(),
           props.navigation.navigate(screens.selection, {
             screen: screens.selection,
-            params: { notLoggedIn: false },
+            params: { notLoggedIn: false, logginVal: loggin },
           }),
         ]}
       />

@@ -48,7 +48,7 @@ const Login = ({ navigation, route }) => {
           loggedIn: 'true',
         })
       );
-      setIsLoading(false);
+      // setIsLoading(false);
       navigation.navigate(screens.home);
     } else {
       setIsLoading(false);
@@ -94,7 +94,7 @@ const Login = ({ navigation, route }) => {
     //     settingsFetchError.name + ': ' + settingsFetchError.message
     //   );
     // }
-    // setIsLoading(false);
+    setIsLoading(false);
   };
 
   return isLoading ? (
