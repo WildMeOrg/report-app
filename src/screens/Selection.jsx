@@ -21,8 +21,9 @@ import AsyncStorage from '@react-native-community/async-storage';
 import useAsyncStorage from '../hooks/useAsyncStorage';
 
 const WildbookCard = (props) => {
-  // console.log('Wildbookcard');
-  const loggedInfo = props.loggedInfo;
+  const loggedInfo = JSON.parse(props.loggedInfo);
+  // console.log('Wildbookcard' + loggedInfo);
+  // console.log(loggedInfo['wildbook']);
   // const [loggedInfo, setLoggedInfo] = useState(useAsyncStorage('loggedIn'));
   // console.log(loggedInfo);
   // const loggedInfo = !props.removeLogin ? useAsyncStorage('loggedIn') : null;
@@ -168,7 +169,9 @@ const WildbookCard = (props) => {
   );
 };
 const SelectionScreen = ({ navigation, route }) => {
-  // const [loggedInfo, setLoggedInfo] = useState(useAsyncStorage('loggedIn'));
+  // const [loggedInfo, setLoggedInfo] = useState(
+  //   route && route.params && route.params.notLoggedIn ? null : asyncStuff
+  // );
   // console.log('loggedinfo: ' + (loggedInfo && loggedInfo.wildbook));
   // useEffect(() => {
   //   setLoggedInfo(loggedInfo);
@@ -185,9 +188,10 @@ const SelectionScreen = ({ navigation, route }) => {
   //   }
   // }
   console.log('in selection screen');
-  console.log(route);
+  // console.log(route);
   const removeLogin = async () => {
     try {
+      console.log('removing login');
       await AsyncStorage.removeItem('loggedIn');
     } catch (e) {
       console.error(e);
@@ -197,12 +201,44 @@ const SelectionScreen = ({ navigation, route }) => {
     console.log('going to remove login');
     removeLogin();
   }
-  const loggedInfo =
-    route && route.params && route.params.notLoggedIn
-      ? null
-      : useAsyncStorage('loggedIn');
-  // console.log(useAsyncStorage('loggedIn'));
-  // console.log(loggedInfo);
+  // const asyncStuff = await AsyncStorage.getItem('loggedIn').then((value) => {
+  //   return value;
+  // });
+
+  // useEffect(() => {
+  //   AsyncStorage.getItem('loggedIn', (err, result) => {
+  //     setLoggedInfo(JSON.parse(result));
+  //   });
+  // }, []);
+  const [functionLoggin, setFunctionLoggin] = useState(null);
+
+  const fetchLoggin = async () => {
+    let loggin = await AsyncStorage.getItem('loggedIn', (err, result) => {
+      return JSON.parse(result);
+    });
+    setFunctionLoggin(loggin);
+  };
+  fetchLoggin();
+  const [loggedInfo, setLoggedInfo] = useState(
+    route && route.params && route.params.notLoggedIn ? null : functionLoggin
+  );
+
+  useEffect(() => {
+    setLoggedInfo(
+      route && route.params && route.params.notLoggedIn ? null : functionLoggin
+    );
+  }, [functionLoggin]);
+
+  // console.log('async stuff: ' + loggedInfo);
+  // const loggedInfo =
+  //   route && route.params && route.params.notLoggedIn
+  //     ? null
+  //     : useAsyncStorage('loggedIn');
+
+  console.log(useAsyncStorage('loggedIn'));
+  console.log(loggedInfo);
+  // fetchLoggin();
+  // console.log(functionLoggin);
 
   return (
     <View style={bodyStyles.parentView}>
