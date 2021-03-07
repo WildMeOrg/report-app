@@ -22,59 +22,69 @@ export default storage = {
       synced: true,
       inProgress: false,
       //used to test the custom fields 
-      customFields:{
-          DateTimePicker: {
-            Title: "Picture Taken",
-            Value: "2021-03-07T02:00:53.350Z"
-          },
-          DateRangePicker:{
-            Title: "Date Range Test",
-            Value: {
-              Start: "2021-03-07T02:00:53.350Z",
-              End: "2021-03-16T21:55:28.978Z"
-            }
-          },
-          LocationIDInput:{
-            Title:"LocationID test",
-            Value: " Some place"
-          },
-          MultiSelect: {
-            Title: "MultiSelect Test",
-            Value: ["b","c"]
-          },
-          Boolean: {
-            Title: "Boolean Test",
-            Value: "True"
-          },
-          FeetMeters: {
-            Title: "Length of Feet",
-            Value: "1.524"
-          },
-          SelectInput: {
-            Title: "SelectTest",
-            Value: "Yes Test"
-          },
-          LatLongInput: {
-            Title: "Coordinates",
-            Value: {
-              Lat: "158.05",
-              Long: "168.00"
-            }
-          },
-          AllTextInput: {
-            Title: "Text input test",
-            Value: "A massive paragraph or something"
-          },
-          Area: {
-            Title: "Area of Sighting",
-            Value: {
-              North: "5.5",
-              East: "6.6",
-              South: "8.8",
-              West: "9.9"
-            }
+      customFields:[
+        {
+          Type: "DateTimePicker",
+          Title: "Picture Taken",
+          Value: "2021-03-07T02:00:53.350Z"
+        },
+        {
+          Type: "DateRangePicker",
+          Title: "Date Range Test",
+          Value: {
+            Start: "2021-03-07T02:00:53.350Z",
+            End: "2021-03-16T21:55:28.978Z"
           }
-      }
+        },
+        {
+          Type: "LocationIDInput",
+          Title:"LocationID test",
+          Value: " Some place"
+        },
+        {
+          Type: "MultiSelect",
+          Title: "MultiSelect Test",
+          Value: ["b","c","d","e"]
+        },
+        {
+          Type: "boolean",
+          Title: "Boolean Test",
+          Value: "True"
+        },
+        {
+          Type: "FeetMeters",
+          Title: "Length of Feet",
+          Value: "1.524"
+        },
+        {
+          Type: "SelectInput",
+          Title: "SelectTest",
+          Value: "Yes Test"
+        },
+        {
+          Type: "LatLongInput",
+          Title: "Coordinates",
+          Value: {
+            Lat: "158.05",
+            Long: "168.00"
+          }
+        },
+        {
+          Type: "AllTextInput",
+          Title: "Text input test",
+          Value: "A massive paragraph or something"
+        },
+        {
+          Type: "Area",
+          Title: "Area of Sighting",
+          Value: {
+            North: "5.5",
+            East: "6.6",
+            South: "8.8",
+            West: "9.9"
+          }
+        }
+      ]
     },
     {
       id: 2,
@@ -87,6 +97,7 @@ export default storage = {
       Context: 'A Cute Little Bird',
       synced: true,
       inProgress: false,
+      customFields:[]
     },
     {
       id: 3,
@@ -99,6 +110,7 @@ export default storage = {
       Context: 'Its that pet from LoK',
       synced: true,
       inProgress: false,
+      customFields:[]
     },
     {
       id: 4,
@@ -111,6 +123,7 @@ export default storage = {
       Context: 'Freaky little guy',
       synced: true,
       inProgress: false,
+      customFields:[]
     },
     {
       id: 5,
@@ -123,6 +136,7 @@ export default storage = {
       Context: 'Went diving, found this guy',
       synced: true,
       inProgress: false,
+      customFields:[]
     },
     {
       id: 6,
@@ -135,6 +149,7 @@ export default storage = {
       Context: 'Got lost on a hiking trail, found this guy',
       synced: true,
       inProgress: false,
+      customFields:[]
     },
     {
       id: 7,
@@ -147,6 +162,7 @@ export default storage = {
       Context: 'Big, Absoluely massive',
       synced: true,
       inProgress: false,
+      customFields:[]
     },
     {
       id: 8,
@@ -159,6 +175,7 @@ export default storage = {
       Context: 'A scary, fast cat',
       synced: true,
       inProgress: false,
+      customFields:[]
     },
   ],
 };

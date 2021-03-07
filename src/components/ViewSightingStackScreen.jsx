@@ -14,47 +14,101 @@ const ViewSightingStack = createStackNavigator();
 
 const ViewSightingScreen = ({ navigation, route }) => {
   const [state, dispatch] = useContext(ReportContext);
-  var fieldsArray = []; // to be used for custom fields
 
   var sighting = state.sightings.filter((item) => {
     if (item.id === route.params.id) {
       return item;
     }
   })[0];
-  //This is a bandage for a wierd search bar bug. 
+  //This is a bandage for a weird search bar bug. 
   //console.log(sighting);
   if(sighting === undefined){
     return null;
   }
+  var keyVal = 0; //used for keys 
   return (
-    //TODO need to add customfields sections 
-    <View style={styles.InfoView}>
-      {/* <Image style={styles.image} source={sighting.image} /> */}
-      <SliderBox images={sighting.image} sliderBoxHeight={250}/>
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <Text style={globalStyles.inputHeader}>{sighting.name}</Text>
-        <Text style={[globalStyles.basicText, styles.InfoText]}>
-          {sighting.date}
-        </Text>
-        <View style={styles.Divider} />
-        <Typography id="SPECIES" style={globalStyles.inputHeader} />
-        <Text style={[globalStyles.basicText, styles.InfoText]}>
-          {sighting.species}
-        </Text>
-        <Typography id="TITLE" style={globalStyles.inputHeader} />
-        <Text style={[globalStyles.basicText, styles.InfoText]}>
-          {sighting.Title}
-        </Text>
-        <Typography id="LOCATION" style={globalStyles.inputHeader} />
-        <Text style={[globalStyles.basicText, styles.InfoText]}>
-          {sighting.Location}
-        </Text>
-        <Typography id="SIGHTING_CONTEXT" style={globalStyles.inputHeader} />
-        <Text style={[globalStyles.basicText, styles.InfoText]}>
-          {sighting.Context}
-        </Text>
-      </ScrollView>
-    </View>
+     //TODO need to add customfields sections 
+     <View style={styles.InfoView} key={keyVal}>
+     {/* <Image style={styles.image} source={sighting.image} /> */}
+     <SliderBox images={sighting.image} sliderBoxHeight={250}/>
+     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+       <Text style={globalStyles.inputHeader}>{sighting.name}</Text>
+       <Text style={[globalStyles.basicText, styles.InfoText]}>
+         {sighting.date}
+       </Text>
+       <View style={styles.Divider} />
+       <Typography id="SPECIES" style={globalStyles.inputHeader} />
+       <Text style={[globalStyles.basicText, styles.InfoText]}>
+         {sighting.species}
+       </Text>
+       <Typography id="TITLE" style={globalStyles.inputHeader} />
+       <Text style={[globalStyles.basicText, styles.InfoText]}>
+         {sighting.Title}
+       </Text>
+       <Typography id="LOCATION" style={globalStyles.inputHeader} />
+       <Text style={[globalStyles.basicText, styles.InfoText]}>
+         {sighting.Location}
+       </Text>
+       <Typography id="SIGHTING_CONTEXT" style={globalStyles.inputHeader} />
+       <Text style={[globalStyles.basicText, styles.InfoText]}>
+         {sighting.Context}
+       </Text>
+       {
+         //TODO figure out fileInput 
+         sighting.customFields.map((field) => {
+          var jsHeader;
+          var jsBody; 
+          var componentArray = []; // to be used for custom fields
+          jsHeader= <Text style={globalStyles.inputHeader} key={keyVal}>{field.Title}</Text>
+          keyVal++;
+          if(field.Type === "DateTimePicker"){
+            var date = new Date(field.Value); 
+            jsBody= <Text style={[globalStyles.basicText, styles.InfoText]} key={keyVal}>
+            {date.toDateString()}
+          </Text>
+          }
+          else if(field.Type === "DateRangePicker"){
+            var sDate = new Date(field.Value.Start);
+            var eDate = new Date(field.Value.End);
+            jsBody = <Text style={[globalStyles.basicText, styles.InfoText]} key={keyVal}>
+            Start: {sDate.toDateString()} {"\n"}End: {eDate.toDateString()}
+          </Text>
+          }
+          else if(field.Type === "MultiSelect"){
+            const arrLen = field.Value.length;
+            var counter = 1;
+            jsBody= <Text style={[globalStyles.basicText, styles.InfoText]} key={keyVal}>
+            {field.Value.map((item,i) => {
+              if(counter === arrLen){
+                return(item);
+              }
+              counter++;
+              return(item+", ")
+              })}
+          </Text>
+          }
+          else if(field.Type === "LatLongInput"){
+            jsBody= <Text style={[globalStyles.basicText, styles.InfoText]} key={keyVal}>
+            Latitude: {field.Value.Lat} Longitude: {field.Value.Long} 
+          </Text>
+          }
+          else if(field.Type === "Area"){
+            jsBody= <Text style={[globalStyles.basicText, styles.InfoText]} key={keyVal}>
+            North: {field.Value.North} East: {field.Value.East} South: {field.Value.South} West: {field.Value.West}
+          </Text>
+          }else{
+            jsBody= <Text style={[globalStyles.basicText, styles.InfoText]} key={keyVal}>
+            {field.Value}
+          </Text>
+          }
+          componentArray.push(jsHeader);
+          componentArray.push(jsBody);
+          keyVal++;
+          return(componentArray);
+        })
+       }
+     </ScrollView>
+   </View>
   );
 };
 export default function ViewSightingStackScreen({ navigation }) {
