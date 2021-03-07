@@ -21,6 +21,60 @@ export default storage = {
       Context: 'I saw it. The thing was absolutly massive bro',
       synced: true,
       inProgress: false,
+      //used to test the custom fields 
+      customFields:{
+          DateTimePicker: {
+            Title: "Picture Taken",
+            Value: "2021-03-07T02:00:53.350Z"
+          },
+          DateRangePicker:{
+            Title: "Date Range Test",
+            Value: {
+              Start: "2021-03-07T02:00:53.350Z",
+              End: "2021-03-16T21:55:28.978Z"
+            }
+          },
+          LocationIDInput:{
+            Title:"LocationID test",
+            Value: " Some place"
+          },
+          MultiSelect: {
+            Title: "MultiSelect Test",
+            Value: ["b","c"]
+          },
+          Boolean: {
+            Title: "Boolean Test",
+            Value: "True"
+          },
+          FeetMeters: {
+            Title: "Length of Feet",
+            Value: "1.524"
+          },
+          SelectInput: {
+            Title: "SelectTest",
+            Value: "Yes Test"
+          },
+          LatLongInput: {
+            Title: "Coordinates",
+            Value: {
+              Lat: "158.05",
+              Long: "168.00"
+            }
+          },
+          AllTextInput: {
+            Title: "Text input test",
+            Value: "A massive paragraph or something"
+          },
+          Area: {
+            Title: "Area of Sighting",
+            Value: {
+              North: "5.5",
+              East: "6.6",
+              South: "8.8",
+              West: "9.9"
+            }
+          }
+      }
     },
     {
       id: 2,
