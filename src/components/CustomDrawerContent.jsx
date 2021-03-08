@@ -14,29 +14,15 @@ import AsyncStorage from '@react-native-community/async-storage';
 import useAsyncStorage from '../hooks/useAsyncStorage';
 
 export default function CustomDrawerContent(props) {
-  // React.useEffect(() => {
-  //   const unsubscribe = props.navigation.addListener('focus', () => {
-  //     Alert.alert('Refreshed');
-  //   });
-  //   return unsubscribe;
-  // }, [props.navigation]);
-  // const fetchLoggin = async () => {
-  //   console.log('fetching');
-  //   useAsyncStorage('loggedIn');
-  //   // console.log(useAsyncStorage('loggedIn'));
-  // };
-  // console.log('drawer nav');
-  // const loggin = useAsyncStorage('loggedIn');
-  // console.log(loggin);
-  // const removeLogin = async () => {
-  //   try {
-  //     await AsyncStorage.removeItem('loggedIn');
-  //     console.log('removed loggedin');
-  //     //loggedInfo = null;
-  //   } catch (e) {
-  //     console.error(e);=;
-  //   }
-  // };
+  const removeLogin = async () => {
+    try {
+      await AsyncStorage.removeItem('loggedIn');
+      console.log('removed loggedin');
+      //loggedInfo = null;
+    } catch (e) {
+      console.error(e);
+    }
+  };
   return (
     <DrawerContentScrollView {...props}>
       <DrawerItem
@@ -97,7 +83,6 @@ export default function CustomDrawerContent(props) {
           </View>
         )}
         onPress={() => [
-          // fetchLoggin(),
           props.navigation.navigate(screens.selection, {
             screen: screens.selection,
             params: { notLoggedIn: false },
@@ -132,7 +117,7 @@ export default function CustomDrawerContent(props) {
           </View>
         )}
         onPress={() => [
-          // removeLogin(),
+          removeLogin(),
           props.navigation.navigate(screens.selection, {
             screen: screens.selection,
             params: { notLoggedIn: true },

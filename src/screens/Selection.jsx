@@ -22,61 +22,16 @@ import useAsyncStorage from '../hooks/useAsyncStorage';
 
 const WildbookCard = (props) => {
   const loggedInfo = JSON.parse(props.loggedInfo);
-  // console.log('Wildbookcard' + loggedInfo);
-  // console.log(loggedInfo['wildbook']);
-  // const [loggedInfo, setLoggedInfo] = useState(useAsyncStorage('loggedIn'));
-  // console.log(loggedInfo);
-  // const loggedInfo = !props.removeLogin ? useAsyncStorage('loggedIn') : null;
-  // const removeLogin = async () => {
-  //   try {
-  //     await AsyncStorage.removeItem('loggedIn');
-  //     setLoggedInfo(null);
-  //   } catch (e) {
-  //     console.error(e);
-  //   }
-  // };
-  // if (props.removeLog) {
-  //   console.log('going to remove login');
-  //   removeLogin();
-  // }
-  // const [isEnabled, setIsEnabled] = useState(false);
+  // const loggedInfo = props.loggedInfo;
+
   const [isEnabled, setIsEnabled] = useState(
     loggedInfo && loggedInfo.wildbook === props.name
   );
-  // console.log('wildbook: ' + props.name);
-  // if (loggedInfo) {
-  //   console.log('wildbook: ' + loggedInfo.wildbook);
-  // }
+
   useEffect(() => {
     setIsEnabled(loggedInfo && loggedInfo.wildbook === props.name);
   }, [loggedInfo]);
-  // const loggedInfo = useAsyncStorage('loggedIn');
-  // console.log(loggedInfo);
-  // if (loggedInfo) {}
-  //   console.log(loggedInfo.wildbook);
-  //   console.log(loggedInfo && loggedInfo.wildbook === props.name);
-  // }
-  // console.log('props name: ' + props.name);
-  // const [isEnabled, setIsEnabled] = useState(
-  //   loggedInfo && loggedInfo.wildbook === props.name
-  // );
-  // console.log(props.name + ': ' + isEnabled);
-  //addListener is used to refresh the page when navigated to
-  // React.useEffect(() => {
-  //   const unsubscribe = props.nav.addListener('focus', () => {
-  //     defaultState();
-  //   });
-  //   return unsubscribe;
-  // }, [props.nav]);
 
-  // const defaultState = async () => {
-  //   console.log('in defaultState');
-  //   if (!loggedInfo) {
-  //     setIsEnabled(false);
-  //   } else if (loggedInfo && loggedInfo.wildbook === props.name) {
-  //     setIsEnabled(true);
-  //   }
-  // };
   const toggleSwitch = async (name) => {
     console.log('toggle switch: ' + name);
     console.log(loggedInfo);
@@ -91,38 +46,15 @@ const WildbookCard = (props) => {
       }
     } else {
       console.log('else');
-      // setIsEnabled(true);
       props.nav.navigate('Login', {
         screen: 'Login1',
         params: { name: name },
       });
     }
-    // if (loggedInfo) {
-    //   if (isEnabled) {
-    //     setIsEnabled(false);
-    //     removeLogin();
-    //   } else if (name === loggedInfo.wildbook) {
-    //     setIsEnabled(true);
-    //   } else {
-    //     Alert.alert(`Already Signed into ${loggedInfo.wildbook}`);
-    //   }
-    // } else {
-    //   setIsEnabled(true);
-    //   props.nav.navigate('Login', {
-    //     screen: 'Login1',
-    //     params: { name: props.name },
-    //   });
-    // }
   };
   return (
     <TouchableOpacity
-      onPress={
-        () => toggleSwitch(props.name)
-        // navigation.navigate('Login', {
-        //   screen: 'Login1',
-        //   params: { name: wildbook.name },
-        // })
-      }
+      onPress={() => toggleSwitch(props.name)}
       style={cardElementStyles.touchableOpacityHolder}
       key={props.id}
     >
@@ -144,7 +76,6 @@ const WildbookCard = (props) => {
           }
           source={props.image}
         />
-        {/* <View style={cardElementStyles.sightingInfo}> */}
         <View style={cardElementStyles.sightingText}>
           <Text
             style={
@@ -156,61 +87,13 @@ const WildbookCard = (props) => {
             {props.name}
           </Text>
         </View>
-        {/* <Switch
-          // TODO use the theme colors
-          trackColor={{ true: theme.green, false: theme.grey }}
-          thumbColor={theme.white}
-          onValueChange={() => toggleSwitch(props.name)}
-          value={isEnabled}
-        /> */}
-        {/* </View> */}
       </View>
     </TouchableOpacity>
   );
 };
-const SelectionScreen = ({ navigation, route }) => {
-  // const [loggedInfo, setLoggedInfo] = useState(
-  //   route && route.params && route.params.notLoggedIn ? null : asyncStuff
-  // );
-  // console.log('loggedinfo: ' + (loggedInfo && loggedInfo.wildbook));
-  // useEffect(() => {
-  //   setLoggedInfo(loggedInfo);
-  // }, [loggedInfo]);
-  // const removeLog;
-  // console.log('selection screen');
-  // if (route && route.params && route.params.notLoggedIn) {
-  //   console.log('here');
-  //   try {
-  //     AsyncStorage.removeItem('loggedIn');
-  //     //loggedInfo = null;
-  //   } catch (e) {
-  //     console.error(e);
-  //   }
-  // }
-  console.log('in selection screen');
-  // console.log(route);
-  const removeLogin = async () => {
-    try {
-      console.log('removing login');
-      await AsyncStorage.removeItem('loggedIn');
-    } catch (e) {
-      console.error(e);
-    }
-  };
-  if (route && route.params && route.params.notLoggedIn) {
-    console.log('going to remove login');
-    removeLogin();
-  }
-  // const asyncStuff = await AsyncStorage.getItem('loggedIn').then((value) => {
-  //   return value;
-  // });
-
-  // useEffect(() => {
-  //   AsyncStorage.getItem('loggedIn', (err, result) => {
-  //     setLoggedInfo(JSON.parse(result));
-  //   });
-  // }, []);
+const SelectionScreen = ({ navigation }) => {
   const [functionLoggin, setFunctionLoggin] = useState(null);
+  const [loggedInfo, setLoggedInfo] = useState(functionLoggin);
 
   const fetchLoggin = async () => {
     let loggin = await AsyncStorage.getItem('loggedIn', (err, result) => {
@@ -220,51 +103,22 @@ const SelectionScreen = ({ navigation, route }) => {
   };
   fetchLoggin();
 
-  const [loggedInfo, setLoggedInfo] = useState(
-    route && route.params && route.params.notLoggedIn ? null : functionLoggin
-  );
-
   useEffect(() => {
-    setLoggedInfo(
-      route && route.params && route.params.notLoggedIn ? null : functionLoggin
-    );
+    setLoggedInfo(functionLoggin);
   }, [functionLoggin]);
-
-  // console.log('async stuff: ' + loggedInfo);
-  // const loggedInfo =
-  //   route && route.params && route.params.notLoggedIn
-  //     ? null
-  //     : useAsyncStorage('loggedIn');
-
-  console.log(useAsyncStorage('loggedIn'));
-  console.log(loggedInfo);
-  // fetchLoggin();
-  // console.log(functionLoggin);
 
   return (
     <View style={bodyStyles.parentView}>
       <ScrollView contentContainerStyle={bodyStyles.content}>
         {selection.wildbooks.map((wildbook) => {
           return (
-            // <TouchableOpacity
-            //   onPress={() =>
-            //     navigation.navigate('Login', {
-            //       screen: 'Login1',
-            //       params: { name: wildbook.name },
-            //     })
-            //   }
-            //   style={cardElementStyles.touchableOpacityHolder}
-            //   key={wildbook.id}
-            // >
             <WildbookCard
               key={wildbook.id}
               image={wildbook.logo}
               name={wildbook.name}
               nav={navigation}
-              // removeLog={route && route.params && route.params.notLoggedIn}
               loggedInfo={loggedInfo}
             />
-            // </TouchableOpacity>
           );
         })}
       </ScrollView>
@@ -285,11 +139,6 @@ const bodyStyles = StyleSheet.create({
     padding: 5,
     marginVertical: '5%',
     backgroundColor: theme.white,
-    // flexDirection: 'column',
-    // alignItems: 'center',
-    // overflow: 'visible',
-    // paddingBottom: 5,
-    // backgroundColor: theme.white,
   },
   sortBy: {
     width: '100%',
@@ -321,7 +170,6 @@ const bodyStyles = StyleSheet.create({
 
 const cardElementStyles = StyleSheet.create({
   touchableOpacityHolder: {
-    // width: '5%',
     width: 150,
   },
   sightingCard: {
@@ -346,19 +194,11 @@ const cardElementStyles = StyleSheet.create({
     // Android
     elevation: 3,
   },
-  // sightingInfo: {
-  //   paddingLeft: 22,
-  //   paddingRight: 4,
-  //   flexDirection: 'row',
-  //   justifyContent: 'space-between',
-  //   flex: 2.5,
-  //   alignItems: 'center',
-  // },
   imageCover: {
     resizeMode: 'cover',
     width: '100%',
-    // borderTopLeftRadius: 5,
-    // borderBottomLeftRadius: 5,
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5,
     height: '50%',
     flex: 1,
     // overflow: 'hidden',
