@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import {
   ScrollView,
   Text,
@@ -7,7 +7,7 @@ import {
   Image,
   Dimensions,
 } from 'react-native';
-import { Button, Icon, Divider } from 'react-native-elements';
+import { Button, Icon } from 'react-native-elements';
 import NetInfo from '@react-native-community/netinfo';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Typography from '../../components/Typography';
@@ -15,7 +15,6 @@ import theme from '../../constants/theme';
 import globalStyles from '../../styles/globalStyles';
 import screens from '../../constants/screens';
 import { ReportContext } from '../../context/report-context';
-import useAsyncStorage from '../../hooks/useAsyncStorage';
 import AsyncStorage from '@react-native-community/async-storage';
 import Sighting from '../localSightings/Sighting';
 
@@ -48,7 +47,13 @@ const SightingCard = (props) => {
 const HomeScreen = ({ navigation }) => {
   const [state, dispatch] = useContext(ReportContext);
   const [isSyncing, setIsSyncing] = useState(false);
-  const storedSightings = useAsyncStorage('SightingSubmissions');
+  const [storedSightings, setStoredSightings] = useState([]);
+
+  useEffect(() => {
+    AsyncStorage.getItem('SightingSubmissions').then((result) =>
+      setStoredSightings(JSON.parse(result))
+    );
+  });
 
   const syncSighting = () => {
     setIsSyncing(true);
@@ -72,24 +77,27 @@ const HomeScreen = ({ navigation }) => {
   return (
     <View style={bodyStyles.parentView}>
       {storedSightings !== null ? (
-          <View style={offlineSightings.offlineText}>
-            <View style={{justifyContent: 'center'}}>
-              <Text style={offlineSightings.offlineSightingsText}> Offline Sightings</Text>
-            </View>
-            <View style={{ marginLeft: "auto" }}>
-              <Button
-                title="Sync All Offline"
-                onPress={() => syncSighting()}
-                loading={isSyncing}
-                disabled={isSyncing}
-              />
-            </View>
+        <View style={offlineSightings.offlineText}>
+          <View style={{ justifyContent: 'center' }}>
+            <Text style={offlineSightings.offlineSightingsText}>
+              {' '}
+              Offline Sightings {`(${storedSightings.length})`}
+            </Text>
           </View>
+          <View style={{ marginLeft: 'auto' }}>
+            <Button
+              title="Sync"
+              onPress={() => syncSighting()}
+              loading={isSyncing}
+              disabled={isSyncing}
+            />
+          </View>
+        </View>
       ) : null}
       {storedSightings !== null ? (
         <ScrollView style={offlineSightings.scrollView}>
           {storedSightings.map((sighting, index) => (
-              <Sighting sighting={sighting} key={index} sightingIndex={index} />
+            <Sighting sighting={sighting} key={index} sightingIndex={index} />
           ))}
         </ScrollView>
       ) : null}
@@ -242,13 +250,13 @@ const offlineSightings = StyleSheet.create({
   },
   scrollView: {
     marginLeft: 12,
-    marginRight: 12
+    marginRight: 12,
   },
   offlineText: {
-    flexDirection:'row', 
-    flexWrap:'wrap',
-     marginTop: 8
-  }
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginTop: 8,
+  },
 });
 
 export default HomeScreen;
