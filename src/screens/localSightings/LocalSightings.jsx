@@ -38,7 +38,6 @@ export default function localSightings() {
           ))
         ) : (
           <Text>
-            {' '}
             There are currently no sightings stored locally on the device.
           </Text>
         )}

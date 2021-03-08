@@ -80,7 +80,6 @@ const HomeScreen = ({ navigation }) => {
         <View style={offlineSightings.offlineText}>
           <View style={{ justifyContent: 'center' }}>
             <Text style={offlineSightings.offlineSightingsText}>
-              {' '}
               Offline Sightings {`(${storedSightings.length})`}
             </Text>
           </View>
