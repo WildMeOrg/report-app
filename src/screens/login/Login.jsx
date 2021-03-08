@@ -44,7 +44,7 @@ const Login = ({ navigation, route }) => {
       await AsyncStorage.setItem(
         'loggedIn',
         JSON.stringify({
-          wildbook: 'WhaleWatch',
+          wildbook: route.params.name,
           loggedIn: 'true',
         })
       );
@@ -94,6 +94,8 @@ const Login = ({ navigation, route }) => {
     //     settingsFetchError.name + ': ' + settingsFetchError.message
     //   );
     // }
+    onChangeEmail('');
+    onChangePassword('');
     setIsLoading(false);
   };
 

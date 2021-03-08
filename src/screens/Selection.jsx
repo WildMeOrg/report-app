@@ -219,6 +219,7 @@ const SelectionScreen = ({ navigation, route }) => {
     setFunctionLoggin(loggin);
   };
   fetchLoggin();
+
   const [loggedInfo, setLoggedInfo] = useState(
     route && route.params && route.params.notLoggedIn ? null : functionLoggin
   );
