@@ -4,7 +4,6 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from 'react-native-elements';
 import { Formik } from 'formik';
-import Uppy from '@uppy/core';
 import * as ImagePicker from 'expo-image-picker';
 import * as yup from 'yup';
 import screens from '../constants/screens';
@@ -14,6 +13,7 @@ import styles from '../styles/newSightingStyles';
 import AsyncStorage from '@react-native-community/async-storage';
 import { baseUrl } from '../constants/urls';
 import sightingFormFields from './fields/sightingFormFields';
+import Uppy from '@uppy/core';
 import CustomField from './CustomField.jsx';
 import Typography from '../components/Typography';
 import testSettingsPacket from '../constants/testSettingsPacket';
@@ -22,6 +22,7 @@ import NetInfo from '@react-native-community/netinfo';
 import GeneralFields from '../components/fields/GeneralFields';
 import SightingDetailsFields from '../components/fields/SightingDetailsFields';
 import IndividualInformationFields from './fields/IndividualInformationFields';
+import UppyComponent from './UppyComponent';
 import useAsyncStorage from '../hooks/useAsyncStorage';
 
 const NewSightingStack = createStackNavigator();
@@ -132,40 +133,6 @@ function NewSightingForm({ navigation }) {
     }
   };
 
-  useEffect(() => {
-    (async () => {
-      const { status } = await ImagePicker.requestCameraRollPermissionsAsync();
-      if (status !== 'granted') {
-        alert('Sorry, we need camera roll permissions in upload photos.');
-      }
-      6;
-    })();
-  }, []);
-
-  const pickImage = async () => {
-    const uppy = new Uppy({
-      restrictions: {
-        allowedFileTypes: ['.png'],
-      }
-    });
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      quality: 1,
-      exif: true,
-      allowsMultipleSelection: true,
-    });
-    console.log(result);
-    uppy.addFile({
-      source: 'file input',
-      name: "test_file",
-      data: result,
-    })
-    if (!result.cancelled) {
-      // setImage(result.uri);
-    }
-  };
-
   return (
     <View style={styles.container}>
       <View style={styles.progressBar}>
@@ -243,21 +210,7 @@ function NewSightingForm({ navigation }) {
               >
                 {formSection === 0 && (
                   <>
-                    <View style={styles.addNew}>
-                      <TouchableOpacity onPress={pickImage}>
-                        <Icon
-                          name="cloud-upload"
-                          type="font-awesome"
-                          color={theme.black}
-                          iconStyle={styles.addText}
-                          size={40}
-                        />
-                        <Typography
-                          id="ADD_IMAGES"
-                          style={(globalStyles.inputHeader, styles.addText)}
-                        />
-                      </TouchableOpacity>
-                    </View>
+                    <UppyComponent />
                     <GeneralFields formikProps={formikProps} />
                     <View style={[styles.horizontal, styles.bottomElement]}>
                       <TouchableOpacity>
