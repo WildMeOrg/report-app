@@ -58,7 +58,7 @@ export default StyleSheet.create({
     borderWidth: 1,
     borderStyle: 'dashed',
     borderColor: theme.black,
-    borderRadius: 6,
+    borderRadius: 4,
   },
   iconButton: {
     flexDirection: 'row',

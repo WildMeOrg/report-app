@@ -8,9 +8,6 @@ import { ImageBrowser } from 'expo-image-picker-multiple';
 import globalStyles from '../styles/globalStyles';
 import Typography from './Typography';
 import { ImageSelectContext } from '../context/imageSelectContext.jsx';
-import Toast from 'react-native-simple-toast';
-
-const max = 10;
 
 const ImageBrowserComponent = ({ navigation }) => {
   const [state, dispatch] = useContext(ImageSelectContext);
@@ -53,7 +50,6 @@ const ImageBrowserComponent = ({ navigation }) => {
   };
 
   const updateHandler = (count, onSubmit) => {
-    if (count == max) Toast.show('Max number of images reached');
     navigation.setOptions({
       headerRight: () => renderDoneButton(count, onSubmit),
     });
@@ -69,7 +65,6 @@ const ImageBrowserComponent = ({ navigation }) => {
   return (
     <View style={{ height: '100%' }}>
       <ImageBrowser
-        max={max}
         loadCompleteMetadata={false}
         onChange={updateHandler}
         callback={imagesCallback}

@@ -9,12 +9,16 @@ const initialState = {
 const reducer = (state, action) => {
   switch (action.type) {
     case 'set':
-      state.images = action.images;
-      break;
+      return {
+        ...state,
+        images: action.images,
+      };
 
     case 'clear':
-      state.images = [];
-      break;
+      return {
+        ...state,
+        images: [],
+      };
 
     default:
       throw new Error(
@@ -23,7 +27,6 @@ const reducer = (state, action) => {
         10
       );
   }
-  return state;
 };
 
 export const ImageSelectProvider = (props) => {

@@ -23,6 +23,8 @@ import SightingDetailsFields from '../components/fields/SightingDetailsFields';
 import IndividualInformationFields from './fields/IndividualInformationFields';
 import useAsyncStorage from '../hooks/useAsyncStorage';
 import { ImageSelectContext } from '../context/imageSelectContext';
+import { color } from 'react-native-reanimated';
+import { Button } from 'react-native';
 
 const NewSightingStack = createStackNavigator();
 
@@ -36,12 +38,16 @@ function NewSightingForm({ navigation }) {
   const [numCategories, setNumCategories] = useState(0); //number of custom field categories
   const [customValidation, setCustomValidation] = useState('');
   const numGeneralForm = 3; //there are 3 general form screens
-  const [imageState, dispatch] = useContext(ImageSelectContext); //Grab images from imageSelector
+  const [imageState, imageStateDispatch] = useContext(ImageSelectContext); //Grab images from imageSelector
 
   const renderImage = (item, i) => {
     return (
       <Image
-        style={{ height: 100, width: '33%' }}
+        style={{
+          flexGrow: 1,
+          height: 120,
+          width: '33%',
+        }}
         source={{ uri: item.uri }}
         key={i}
       />
@@ -231,11 +237,13 @@ function NewSightingForm({ navigation }) {
                 {formSection === 0 && (
                   <>
                     {imageState.images.length == 0 ? (
-                      <View
-                        style={styles.addNew}
-                        onPress={navigation.navigate(screens.imageBrowser)}
-                      >
-                        <TouchableOpacity style={styles.addNewPadded}>
+                      <View style={styles.addNew}>
+                        <TouchableOpacity
+                          style={styles.addNewPadded}
+                          onPress={() =>
+                            navigation.navigate(screens.imageBrowser)
+                          }
+                        >
                           <Icon
                             name="add-a-photo"
                             type="material"
@@ -250,13 +258,17 @@ function NewSightingForm({ navigation }) {
                         </TouchableOpacity>
                       </View>
                     ) : (
-                      <View
-                        style={styles.selectedImages}
-                        onPress={navigation.navigate(screens.imageBrowser)}
-                      >
-                        {imageState.images.map((item, i) =>
-                          renderImage(item, i)
-                        )}
+                      <View>
+                        <TouchableOpacity
+                          style={styles.selectedImages}
+                          onPress={() =>
+                            navigation.navigate(screens.imageBrowser)
+                          }
+                        >
+                          {imageState.images.map((item, i) =>
+                            renderImage(item, i)
+                          )}
+                        </TouchableOpacity>
                       </View>
                     )}
                     <GeneralFields formikProps={formikProps} />
