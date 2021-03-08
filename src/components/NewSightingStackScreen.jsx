@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Text, View, TouchableOpacity, Animated } from 'react-native';
+import React, { useState, useEffect, useContext } from 'react';
+import { Text, View, TouchableOpacity, Animated, Image } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from 'react-native-elements';
@@ -22,6 +22,7 @@ import GeneralFields from '../components/fields/GeneralFields';
 import SightingDetailsFields from '../components/fields/SightingDetailsFields';
 import IndividualInformationFields from './fields/IndividualInformationFields';
 import useAsyncStorage from '../hooks/useAsyncStorage';
+import { ImageSelectContext } from '../context/imageSelectContext';
 
 const NewSightingStack = createStackNavigator();
 
@@ -35,6 +36,17 @@ function NewSightingForm({ navigation }) {
   const [numCategories, setNumCategories] = useState(0); //number of custom field categories
   const [customValidation, setCustomValidation] = useState('');
   const numGeneralForm = 3; //there are 3 general form screens
+  const [imageState, dispatch] = useContext(ImageSelectContext); //Grab images from imageSelector
+
+  const renderImage = (item, i) => {
+    return (
+      <Image
+        style={{ height: 100, width: '33%' }}
+        source={{ uri: item.uri }}
+        key={i}
+      />
+    );
+  };
 
   const validationSchema = [];
   generalValidationSchema.map((schema) => {
@@ -141,19 +153,6 @@ function NewSightingForm({ navigation }) {
     })();
   }, []);
 
-  const pickImage = async () => {
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      quality: 1,
-      exif: true,
-      allowsMultipleSelection: true,
-    });
-    if (!result.cancelled) {
-      // setImage(result.uri);
-    }
-  };
-
   return (
     <View style={styles.container}>
       <View style={styles.progressBar}>
@@ -231,24 +230,35 @@ function NewSightingForm({ navigation }) {
               >
                 {formSection === 0 && (
                   <>
-                    <View
-                      style={styles.addNew}
-                      onPress={navigation.navigate(screens.imageBrowser)}
-                    >
-                      <TouchableOpacity>
-                        <Icon
-                          name="cloud-upload"
-                          type="font-awesome"
-                          color={theme.black}
-                          iconStyle={styles.addText}
-                          size={40}
-                        />
-                        <Typography
-                          id="ADD_IMAGES"
-                          style={(globalStyles.inputHeader, styles.addText)}
-                        />
-                      </TouchableOpacity>
-                    </View>
+                    {imageState.images.length == 0 ? (
+                      <View
+                        style={styles.addNew}
+                        onPress={navigation.navigate(screens.imageBrowser)}
+                      >
+                        <TouchableOpacity style={styles.addNewPadded}>
+                          <Icon
+                            name="add-a-photo"
+                            type="material"
+                            color={theme.black}
+                            iconStyle={styles.addText}
+                            size={40}
+                          />
+                          <Typography
+                            id="ADD_IMAGES"
+                            style={(globalStyles.inputHeader, styles.addText)}
+                          />
+                        </TouchableOpacity>
+                      </View>
+                    ) : (
+                      <View
+                        style={styles.selectedImages}
+                        onPress={navigation.navigate(screens.imageBrowser)}
+                      >
+                        {imageState.images.map((item, i) =>
+                          renderImage(item, i)
+                        )}
+                      </View>
+                    )}
                     <GeneralFields formikProps={formikProps} />
                     <View style={[styles.horizontal, styles.bottomElement]}>
                       <TouchableOpacity>

@@ -44,7 +44,8 @@
     "react-native-safe-area-context": "~3.0.7",
     "react-native-screens": "~2.9.0",
     "react-native-select-multiple": "^2.1.0",
-    "react-native-web": "~0.11.7",
+    "react-native-simple-toast": "^1.1.3",
+    "react-native-web": "^0.15.0",
     "yup": "^0.29.3"
   },
   "devDependencies": {

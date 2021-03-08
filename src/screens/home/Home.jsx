@@ -13,7 +13,7 @@ import Typography from '../../components/Typography';
 import theme from '../../constants/theme';
 import globalStyles from '../../styles/globalStyles';
 import screens from '../../constants/screens';
-import { ReportContext } from '../../context/report-context';
+import { ReportContext } from '../../context/reportContext';
 
 /** <SightingCard> : A functional component that creates the sighting cards on the homepage
  *    @props

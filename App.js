@@ -27,7 +27,8 @@ import getLocale from './src/utils/getLocale';
 import GuestHomeStackScreen from './src/components/GuestHomeStackScreen';
 import GuestAddStackScreen from './src/components/GuestAddStackScreen';
 import SelectionStackScreen from './src/components/SelectionStackScreen';
-import { ReportContextProvider } from './src/context/report-context';
+import { ReportContextProvider } from './src/context/reportContext';
+import { ImageSelectProvider } from './src/context/imageSelectContext';
 import ImageBrowserStackScreen from './src/components/ImageBrowserStack';
 
 const messageMap = {
@@ -51,60 +52,65 @@ export default function App() {
   if (fontsLoaded) {
     return (
       <ReportContextProvider>
-        <IntlProvider
-          locale={locale}
-          messages={messageMap[locale]}
-          defaultLocale="en"
-        >
-          <NavigationContainer>
-            <Drawer.Navigator
-              drawerContent={(props) => <CustomDrawerContent {...props} />}
-            >
-              {/* As new screens are made, put them here to be able to view them */}
-              <Drawer.Screen
-                name={screens.selection}
-                component={SelectionStackScreen}
-              />
-              <Drawer.Screen name={screens.home} component={HomeStackScreen} />
-              <Drawer.Screen
-                name={screens.login}
-                component={LoginStackScreen}
-              />
-              <Drawer.Screen
-                name={screens.guestHome}
-                component={GuestHomeStackScreen}
-              />
-              <Drawer.Screen
-                name={screens.guestAdd}
-                component={GuestAddStackScreen}
-              />
-              <Drawer.Screen
-                name={screens.setings}
-                component={SettingsStackScreen}
-              />
-              <Drawer.Screen
-                name={screens.newSighting}
-                component={NewSightingStackScreen}
-              />
-              <Drawer.Screen
-                name={screens.viewSighting}
-                component={ViewSightingStackScreen}
-              />
-              <Drawer.Screen
-                name={screens.profile}
-                component={ProfileStackScreen}
-              />
-              <Drawer.Screen
-                name={screens.imageBrowser}
-                component={ImageBrowserStackScreen}
-              />
-              <Drawer.Screen
-                name={screens.notifications}
-                component={NotificationsStackScreen}
-              />
-            </Drawer.Navigator>
-          </NavigationContainer>
-        </IntlProvider>
+        <ImageSelectProvider>
+          <IntlProvider
+            locale={locale}
+            messages={messageMap[locale]}
+            defaultLocale="en"
+          >
+            <NavigationContainer>
+              <Drawer.Navigator
+                drawerContent={(props) => <CustomDrawerContent {...props} />}
+              >
+                {/* As new screens are made, put them here to be able to view them */}
+                <Drawer.Screen
+                  name={screens.selection}
+                  component={SelectionStackScreen}
+                />
+                <Drawer.Screen
+                  name={screens.home}
+                  component={HomeStackScreen}
+                />
+                <Drawer.Screen
+                  name={screens.login}
+                  component={LoginStackScreen}
+                />
+                <Drawer.Screen
+                  name={screens.guestHome}
+                  component={GuestHomeStackScreen}
+                />
+                <Drawer.Screen
+                  name={screens.guestAdd}
+                  component={GuestAddStackScreen}
+                />
+                <Drawer.Screen
+                  name={screens.setings}
+                  component={SettingsStackScreen}
+                />
+                <Drawer.Screen
+                  name={screens.newSighting}
+                  component={NewSightingStackScreen}
+                />
+                <Drawer.Screen
+                  name={screens.viewSighting}
+                  component={ViewSightingStackScreen}
+                />
+                <Drawer.Screen
+                  name={screens.profile}
+                  component={ProfileStackScreen}
+                />
+                <Drawer.Screen
+                  name={screens.imageBrowser}
+                  component={ImageBrowserStackScreen}
+                />
+                <Drawer.Screen
+                  name={screens.notifications}
+                  component={NotificationsStackScreen}
+                />
+              </Drawer.Navigator>
+            </NavigationContainer>
+          </IntlProvider>
+        </ImageSelectProvider>
       </ReportContextProvider>
     );
   } else {
