@@ -12,4 +12,5 @@ export default {
   notifications: 'Notifications',
   imageBrowser: 'SelectImages',
   selection: 'Selection',
+  localSigthing: 'LocalSighting',
 };

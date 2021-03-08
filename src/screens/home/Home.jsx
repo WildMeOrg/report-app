@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import {
   ScrollView,
   Text,
@@ -7,13 +7,16 @@ import {
   Image,
   Dimensions,
 } from 'react-native';
-import { Icon } from 'react-native-elements';
+import { Button, Icon } from 'react-native-elements';
+import NetInfo from '@react-native-community/netinfo';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Typography from '../../components/Typography';
 import theme from '../../constants/theme';
 import globalStyles from '../../styles/globalStyles';
 import screens from '../../constants/screens';
-import { ReportContext } from '../../context/reportContext';
+import { ReportContext } from '../../context/report-context';
+import AsyncStorage from '@react-native-community/async-storage';
+import Sighting from '../localSightings/Sighting';
 
 /** <SightingCard> : A functional component that creates the sighting cards on the homepage
  *    @props
@@ -43,9 +46,60 @@ const SightingCard = (props) => {
 
 const HomeScreen = ({ navigation }) => {
   const [state, dispatch] = useContext(ReportContext);
+  const [isSyncing, setIsSyncing] = useState(false);
+  const [storedSightings, setStoredSightings] = useState([]);
+
+  useEffect(() => {
+    AsyncStorage.getItem('SightingSubmissions').then((result) =>
+      setStoredSightings(JSON.parse(result))
+    );
+  });
+
+  const syncSighting = () => {
+    setIsSyncing(true);
+    setTimeout(
+      () =>
+        NetInfo.fetch().then((state) => {
+          if (state.isInternetReachable) {
+            alert(
+              `Sent ${storedSightings.length} locally saved sighting(s) to the server`
+            );
+            AsyncStorage.removeItem('SightingSubmissions');
+          } else {
+            alert('No Internet, try again later.');
+          }
+          setIsSyncing(false);
+        }),
+      5000
+    );
+  };
+
   return (
     <View style={bodyStyles.parentView}>
-      {/* TODO: Turn from ScrollView into something FlatView for performance in long term(?) */}
+      {storedSightings !== null ? (
+        <View style={offlineSightings.offlineText}>
+          <View style={{ justifyContent: 'center' }}>
+            <Text style={offlineSightings.offlineSightingsText}>
+              Offline Sightings {`(${storedSightings.length})`}
+            </Text>
+          </View>
+          <View style={{ marginLeft: 'auto' }}>
+            <Button
+              title="Sync"
+              onPress={() => syncSighting()}
+              loading={isSyncing}
+              disabled={isSyncing}
+            />
+          </View>
+        </View>
+      ) : null}
+      {storedSightings !== null ? (
+        <ScrollView style={offlineSightings.scrollView}>
+          {storedSightings.map((sighting, index) => (
+            <Sighting sighting={sighting} key={index} sightingIndex={index} />
+          ))}
+        </ScrollView>
+      ) : null}
       <ScrollView contentContainerStyle={bodyStyles.content}>
         <View style={bodyStyles.sortBy}>
           <Typography id="LAST_ADDED" style={globalStyles.h2Text} />
@@ -186,6 +240,24 @@ const cardElementStyles = StyleSheet.create({
     fontSize: 12,
     fontFamily: 'Lato-Regular',
     color: '#777',
+  },
+});
+
+const offlineSightings = StyleSheet.create({
+  offlineSightingsText: {
+    fontSize: 20,
+    fontFamily: 'Lato-Regular',
+    textAlign: 'center',
+    color: theme.black,
+  },
+  scrollView: {
+    marginLeft: 12,
+    marginRight: 12,
+  },
+  offlineText: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginTop: 8,
   },
 });
 
