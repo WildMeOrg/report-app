@@ -11,4 +11,5 @@ export default {
   profile: 'Profile',
   notifications: 'Notifications',
   selection: 'Selection',
+  localSigthing: 'LocalSighting',
 };
