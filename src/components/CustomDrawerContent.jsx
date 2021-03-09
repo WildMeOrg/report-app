@@ -81,7 +81,7 @@ export default function CustomDrawerContent(props) {
         onPress={() => [
           props.navigation.navigate(screens.selection, {
             screen: screens.selection,
-            params: { notLoggedIn: false },
+            params: { loggedOut: false },
           }),
         ]}
       />
@@ -116,7 +116,7 @@ export default function CustomDrawerContent(props) {
           removeLogin(),
           props.navigation.navigate(screens.selection, {
             screen: screens.selection,
-            params: { notLoggedIn: true },
+            params: { loggedOut: true },
           }),
         ]}
       />
