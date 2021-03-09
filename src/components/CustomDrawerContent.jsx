@@ -1,17 +1,15 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import {
   DrawerContentScrollView,
   DrawerItemList,
   DrawerItem,
-  Alert,
 } from '@react-navigation/drawer';
 import { Icon } from 'react-native-elements';
 import screens from '../constants/screens';
 import theme from '../constants/theme';
 import Typography from './Typography';
 import AsyncStorage from '@react-native-community/async-storage';
-import useAsyncStorage from '../hooks/useAsyncStorage';
 
 export default function CustomDrawerContent(props) {
   const removeLogin = async () => {

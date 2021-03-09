@@ -28,6 +28,7 @@ const Login = ({ navigation, route }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const authenticate = async (email, password) => {
+    setIsLoading(true);
     try {
       const response = await axios.request({
         url: `${baseUrl}/api/v1/auth/sessions`,
