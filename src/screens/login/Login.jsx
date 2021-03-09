@@ -27,64 +27,47 @@ const Login = ({ navigation, route }) => {
   const [responseData, onChangeResponseData] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const emailTest = 'j@w.o';
-  const passwordTest = '123';
-
   const authenticate = async (email, password) => {
-    setIsLoading(true);
-    if (email === emailTest && password === passwordTest) {
-      await AsyncStorage.setItem(
-        'loggedIn',
-        JSON.stringify({
-          wildbook: route.params.name,
-          loggedIn: 'true',
-        })
-      );
-      navigation.navigate(screens.home);
-    } else {
+    try {
+      const response = await axios.request({
+        url: `${baseUrl}/api/v1/auth/sessions`,
+        method: 'post',
+        data: {
+          email,
+          password,
+        },
+      });
+      if (response.data != null) {
+        await AsyncStorage.setItem(
+          'loggedIn',
+          JSON.stringify({
+            wildbook: route.params.name,
+            loggedIn: 'true',
+          })
+        );
+        navigation.navigate(screens.home);
+      }
+      onChangeResponseData(JSON.stringify(response.data));
+    } catch (loginError) {
+      console.log('login error');
+      onChangeResponseData(loginError.name + ': ' + loginError.message);
       setIsLoading(false);
       return;
     }
 
-    // try {
-    //   const response = await axios.request({
-    //     url: `${houstonUrl}/api/v1/auth/sessions`,
-    //     method: 'post',
-    //     data: {
-    //       email,
-    //       password,
-    //     },
-    //   });
-    //   if (response.data != null) {
-    //     await AsyncStorage.setItem(
-    //       'loggedIn',
-    //       JSON.stringify({
-    //         wildbook: route.params.name,
-    //         loggedIn: 'true',
-    //       })
-    //     );
-    //     navigation.navigate(screens.home);
-    //   }
-    //   onChangeResponseData(JSON.stringify(response.data));
-    // } catch (loginError) {
-    //   onChangeResponseData(loginError.name + ': ' + loginError.message);
-    //   setIsLoading(false);
-    //   return;
-    // }
-
-    // try {
-    //   const settingsPacket = await axios(
-    //     `${baseUrl}/api/v1/configuration/default/__bundle_setup`
-    //   );
-    //   await AsyncStorage.setItem(
-    //     'appConfiguration',
-    //     JSON.stringify(settingsPacket.data.response.configuration)
-    //   );
-    // } catch (settingsFetchError) {
-    //   onChangeResponseData(
-    //     settingsFetchError.name + ': ' + settingsFetchError.message
-    //   );
-    // }
+    try {
+      const settingsPacket = await axios(
+        `${baseUrl}/api/v1/configuration/default/__bundle_setup`
+      );
+      await AsyncStorage.setItem(
+        'appConfiguration',
+        JSON.stringify(settingsPacket.data.response.configuration)
+      );
+    } catch (settingsFetchError) {
+      onChangeResponseData(
+        settingsFetchError.name + ': ' + settingsFetchError.message
+      );
+    }
     onChangeEmail('');
     onChangePassword('');
     setIsLoading(false);

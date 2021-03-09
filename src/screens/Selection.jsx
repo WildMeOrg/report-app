@@ -22,7 +22,6 @@ import useAsyncStorage from '../hooks/useAsyncStorage';
 
 const WildbookCard = (props) => {
   const loggedInfo = JSON.parse(props.loggedInfo);
-  // const loggedInfo = props.loggedInfo;
 
   const [isEnabled, setIsEnabled] = useState(
     loggedInfo && loggedInfo.wildbook === props.name
@@ -33,11 +32,7 @@ const WildbookCard = (props) => {
   }, [loggedInfo]);
 
   const toggleSwitch = async (name) => {
-    console.log('toggle switch: ' + name);
-    console.log(loggedInfo);
     if (loggedInfo) {
-      console.log('loggedInfo');
-      console.log(loggedInfo.wildbook);
       if (name === loggedInfo.wildbook) {
         setIsEnabled(true);
         props.nav.navigate(screens.home);
@@ -45,7 +40,6 @@ const WildbookCard = (props) => {
         Alert.alert(`Already Signed into ${loggedInfo.wildbook}`);
       }
     } else {
-      console.log('else');
       props.nav.navigate('Login', {
         screen: 'Login1',
         params: { name: name },

@@ -17,8 +17,6 @@ export default function CustomDrawerContent(props) {
   const removeLogin = async () => {
     try {
       await AsyncStorage.removeItem('loggedIn');
-      console.log('removed loggedin');
-      //loggedInfo = null;
     } catch (e) {
       console.error(e);
     }
