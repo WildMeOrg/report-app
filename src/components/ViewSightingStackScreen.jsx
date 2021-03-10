@@ -3,7 +3,6 @@ import { Text, StyleSheet, Image, View, ScrollView } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import screens from '../constants/screens';
 import { Icon } from 'react-native-elements';
-import Humpback from '../../assets/images/humpback.jpg';
 import theme from '../constants/theme';
 import globalStyles from '../styles/globalStyles';
 import Typography from './Typography';
@@ -25,10 +24,9 @@ const ViewSightingScreen = ({ navigation, route }) => {
   if (sighting === undefined) {
     return null;
   }
-  var keyVal = 0; //used for keys
   return (
     //TODO need to add customfields sections
-    <View style={styles.InfoView} key={keyVal}>
+    <View style={styles.InfoView} key={'Mainsection'}>
       {/* <Image style={styles.image} source={sighting.image} /> */}
       <SliderBox images={sighting.image} sliderBoxHeight={250} />
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -53,92 +51,74 @@ const ViewSightingScreen = ({ navigation, route }) => {
         <Text style={[globalStyles.basicText, styles.InfoText]}>
           {sighting.Context}
         </Text>
-        {
-          //TODO figure out fileInput
-          sighting.customFields.map((field) => {
-            var jsHeader;
-            var jsBody;
-            var componentArray = []; // to be used for custom fields
-            jsHeader = (
-              <Text style={globalStyles.inputHeader} key={keyVal}>
-                {field.Title}
+        {sighting.customFields.map((field) => {
+          var jsBody;
+          const jsHeader = (
+            <Text style={globalStyles.inputHeader} key={field.Title + 'Header'}>
+              {field.Title}
+            </Text>
+          );
+          if (field.Type === 'DateTimePicker') {
+            const date = new Date(field.Value);
+            jsBody = (
+              <Text
+                style={[globalStyles.basicText, styles.InfoText]}
+                key={field.Title + field.Type}
+              >
+                {date.toDateString()}
               </Text>
             );
-            keyVal++;
-            if (field.Type === 'DateTimePicker') {
-              var date = new Date(field.Value);
-              jsBody = (
-                <Text
-                  style={[globalStyles.basicText, styles.InfoText]}
-                  key={keyVal}
-                >
-                  {date.toDateString()}
-                </Text>
-              );
-            } else if (field.Type === 'DateRangePicker') {
-              var sDate = new Date(field.Value.Start);
-              var eDate = new Date(field.Value.End);
-              jsBody = (
-                <Text
-                  style={[globalStyles.basicText, styles.InfoText]}
-                  key={keyVal}
-                >
-                  Start: {sDate.toDateString()} {'\n'}End:{' '}
-                  {eDate.toDateString()}
-                </Text>
-              );
-            } else if (field.Type === 'MultiSelect') {
-              const arrLen = field.Value.length;
-              var counter = 1;
-              jsBody = (
-                <Text
-                  style={[globalStyles.basicText, styles.InfoText]}
-                  key={keyVal}
-                >
-                  {field.Value.map((item, i) => {
-                    if (counter === arrLen) {
-                      return item;
-                    }
-                    counter++;
-                    return item + ', ';
-                  })}
-                </Text>
-              );
-            } else if (field.Type === 'LatLongInput') {
-              jsBody = (
-                <Text
-                  style={[globalStyles.basicText, styles.InfoText]}
-                  key={keyVal}
-                >
-                  Latitude: {field.Value.Lat} Longitude: {field.Value.Long}
-                </Text>
-              );
-            } else if (field.Type === 'Area') {
-              jsBody = (
-                <Text
-                  style={[globalStyles.basicText, styles.InfoText]}
-                  key={keyVal}
-                >
-                  North: {field.Value.North} East: {field.Value.East} South:{' '}
-                  {field.Value.South} West: {field.Value.West}
-                </Text>
-              );
-            } else {
-              jsBody = (
-                <Text
-                  style={[globalStyles.basicText, styles.InfoText]}
-                  key={keyVal}
-                >
-                  {field.Value}
-                </Text>
-              );
-            }
-            componentArray.push(jsHeader);
-            componentArray.push(jsBody);
-            keyVal++;
-            return componentArray;
-          })
-        }
+          } else if (field.Type === 'DateRangePicker') {
+            const sDate = new Date(field.Value.Start);
+            const eDate = new Date(field.Value.End);
+            jsBody = (
+              <Text
+                style={[globalStyles.basicText, styles.InfoText]}
+                key={field.Title + field.Type}
+              >
+                Start: {sDate.toDateString()} {'\n'}End: {eDate.toDateString()}
+              </Text>
+            );
+          } else if (field.Type === 'MultiSelect') {
+            jsBody = (
+              <Text
+                style={[globalStyles.basicText, styles.InfoText]}
+                key={field.Title + field.Type}
+              >
+                {field.Value.join(', ')}
+              </Text>
+            );
+          } else if (field.Type === 'LatLongInput') {
+            jsBody = (
+              <Text
+                style={[globalStyles.basicText, styles.InfoText]}
+                key={field.Title + field.Type}
+              >
+                Latitude: {field.Value.Lat} Longitude: {field.Value.Long}
+              </Text>
+            );
+          } else if (field.Type === 'Area') {
+            jsBody = (
+              <Text
+                style={[globalStyles.basicText, styles.InfoText]}
+                key={field.Title + field.Type}
+              >
+                North: {field.Value.North} East: {field.Value.East} South:{' '}
+                {field.Value.South} West: {field.Value.West}
+              </Text>
+            );
+          } else {
+            jsBody = (
+              <Text
+                style={[globalStyles.basicText, styles.InfoText]}
+                key={field.Title + field.Type}
+              >
+                {field.Value}
+              </Text>
+            );
+          }
+          return [jsHeader, jsBody];
+        })}
       </ScrollView>
     </View>
   );
