@@ -82,7 +82,7 @@ function NewSightingForm({ navigation }) {
     //-----TESTING END-----//
     try {
       if (settingsPacket) {
-        //console.log(settingsPacket);
+        console.log(settingsPacket);
         setNumCategories(
           settingsPacket['site.custom.customFieldCategories']['value'].length
         );

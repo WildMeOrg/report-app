@@ -31,7 +31,7 @@ const Login = ({ navigation, route }) => {
     setIsLoading(true);
     try {
       const response = await axios.request({
-        url: `${houstonUrl}/api/v1/auth/sessions`,
+        url: `${baseUrl}/api/v1/auth/sessions`,
         method: 'post',
         data: {
           email,
@@ -50,6 +50,7 @@ const Login = ({ navigation, route }) => {
       }
       onChangeResponseData(JSON.stringify(response.data));
     } catch (loginError) {
+      console.log('login error');
       onChangeResponseData(loginError.name + ': ' + loginError.message);
       setIsLoading(false);
       return;
@@ -68,6 +69,8 @@ const Login = ({ navigation, route }) => {
         settingsFetchError.name + ': ' + settingsFetchError.message
       );
     }
+    onChangeEmail('');
+    onChangePassword('');
     setIsLoading(false);
   };
 

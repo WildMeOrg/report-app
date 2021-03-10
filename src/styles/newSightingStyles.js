@@ -36,7 +36,7 @@ export default StyleSheet.create({
   addNew: {
     flexDirection: 'column',
     alignContent: 'center',
-    backgroundColor: '#2C2C2C30',
+    backgroundColor: theme.lightGrey,
     margin: '5%',
     borderWidth: 1,
     borderStyle: 'dashed',

@@ -21,65 +21,83 @@ import AsyncStorage from '@react-native-community/async-storage';
 import useAsyncStorage from '../hooks/useAsyncStorage';
 
 const WildbookCard = (props) => {
-  const loggedInfo = useAsyncStorage('loggedIn');
-  const [isEnabled, setIsEnabled] = useState(false);
-  //addListener is used to refresh the page when navigated to
-  React.useEffect(() => {
-    const unsubscribe = props.nav.addListener('focus', () => {
-      defaultState();
-    });
-    return unsubscribe;
-  }, [props.nav]);
-  const removeLogin = async () => {
-    try {
-      await AsyncStorage.removeItem('loggedIn');
-      //loggedInfo = null;
-    } catch (e) {
-      console.error(e);
-    }
-  };
-  const defaultState = async () => {
-    if (!loggedInfo) {
-      setIsEnabled(false);
-    }
-  };
+  const loggedInfo = JSON.parse(props.loggedInfo);
+
+  const isEnabled = loggedInfo && loggedInfo.wildbook === props.name;
+
+  // const [isEnabled, setIsEnabled] = useState(
+  //   loggedInfo && loggedInfo.wildbook === props.name
+  // );
+
+  // useEffect(() => {
+  //   setIsEnabled(loggedInfo && loggedInfo.wildbook === props.name);
+  // }, [loggedInfo]);
+
   const toggleSwitch = async (name) => {
     if (loggedInfo) {
-      if (isEnabled) {
-        setIsEnabled(false);
-        removeLogin();
-      } else if (name === loggedInfo.wildbook) {
-        setIsEnabled(true);
+      if (name === loggedInfo.wildbook) {
+        // setIsEnabled(true);
+        props.nav.navigate(screens.home);
       } else {
         Alert.alert(`Already Signed into ${loggedInfo.wildbook}`);
       }
     } else {
-      setIsEnabled(true);
       props.nav.navigate('Login', {
         screen: 'Login1',
-        params: { name: props.name },
+        params: { name },
       });
     }
   };
   return (
-    <View style={cardElementStyles.sightingCard}>
-      <Image style={cardElementStyles.imageCover} source={props.image} />
-      <View style={cardElementStyles.sightingInfo}>
-        <View style={cardElementStyles.sightingText}>
-          <Text style={cardElementStyles.sightingTitle}>{props.name}</Text>
-        </View>
-        <Switch
-          // TODO use the theme colors
-          trackColor={{ true: theme.green, false: theme.grey }}
-          thumbColor={theme.white}
-          onValueChange={() => toggleSwitch(props.name)}
-          value={isEnabled}
+    <TouchableOpacity
+      onPress={() => toggleSwitch(props.name)}
+      style={cardElementStyles.touchableOpacityHolder}
+      key={props.id}
+    >
+      <View
+        style={
+          isEnabled
+            ? cardElementStyles.sightingCard
+            : [
+                cardElementStyles.sightingCard,
+                { backgroundColor: theme.lightGrey },
+              ]
+        }
+      >
+        <Image
+          style={
+            isEnabled
+              ? cardElementStyles.imageCover
+              : [cardElementStyles.imageCover, { opacity: 0.5 }]
+          }
+          source={props.image}
         />
+        <View style={cardElementStyles.sightingText}>
+          <Text
+            style={
+              isEnabled
+                ? cardElementStyles.sightingTitle
+                : [cardElementStyles.sightingTitle, { opacity: 0.5 }]
+            }
+          >
+            {props.name}
+          </Text>
+        </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 const SelectionScreen = ({ navigation }) => {
+  const [functionLoggin, setFunctionLoggin] = useState(null);
+
+  const fetchLoggin = async () => {
+    const loggin = await AsyncStorage.getItem('loggedIn', (err, result) => {
+      return JSON.parse(result);
+    });
+    setFunctionLoggin(loggin);
+  };
+  fetchLoggin();
+
   return (
     <View style={bodyStyles.parentView}>
       <ScrollView contentContainerStyle={bodyStyles.content}>
@@ -90,6 +108,7 @@ const SelectionScreen = ({ navigation }) => {
               image={wildbook.logo}
               name={wildbook.name}
               nav={navigation}
+              loggedInfo={functionLoggin}
             />
           );
         })}
@@ -103,10 +122,13 @@ const bodyStyles = StyleSheet.create({
     backgroundColor: theme.white,
   },
   content: {
-    flexDirection: 'column',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
     overflow: 'visible',
-    paddingBottom: 5,
+    padding: 5,
+    marginVertical: '5%',
     backgroundColor: theme.white,
   },
   sortBy: {
@@ -139,13 +161,13 @@ const bodyStyles = StyleSheet.create({
 
 const cardElementStyles = StyleSheet.create({
   touchableOpacityHolder: {
-    width: '95%',
+    width: 150,
   },
   sightingCard: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     marginVertical: 7,
-    width: '95%',
-    height: 80,
+    width: '100%',
+    height: 175,
     justifyContent: 'center',
     borderStyle: 'solid',
     borderWidth: 1,
@@ -163,35 +185,31 @@ const cardElementStyles = StyleSheet.create({
     // Android
     elevation: 3,
   },
-  sightingInfo: {
-    paddingLeft: 22,
-    paddingRight: 4,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    flex: 2.5,
-    alignItems: 'center',
-  },
   imageCover: {
     resizeMode: 'cover',
+    width: '100%',
     borderTopLeftRadius: 5,
-    borderBottomLeftRadius: 5,
-    height: 78,
+    borderTopRightRadius: 5,
+    height: '50%',
     flex: 1,
-    overflow: 'hidden',
-    alignSelf: 'center',
+    // overflow: 'hidden',
+    alignSelf: 'flex-start',
   },
   sightingText: {
-    justifyContent: 'space-around',
+    justifyContent: 'center',
     height: 36,
+    marginVertical: '5%',
   },
   sightingTitle: {
     fontSize: 18,
     fontFamily: 'Lato-Regular',
+    justifyContent: 'center',
+    textAlign: 'center',
   },
-  sightingDate: {
-    fontSize: 12,
-    fontFamily: 'Lato-Regular',
-    color: '#777',
-  },
+  // sightingDate: {
+  //   fontSize: 12,
+  //   fontFamily: 'Lato-Regular',
+  //   color: '#777',
+  // },
 });
 export default SelectionScreen;

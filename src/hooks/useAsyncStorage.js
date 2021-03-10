@@ -8,6 +8,5 @@ export default function useAsyncStorage(itemKey) {
       setItem(JSON.parse(result));
     });
   }, []);
-
   return item;
 }
