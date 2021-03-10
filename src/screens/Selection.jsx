@@ -23,18 +23,20 @@ import useAsyncStorage from '../hooks/useAsyncStorage';
 const WildbookCard = (props) => {
   const loggedInfo = JSON.parse(props.loggedInfo);
 
-  const [isEnabled, setIsEnabled] = useState(
-    loggedInfo && loggedInfo.wildbook === props.name
-  );
+  const isEnabled = loggedInfo && loggedInfo.wildbook === props.name;
 
-  useEffect(() => {
-    setIsEnabled(loggedInfo && loggedInfo.wildbook === props.name);
-  }, [loggedInfo]);
+  // const [isEnabled, setIsEnabled] = useState(
+  //   loggedInfo && loggedInfo.wildbook === props.name
+  // );
+
+  // useEffect(() => {
+  //   setIsEnabled(loggedInfo && loggedInfo.wildbook === props.name);
+  // }, [loggedInfo]);
 
   const toggleSwitch = async (name) => {
     if (loggedInfo) {
       if (name === loggedInfo.wildbook) {
-        setIsEnabled(true);
+        // setIsEnabled(true);
         props.nav.navigate(screens.home);
       } else {
         Alert.alert(`Already Signed into ${loggedInfo.wildbook}`);
@@ -42,7 +44,7 @@ const WildbookCard = (props) => {
     } else {
       props.nav.navigate('Login', {
         screen: 'Login1',
-        params: { name: name },
+        params: { name },
       });
     }
   };
@@ -87,19 +89,14 @@ const WildbookCard = (props) => {
 };
 const SelectionScreen = ({ navigation }) => {
   const [functionLoggin, setFunctionLoggin] = useState(null);
-  const [loggedInfo, setLoggedInfo] = useState(functionLoggin);
 
   const fetchLoggin = async () => {
-    let loggin = await AsyncStorage.getItem('loggedIn', (err, result) => {
+    const loggin = await AsyncStorage.getItem('loggedIn', (err, result) => {
       return JSON.parse(result);
     });
     setFunctionLoggin(loggin);
   };
   fetchLoggin();
-
-  useEffect(() => {
-    setLoggedInfo(functionLoggin);
-  }, [functionLoggin]);
 
   return (
     <View style={bodyStyles.parentView}>
@@ -111,7 +108,7 @@ const SelectionScreen = ({ navigation }) => {
               image={wildbook.logo}
               name={wildbook.name}
               nav={navigation}
-              loggedInfo={loggedInfo}
+              loggedInfo={functionLoggin}
             />
           );
         })}
