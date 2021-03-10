@@ -7,7 +7,7 @@ import Humpback from '../../assets/images/humpback.jpg';
 import theme from '../constants/theme';
 import globalStyles from '../styles/globalStyles';
 import Typography from './Typography';
-import { ReportContext } from '../context/report-context';
+import { ReportContext } from '../context/reportContext';
 
 const ViewSightingStack = createStackNavigator();
 

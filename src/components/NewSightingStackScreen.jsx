@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Text, View, TouchableOpacity, Animated } from 'react-native';
+import React, { useState, useEffect, useContext } from 'react';
+import { Text, View, TouchableOpacity, Animated, Image } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from 'react-native-elements';
@@ -24,6 +24,9 @@ import SightingDetailsFields from '../components/fields/SightingDetailsFields';
 import IndividualInformationFields from './fields/IndividualInformationFields';
 import UppyComponent from './UppyComponent';
 import useAsyncStorage from '../hooks/useAsyncStorage';
+import { ImageSelectContext } from '../context/imageSelectContext';
+import { color } from 'react-native-reanimated';
+import { Button } from 'react-native';
 
 const NewSightingStack = createStackNavigator();
 
@@ -37,6 +40,21 @@ function NewSightingForm({ navigation }) {
   const [numCategories, setNumCategories] = useState(0); //number of custom field categories
   const [customValidation, setCustomValidation] = useState('');
   const numGeneralForm = 3; //there are 3 general form screens
+  const [imageState, imageStateDispatch] = useContext(ImageSelectContext); //Grab images from imageSelector
+
+  const renderImage = (item, i) => {
+    return (
+      <Image
+        style={{
+          flexGrow: 1,
+          height: 120,
+          width: '33%',
+        }}
+        source={{ uri: item.uri }}
+        key={i}
+      />
+    );
+  };
 
   const validationSchema = [];
   generalValidationSchema.map((schema) => {
@@ -133,6 +151,16 @@ function NewSightingForm({ navigation }) {
     }
   };
 
+  useEffect(() => {
+    (async () => {
+      const { status } = await ImagePicker.requestCameraRollPermissionsAsync();
+      if (status !== 'granted') {
+        alert('Sorry, we need camera roll permissions in upload photos.');
+      }
+      6;
+    })();
+  }, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.progressBar}>
@@ -210,7 +238,41 @@ function NewSightingForm({ navigation }) {
               >
                 {formSection === 0 && (
                   <>
-                    <UppyComponent />
+                    {imageState.images.length == 0 ? (
+                      <View style={styles.addNew}>
+                        <TouchableOpacity
+                          style={styles.addNewPadded}
+                          onPress={() =>
+                            navigation.navigate(screens.imageBrowser)
+                          }
+                        >
+                          <Icon
+                            name="add-a-photo"
+                            type="material"
+                            color={theme.black}
+                            iconStyle={styles.addText}
+                            size={40}
+                          />
+                          <Typography
+                            id="ADD_IMAGES"
+                            style={(globalStyles.inputHeader, styles.addText)}
+                          />
+                        </TouchableOpacity>
+                      </View>
+                    ) : (
+                      <View>
+                        <TouchableOpacity
+                          style={styles.selectedImages}
+                          onPress={() =>
+                            navigation.navigate(screens.imageBrowser)
+                          }
+                        >
+                          {imageState.images.map((item, i) =>
+                            renderImage(item, i)
+                          )}
+                        </TouchableOpacity>
+                      </View>
+                    )}
                     <GeneralFields formikProps={formikProps} />
                     <View style={[styles.horizontal, styles.bottomElement]}>
                       <TouchableOpacity>
