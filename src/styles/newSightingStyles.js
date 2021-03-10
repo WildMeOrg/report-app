@@ -43,7 +43,26 @@ export default StyleSheet.create({
     borderColor: theme.black,
     borderRadius: 6,
     opacity: 0.5,
+  },
+  addNewPadded: {
     paddingVertical: '7%',
+  },
+  selectedImages: {
+    opacity: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignContent: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#2C2C2C30',
+    margin: '5%',
+    borderWidth: 1,
+    borderStyle: 'dashed',
+    borderColor: theme.black,
+    borderRadius: 4,
+  },
+  iconButton: {
+    flexDirection: 'row',
+    paddingHorizontal: '9%',
   },
   addText: {
     alignSelf: 'center',
@@ -69,6 +88,9 @@ export default StyleSheet.create({
   //
   buttonInactive: {
     backgroundColor: '#CACACA',
+  },
+  buttonReset: {
+    backgroundColor: theme.red,
   },
   horizontal: {
     flex: 1,
