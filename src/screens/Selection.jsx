@@ -15,7 +15,7 @@ import Typography from '../components/Typography';
 import theme from '../constants/theme';
 import globalStyles from '../styles/globalStyles';
 import screens from '../constants/screens';
-import { ReportContext } from '../context/report-context';
+import { ReportContext } from '../context/reportContext';
 import selection from '../constants/wildbooks';
 import AsyncStorage from '@react-native-community/async-storage';
 import useAsyncStorage from '../hooks/useAsyncStorage';

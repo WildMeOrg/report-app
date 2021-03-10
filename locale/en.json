@@ -36,5 +36,8 @@
   "LOCAL_SIGHTINGS": "Local Sightings",
   "EDIT_DATE":"Edit Date:",
   "EDIT_TIME":"Edit Time:",
-  "FIELD_REQUIRED": "This Field is Required"
+  "FIELD_REQUIRED": "This Field is Required",
+  "SELECT_IMAGES": "Select Images",
+  "ADD_MORE": " Add More",
+  "PICK_AGAIN": " Pick Again"
 }

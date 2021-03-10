@@ -1,6 +1,6 @@
 # State
 
-State is written using [React Context](https://reactjs.org/docs/context.html) with [Hooks](https://reactjs.org/docs/hooks-reference.html). The implementation can be found in `/src/context/report-context`.
+State is written using [React Context](https://reactjs.org/docs/context.html) with [Hooks](https://reactjs.org/docs/hooks-reference.html). The implementation can be found in `/src/context/reportContext`.
 
 
 
@@ -10,7 +10,7 @@ To implement state into your file, you will need to imports the following:
 
 ```jsx
 import React, { useContext, useState } from 'react';
-import { ReportContext } from '/src/context/report-context';
+import { ReportContext } from '/src/context/reportContext';
 ```
 
 Once these are imported, you can start to use the state. To use it, create the following deconstructed array:

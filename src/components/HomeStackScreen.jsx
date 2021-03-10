@@ -9,7 +9,7 @@ import HomeScreen from '../screens/home/Home.jsx';
 import { TextInput } from 'react-native-gesture-handler';
 import globalStyles from '../styles/globalStyles';
 import AsyncStorage from '@react-native-community/async-storage';
-import { ReportContext } from '../context/report-context';
+import { ReportContext } from '../context/reportContext';
 
 const HomeStack = createStackNavigator();
 

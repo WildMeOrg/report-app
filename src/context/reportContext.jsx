@@ -33,7 +33,7 @@ const reducer = (state, action) => {
       specialKey.map((key) => {
         literalText = literalText.replace(key, '\\' + key);
         //might need to remove other characters later on.
-        literalText = literalText.replace("'", '');
+        literalText = literalText.replace('\'', '');
       });
       return {
         //TODO: figure out async storage to store and receive cards
@@ -43,7 +43,7 @@ const reducer = (state, action) => {
               sighting[key]
                 .toString()
                 .toLowerCase()
-                .replace("'", '')
+                .replace('\'', '')
                 .search(literalText.toLowerCase()) !== -1
           )
         ),
@@ -52,7 +52,7 @@ const reducer = (state, action) => {
     default:
       throw new Error(
         'reducer: action.type "' + action.type + '" is invalid action type',
-        'report-context.jsx',
+        'reportContext.jsx',
         10
       );
   }
