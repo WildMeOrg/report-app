@@ -11,8 +11,6 @@ import Uppy from '@uppy/core';
 import Tus from '@uppy/tus';
 import UppyFilePicker from '@uppy/react-native';
 import { ImageSelectContext } from '../context/imageSelectContext.jsx';
-import 'react-native-get-random-values';
-import { v4 as uuidv4 } from 'uuid';
 
 export default function UppyComponent() {
   const [state, dispatch] = useContext(ImageSelectContext);
