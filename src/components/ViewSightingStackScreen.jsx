@@ -3,32 +3,32 @@ import { Text, StyleSheet, Image, View, ScrollView } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import screens from '../constants/screens';
 import { Icon } from 'react-native-elements';
-import Humpback from '../../assets/images/humpback.jpg';
 import theme from '../constants/theme';
 import globalStyles from '../styles/globalStyles';
 import Typography from './Typography';
 import { ReportContext } from '../context/reportContext';
+import { SliderBox } from 'react-native-image-slider-box';
 
 const ViewSightingStack = createStackNavigator();
 
 const ViewSightingScreen = ({ navigation, route }) => {
   const [state, dispatch] = useContext(ReportContext);
-  var fieldsArray = []; // to be used for custom fields
 
   var sighting = state.sightings.filter((item) => {
     if (item.id === route.params.id) {
       return item;
     }
   })[0];
-  //This is a bandage for a wierd search bar bug. 
+  //This is a bandage for a weird search bar bug.
   //console.log(sighting);
-  if(sighting === undefined){
+  if (sighting === undefined) {
     return null;
   }
   return (
-    //TODO need to add customfields sections 
-    <View style={styles.InfoView}>
-      <Image style={styles.image} source={sighting.image} />
+    //TODO need to add customfields sections
+    <View style={styles.InfoView} key={'Mainsection'}>
+      {/* <Image style={styles.image} source={sighting.image} /> */}
+      <SliderBox images={sighting.image} sliderBoxHeight={250} />
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <Text style={globalStyles.inputHeader}>{sighting.name}</Text>
         <Text style={[globalStyles.basicText, styles.InfoText]}>
@@ -51,6 +51,74 @@ const ViewSightingScreen = ({ navigation, route }) => {
         <Text style={[globalStyles.basicText, styles.InfoText]}>
           {sighting.Context}
         </Text>
+        {sighting.customFields.map((field) => {
+          var jsBody;
+          const jsHeader = (
+            <Text style={globalStyles.inputHeader} key={field.Title + 'Header'}>
+              {field.Title}
+            </Text>
+          );
+          if (field.Type === 'DateTimePicker') {
+            const date = new Date(field.Value);
+            jsBody = (
+              <Text
+                style={[globalStyles.basicText, styles.InfoText]}
+                key={field.Title + field.Type}
+              >
+                {date.toDateString()}
+              </Text>
+            );
+          } else if (field.Type === 'DateRangePicker') {
+            const sDate = new Date(field.Value.Start);
+            const eDate = new Date(field.Value.End);
+            jsBody = (
+              <Text
+                style={[globalStyles.basicText, styles.InfoText]}
+                key={field.Title + field.Type}
+              >
+                Start: {sDate.toDateString()} {'\n'}End: {eDate.toDateString()}
+              </Text>
+            );
+          } else if (field.Type === 'MultiSelect') {
+            jsBody = (
+              <Text
+                style={[globalStyles.basicText, styles.InfoText]}
+                key={field.Title + field.Type}
+              >
+                {field.Value.join(', ')}
+              </Text>
+            );
+          } else if (field.Type === 'LatLongInput') {
+            jsBody = (
+              <Text
+                style={[globalStyles.basicText, styles.InfoText]}
+                key={field.Title + field.Type}
+              >
+                Latitude: {field.Value.Lat} Longitude: {field.Value.Long}
+              </Text>
+            );
+          } else if (field.Type === 'Area') {
+            jsBody = (
+              <Text
+                style={[globalStyles.basicText, styles.InfoText]}
+                key={field.Title + field.Type}
+              >
+                North: {field.Value.North} East: {field.Value.East} South:{' '}
+                {field.Value.South} West: {field.Value.West}
+              </Text>
+            );
+          } else {
+            jsBody = (
+              <Text
+                style={[globalStyles.basicText, styles.InfoText]}
+                key={field.Title + field.Type}
+              >
+                {field.Value}
+              </Text>
+            );
+          }
+          return [jsHeader, jsBody];
+        })}
       </ScrollView>
     </View>
   );

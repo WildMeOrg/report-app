@@ -132,7 +132,7 @@ const HomeScreen = ({ navigation }) => {
               >
                 <SightingCard
                   key={sighting.id}
-                  image={sighting.image}
+                  image={sighting.image[0]}
                   name={sighting.name}
                   date={sighting.date}
                 />
