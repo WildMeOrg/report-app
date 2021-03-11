@@ -271,6 +271,7 @@ function NewSightingForm({ navigation }) {
                             renderImage(item, i)
                           )}
                         </TouchableOpacity>
+                        <UppyComponent></UppyComponent>
                       </View>
                     )}
                     <GeneralFields formikProps={formikProps} />
