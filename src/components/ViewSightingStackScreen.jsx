@@ -20,7 +20,7 @@ const ViewSightingScreen = ({ navigation, route }) => {
     }
   })[0];
   //This is a bandage for a weird search bar bug.
-  //console.log(sighting);
+  console.log(sighting);
   if (sighting === undefined) {
     return null;
   }
@@ -35,7 +35,7 @@ const ViewSightingScreen = ({ navigation, route }) => {
           {sighting.date}
         </Text>
         <View style={styles.Divider} />
-        <Typography id="SPECIES" style={globalStyles.inputHeader} />
+        {/* <Typography id="SPECIES" style={globalStyles.inputHeader} />
         <Text style={[globalStyles.basicText, styles.InfoText]}>
           {sighting.species}
         </Text>
@@ -50,7 +50,39 @@ const ViewSightingScreen = ({ navigation, route }) => {
         <Typography id="SIGHTING_CONTEXT" style={globalStyles.inputHeader} />
         <Text style={[globalStyles.basicText, styles.InfoText]}>
           {sighting.Context}
-        </Text>
+        </Text> */}
+        {Object.keys(sighting).map((field) => {
+          // console.log(field);
+          // console.log(sighting[field]);
+          const excludeList = [
+            'customFields',
+            'image',
+            'id',
+            'name',
+            'date',
+            'synced',
+            'inProgress',
+          ];
+          if (excludeList.includes(field.toString())) {
+            //customFields are handled later
+            return;
+          }
+          console.log(field);
+          const header = (
+            <Text style={globalStyles.inputHeader} key={field + 'Header'}>
+              {field.toString()}
+            </Text>
+          );
+          const body = (
+            <Text
+              style={[globalStyles.basicText, styles.InfoText]}
+              key={field + 'Body'}
+            >
+              {sighting[field].toString()}
+            </Text>
+          );
+          return [header, body];
+        })}
         {sighting.customFields.map((field) => {
           var jsBody;
           const jsHeader = (
