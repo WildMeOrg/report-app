@@ -23,6 +23,7 @@ import SightingDetailsFields from '../components/fields/SightingDetailsFields';
 import IndividualInformationFields from './fields/IndividualInformationFields';
 import useAsyncStorage from '../hooks/useAsyncStorage';
 import { ImageSelectContext } from '../context/imageSelectContext';
+import UppyComponent from '../components/UppyComponent';
 import { color } from 'react-native-reanimated';
 import { Button } from 'react-native';
 
@@ -271,6 +272,7 @@ function NewSightingForm({ navigation }) {
                         </TouchableOpacity>
                       </View>
                     )}
+                    <UppyComponent onPress={() => {}}></UppyComponent>
                     <GeneralFields formikProps={formikProps} />
                     <View style={[styles.horizontal, styles.bottomElement]}>
                       <TouchableOpacity>

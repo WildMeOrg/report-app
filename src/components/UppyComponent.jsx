@@ -1,96 +1,127 @@
 import React, { useState, useContext } from 'react';
-import { View, TouchableOpacity, Image, Text } from 'react-native';
-import axios from 'axios';
-import { Icon } from 'react-native-elements';
+import { View, TouchableOpacity } from 'react-native';
 import globalStyles from '../styles/globalStyles';
 import styles from '../styles/newSightingStyles';
-import theme from '../constants/theme';
 import Typography from '../components/Typography';
 import { baseUrl } from '../constants/urls';
 import Uppy from '@uppy/core';
 import Tus from '@uppy/tus';
-import UppyFilePicker from '@uppy/react-native';
+import uuid from 'uuid-random';
 import { ImageSelectContext } from '../context/imageSelectContext.jsx';
 
 export default function UppyComponent() {
   const [state, dispatch] = useContext(ImageSelectContext);
-  const title = 'Scout App Test';
-  const description = 'Test Description';
-  const [uuid, setuuid] = useState('');
+  const [uploadComplete, setUploadComplete] = useState(false);
+  const [reuploadComplete, setreUploadComplete] = useState(false);
+  const [isUploading, setUploading] = useState(false);
+
+  const setUploadID = (uploadID, submissionID) => {
+    dispatch({
+      type: 'uppy',
+      submissionID: submissionID,
+      uploadID: uploadID,
+    });
+  };
 
   const uppy = new Uppy({
     restrictions: {
       allowedFileTypes: ['.png', '.jpg', '.jpeg', '.heic'],
     },
   });
-  uppy.on('file-added', (file) => {
-    //createSubmission();
-    console.log('Added file', file);
-  });
 
-  const uploadTest = () => {
-    setuuid(uuidv4());
-    console.log(uuid);
-    uppy.upload();
+  const upload = () => {
+    setreUploadComplete(false);
+    setUploading(true);
+    const uuidTemp = uuid();
+    try {
+      if (state.images.length) {
+        uppy.cancelAll();
+        state.images.map((file) => {
+          uppy.addFile({
+            name: file.name,
+            source: 'Scout App',
+            type: file.type,
+            data: file,
+          });
+        });
+        uppy.upload();
+      }
+    } catch (error) {
+      if (error.isRestriction) {
+        console.log('Restriction error:', error);
+      } else {
+        console.error(error);
+      }
+    }
+
+    uppy.use(Tus, {
+      endpoint: `${baseUrl}/api/v1/submissions/tus`,
+      headers: {
+        'x-tus-transaction-id': uuidTemp,
+      },
+    });
+
+    uppy.on('upload', (data) => {
+      console.log('UPLOADING:', data);
+    });
+
+    uppy.on('progress', (progress) => {
+      // progress: integer (total progress percentage)
+      console.log(progress);
+    });
+
+    uppy.on('upload-error', (file, error, response) => {
+      setUploading(false);
+      console.log('error with file:', file.id);
+      console.log('error message:', error);
+    });
+
+    uppy.on('error', (error) => {
+      setUploading(false);
+      console.error(error.stack);
+    });
+
+    uppy.on('complete', (uppyState) => {
+      setUploading(false);
+      console.log('COMPLETE UPLOAD:', uppyState);
+      setUploadID(uppyState.uploadID, uuidTemp);
+      setUploadComplete(true);
+      setreUploadComplete(true);
+    });
   };
 
-  try {
-    if (state.images.length) {
-      uppy.cancelAll();
-      state.images.map((file) => {
-        uppy.addFile({
-          name: file.name,
-          source: 'Scout App',
-          type: file.type,
-          data: file,
-        });
-      });
-      uploadTest();
-    }
-  } catch (error) {
-    if (error.isRestriction) {
-      console.log('Restriction error:', error);
-    } else {
-      console.error(error);
-    }
-  }
-
-  uppy.use(Tus, {
-    endpoint: `${baseUrl}/api/v1/submissions/tus`,
-    headers: {
-      'x-tus-transaction-id': uuid,
-    },
-  });
-
-  uppy.on('upload', (data) => {
-    console.log('UPLOADING:', data);
-  });
-
-  uppy.on('complete', (uppyState) => {
-    console.log('COMPLETE UPLOAD:', uppyState);
-  });
-
   return (
-    <View>
-      <Text>THIS IS WHERE UPPY IS</Text>
-      {/* <TouchableOpacity>
-        <Icon
-          name="cloud-upload"
-          type="font-awesome"
-          color={theme.black}
-          iconStyle={styles.addText}
-          size={40}
-        />
-        <Typography
-          id="ADD_IMAGES"
-          style={(globalStyles.inputHeader, styles.addText)}
-        />
-      </TouchableOpacity>
-      <UppyFilePicker
-        uppy={uppy}
-        show={showUppy}
-        onRequestClose={hideFilePicker}
-      /> */}
+    <View style={styles.container}>
+      {uploadComplete ? (
+        <>
+          {reuploadComplete ? (
+            <Typography
+              id="IMAGE_UPLOAD_SUCCESSFUL"
+              style={[
+                globalStyles.h2Text,
+                { alignSelf: 'center', fontSize: 16 },
+              ]}
+            />
+          ) : (
+            <></>
+          )}
+          <TouchableOpacity
+            style={[globalStyles.button, styles.imageButton]}
+            onPress={() => upload()}
+            disabled={isUploading}
+          >
+            <Typography id="IMAGE_REUPLOAD" style={globalStyles.buttonText} />
+          </TouchableOpacity>
+        </>
+      ) : (
+        <TouchableOpacity
+          style={[globalStyles.button, styles.imageButton]}
+          onPress={() => upload()}
+          disabled={isUploading}
+        >
+          <Typography id="IMAGE_UPLOAD" style={globalStyles.buttonText} />
+        </TouchableOpacity>
+      )}
     </View>
   );
 }
