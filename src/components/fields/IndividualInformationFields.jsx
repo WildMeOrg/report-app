@@ -14,19 +14,10 @@ export default function IndividualInformation(input) {
 
   return (
     <View>
-      <Text style={[globalStyles.inputHeader, globalStyles.h2Text]}>
-        <Typography id="PHOTOGRAPHER_NAME" required={true} />
-        {formikProps.touched.photographerName &&
-          formikProps.errors.photographerName && (
-            <Typography
-              id="FIELD_REQUIRED"
-              style={[
-                globalStyles.h2TextInvalid,
-                { fontFamily: 'Lato-Italic' },
-              ]}
-            />
-          )}
-      </Text>
+      <Typography
+        id="PHOTOGRAPHER_NAME"
+        style={(globalStyles.h2Text, globalStyles.inputHeader)}
+      />
       <TextInput
         style={[globalStyles.inputField]}
         autoCorrect={false}
@@ -42,19 +33,10 @@ export default function IndividualInformation(input) {
           formikProps.errors.photographerName
         }
       />
-      <Text style={[globalStyles.inputHeader, globalStyles.h2Text]}>
-        <Typography id="PHOTOGRAPHER_EMAIL" required={true} />
-        {formikProps.touched.photographerEmail &&
-          formikProps.errors.photographerEmail && (
-            <Typography
-              id="FIELD_REQUIRED"
-              style={[
-                globalStyles.h2TextInvalid,
-                { fontFamily: 'Lato-Italic' },
-              ]}
-            />
-          )}
-      </Text>
+      <Typography
+        id="PHOTOGRAPHER_EMAIL"
+        style={(globalStyles.h2Text, globalStyles.inputHeader)}
+      />
       <TextInput
         style={[globalStyles.inputField]}
         autoCorrect={false}

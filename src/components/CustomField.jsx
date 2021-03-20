@@ -16,22 +16,18 @@ export default function CustomField({ id, required, name, ...rest }) {
   return (
     <View>
       <Text style={[globalStyles.inputHeader, globalStyles.h2Text]}>
-        <Text>
-          {displayName}
-          {required && ' * '}
-        </Text>
-        {props.touched.customFields &&
-          props.errors.customFields &&
-          props.errors.customFields[name] && (
-            <Typography
-              id="FIELD_REQUIRED"
-              style={[
-                globalStyles.h2TextInvalid,
-                { fontFamily: 'Lato-Italic' },
-              ]}
-            />
-          )}
+        {displayName}
+        {required && ' * '}
       </Text>
+      {props.touched.customFields &&
+        props.errors.customFields &&
+        props.errors.customFields[name] && (
+          <Typography
+            id="FIELD_REQUIRED"
+            style={[globalStyles.h2TextInvalid, { fontFamily: 'Lato-Italic' }]}
+          />
+        )}
+
       {description != '' && (
         <>
           <Text style={[globalStyles.subText, globalStyles.basicText]}>
