@@ -168,20 +168,6 @@ function NewSightingForm({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.progressBar}>
-        <Animated.View
-          style={
-            (styles.innerProgressBar,
-            formSection == 0 ? styles.thirtyThree : null,
-            formSection == 1 ? styles.thirtyThree : null,
-            formSection == 2 ? styles.sixtySix : null,
-            formSection > 2 && formSection < numCategories + 2
-              ? styles.sixtySix
-              : null,
-            formSection == numCategories + 2 ? styles.oneHundred : null)
-          }
-        />
-      </View>
       <Formik
         initialValues={{
           title: '',
@@ -241,6 +227,19 @@ function NewSightingForm({ navigation }) {
         {(formikProps) => {
           return (
             <>
+              <View style={styles.progressBar}>
+                <Animated.View
+                  style={[
+                    styles.oneHundred,
+                    {
+                      width:
+                        ((formSection + 1) / (numCategories + numGeneralForm)) *
+                          100 +
+                        '%',
+                    },
+                  ]}
+                />
+              </View>
               <KeyboardAwareScrollView
                 resetScrollToCoords={{ x: 0, y: 0 }}
                 style={styles.keyboardView}
@@ -384,16 +383,6 @@ function NewSightingForm({ navigation }) {
                   <>
                     <React.Suspense fallback="Loading Views...">
                       <View>
-                        <Text
-                          style={[
-                            globalStyles.h2Text,
-                            globalStyles.sectionHeader,
-                          ]}
-                        >
-                          {views[formSection - numGeneralForm]
-                            ? views[formSection - numGeneralForm]['label']
-                            : errorData}
-                        </Text>
                         {views[formSection - numGeneralForm] ? (
                           formFields[
                             views[formSection - numGeneralForm]['label']
