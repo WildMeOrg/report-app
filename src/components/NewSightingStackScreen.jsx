@@ -272,7 +272,7 @@ function NewSightingForm({ navigation }) {
                         </TouchableOpacity>
                       </View>
                     )}
-                    <UppyComponent onPress={() => {}}></UppyComponent>
+                    <UppyComponent />
                     <GeneralFields formikProps={formikProps} />
                     <View style={[styles.horizontal, styles.bottomElement]}>
                       <TouchableOpacity>

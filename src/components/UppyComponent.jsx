@@ -61,15 +61,6 @@ export default function UppyComponent() {
       },
     });
 
-    uppy.on('upload', (data) => {
-      console.log('UPLOADING:', data);
-    });
-
-    uppy.on('progress', (progress) => {
-      // progress: integer (total progress percentage)
-      console.log(progress);
-    });
-
     uppy.on('upload-error', (file, error, response) => {
       setUploading(false);
       console.log('error with file:', file.id);
@@ -83,7 +74,6 @@ export default function UppyComponent() {
 
     uppy.on('complete', (uppyState) => {
       setUploading(false);
-      console.log('COMPLETE UPLOAD:', uppyState);
       setUploadID(uppyState.uploadID, uuidTemp);
       setUploadComplete(true);
       setreUploadComplete(true);
@@ -102,12 +92,10 @@ export default function UppyComponent() {
                 { alignSelf: 'center', fontSize: 16 },
               ]}
             />
-          ) : (
-            <></>
-          )}
+          ) : null}
           <TouchableOpacity
             style={[globalStyles.button, styles.imageButton]}
-            onPress={() => upload()}
+            onPress={upload}
             disabled={isUploading}
           >
             <Typography id="IMAGE_REUPLOAD" style={globalStyles.buttonText} />
@@ -116,7 +104,7 @@ export default function UppyComponent() {
       ) : (
         <TouchableOpacity
           style={[globalStyles.button, styles.imageButton]}
-          onPress={() => upload()}
+          onPress={upload}
           disabled={isUploading}
         >
           <Typography id="IMAGE_UPLOAD" style={globalStyles.buttonText} />
