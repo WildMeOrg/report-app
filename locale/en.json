@@ -39,5 +39,8 @@
   "FIELD_REQUIRED": "This Field is Required",
   "SELECT_IMAGES": "Select Images",
   "ADD_MORE": " Add More",
-  "PICK_AGAIN": " Pick Again"
+  "PICK_AGAIN": " Pick Again",
+  "IMAGE_UPLOAD_SUCCESSFUL": "Images Uploaded Successfully",
+  "IMAGE_UPLOAD": "Upload Images",
+  "IMAGE_REUPLOAD": "Upload New Images?"
 }
