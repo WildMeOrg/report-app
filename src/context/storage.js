@@ -10,11 +10,11 @@ import Humpback2 from '../../assets/images/humpback2.jpeg';
 import Humpback3 from '../../assets/images/humpback3.jpeg';
 
 export default storage = {
-  //dummy data for testing 
+  //dummy data for testing
   sightings: [
     {
       id: 1,
-      image: [Humpback, Humpback2, Humpback3], //used to test image slider 
+      image: [Humpback, Humpback2, Humpback3], //used to test image slider
       name: 'Humpback Whale',
       date: 'September 23rd, 2019',
       Species: 'Humpback Whale',
@@ -23,58 +23,58 @@ export default storage = {
       Context: 'I saw it. The thing was absolutly massive bro',
       synced: true,
       inProgress: false,
-      //used to test the custom fields 
-      customFields:[
+      //used to test the custom fields
+      customFields: [
         {
           Type: 'DateTimePicker',
           Title: 'Picture Taken',
-          Value: '2021-03-07T02:00:53.350Z'
+          Value: '2021-03-07T02:00:53.350Z',
         },
         {
           Type: 'DateRangePicker',
           Title: 'Date Range Test',
           Value: {
             Start: '2021-03-07T02:00:53.350Z',
-            End: '2021-03-16T21:55:28.978Z'
-          }
+            End: '2021-03-16T21:55:28.978Z',
+          },
         },
         {
           Type: 'LocationIDInput',
-          Title:'LocationID test',
-          Value: ' Some place'
+          Title: 'LocationID test',
+          Value: ' Some place',
         },
         {
           Type: 'MultiSelect',
           Title: 'MultiSelect Test',
-          Value: ['b','c','d','e']
+          Value: ['b', 'c', 'd', 'e'],
         },
         {
           Type: 'boolean',
           Title: 'Boolean Test',
-          Value: 'True'
+          Value: 'True',
         },
         {
           Type: 'FeetMeters',
           Title: 'Length of Feet',
-          Value: '1.524'
+          Value: '1.524',
         },
         {
           Type: 'SelectInput',
           Title: 'SelectTest',
-          Value: 'Yes Test'
+          Value: 'Yes Test',
         },
         {
           Type: 'LatLongInput',
           Title: 'Coordinates',
           Value: {
             Lat: '158.05',
-            Long: '168.00'
-          }
+            Long: '168.00',
+          },
         },
         {
           Type: 'AllTextInput',
           Title: 'Text input test',
-          Value: 'A massive paragraph or something'
+          Value: 'A massive paragraph or something',
         },
         {
           Type: 'Area',
@@ -83,15 +83,15 @@ export default storage = {
             North: '5.5',
             East: '6.6',
             South: '8.8',
-            West: '9.9'
-          }
-        }
-      ]
+            West: '9.9',
+          },
+        },
+      ],
     },
     {
       id: 2,
       image: [Hummingbird],
-      name: 'Anna\'s Hummingbird',
+      name: "Anna's Hummingbird",
       date: 'October 23rd, 2019',
       Species: 'Hummingbird',
       Title: 'Humming',
@@ -99,7 +99,7 @@ export default storage = {
       Context: 'A Cute Little Bird',
       synced: true,
       inProgress: false,
-      customFields:[]
+      customFields: [],
     },
     {
       id: 3,
@@ -112,7 +112,7 @@ export default storage = {
       Context: 'Its that pet from LoK',
       synced: true,
       inProgress: false,
-      customFields:[]
+      customFields: [],
     },
     {
       id: 4,
@@ -125,7 +125,7 @@ export default storage = {
       Context: 'Freaky little guy',
       synced: true,
       inProgress: false,
-      customFields:[]
+      customFields: [],
     },
     {
       id: 5,
@@ -138,7 +138,7 @@ export default storage = {
       Context: 'Went diving, found this guy',
       synced: true,
       inProgress: false,
-      customFields:[]
+      customFields: [],
     },
     {
       id: 6,
@@ -151,7 +151,7 @@ export default storage = {
       Context: 'Got lost on a hiking trail, found this guy',
       synced: true,
       inProgress: false,
-      customFields:[]
+      customFields: [],
     },
     {
       id: 7,
@@ -164,7 +164,7 @@ export default storage = {
       Context: 'Big, Absoluely massive',
       synced: true,
       inProgress: false,
-      customFields:[]
+      customFields: [],
     },
     {
       id: 8,
@@ -177,7 +177,7 @@ export default storage = {
       Context: 'A scary, fast cat',
       synced: true,
       inProgress: false,
-      customFields:[]
+      customFields: [],
     },
   ],
 };
