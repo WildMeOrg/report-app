@@ -6,6 +6,14 @@ import styles from '../../styles/newSightingStyles';
 
 export default function AllTextInput(rest) {
   const { name, schema, props } = rest;
+  const { displayType } = rest;
+  const type = (schema && schema.displayType) || displayType;
+  const onTextChange = (text) => {
+    props.setFieldValue(`customFields.${name}`, {
+      Type: type,
+      Value: text,
+    });
+  };
   return (
     <TextInput
       style={
@@ -16,8 +24,10 @@ export default function AllTextInput(rest) {
       autoCorrect={false}
       multiline={schema.displayType === 'longstring'}
       rowsMax={schema.displayType === 'longstring' ? 5 : undefined}
-      onChangeText={props.handleChange(`customFields.${name}`)}
-      value={props.values.customFields[name]}
+      onChangeText={onTextChange}
+      value={
+        props.values.customFields[name] && props.values.customFields[name].Value
+      }
       onBlur={props.handleBlur(`customFields.${name}`)}
       isValid={
         props.touched.customFields &&
