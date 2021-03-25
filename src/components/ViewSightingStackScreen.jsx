@@ -20,7 +20,7 @@ const ViewSightingScreen = ({ navigation, route }) => {
     }
   })[0];
   //This is a bandage for a weird search bar bug.
-  console.log(sighting);
+  //console.log(sighting);
   if (sighting === undefined) {
     return null;
   }
@@ -35,25 +35,7 @@ const ViewSightingScreen = ({ navigation, route }) => {
           {sighting.date}
         </Text>
         <View style={styles.Divider} />
-        {/* <Typography id="SPECIES" style={globalStyles.inputHeader} />
-        <Text style={[globalStyles.basicText, styles.InfoText]}>
-          {sighting.species}
-        </Text>
-        <Typography id="TITLE" style={globalStyles.inputHeader} />
-        <Text style={[globalStyles.basicText, styles.InfoText]}>
-          {sighting.Title}
-        </Text>
-        <Typography id="LOCATION" style={globalStyles.inputHeader} />
-        <Text style={[globalStyles.basicText, styles.InfoText]}>
-          {sighting.Location}
-        </Text>
-        <Typography id="SIGHTING_CONTEXT" style={globalStyles.inputHeader} />
-        <Text style={[globalStyles.basicText, styles.InfoText]}>
-          {sighting.Context}
-        </Text> */}
         {Object.keys(sighting).map((field) => {
-          // console.log(field);
-          // console.log(sighting[field]);
           const excludeList = [
             'customFields',
             'image',
@@ -63,89 +45,93 @@ const ViewSightingScreen = ({ navigation, route }) => {
             'synced',
             'inProgress',
           ];
-          if (excludeList.includes(field.toString())) {
+          if (!excludeList.includes(field.toString())) {
             //customFields are handled later
-            return;
+            const header = (
+              <Text style={globalStyles.inputHeader} key={field + 'Header'}>
+                {field.toString()}
+              </Text>
+            );
+            const body = (
+              <Text
+                style={[globalStyles.basicText, styles.InfoText]}
+                key={field + 'Body'}
+              >
+                {sighting[field].toString()}
+              </Text>
+            );
+            return [header, body];
           }
-          console.log(field);
-          const header = (
-            <Text style={globalStyles.inputHeader} key={field + 'Header'}>
+          return;
+        })}
+        {Object.keys(sighting.customFields).map((field) => {
+          var jsBody;
+          const fieldType = sighting.customFields[field].Type;
+          const fieldValue = sighting.customFields[field].Value;
+          const jsHeader = (
+            <Text
+              style={globalStyles.inputHeader}
+              key={field.toString() + 'Header'}
+            >
               {field.toString()}
             </Text>
           );
-          const body = (
-            <Text
-              style={[globalStyles.basicText, styles.InfoText]}
-              key={field + 'Body'}
-            >
-              {sighting[field].toString()}
-            </Text>
-          );
-          return [header, body];
-        })}
-        {sighting.customFields.map((field) => {
-          var jsBody;
-          const jsHeader = (
-            <Text style={globalStyles.inputHeader} key={field.Title + 'Header'}>
-              {field.Title}
-            </Text>
-          );
-          if (field.Type === 'DateTimePicker') {
-            const date = new Date(field.Value);
+          if (fieldType === 'DateTimePicker') {
+            const date = new Date(fieldValue.Value);
             jsBody = (
               <Text
                 style={[globalStyles.basicText, styles.InfoText]}
-                key={field.Title + field.Type}
+                key={field.toString() + fieldType.toString()}
               >
                 {date.toDateString()}
               </Text>
             );
-          } else if (field.Type === 'DateRangePicker') {
-            const sDate = new Date(field.Value.Start);
-            const eDate = new Date(field.Value.End);
+          } else if (fieldType === 'DateRangePicker') {
+            const sDate = new Date(fieldValue.Start);
+            const eDate = new Date(fieldValue.End);
             jsBody = (
               <Text
                 style={[globalStyles.basicText, styles.InfoText]}
-                key={field.Title + field.Type}
+                key={field.toString() + fieldType.toString()}
               >
-                Start: {sDate.toDateString()} {'\n'}End: {eDate.toDateString()}
+                Start: {sDate.toDateString() + ' '} End: {eDate.toDateString()}
               </Text>
             );
-          } else if (field.Type === 'MultiSelect') {
+          } else if (fieldType === 'MultiSelect') {
             jsBody = (
               <Text
                 style={[globalStyles.basicText, styles.InfoText]}
-                key={field.Title + field.Type}
+                key={field.toString() + fieldType.toString()}
               >
-                {field.Value.join(', ')}
+                {fieldValue.join(', ')}
               </Text>
             );
-          } else if (field.Type === 'LatLongInput') {
+          } else if (fieldType === 'LatLongInput') {
             jsBody = (
               <Text
                 style={[globalStyles.basicText, styles.InfoText]}
-                key={field.Title + field.Type}
+                key={field.toString() + fieldType.toString()}
               >
-                Latitude: {field.Value.Lat} Longitude: {field.Value.Long}
+                Latitude: {fieldValue.Lat} Longitude: {fieldValue.Long}
               </Text>
             );
-          } else if (field.Type === 'Area') {
+          } else if (fieldType === 'AreaInput') {
             jsBody = (
               <Text
                 style={[globalStyles.basicText, styles.InfoText]}
-                key={field.Title + field.Type}
+                key={field.toString() + fieldType.toString()}
               >
-                North: {field.Value.North} East: {field.Value.East} South:{' '}
-                {field.Value.South} West: {field.Value.West}
+                North: {fieldValue.North + ' '} East: {fieldValue.East + ' '}{' '}
+                South: {fieldValue.South + ' '} West: {fieldValue.West + ' '}
               </Text>
             );
           } else {
             jsBody = (
               <Text
                 style={[globalStyles.basicText, styles.InfoText]}
-                key={field.Title + field.Type}
+                key={field.toString() + fieldType.toString()}
               >
-                {field.Value}
+                {fieldValue.toString()}
               </Text>
             );
           }

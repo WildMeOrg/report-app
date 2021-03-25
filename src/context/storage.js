@@ -24,61 +24,51 @@ export default storage = {
       synced: true,
       inProgress: false,
       //used to test the custom fields
-      customFields: [
-        {
+      customFields: {
+        'Picture Taken': {
           Type: 'DateTimePicker',
-          Title: 'Picture Taken',
           Value: '2021-03-07T02:00:53.350Z',
         },
-        {
+        'Date Range Test': {
           Type: 'DateRangePicker',
-          Title: 'Date Range Test',
           Value: {
             Start: '2021-03-07T02:00:53.350Z',
             End: '2021-03-16T21:55:28.978Z',
           },
         },
-        {
+        'LocationID Test': {
           Type: 'LocationIDInput',
-          Title: 'LocationID test',
-          Value: ' Some place',
+          Value: 'Some Place',
         },
-        {
+        'MultiSelect Test': {
           Type: 'MultiSelect',
-          Title: 'MultiSelect Test',
           Value: ['b', 'c', 'd', 'e'],
         },
-        {
+        'Boolean Test': {
           Type: 'boolean',
-          Title: 'Boolean Test',
           Value: 'True',
         },
-        {
+        'Length of Feet': {
           Type: 'FeetMeters',
-          Title: 'Length of Feet',
           Value: '1.524',
         },
-        {
+        'Select Test': {
           Type: 'SelectInput',
-          Title: 'SelectTest',
           Value: 'Yes Test',
         },
-        {
+        'Coordinates ': {
           Type: 'LatLongInput',
-          Title: 'Coordinates',
           Value: {
             Lat: '158.05',
             Long: '168.00',
           },
         },
-        {
+        'Text Input Test': {
           Type: 'AllTextInput',
-          Title: 'Text input test',
-          Value: 'A massive paragraph or something',
+          Value: 'A massive paragraph or soemthing',
         },
-        {
-          Type: 'Area',
-          Title: 'Area of Sighting',
+        'Area of Sighting': {
+          Type: 'AreaInput',
           Value: {
             North: '5.5',
             East: '6.6',
@@ -86,7 +76,7 @@ export default storage = {
             West: '9.9',
           },
         },
-      ],
+      },
     },
     {
       id: 2,
@@ -99,7 +89,7 @@ export default storage = {
       Context: 'A Cute Little Bird',
       synced: true,
       inProgress: false,
-      customFields: [],
+      customFields: {},
     },
     {
       id: 3,
@@ -112,7 +102,7 @@ export default storage = {
       Context: 'Its that pet from LoK',
       synced: true,
       inProgress: false,
-      customFields: [],
+      customFields: {},
     },
     {
       id: 4,
@@ -125,7 +115,7 @@ export default storage = {
       Context: 'Freaky little guy',
       synced: true,
       inProgress: false,
-      customFields: [],
+      customFields: {},
     },
     {
       id: 5,
@@ -138,7 +128,7 @@ export default storage = {
       Context: 'Went diving, found this guy',
       synced: true,
       inProgress: false,
-      customFields: [],
+      customFields: {},
     },
     {
       id: 6,
@@ -151,7 +141,7 @@ export default storage = {
       Context: 'Got lost on a hiking trail, found this guy',
       synced: true,
       inProgress: false,
-      customFields: [],
+      customFields: {},
     },
     {
       id: 7,
@@ -164,7 +154,7 @@ export default storage = {
       Context: 'Big, Absoluely massive',
       synced: true,
       inProgress: false,
-      customFields: [],
+      customFields: {},
     },
     {
       id: 8,
@@ -177,7 +167,7 @@ export default storage = {
       Context: 'A scary, fast cat',
       synced: true,
       inProgress: false,
-      customFields: [],
+      customFields: {},
     },
   ],
 };
