@@ -20,14 +20,11 @@ const ViewSightingScreen = ({ navigation, route }) => {
     }
   })[0];
   //This is a bandage for a weird search bar bug.
-  //console.log(sighting);
   if (sighting === undefined) {
     return null;
   }
   return (
-    //TODO need to add customfields sections
     <View style={styles.InfoView} key={'Mainsection'}>
-      {/* <Image style={styles.image} source={sighting.image} /> */}
       <SliderBox images={sighting.image} sliderBoxHeight={250} />
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <Text style={globalStyles.inputHeader}>{sighting.name}</Text>
@@ -46,7 +43,6 @@ const ViewSightingScreen = ({ navigation, route }) => {
             'inProgress',
           ];
           if (!excludeList.includes(field.toString())) {
-            //customFields are handled later
             const header = (
               <Text style={globalStyles.inputHeader} key={field + 'Header'}>
                 {field.toString()}
