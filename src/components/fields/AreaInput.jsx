@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { TextInput } from 'react-native';
 import globalStyles from '../../styles/globalStyles';
 import styles from '../../styles/newSightingStyles';
+import { get } from 'lodash-es';
 
 export default function AreaInput(rest) {
   const { name, schema, props } = rest;
@@ -25,9 +26,11 @@ export default function AreaInput(rest) {
           placeholder={'0.0'}
           autoCorrect={false}
           value={
-            (props.values.customFields[name] &&
-              props.values.customFields[name]['Value']['north']) ||
-            north
+            get(
+              props,
+              ['values', 'customFields', name, 'Value', 'north'],
+              ''
+            ) || north
           }
           onChangeText={(val) => {
             [
@@ -54,8 +57,7 @@ export default function AreaInput(rest) {
           placeholder={'0.0'}
           autoCorrect={false}
           value={
-            (props.values.customFields[name] &&
-              props.values.customFields[name]['Value']['east']) ||
+            get(props, ['values', 'customFields', name, 'Value', 'east'], '') ||
             east
           }
           onChangeText={(val) => {
@@ -91,9 +93,11 @@ export default function AreaInput(rest) {
           placeholder={'0.0'}
           autoCorrect={false}
           value={
-            (props.values.customFields[name] &&
-              props.values.customFields[name]['Value']['south']) ||
-            south
+            get(
+              props,
+              ['values', 'customFields', name, 'Value', 'south'],
+              ''
+            ) || south
           }
           onChangeText={(val) => {
             [
@@ -120,8 +124,7 @@ export default function AreaInput(rest) {
           placeholder={'0.0'}
           autoCorrect={false}
           value={
-            (props.values.customFields[name] &&
-              props.values.customFields[name]['Value']['west']) ||
+            get(props, ['values', 'customFields', name, 'Value', 'west'], '') ||
             west
           }
           onChangeText={(val) => {

@@ -1,8 +1,10 @@
+/* eslint-disable prettier/prettier */
 // Component that returns a TextInput based on the given schema
 import React from 'react';
 import { TextInput, Alert } from 'react-native';
 import globalStyles from '../../styles/globalStyles';
 import styles from '../../styles/newSightingStyles';
+import { get } from 'lodash-es';
 
 export default function AllTextInput(rest) {
   const { name, schema, props } = rest;
@@ -26,7 +28,7 @@ export default function AllTextInput(rest) {
       rowsMax={schema.displayType === 'longstring' ? 5 : undefined}
       onChangeText={onTextChange}
       value={
-        props.values.customFields[name] && props.values.customFields[name].Value
+        get(props, ['values', 'customFields', name, 'Value'],'')
       }
       onBlur={props.handleBlur(`customFields.${name}`)}
       isValid={
