@@ -2,20 +2,26 @@ import React, { useState } from 'react';
 import { Picker } from '@react-native-community/picker';
 import globalStyles from '../../styles/globalStyles';
 import styles from '../../styles/newSightingStyles';
-//import DropDownPicker from 'react-native-dropdown-picker';
 
 export default function SelectInput(rest) {
-  //TODO Typography
-  //TODO possibly make a style for the picker?
-  //TODO validation
   const { name, schema, props } = rest;
-  const [choice, setChoice] = useState(schema.choices[0].label);
+  const { displayType } = rest;
+  const type = (schema && schema.displayType) || displayType;
+  const onChoiceChange = (choice) => {
+    props.setFieldValue(`customFields.${name}`, {
+      Type: type,
+      Value: choice,
+    });
+  };
   return (
     <Picker
-      selectedValue={props.values.customFields[name]}
+      selectedValue={
+        props.values.customFields[name] &&
+        props.values.customFields[name]['Value']
+      }
       style={{ marginHorizontal: '5%', height: 125 }}
       itemStyle={{ height: 125 }}
-      onValueChange={props.handleChange(`customFields.${name}`)}
+      onValueChange={onChoiceChange}
       onBlur={props.handleBlur(`customFields.${name}`)}
     >
       <Picker.Item
