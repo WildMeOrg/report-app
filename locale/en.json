@@ -34,10 +34,14 @@
   "CHOOSE_WILDBOOK": "Choose a Wildbook:",
   "CHANGE_WILDBOOK": "Change Wildbook",
   "LOCAL_SIGHTINGS": "Local Sightings",
-  "EDIT_DATE":"Edit Date:",
-  "EDIT_TIME":"Edit Time:",
+  "EDIT_DATE": "Edit Date:",
+  "EDIT_TIME": "Edit Time:",
   "FIELD_REQUIRED": "This Field is Required",
   "SELECT_IMAGES": "Select Images",
   "ADD_MORE": " Add More",
-  "PICK_AGAIN": " Pick Again"
+  "PICK_AGAIN": " Pick Again",
+  "ADD_NEW_SIGHTING": "+ Add new sighting",
+  "SYNC": "Sync",
+  "OFFLINE_SIGHTINGS": "Offline Sightings",
+  "SYNCED_SIGHTINGS": "Synced Sightings"
 }
