@@ -7,28 +7,50 @@ import { View, TextInput } from 'react-native';
 
 export default function FeetMetersInput(rest) {
   const { name, schema, props } = rest;
+  const { displayType } = rest;
+  const type = (schema && schema.displayType) || displayType;
   const [choice, setChoice] = useState('Feet');
   const [measurement, setMeasurement] = useState(
-    round((props.values.customFields[name] || 0) * 3.28084, 2).toString()
+    round(
+      ((props.values.customFields[name] &&
+        props.values.customFields[name]['Value']) ||
+        0) * 3.28084,
+      2
+    ).toString()
   );
   const onTextChange = (value) => {
     setMeasurement(value);
-    props.setFieldValue(`customFields.${name}`, value);
+    props.setFieldValue(`customFields.${name}`, { Type: type, Value: value });
     if (choice === 'Feet') {
       const tempVal = value * 0.3048;
-      props.setFieldValue(`customFields.${name}`, tempVal);
+      props.setFieldValue(`customFields.${name}`, {
+        Type: type,
+        Value: tempVal,
+      });
     } else {
-      props.setFieldValue(`customFields.${name}`, value);
+      props.setFieldValue(`customFields.${name}`, { Type: type, Value: value });
     }
   };
   const onPickerChange = (value) => {
     if (choice === 'Meters') {
       setMeasurement(
-        round((props.values.customFields[name] || 0) * 3.28084, 2).toString()
+        round(
+          ((props.values.customFields[name] &&
+            props.values.customFields[name]['Value']) ||
+            0) * 3.28084,
+          2
+        ).toString()
       );
       setChoice(value);
     } else {
-      setMeasurement(round(props.values.customFields[name] || 0, 2).toString());
+      setMeasurement(
+        round(
+          (props.values.customFields[name] &&
+            props.values.customFields[name]['Value']) ||
+            0,
+          2
+        ).toString()
+      );
       setChoice(value);
     }
   };

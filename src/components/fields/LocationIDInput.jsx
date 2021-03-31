@@ -7,17 +7,26 @@ import { View } from 'react-native';
 export default function locationIDInput(rest) {
   //NOTE: for some reason this field doesnt have a schema, just locationID
   const { name, schema, locationID, props } = rest;
+  const { displayType } = rest;
+  const type = (schema && schema.displayType) || displayType;
   const [choice, setChoice] = useState();
   return (
     <View style={{ flex: 1 }}>
       <Picker
-        selectedValue={props.values.customFields[name] || choice}
+        selectedValue={
+          (props.values.customFields[name] &&
+            props.values.customFields[name]['Value']) ||
+          choice
+        }
         style={{ margin: '5%', height: 115 }}
         itemStyle={{ height: 115 }}
         onValueChange={(itemValue) => {
           [
             setChoice(itemValue),
-            props.setFieldValue(`customFields.${name}`, itemValue),
+            props.setFieldValue(`customFields.${name}`, {
+              Type: type,
+              Value: itemValue,
+            }),
           ];
         }}
         onBlur={props.handleBlur(`customFields.${name}`)}

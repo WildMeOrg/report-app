@@ -43,5 +43,8 @@
   "ADD_NEW_SIGHTING": "+ Add new sighting",
   "SYNC": "Sync",
   "OFFLINE_SIGHTINGS": "Offline Sightings",
-  "SYNCED_SIGHTINGS": "Synced Sightings"
+  "SYNCED_SIGHTINGS": "Synced Sightings",
+  "IMAGE_UPLOAD_SUCCESSFUL": "Images Uploaded Successfully",
+  "IMAGE_UPLOAD": "Upload Images",
+  "IMAGE_REUPLOAD": "Upload New Images?"
 }

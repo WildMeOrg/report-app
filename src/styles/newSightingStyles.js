@@ -118,4 +118,13 @@ export default StyleSheet.create({
     marginVertical: 20,
     marginHorizontal: 10,
   },
+  imageButton: {
+    backgroundColor: theme.primary,
+    paddingVertical: buttonPadding,
+    paddingHorizontal: 50,
+    borderRadius: 20,
+    margin: '5%',
+    alignItems: 'center',
+    alignSelf: 'center',
+  },
 });
