@@ -105,6 +105,21 @@ export default {
         },
         {
           schema: {
+            displayType: 'daterange',
+            description: 'Snarkin about',
+            label: 'Range of Dates',
+            category: '1be9eb32-9853-4c24-91f3-4c4d296d31a6',
+          },
+          name: 'daterange',
+          multiple: true,
+          timeCreated: 1602869336242,
+          className: 'org.ecocean.MarkedIndividual',
+          id: '165c3695-8eee-4a60-a9e9-eba4dacba4d0',
+          type: 'string',
+          required: true,
+        },
+        {
+          schema: {
             displayType: 'select',
             description: '',
             label: 'jorbuzzy',
