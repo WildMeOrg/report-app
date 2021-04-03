@@ -47,3 +47,8 @@ export default function HelpPageStackScreen({ navigation }) {
     </HelpPageStack.Navigator>
   );
 }
+const styles = StyleSheet.create({
+    closeButton: {
+      marginRight: 16,
+    },
+  });
