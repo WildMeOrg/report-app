@@ -102,10 +102,10 @@ const HomeScreen = ({ navigation }) => {
             id="OFFLINE_SIGHTINGS"
             style={offlineSightings.offlineSightingsText}
           />
-          <View style={{}}>
+          <View>
             <TouchableOpacity
               style={offlineSightings.syncButton}
-              onPress={() => syncSighting()}
+              onPress={syncSighting}
             >
               <Typography id="SYNC" style={offlineSightings.syncButton} />
               <Icon
@@ -129,10 +129,10 @@ const HomeScreen = ({ navigation }) => {
                 }),
               ]}
               style={cardElementStyles.touchableOpacityHolder}
-              key={index}
+              key={sighting.id}
             >
               <SightingCard
-                key={index}
+                key={sighting.id}
                 image={26}
                 name={sighting.title}
                 date={sighting.location}
