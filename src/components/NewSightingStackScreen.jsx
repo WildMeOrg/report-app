@@ -148,6 +148,7 @@ function NewSightingForm({ navigation }) {
           }
         }
       );
+      // console.log(fieldsByCategory);
       fieldsByCategory['Regions'] = appConfig['site.custom.regions'];
       setCustomValidation(customRequiredFields); // validation
       setViews(customFields); // category titles for custom fields
@@ -468,7 +469,7 @@ function NewSightingForm({ navigation }) {
                         >
                           <View style={styles.button}>
                             <Typography
-                              id="UPLOAD"
+                              id="REPORT"
                               style={globalStyles.buttonText}
                             />
                           </View>

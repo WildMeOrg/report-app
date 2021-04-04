@@ -1,7 +1,7 @@
 {
   "LOGIN": "Login",
   "LOG_OUT": "Log out",
-  "APP_NAME": "Wild Me Report",
+  "APP_NAME": "Wild Me Scout",
   "NEW_SIGHTING": "New sighting",
   "HELP": "Help",
   "SIGHTING": "Sighting",
@@ -28,6 +28,7 @@
   "PHOTOGRAPHER_EMAIL": "Photographer Email",
   "BACK": "Back",
   "UPLOAD": "Upload",
+  "REPORT": "Report",
   "NEXT": "Next",
   "SIGHTING_INFO": "Sighting Info",
   "UNREAD": "Unread",

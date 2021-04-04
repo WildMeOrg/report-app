@@ -17,7 +17,7 @@ export default function CustomField({ id, required, name, ...rest }) {
     <View>
       <Text style={[globalStyles.inputHeader, globalStyles.h2Text]}>
         {displayName}
-        {required && ' * '}
+        {required && '*'}
       </Text>
       {props.touched.customFields &&
         props.errors.customFields &&

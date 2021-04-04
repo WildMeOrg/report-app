@@ -9,8 +9,11 @@ export default function FeetMetersInput(rest) {
   const { name, schema, props } = rest;
   const [choice, setChoice] = useState('Feet');
   const [measurement, setMeasurement] = useState(
-    round((props.values.customFields[name] || 0) * 3.28084, 2).toString()
+    (props.values.customFields[name] &&
+      round(props.values.customFields[name] * 3.28084, 2).toString()) ||
+      null
   );
+
   const onTextChange = (value) => {
     setMeasurement(value);
     props.setFieldValue(`customFields.${name}`, value);

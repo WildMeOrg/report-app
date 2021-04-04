@@ -127,6 +127,7 @@ export default function ViewSightingStackScreen({ navigation }) {
   return (
     <ViewSightingStack.Navigator
       screenOptions={{
+        cardStyle: { backgroundColor: '#fff' },
         headerTitleAlign: 'center',
         headerLeft: () => (
           <Icon
