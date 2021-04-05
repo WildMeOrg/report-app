@@ -159,6 +159,12 @@ function NewSightingForm({ navigation }) {
     }
   };
 
+  const progressBarPercentage = (formikProps) => {
+    const totalCategories =
+      (numCategories || form(formikProps)) + numGeneralForm;
+    return ((formSection + 1) / totalCategories) * 100;
+  };
+
   useEffect(() => {
     (async () => {
       const { status } = await ImagePicker.requestCameraRollPermissionsAsync();
@@ -235,12 +241,7 @@ function NewSightingForm({ navigation }) {
                   style={[
                     styles.progress,
                     {
-                      width:
-                        ((formSection + 1) /
-                          ((numCategories || form(formikProps)) +
-                            numGeneralForm)) *
-                          100 +
-                        '%',
+                      width: progressBarPercentage(formikProps) + '%',
                     },
                   ]}
                 />
