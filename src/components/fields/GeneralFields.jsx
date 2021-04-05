@@ -13,15 +13,17 @@ export default function GeneralFields(input) {
   const { formikProps } = input;
   return (
     <View>
-      <Text style={[globalStyles.inputHeader, globalStyles.h2Text]}>
-        <Typography id="TITLE" required={true} />
-        {formikProps.touched.title && formikProps.errors.title && (
-          <Typography
-            id="FIELD_REQUIRED"
-            style={[globalStyles.h2TextInvalid, { fontFamily: 'Lato-Italic' }]}
-          />
-        )}
-      </Text>
+      <Typography
+        id="TITLE"
+        required={true}
+        style={[globalStyles.inputHeader, globalStyles.h2Text]}
+      />
+      {formikProps.touched.title && formikProps.errors.title && (
+        <Typography
+          id="FIELD_REQUIRED"
+          style={[globalStyles.h2TextInvalid, { fontFamily: 'Lato-Italic' }]}
+        />
+      )}
       <TextInput
         style={[globalStyles.inputField]}
         autoCorrect={false}
@@ -31,15 +33,17 @@ export default function GeneralFields(input) {
         isValid={formikProps.touched.title && !formikProps.errors.title}
         isInvalid={formikProps.touched.title && formikProps.errors.title}
       />
-      <Text style={[globalStyles.inputHeader, globalStyles.h2Text]}>
-        <Typography id="LOCATION" required={true} />
-        {formikProps.touched.location && formikProps.errors.location && (
-          <Typography
-            id="FIELD_REQUIRED"
-            style={[globalStyles.h2TextInvalid, { fontFamily: 'Lato-Italic' }]}
-          />
-        )}
-      </Text>
+      <Typography
+        id="LOCATION"
+        required={true}
+        style={[globalStyles.inputHeader, globalStyles.h2Text]}
+      />
+      {formikProps.touched.location && formikProps.errors.location && (
+        <Typography
+          id="FIELD_REQUIRED"
+          style={[globalStyles.h2TextInvalid, { fontFamily: 'Lato-Italic' }]}
+        />
+      )}
       <TextInput
         style={[globalStyles.inputField]}
         autoCorrect={false}
@@ -49,19 +53,18 @@ export default function GeneralFields(input) {
         isValid={formikProps.touched.location && !formikProps.errors.location}
         isInvalid={formikProps.touched.location && formikProps.errors.location}
       />
-      <Text style={[globalStyles.inputHeader, globalStyles.h2Text]}>
-        <Typography id="SIGHTING_CONTEXT" required={true} />
-        {formikProps.touched.sightingContext &&
-          formikProps.errors.sightingContext && (
-            <Typography
-              id="FIELD_REQUIRED"
-              style={[
-                globalStyles.h2TextInvalid,
-                { fontFamily: 'Lato-Italic' },
-              ]}
-            />
-          )}
-      </Text>
+      <Typography
+        id="SIGHTING_CONTEXT"
+        required={true}
+        style={[globalStyles.inputHeader, globalStyles.h2Text]}
+      />
+      {formikProps.touched.sightingContext &&
+        formikProps.errors.sightingContext && (
+          <Typography
+            id="FIELD_REQUIRED"
+            style={[globalStyles.h2TextInvalid, { fontFamily: 'Lato-Italic' }]}
+          />
+        )}
       <TextInput
         style={[globalStyles.inputField, styles.multiLine]}
         autoCorrect={false}

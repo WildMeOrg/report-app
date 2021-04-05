@@ -13,7 +13,7 @@ export default function Typography({ id, style, required, ...rest }) {
   return (
     <Text style={mergedStyles} {...rest}>
       <FormattedMessage id={id} />
-      {required && ' * '}
+      {required && '*'}
     </Text>
   );
 }
