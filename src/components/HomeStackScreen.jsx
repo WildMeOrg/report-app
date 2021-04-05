@@ -101,7 +101,7 @@ export default function HomeStackScreen({ navigation }) {
           component={HomeScreen}
           options={{
             headerTitle: () => (
-              <Typography style={headerStyles.headerText} id="APP_NAME" />
+              <Typography style={globalStyles.headerText} id="APP_NAME" />
             ),
           }}
         />

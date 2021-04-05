@@ -30,6 +30,7 @@ import testReportFormat from '../constants/testReportFormat';
 import axios from 'axios';
 
 const NewSightingStack = createStackNavigator();
+const categoryHeader = 'General info';
 
 function NewSightingForm({ navigation }) {
   const errorData = 'Error no data';
@@ -38,10 +39,15 @@ function NewSightingForm({ navigation }) {
   const [formSection, setFormSection] = useState(0); //what is the current section/screen
   const [formFields, setFormFields] = useState({}); //all the custom fields for each category
   const [views, setViews] = useState([]); //the different custom field sections
-  const [numCategories, setNumCategories] = useState(0); //number of custom field categories
+  const [numCategories, setNumCategories] = useState(null); //number of custom field categories
   const [customValidation, setCustomValidation] = useState('');
   const numGeneralForm = 3; //there are 3 general form screens
   const [imageState, imageStateDispatch] = useContext(ImageSelectContext); //Grab images from imageSelector
+  const [headers, setHeaders] = useState([
+    'General info',
+    'Sighting details',
+    'Individual info',
+  ]);
 
   const renderImage = (item, i) => {
     return (
@@ -85,7 +91,7 @@ function NewSightingForm({ navigation }) {
     //-----TESTING END-----//
     try {
       if (settingsPacket) {
-        //console.log(settingsPacket);
+        // console.log(settingsPacket);
         setNumCategories(
           settingsPacket['site.custom.customFieldCategories']['value'].length
         );
@@ -126,6 +132,7 @@ function NewSightingForm({ navigation }) {
           if (fields.length > 0) {
             fieldsByCategory[category.label] = fields;
             customFields.push(category);
+            headers.push(category.label);
           }
           if (categoryValidation) {
             const test = categoryValidation.reduce(
@@ -144,12 +151,20 @@ function NewSightingForm({ navigation }) {
           }
         }
       );
+      // console.log(fieldsByCategory);
       fieldsByCategory['Regions'] = appConfig['site.custom.regions'];
       setCustomValidation(customRequiredFields); // validation
       setViews(customFields); // category titles for custom fields
       setNumCategories(customFields.length); // number of screens for custom fields
       setFormFields(fieldsByCategory); // fields based on each category
+      return customFields.length;
     }
+  };
+
+  const progressBarPercentage = (formikProps) => {
+    const totalCategories =
+      (numCategories || form(formikProps)) + numGeneralForm;
+    return ((formSection + 1) / totalCategories) * 100;
   };
 
   useEffect(() => {
@@ -181,20 +196,6 @@ function NewSightingForm({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.progressBar}>
-        <Animated.View
-          style={
-            (styles.innerProgressBar,
-            formSection == 0 ? styles.thirtyThree : null,
-            formSection == 1 ? styles.thirtyThree : null,
-            formSection == 2 ? styles.sixtySix : null,
-            formSection > 2 && formSection < numCategories + 2
-              ? styles.sixtySix
-              : null,
-            formSection == numCategories + 2 ? styles.oneHundred : null)
-          }
-        />
-      </View>
       <Formik
         initialValues={{
           title: '',
@@ -239,17 +240,32 @@ function NewSightingForm({ navigation }) {
               }
             });
             resetForm();
-
+            navigation.setOptions({
+              headerTitle: headers[0],
+            });
             setFormSection(0);
             navigation.navigate(screens.home);
           } else {
             setFormSection(formSection + 1);
+            navigation.setOptions({
+              headerTitle: headers[formSection + 1],
+            });
           }
         }}
       >
         {(formikProps) => {
           return (
             <>
+              <View style={styles.progressBar}>
+                <Animated.View
+                  style={[
+                    styles.progress,
+                    {
+                      width: progressBarPercentage(formikProps) + '%',
+                    },
+                  ]}
+                />
+              </View>
               <KeyboardAwareScrollView
                 resetScrollToCoords={{ x: 0, y: 0 }}
                 style={styles.keyboardView}
@@ -307,7 +323,6 @@ function NewSightingForm({ navigation }) {
                         onPress={() => [
                           formikProps.handleSubmit(),
                           formikProps.setSubmitting(false),
-                          form(formikProps),
                         ]}
                       >
                         <View style={(globalStyles.button, styles.button)}>
@@ -324,7 +339,14 @@ function NewSightingForm({ navigation }) {
                   <>
                     <SightingDetailsFields formikProps={formikProps} />
                     <View style={[styles.horizontal, styles.bottomElement]}>
-                      <TouchableOpacity onPress={() => setFormSection(0)}>
+                      <TouchableOpacity
+                        onPress={() => [
+                          setFormSection(0),
+                          navigation.setOptions({
+                            headerTitle: headers[0],
+                          }),
+                        ]}
+                      >
                         <View style={[styles.button, styles.buttonInactive]}>
                           <Typography
                             id="BACK"
@@ -352,7 +374,14 @@ function NewSightingForm({ navigation }) {
                   <>
                     <IndividualInformationFields formikProps={formikProps} />
                     <View style={[styles.horizontal, styles.bottomElement]}>
-                      <TouchableOpacity onPress={() => setFormSection(1)}>
+                      <TouchableOpacity
+                        onPress={() => [
+                          setFormSection(1),
+                          navigation.setOptions({
+                            headerTitle: headers[1],
+                          }),
+                        ]}
+                      >
                         <View style={[styles.button, styles.buttonInactive]}>
                           <Typography
                             id="BACK"
@@ -380,16 +409,6 @@ function NewSightingForm({ navigation }) {
                   <>
                     <React.Suspense fallback="Loading Views...">
                       <View>
-                        <Text
-                          style={[
-                            globalStyles.h2Text,
-                            globalStyles.sectionHeader,
-                          ]}
-                        >
-                          {views[formSection - numGeneralForm]
-                            ? views[formSection - numGeneralForm]['label']
-                            : errorData}
-                        </Text>
                         {views[formSection - numGeneralForm] ? (
                           formFields[
                             views[formSection - numGeneralForm]['label']
@@ -427,6 +446,9 @@ function NewSightingForm({ navigation }) {
                           onPress={() => [
                             setFormSection(formSection - 1),
                             form(formikProps),
+                            navigation.setOptions({
+                              headerTitle: headers[formSection - 1],
+                            }),
                           ]}
                         >
                           <View style={[styles.button, styles.buttonInactive]}>
@@ -452,6 +474,9 @@ function NewSightingForm({ navigation }) {
                           onPress={() => [
                             setFormSection(formSection - 1),
                             form(formikProps),
+                            navigation.setOptions({
+                              headerTitle: headers[formSection - 1],
+                            }),
                           ]}
                         >
                           <View style={[styles.button, styles.buttonInactive]}>
@@ -469,7 +494,7 @@ function NewSightingForm({ navigation }) {
                         >
                           <View style={styles.button}>
                             <Typography
-                              id="UPLOAD"
+                              id="REPORT"
                               style={globalStyles.buttonText}
                             />
                           </View>
@@ -509,9 +534,11 @@ export default function NewSightingStackScreen({ navigation }) {
         name={screens.newSighting}
         component={NewSightingForm}
         options={{
-          headerTitle: () => (
-            <Typography id="SIGHTING_INFO" style={globalStyles.headerText} />
-          ),
+          headerTitle: 'General info',
+          headerTitleStyle: {
+            fontFamily: 'Lato-Regular',
+            fontStyle: 'normal',
+          },
         }}
       />
     </NewSightingStack.Navigator>

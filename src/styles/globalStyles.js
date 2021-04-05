@@ -20,8 +20,8 @@ export default StyleSheet.create({
   },
   h2TextInvalid: {
     fontFamily: 'Lato-Regular',
-    fontSize: 18,
-    margin: '5%',
+    fontSize: 16,
+    marginHorizontal: '5%',
     marginBottom: '3%',
     color: theme.red,
   },

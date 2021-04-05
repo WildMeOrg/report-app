@@ -7,12 +7,12 @@ import { get } from 'lodash-es';
 
 export default function AreaInput(rest) {
   const { name, schema, props } = rest;
+  const [north, setNorth] = useState(null);
+  const [east, setEast] = useState(null);
+  const [south, setSouth] = useState(null);
+  const [west, setWest] = useState(null);
   const { displayType } = rest;
   const type = (schema && schema.displayType) || displayType;
-  const [north, setNorth] = useState('0.0');
-  const [east, setEast] = useState('0.0');
-  const [south, setSouth] = useState('0.0');
-  const [west, setWest] = useState('0.0');
   //TODO test
   return (
     <View style={{ flexDirection: 'column', flex: 1 }}>
