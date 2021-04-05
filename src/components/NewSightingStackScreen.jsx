@@ -36,7 +36,7 @@ function NewSightingForm({ navigation }) {
   const [formSection, setFormSection] = useState(0); //what is the current section/screen
   const [formFields, setFormFields] = useState({}); //all the custom fields for each category
   const [views, setViews] = useState([]); //the different custom field sections
-  const [numCategories, setNumCategories] = useState(0); //number of custom field categories
+  const [numCategories, setNumCategories] = useState(null); //number of custom field categories
   const [customValidation, setCustomValidation] = useState('');
   const numGeneralForm = 3; //there are 3 general form screens
   const [imageState, imageStateDispatch] = useContext(ImageSelectContext); //Grab images from imageSelector
@@ -154,6 +154,7 @@ function NewSightingForm({ navigation }) {
       setViews(customFields); // category titles for custom fields
       setNumCategories(customFields.length); // number of screens for custom fields
       setFormFields(fieldsByCategory); // fields based on each category
+      return customFields.length;
     }
   };
 
@@ -234,7 +235,9 @@ function NewSightingForm({ navigation }) {
                     styles.oneHundred,
                     {
                       width:
-                        ((formSection + 1) / (numCategories + numGeneralForm)) *
+                        ((formSection + 1) /
+                          ((numCategories || form(formikProps)) +
+                            numGeneralForm)) *
                           100 +
                         '%',
                     },
@@ -297,7 +300,6 @@ function NewSightingForm({ navigation }) {
                         onPress={() => [
                           formikProps.handleSubmit(),
                           formikProps.setSubmitting(false),
-                          form(formikProps),
                         ]}
                       >
                         <View style={(globalStyles.button, styles.button)}>
