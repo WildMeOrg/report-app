@@ -233,7 +233,7 @@ function NewSightingForm({ navigation }) {
               <View style={styles.progressBar}>
                 <Animated.View
                   style={[
-                    styles.oneHundred,
+                    styles.progress,
                     {
                       width:
                         ((formSection + 1) /

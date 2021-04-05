@@ -10,17 +10,7 @@ export default StyleSheet.create({
     backgroundColor: '#EDEDED',
     justifyContent: 'center',
   },
-  thirtyThree: {
-    height: 3,
-    backgroundColor: theme.primary,
-    width: '33%',
-  },
-  sixtySix: {
-    height: 3,
-    backgroundColor: theme.primary,
-    width: '66%',
-  },
-  oneHundred: {
+  progress: {
     height: 3,
     backgroundColor: theme.primary,
     width: '100%',
