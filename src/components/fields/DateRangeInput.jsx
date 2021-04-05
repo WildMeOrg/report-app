@@ -12,6 +12,8 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function DateRangeInput(rest) {
   const { name, schema, props } = rest;
+  const { displayType } = rest;
+  const type = (schema && schema.displayType) || displayType;
   //start date constants
   const [dateStart, setDateStart] = useState(new Date());
   const [modeStart, setModeStart] = useState('date');
@@ -38,7 +40,10 @@ export default function DateRangeInput(rest) {
   const onChangeStart = (event, selectedDate) => {
     const currDate = selectedDate || dateStart;
     setShowStart(Platform.OS === 'ios');
-    props.setFieldValue(`customFields.${name}`, [currDate, dateEnd]);
+    props.setFieldValue(`customFields.${name}`, {
+      Type: type,
+      Value: [currDate, dateEnd],
+    });
     setDateStart(currDate);
   };
 
@@ -60,7 +65,10 @@ export default function DateRangeInput(rest) {
   const onChangeEnd = (event, selectedDate) => {
     const currDate = selectedDate || dateEnd;
     setShowEnd(Platform.OS === 'ios');
-    props.setFieldValue(`customFields.${name}`, [dateStart, currDate]);
+    props.setFieldValue(`customFields.${name}`, {
+      Type: type,
+      Value: [dateStart, currDate],
+    });
     setDateEnd(currDate);
   };
   function formatDate(date, num) {
@@ -71,9 +79,11 @@ export default function DateRangeInput(rest) {
     };
     if (
       props.values.customFields[name] &&
-      props.values.customFields[name][num]
+      props.values.customFields[name]['Value'][num]
     ) {
-      return new Date(props.values.customFields[name][num]).toLocaleDateString({
+      return new Date(
+        props.values.customFields[name]['Value'][num]
+      ).toLocaleDateString({
         month: '2-digit',
         day: '2-digit',
         year: 'numeric',
@@ -155,7 +165,7 @@ export default function DateRangeInput(rest) {
             }}
             value={
               (props.values.customFields[name] &&
-                props.values.customFields[name][0]) ||
+                props.values.customFields[name]['Value'][0]) ||
               dateStart
             }
             display="default"
@@ -181,7 +191,7 @@ export default function DateRangeInput(rest) {
             }}
             value={
               (props.values.customFields[name] &&
-                props.values.customFields[name][1]) ||
+                props.values.customFields[name]['Value'][1]) ||
               dateEnd
             }
             display="default"

@@ -11,6 +11,8 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function DateInput(rest) {
   const { name, schema, props } = rest;
+  const { displayType } = rest;
+  const type = (schema && schema.displayType) || displayType;
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
@@ -36,7 +38,7 @@ export default function DateInput(rest) {
       day: 'numeric',
     };
     if (props.values.customFields[name]) {
-      return new Date(props.values.customFields[name]).toLocaleDateString(
+      return new Date(props.values.customFields[name].Value).toLocaleDateString(
         [],
         options
       );
@@ -59,7 +61,10 @@ export default function DateInput(rest) {
   const onChange = (event, selectedDate) => {
     const currDate = selectedDate || date;
     setShow(Platform.OS === 'ios');
-    props.setFieldValue(`customFields.${name}`, currDate);
+    props.setFieldValue(`customFields.${name}`, {
+      Type: type,
+      Value: currDate,
+    });
     setDate(currDate);
   };
   return (
@@ -111,7 +116,11 @@ export default function DateInput(rest) {
               alignItems: 'flex-start',
               paddingHorizontal: '20%',
             }}
-            value={props.values.customFields[name] || date}
+            value={
+              (props.values.customFields[name] &&
+                props.values.customFields[name].Value) ||
+              date
+            }
             display="default"
             mode={mode}
             onBlur={props.handleBlur(`customFields.${name}`)}
