@@ -26,6 +26,8 @@ import { ImageSelectContext } from '../context/imageSelectContext';
 import UppyComponent from '../components/UppyComponent';
 import { color } from 'react-native-reanimated';
 import { Button } from 'react-native';
+import testReportFormat from '../constants/testReportFormat';
+import axios from 'axios';
 
 const NewSightingStack = createStackNavigator();
 
@@ -83,7 +85,7 @@ function NewSightingForm({ navigation }) {
     //-----TESTING END-----//
     try {
       if (settingsPacket) {
-        console.log(settingsPacket);
+        //console.log(settingsPacket);
         setNumCategories(
           settingsPacket['site.custom.customFieldCategories']['value'].length
         );
@@ -160,6 +162,23 @@ function NewSightingForm({ navigation }) {
     })();
   }, []);
 
+  const sendReport = async () => {
+    try {
+      console.log(JSON.stringify(testReportFormat));
+      const response = await axios.request({
+        url: `${baseUrl}/api/v1/sightings/`,
+        withCredentials: true,
+        method: 'post',
+        data: testReportFormat,
+      });
+      if (response) {
+        console.log(response);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.progressBar}>
@@ -197,6 +216,7 @@ function NewSightingForm({ navigation }) {
           if (formSection === numCategories + 2) {
             NetInfo.fetch().then((state) => {
               // console.log(state);
+              sendReport();
               if (state.isInternetReachable) {
                 alert(
                   'Internet Reachable: ' + JSON.stringify(values, undefined, 4)

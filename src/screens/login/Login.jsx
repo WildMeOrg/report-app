@@ -33,6 +33,7 @@ const Login = ({ navigation, route }) => {
       const response = await axios.request({
         url: `${baseUrl}/api/v1/auth/sessions`,
         method: 'post',
+        withCredentials: true,
         data: {
           email,
           password,
