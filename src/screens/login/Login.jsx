@@ -117,7 +117,12 @@ const Login = ({ navigation, route }) => {
         />
 
         <View style={styles.forgotView}>
-          <TouchableOpacity style={styles.forgot}>
+          <TouchableOpacity
+            style={styles.forgot}
+            onPress={() => {
+              alert('Reset your password on the desktop site');
+            }}
+          >
             <Typography
               id="FORGOT_PASSWORD_QUESTION"
               style={globalStyles.basicText}
