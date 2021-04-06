@@ -17,6 +17,7 @@ import screens from '../../constants/screens';
 import { ReportContext } from '../../context/reportContext';
 import AsyncStorage from '@react-native-community/async-storage';
 import Sighting from '../localSightings/Sighting';
+import { LinearGradient } from 'expo-linear-gradient';
 
 /** <SightingCard> : A functional component that creates the sighting cards on the homepage
  *    @props
@@ -80,7 +81,7 @@ const HomeScreen = ({ navigation }) => {
   return (
     <View style={bodyStyles.parentView}>
       <View style={{ alignItems: 'center' }}>
-        <View style={bodyStyles.sortBy}>
+        <View style={bodyStyles.sortByPos}>
           <Typography id="LAST_ADDED" style={bodyStyles.sortBy} />
           <Icon
             name="arrow-downward"
@@ -89,12 +90,6 @@ const HomeScreen = ({ navigation }) => {
             color={theme.black}
           />
         </View>
-        <TouchableOpacity
-          style={bodyStyles.addNew}
-          onPress={() => navigation.navigate(screens.newSighting)}
-        >
-          <Typography id="ADD_NEW_SIGHTING" style={bodyStyles.addNewText} />
-        </TouchableOpacity>
       </View>
       {storedSightings.length > 0 ? (
         <View style={offlineSightings.header}>
@@ -141,12 +136,14 @@ const HomeScreen = ({ navigation }) => {
           ))}
         </ScrollView>
       ) : null}
-      <View style={offlineSightings.header}>
-        <Typography
-          id="SYNCED_SIGHTINGS"
-          style={offlineSightings.offlineSightingsText}
-        />
-      </View>
+      {storedSightings.length > 0 ? (
+        <View style={offlineSightings.header}>
+          <Typography
+            id="SYNCED_SIGHTINGS"
+            style={offlineSightings.offlineSightingsText}
+          />
+        </View>
+      ) : null}
       <ScrollView contentContainerStyle={bodyStyles.content}>
         {
           // Procedurally generate the cards from the sightings array
@@ -173,6 +170,20 @@ const HomeScreen = ({ navigation }) => {
           })
         }
       </ScrollView>
+      <View style={bodyStyles.addNewPosition}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate(screens.newSighting)}
+        >
+          <LinearGradient
+            colors={['#21BDC1', '#41D06A']}
+            start={[0, 0]}
+            end={[1, 1]}
+            style={bodyStyles.addNew}
+          >
+            <Text style={bodyStyles.addNewText}>+</Text>
+          </LinearGradient>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -186,10 +197,16 @@ const bodyStyles = StyleSheet.create({
   sortBy: {
     fontSize: 18,
     fontFamily: 'Lato-Regular',
+    // alignSelf: 'flex-start',
+    // flexDirection: 'row',
+    // marginLeft: 12,
+    // marginTop: 4,
+  },
+  sortByPos: {
     alignSelf: 'flex-start',
     flexDirection: 'row',
-    marginLeft: 12,
-    marginTop: 4,
+    marginLeft: 20,
+    marginTop: 10,
   },
   content: {
     flexDirection: 'column',
@@ -199,6 +216,11 @@ const bodyStyles = StyleSheet.create({
     backgroundColor: theme.white,
     minHeight: 160,
   },
+  // addSighting: {
+  //   fontSize: 14,
+  //   fontFamily: 'Lato-Regular',
+  //   color: theme.white,
+  // },
   // sortBy: {
   //   width: 102,
   //   marginTop: 10,
@@ -207,22 +229,56 @@ const bodyStyles = StyleSheet.create({
   //   justifyContent: 'space-between',
   //   alignSelf: 'flex-start',
   // },
+  addNewPosition: {
+    // backgroundColor: theme.red,
+    height: Dimensions.get('window').width * 0.07,
+    width: Dimensions.get('window').width * 0.07,
+    // marginTop: 15,
+    // marginBottom: 10,
+    // padding: '5%',
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    margin: '7%',
+    // iOS
+    shadowColor: theme.black,
+    shadowOffset: {
+      width: 1,
+      height: 3,
+    },
+    shadowOpacity: 0.35,
+    // shadowRadius: 2.6,
+    // // Android
+    // elevation: 3,
+  },
   addNew: {
-    marginTop: 15,
-    marginBottom: 10,
-    width: Dimensions.get('window').width * 0.9, // Looks dumb but is necessary
-    padding: 25,
+    // position: 'absolute',
+    // bottom: 0,
+    // left: 0,
+    // marginTop: 15,
+    // marginBottom: 10,
+    // width: Dimensions.get('window').width * 0.9, // Looks dumb but is necessary
+    height: '100%',
+    width: '100%',
+    // padding: 25,
     justifyContent: 'center',
-    borderStyle: 'dashed',
-    borderWidth: 2,
-    borderColor: '#888',
-    borderRadius: 6,
+    alignContent: 'center',
+    // borderStyle: 'dashed',
+    // borderWidth: 1,
+    // borderColor: theme.primary,
+    borderRadius: Dimensions.get('window').width * 0.09,
+    // backgroundColor: theme.primary,
+    // margin: '0%',
+    // Android
+    shadowRadius: 2.6,
+    elevation: 4,
   },
   addNewText: {
-    fontSize: 20,
+    fontSize: 45,
     fontFamily: 'Lato-Regular',
     textAlign: 'center',
-    color: '#888',
+    color: theme.white,
+    // margin: '0%',
   },
 });
 
@@ -286,10 +342,11 @@ const cardElementStyles = StyleSheet.create({
 
 const offlineSightings = StyleSheet.create({
   offlineSightingsText: {
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: 'Lato-Regular',
     textAlign: 'center',
     color: theme.black,
+    opacity: 0.5,
   },
   scrollView: {
     marginLeft: 12,
