@@ -6,6 +6,8 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import globalStyles from '../../styles/globalStyles';
 import styles from '../../styles/newSightingStyles';
 import Typography from '../../components/Typography';
+import theme from '../../constants/theme';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function DateInput(rest) {
   const { name, schema, props } = rest;
@@ -15,7 +17,7 @@ export default function DateInput(rest) {
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
   const showMode = (currMode) => {
-    if (show) {
+    if (show && mode === currMode) {
       setShow(false);
     } else {
       setShow(true);
@@ -34,8 +36,6 @@ export default function DateInput(rest) {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric',
     };
     if (props.values.customFields[name]) {
       return new Date(props.values.customFields[name].Value).toLocaleDateString(
@@ -44,6 +44,18 @@ export default function DateInput(rest) {
       );
     } else {
       return new Date(date).toLocaleDateString([], options);
+    }
+  }
+
+  function formatTime(date) {
+    var options = {
+      hour: 'numeric',
+      minute: 'numeric',
+    };
+    if (props.values.customFields[name]) {
+      return new Date(date).toLocaleTimeString([], options);
+    } else {
+      return new Date(date).toLocaleTimeString([], options);
     }
   }
   const onChange = (event, selectedDate) => {
@@ -59,25 +71,42 @@ export default function DateInput(rest) {
     //TODO Typography
     <View>
       <View>
-        <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
-          Date: {formatDate(date)}
-        </Text>
-        <View style={[styles.horizontal]}>
-          <Typography id="EDIT_DATE" style={styles.dtpText} />
-          <Icon
-            name="today"
-            type="material-icons"
-            onPress={showDatePicker}
-            raised={true}
-          />
-          <Typography id="EDIT_TIME" style={styles.dtpText} />
-          <Icon
-            name="schedule"
-            type="material-icons"
-            onPress={showTimePicker}
-            raised={true}
-          />
-        </View>
+        <TouchableOpacity
+          onPress={showDatePicker}
+          style={[
+            globalStyles.inputField,
+            {
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              marginBottom: '2%',
+            },
+          ]}
+        >
+          <Text style={[globalStyles.basicText, { margin: '2%' }]}>
+            {formatDate(date)}
+          </Text>
+          <View style={{ alignSelf: 'center' }}>
+            <Icon name="today" type="material-icons" onPress={showDatePicker} />
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={showTimePicker}
+          style={[
+            globalStyles.inputField,
+            { flexDirection: 'row', justifyContent: 'space-between' },
+          ]}
+        >
+          <Text style={[globalStyles.basicText, { margin: '2%' }]}>
+            {formatTime(date)}
+          </Text>
+          <View style={{ alignSelf: 'center' }}>
+            <Icon
+              name="schedule"
+              type="material-icons"
+              onPress={showTimePicker}
+            />
+          </View>
+        </TouchableOpacity>
         {show && (
           <DateTimePicker
             style={{
