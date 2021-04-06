@@ -48,6 +48,10 @@ const HomeScreen = ({ navigation }) => {
   const [state, dispatch] = useContext(ReportContext);
   const [isSyncing, setIsSyncing] = useState(false);
   const [storedSightings, setStoredSightings] = useState([]);
+  const [sortDescending, flipSortDirection] = useState(true);
+  const BooleanXOR = (a, b) => {
+    return (a || b) && !(a && b);
+  };
 
   useEffect(() => {
     AsyncStorage.getItem('SightingSubmissions').then((result) =>
@@ -101,14 +105,28 @@ const HomeScreen = ({ navigation }) => {
         </ScrollView>
       ) : null}
       <ScrollView contentContainerStyle={bodyStyles.content}>
-        <View style={bodyStyles.sortBy}>
-          <Typography id="LAST_ADDED" style={globalStyles.h2Text} />
-          <Icon
-            name="arrow-downward"
-            type="material-icons"
-            size={18}
-            color={theme.black}
-          />
+        <View style={bodyStyles.alignLeft}>
+          <TouchableOpacity
+            style={bodyStyles.sortBy}
+            onPress={() => flipSortDirection(!sortDescending)}
+          >
+            <Typography id="DATE_ADDED" style={globalStyles.h2Text} />
+            {sortDescending ? (
+              <Icon
+                name="arrow-downward"
+                type="material-icons"
+                size={18}
+                color={theme.black}
+              />
+            ) : (
+              <Icon
+                name="arrow-upward"
+                type="material-icons"
+                size={18}
+                color={theme.black}
+              />
+            )}
+          </TouchableOpacity>
         </View>
         <TouchableOpacity
           style={bodyStyles.addNew}
@@ -117,35 +135,38 @@ const HomeScreen = ({ navigation }) => {
           <Typography id="NEW_SIGHTING" style={bodyStyles.addNewText} />
         </TouchableOpacity>
         {
-          // Procedurally generate the cards from the sightings array
-          state.sightings.map((sighting) => {
-            return (
-              <TouchableOpacity
-                onPress={() => [
-                  navigation.navigate(screens.viewSighting, {
-                    screen: screens.viewSighting,
-                    params: { id: sighting.id },
-                  }),
-                ]}
-                style={cardElementStyles.touchableOpacityHolder}
-                key={sighting.id}
-              >
-                <SightingCard
+          // Create a separate array from state
+          [...state.sightings]
+            .sort((a, b) => {
+              return BooleanXOR(a.date > b.date, sortDescending) ? -1 : 1;
+            })
+            // Then use map to generate each sighting
+            .map((sighting) => {
+              return (
+                <TouchableOpacity
+                  onPress={() => [
+                    navigation.navigate(screens.viewSighting, {
+                      screen: screens.viewSighting,
+                      params: { id: sighting.id },
+                    }),
+                  ]}
+                  style={cardElementStyles.touchableOpacityHolder}
                   key={sighting.id}
-                  image={sighting.image[0]}
-                  name={sighting.name}
-                  date={sighting.date}
-                />
-              </TouchableOpacity>
-            );
-          })
+                >
+                  <SightingCard
+                    image={sighting.image[0]}
+                    name={sighting.name}
+                    date={sighting.date.toLocaleDateString()}
+                  />
+                </TouchableOpacity>
+              );
+            })
         }
       </ScrollView>
     </View>
   );
 };
 
-// TODO: Clean up explicit numbers and check on different displays
 const bodyStyles = StyleSheet.create({
   parentView: {
     height: '100%',
@@ -159,12 +180,16 @@ const bodyStyles = StyleSheet.create({
     backgroundColor: theme.white,
   },
   sortBy: {
-    width: 102,
+    width: 115,
     marginTop: 10,
     marginHorizontal: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  alignLeft: {
+    marginLeft: 10,
     alignSelf: 'flex-start',
+    justifyContent: 'flex-start',
   },
   addNew: {
     marginTop: 15,
@@ -220,7 +245,7 @@ const cardElementStyles = StyleSheet.create({
     alignItems: 'center',
   },
   imageCover: {
-    resizeMode: 'cover', // TODO: Fix to dynamically take up space in View
+    resizeMode: 'cover',
     borderTopLeftRadius: 5,
     borderBottomLeftRadius: 5,
     height: 78,

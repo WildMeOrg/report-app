@@ -32,7 +32,7 @@ const ViewSightingScreen = ({ navigation, route }) => {
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <Text style={globalStyles.inputHeader}>{sighting.name}</Text>
         <Text style={[globalStyles.basicText, styles.InfoText]}>
-          {sighting.date}
+          {sighting.date.toLocaleDateString()}
         </Text>
         <View style={styles.Divider} />
         <Typography id="SPECIES" style={globalStyles.inputHeader} />
@@ -65,7 +65,7 @@ const ViewSightingScreen = ({ navigation, route }) => {
                 style={[globalStyles.basicText, styles.InfoText]}
                 key={field.Title + field.Type}
               >
-                {date.toDateString()}
+                {date.toLocaleDateString()}
               </Text>
             );
           } else if (field.Type === 'DateRangePicker') {
@@ -76,7 +76,8 @@ const ViewSightingScreen = ({ navigation, route }) => {
                 style={[globalStyles.basicText, styles.InfoText]}
                 key={field.Title + field.Type}
               >
-                Start: {sDate.toDateString()} {'\n'}End: {eDate.toDateString()}
+                Start: {sDate.toLocaleDateString()} {'\n'}End:{' '}
+                {eDate.toLocaleDateString()}
               </Text>
             );
           } else if (field.Type === 'MultiSelect') {

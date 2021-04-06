@@ -36,12 +36,9 @@ export default function DateInput(rest) {
       minute: 'numeric',
     };
     if (props.values.customFields[name]) {
-      return new Date(props.values.customFields[name]).toLocaleDateString(
-        [],
-        options
-      );
+      return new Date(props.values.customFields[name]);
     } else {
-      return new Date(date).toLocaleDateString([], options);
+      return new Date(date);
     }
   }
   const onChange = (event, selectedDate) => {
