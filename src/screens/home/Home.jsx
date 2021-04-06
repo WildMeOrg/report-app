@@ -7,7 +7,7 @@ import {
   Image,
   Dimensions,
 } from 'react-native';
-import { Button, Icon } from 'react-native-elements';
+import { Icon } from 'react-native-elements';
 import NetInfo from '@react-native-community/netinfo';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Typography from '../../components/Typography';
@@ -53,9 +53,12 @@ const HomeScreen = ({ navigation }) => {
     return (a || b) && !(a && b);
   };
 
+  // console.log(state.sightings);
   useEffect(() => {
     AsyncStorage.getItem('SightingSubmissions').then((result) =>
-      setStoredSightings(JSON.parse(result))
+      result != null
+        ? setStoredSightings(JSON.parse(result))
+        : setStoredSightings([])
     );
   });
 
@@ -80,30 +83,6 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View style={bodyStyles.parentView}>
-      {storedSightings !== null ? (
-        <View style={offlineSightings.offlineText}>
-          <View style={{ justifyContent: 'center' }}>
-            <Text style={offlineSightings.offlineSightingsText}>
-              Offline Sightings {`(${storedSightings.length})`}
-            </Text>
-          </View>
-          <View style={{ marginLeft: 'auto' }}>
-            <Button
-              title="Sync"
-              onPress={() => syncSighting()}
-              loading={isSyncing}
-              disabled={isSyncing}
-            />
-          </View>
-        </View>
-      ) : null}
-      {storedSightings !== null ? (
-        <ScrollView style={offlineSightings.scrollView}>
-          {storedSightings.map((sighting, index) => (
-            <Sighting sighting={sighting} key={index} sightingIndex={index} />
-          ))}
-        </ScrollView>
-      ) : null}
       <ScrollView contentContainerStyle={bodyStyles.content}>
         <View style={bodyStyles.alignLeft}>
           <TouchableOpacity
@@ -132,11 +111,64 @@ const HomeScreen = ({ navigation }) => {
           style={bodyStyles.addNew}
           onPress={() => navigation.navigate(screens.newSighting)}
         >
-          <Typography id="NEW_SIGHTING" style={bodyStyles.addNewText} />
+          <Typography id="ADD_NEW_SIGHTING" style={bodyStyles.addNewText} />
         </TouchableOpacity>
+      </ScrollView>
+      {storedSightings.length > 0 ? (
+        <View style={offlineSightings.header}>
+          <Typography
+            id="OFFLINE_SIGHTINGS"
+            style={offlineSightings.offlineSightingsText}
+          />
+          <View>
+            <TouchableOpacity
+              style={offlineSightings.syncButton}
+              onPress={syncSighting}
+            >
+              <Typography id="SYNC" style={offlineSightings.syncButton} />
+              <Icon
+                name="sync"
+                type="material-icons"
+                size={22}
+                color={theme.blue}
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
+      ) : null}
+      {storedSightings.length > 0 ? (
+        <ScrollView contentContainerStyle={bodyStyles.content}>
+          {storedSightings.map((sighting, index) => (
+            <TouchableOpacity
+              onPress={() => [
+                navigation.navigate(screens.viewSighting, {
+                  screen: screens.viewSighting,
+                  params: { id: 2 },
+                }),
+              ]}
+              style={cardElementStyles.touchableOpacityHolder}
+              key={sighting.id}
+            >
+              <SightingCard
+                key={sighting.id}
+                image={26}
+                name={sighting.title}
+                date={sighting.location}
+              />
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+      ) : null}
+      <View style={offlineSightings.header}>
+        <Typography
+          id="SYNCED_SIGHTINGS"
+          style={offlineSightings.offlineSightingsText}
+        />
+      </View>
+      <ScrollView contentContainerStyle={bodyStyles.content}>
         {
           // Create a separate array from state
-          [...state.sightings]
+          state.sightings
             .sort((a, b) => {
               return BooleanXOR(a.date > b.date, sortDescending) ? -1 : 1;
             })
@@ -172,19 +204,21 @@ const bodyStyles = StyleSheet.create({
     height: '100%',
     backgroundColor: theme.white,
   },
+  sortBy: {
+    fontSize: 18,
+    fontFamily: 'Lato-Regular',
+    alignSelf: 'flex-start',
+    flexDirection: 'row',
+    marginLeft: 12,
+    marginTop: 10,
+  },
   content: {
     flexDirection: 'column',
     alignItems: 'center',
     overflow: 'visible',
     paddingBottom: 5,
     backgroundColor: theme.white,
-  },
-  sortBy: {
-    width: 115,
-    marginTop: 10,
-    marginHorizontal: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    minHeight: 160,
   },
   alignLeft: {
     marginLeft: 10,
@@ -270,7 +304,7 @@ const cardElementStyles = StyleSheet.create({
 
 const offlineSightings = StyleSheet.create({
   offlineSightingsText: {
-    fontSize: 20,
+    fontSize: 18,
     fontFamily: 'Lato-Regular',
     textAlign: 'center',
     color: theme.black,
@@ -278,10 +312,24 @@ const offlineSightings = StyleSheet.create({
   scrollView: {
     marginLeft: 12,
     marginRight: 12,
+    minHeight: 100,
   },
   offlineText: {
     flexDirection: 'row',
     flexWrap: 'wrap',
+    marginTop: 8,
+  },
+  syncButton: {
+    flexDirection: 'row',
+    color: theme.blue,
+    fontSize: 18,
+    fontFamily: 'Lato-Regular',
+  },
+  header: {
+    marginLeft: 20,
+    marginRight: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginTop: 8,
   },
 });

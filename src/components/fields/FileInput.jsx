@@ -7,6 +7,8 @@ import styles from '../../styles/newSightingStyles';
 
 export default function FileInput(rest) {
   const { name, schema, props } = rest;
+  const { displayType } = rest;
+  const type = (schema && schema.displayType) || displayType;
   const [file, setFile] = useState(); //file to be used
   const [fileName, setFileName] = useState('');
   const getFile = async () => {
@@ -14,7 +16,7 @@ export default function FileInput(rest) {
     if (res.type !== 'cancel') {
       setFile(res);
       setFileName(res.name);
-      props.setFieldValue(`customFields.${name}`, res);
+      props.setFieldValue(`customFields.${name}`, { Type: type, Value: res });
     }
   };
   const deleteFile = () => {
@@ -31,7 +33,7 @@ export default function FileInput(rest) {
       >
         Add File:{' '}
         {(props.values.customFields[name] &&
-          props.values.customFields[name].name) ||
+          props.values.customFields[name]['Value'].name) ||
           fileName}
       </Text>
       <Icon

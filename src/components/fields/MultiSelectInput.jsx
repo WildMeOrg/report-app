@@ -7,12 +7,14 @@ import { View } from 'react-native';
 
 export default function MultiSelectInput(rest) {
   const { name, schema, props } = rest;
+  const { displayType } = rest;
+  const type = (schema && schema.displayType) || displayType;
   const multiSelectOptions = schema.choices;
   const [selectedOptions, setSelectedOptions] = useState([]);
   const onSelectionsChange = (items) => {
     props.setFieldValue('customFields.MULTI_TEMP', items);
     const values = items.map((item) => item.value);
-    props.setFieldValue(`customFields.${name}`, values);
+    props.setFieldValue(`customFields.${name}`, { Type: type, Value: values });
     setSelectedOptions(items);
   };
   return (

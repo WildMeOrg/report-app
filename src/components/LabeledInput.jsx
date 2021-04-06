@@ -13,7 +13,6 @@ import globalStyles from '../styles/globalStyles';
 export default function LabeledInput({ name, props, ...rest }) {
   const { displayType } = rest;
   const { schema } = rest;
-
   const type = (schema && schema.displayType) || displayType;
   const FieldComponent = fieldList[type];
   if (FieldComponent)

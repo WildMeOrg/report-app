@@ -16,15 +16,8 @@ const validationSchema = [
     matchIndividual: yup.string(),
   }),
   yup.object().shape({
-    photographerName: yup
-      .string()
-      .required('Photographer Name is required')
-      .min(3, 'Photographer Name must be at least 3 charaters')
-      .max(30, 'Photographer Name must be less than 30 charaters'),
-    photographerEmail: yup
-      .string()
-      .email('Photographer Email is not valid')
-      .required('Photographer Email is required'),
+    photographerName: yup.string(),
+    photographerEmail: yup.string(),
   }),
 ];
 

@@ -10,17 +10,7 @@ export default StyleSheet.create({
     backgroundColor: '#EDEDED',
     justifyContent: 'center',
   },
-  thirtyThree: {
-    height: 3,
-    backgroundColor: theme.primary,
-    width: '33%',
-  },
-  sixtySix: {
-    height: 3,
-    backgroundColor: theme.primary,
-    width: '66%',
-  },
-  oneHundred: {
+  progress: {
     height: 3,
     backgroundColor: theme.primary,
     width: '100%',
@@ -86,6 +76,16 @@ export default StyleSheet.create({
     fontFamily: 'Lato-Regular',
   },
   //
+  displayInput: {
+    textAlign: 'center',
+    marginHorizontal: '5%',
+    fontSize: 16,
+    borderRadius: 6,
+    padding: '3%',
+    margin: 1,
+    backgroundColor: theme.lightGrey,
+    overflow: 'hidden',
+  },
   buttonInactive: {
     backgroundColor: '#CACACA',
   },
@@ -95,7 +95,7 @@ export default StyleSheet.create({
   horizontal: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-evenly',
   },
   container: {
     flexGrow: 1,

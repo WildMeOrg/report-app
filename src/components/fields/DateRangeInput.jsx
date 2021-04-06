@@ -8,9 +8,12 @@ import styles from '../../styles/newSightingStyles';
 import theme from '../../constants/theme';
 import { onChange } from 'react-native-reanimated';
 import Typography from '../../components/Typography';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function DateRangeInput(rest) {
   const { name, schema, props } = rest;
+  const { displayType } = rest;
+  const type = (schema && schema.displayType) || displayType;
   //start date constants
   const [dateStart, setDateStart] = useState(new Date());
   const [modeStart, setModeStart] = useState('date');
@@ -20,6 +23,7 @@ export default function DateRangeInput(rest) {
   const [modeEnd, setModeEnd] = useState('date');
   const [showEnd, setShowEnd] = useState(false);
   const showModeStart = (currMode) => {
+    setShowEnd(false);
     if (showStart) {
       setShowStart(false);
     } else {
@@ -36,11 +40,15 @@ export default function DateRangeInput(rest) {
   const onChangeStart = (event, selectedDate) => {
     const currDate = selectedDate || dateStart;
     setShowStart(Platform.OS === 'ios');
-    props.setFieldValue(`customFields.${name}`, [currDate, dateEnd]);
+    props.setFieldValue(`customFields.${name}`, {
+      Type: type,
+      Value: [currDate, dateEnd],
+    });
     setDateStart(currDate);
   };
 
   const showModeEnd = (currMode) => {
+    setShowStart(false);
     if (showEnd) {
       setShowEnd(false);
     } else {
@@ -57,7 +65,10 @@ export default function DateRangeInput(rest) {
   const onChangeEnd = (event, selectedDate) => {
     const currDate = selectedDate || dateEnd;
     setShowEnd(Platform.OS === 'ios');
-    props.setFieldValue(`customFields.${name}`, [dateStart, currDate]);
+    props.setFieldValue(`customFields.${name}`, {
+      Type: type,
+      Value: [dateStart, currDate],
+    });
     setDateEnd(currDate);
   };
   function formatDate(date, num) {
@@ -65,41 +76,80 @@ export default function DateRangeInput(rest) {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric',
     };
     if (
       props.values.customFields[name] &&
-      props.values.customFields[name][num]
+      props.values.customFields[name]['Value'][num]
     ) {
-      return new Date(props.values.customFields[name][num]).toLocaleDateString(
-        [],
-        options
-      );
+      return new Date(
+        props.values.customFields[name]['Value'][num]
+      ).toLocaleDateString({
+        month: '2-digit',
+        day: '2-digit',
+        year: 'numeric',
+      });
     } else {
-      return new Date(date).toLocaleDateString([], options);
+      return new Date(date).toLocaleDateString({
+        month: '2-digit',
+        day: '2-digit',
+        year: 'numeric',
+      });
     }
   }
   return (
     <View>
-      <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
-        Start Date: {formatDate(dateStart, 0)}
-      </Text>
-      <View style={styles.horizontal}>
-        <Typography id="EDIT_DATE" style={styles.dtpText} />
-        <Icon
-          name="today"
-          type="material-icons"
-          onPress={showDatePickerStart}
-          raised={true}
-        />
-        <Typography id="EDIT_TIME" style={styles.dtpText} />
-        <Icon
-          name="schedule"
-          type="material-icons"
-          onPress={showTimePickerStart}
-          raised={true}
-        />
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          marginHorizontal: '3%',
+        }}
+      >
+        <View>
+          {/* <Text style={[globalStyles.subText, { fontSize: 14 }]}>
+            Start date
+          </Text> */}
+          <TouchableOpacity
+            onPress={showDatePickerStart}
+            style={[
+              globalStyles.inputField,
+              { flexDirection: 'row', justifyContent: 'space-between' },
+            ]}
+          >
+            <Text style={[globalStyles.basicText, { margin: '2%' }]}>
+              {formatDate(dateStart)}
+            </Text>
+            <View style={{ alignSelf: 'center' }}>
+              <Icon
+                name="today"
+                type="material-icons"
+                onPress={showDatePickerStart}
+              />
+            </View>
+          </TouchableOpacity>
+        </View>
+        <Text
+          style={[globalStyles.h2Text, { fontSize: 16, alignSelf: 'center' }]}
+        >
+          to
+        </Text>
+        <View>
+          {/* <Text style={[globalStyles.subText, { fontSize: 14 }]}>End date</Text> */}
+          <TouchableOpacity
+            onPress={showDatePickerEnd}
+            style={[
+              globalStyles.inputField,
+              { flexDirection: 'row', justifyContent: 'space-between' },
+            ]}
+          >
+            <Text style={[globalStyles.basicText, { margin: '2%' }]}>
+              {formatDate(dateEnd)}
+            </Text>
+            <View style={{ alignSelf: 'center' }}>
+              <Icon name="today" type="material-icons" />
+            </View>
+          </TouchableOpacity>
+        </View>
       </View>
       <View
         style={{
@@ -115,7 +165,7 @@ export default function DateRangeInput(rest) {
             }}
             value={
               (props.values.customFields[name] &&
-                props.values.customFields[name][0]) ||
+                props.values.customFields[name]['Value'][0]) ||
               dateStart
             }
             display="default"
@@ -124,25 +174,6 @@ export default function DateRangeInput(rest) {
             onChange={onChangeStart}
           />
         )}
-      </View>
-      <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
-        End Date: {formatDate(dateEnd, 1)}
-      </Text>
-      <View style={styles.horizontal}>
-        <Typography id="EDIT_DATE" style={styles.dtpText} />
-        <Icon
-          name="today"
-          type="material-icons"
-          onPress={showDatePickerEnd}
-          raised={true}
-        />
-        <Typography id="EDIT_TIME" style={styles.dtpText} />
-        <Icon
-          name="schedule"
-          type="material-icons"
-          onPress={showTimePickerEnd}
-          raised={true}
-        />
       </View>
       <View
         style={{
@@ -160,7 +191,7 @@ export default function DateRangeInput(rest) {
             }}
             value={
               (props.values.customFields[name] &&
-                props.values.customFields[name][1]) ||
+                props.values.customFields[name]['Value'][1]) ||
               dateEnd
             }
             display="default"

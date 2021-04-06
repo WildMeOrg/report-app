@@ -6,6 +6,8 @@ import { Switch } from 'react-native-gesture-handler';
 import theme from '../../constants/theme';
 export default function BooleanInput(rest) {
   const { name, schema, props } = rest;
+  const { displayType } = rest;
+  const type = (schema && schema.displayType) || displayType;
   const [choice, setChoice] = useState(false);
   return (
     <Switch
@@ -14,10 +16,17 @@ export default function BooleanInput(rest) {
       style={{ marginHorizontal: '5%' }}
       onValueChange={() => [
         setChoice(!choice),
-        props.setFieldValue(`customFields.${name}`, !choice),
+        props.setFieldValue(`customFields.${name}`, {
+          Type: type,
+          Value: !choice,
+        }),
       ]}
       onBlur={props.handleBlur(`customFields.${name}`)}
-      value={choice}
+      value={
+        (props.values.customFields[name] &&
+          props.values.customFields[name].Value) ||
+        choice
+      }
     />
   );
 }
