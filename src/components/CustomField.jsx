@@ -42,7 +42,9 @@ export default function CustomField({ id, required, name, ...rest }) {
           )}
         </View>
         {/* LabeledInput contains the actual custom field for input */}
-        <View style={{ marginLeft: '45%', marginTop: '3%' }}>
+        <View
+          style={{ marginLeft: '75%', marginTop: '3%', position: 'absolute' }}
+        >
           <LabeledInput name={name} props={props} {...rest} />
         </View>
       </View>
