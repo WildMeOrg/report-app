@@ -497,6 +497,7 @@ export default function NewSightingStackScreen({ navigation }) {
     <NewSightingStack.Navigator
       screenOptions={{
         headerTitleAlign: 'center',
+        // eslint-disable-next-line react/display-name
         headerRight: () => (
           <Icon
             name="close"
