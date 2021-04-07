@@ -64,10 +64,6 @@ export default function App() {
               >
                 {/* As new screens are made, put them here to be able to view them */}
                 <Drawer.Screen
-                  name={screens.helpPage}
-                  component={HelpPageStackScreen}
-                />
-                <Drawer.Screen
                   name={screens.selection}
                   component={SelectionStackScreen}
                 />
@@ -110,6 +106,10 @@ export default function App() {
                 <Drawer.Screen
                   name={screens.notifications}
                   component={NotificationsStackScreen}
+                />
+                <Drawer.Screen
+                  name={screens.helpPage}
+                  component={HelpPageStackScreen}
                 />
               </Drawer.Navigator>
             </NavigationContainer>

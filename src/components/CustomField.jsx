@@ -13,30 +13,69 @@ export default function CustomField({ id, required, name, ...rest }) {
   const displayName = (schema && schema.label) || name;
   const description = (schema && schema.description) || '';
 
-  return (
-    <View>
-      <Text style={[globalStyles.inputHeader, globalStyles.h2Text]}>
-        {displayName}
-        {required && '*'}
-      </Text>
-      {props.touched.customFields &&
-        props.errors.customFields &&
-        props.errors.customFields[name] && (
-          <Typography
-            id="FIELD_REQUIRED"
-            style={[globalStyles.h2TextInvalid, { fontFamily: 'Lato-Italic' }]}
-          />
-        )}
-
-      {description != '' && (
-        <>
-          <Text style={[globalStyles.subText, globalStyles.basicText]}>
-            {description}
+  //separate style for boolean custom fields
+  if (schema.displayType === 'boolean') {
+    return (
+      <View style={{ flexDirection: 'row' }}>
+        <View style={{ marginHorizontal: '4%' }}>
+          <Text style={[globalStyles.inputHeader, globalStyles.h2Text]}>
+            {displayName}
+            {required && '*'}
           </Text>
-        </>
-      )}
-      {/* LabeledInput contains the actual custom field for input */}
-      <LabeledInput name={name} props={props} {...rest} />
-    </View>
-  );
+          {props.touched.customFields &&
+            props.errors.customFields &&
+            props.errors.customFields[name] && (
+              <Typography
+                id="FIELD_REQUIRED"
+                style={[
+                  globalStyles.h2TextInvalid,
+                  { fontFamily: 'Lato-Italic' },
+                ]}
+              />
+            )}
+          {description != '' && (
+            <>
+              <Text style={[globalStyles.subText, globalStyles.basicText]}>
+                {description}
+              </Text>
+            </>
+          )}
+        </View>
+        {/* LabeledInput contains the actual custom field for input */}
+        <View style={{ marginLeft: '45%', marginTop: '3%' }}>
+          <LabeledInput name={name} props={props} {...rest} />
+        </View>
+      </View>
+    );
+  } else {
+    return (
+      <View>
+        <Text style={[globalStyles.inputHeader, globalStyles.h2Text]}>
+          {displayName}
+          {required && '*'}
+        </Text>
+        {props.touched.customFields &&
+          props.errors.customFields &&
+          props.errors.customFields[name] && (
+            <Typography
+              id="FIELD_REQUIRED"
+              style={[
+                globalStyles.h2TextInvalid,
+                { fontFamily: 'Lato-Italic' },
+              ]}
+            />
+          )}
+
+        {description != '' && (
+          <>
+            <Text style={[globalStyles.subText, globalStyles.basicText]}>
+              {description}
+            </Text>
+          </>
+        )}
+        {/* LabeledInput contains the actual custom field for input */}
+        <LabeledInput name={name} props={props} {...rest} />
+      </View>
+    );
+  }
 }
