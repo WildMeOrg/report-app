@@ -30,7 +30,7 @@ import SelectionStackScreen from './src/components/SelectionStackScreen';
 import { ReportContextProvider } from './src/context/reportContext';
 import { ImageSelectProvider } from './src/context/imageSelectContext';
 import ImageBrowserStackScreen from './src/components/ImageBrowserStack';
-
+import HelpPageStackScreen from './src/components/HelpPageStackScreen';
 const messageMap = {
   en: englishTranslations,
   es: spanishTranslations,
@@ -63,6 +63,10 @@ export default function App() {
                 drawerContent={(props) => <CustomDrawerContent {...props} />}
               >
                 {/* As new screens are made, put them here to be able to view them */}
+                <Drawer.Screen
+                  name={screens.helpPage}
+                  component={HelpPageStackScreen}
+                />
                 <Drawer.Screen
                   name={screens.selection}
                   component={SelectionStackScreen}

@@ -13,4 +13,5 @@ export default {
   imageBrowser: 'SelectImages',
   selection: 'Selection',
   localSigthing: 'LocalSighting',
+  helpPage: 'HelpPage',
 };
