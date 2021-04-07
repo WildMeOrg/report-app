@@ -24,7 +24,7 @@ export default function CustomDrawerContent(props) {
       <DrawerItem
         style={styles.drawerItemEnd}
         label={() => (
-          <View style={styles.drawerHeaderItem}>
+          <View style={styles.drawerListItem}>
             <Icon
               name="person"
               type="material-icons"
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
   },
   drawerHeaderItem: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    // justifyContent: 'center',
     alignItems: 'center',
   },
   drawerHeaderName: {

@@ -4,6 +4,7 @@ import { TextInput } from 'react-native';
 import globalStyles from '../../styles/globalStyles';
 import styles from '../../styles/newSightingStyles';
 import { get } from 'lodash-es';
+import theme from '../../constants/theme';
 
 export default function AreaInput(rest) {
   const { name, schema, props } = rest;
@@ -15,134 +16,185 @@ export default function AreaInput(rest) {
   const type = (schema && schema.displayType) || displayType;
   //TODO test
   return (
-    <View style={{ flexDirection: 'column', flex: 1 }}>
-      <View style={styles.horizontal}>
-        <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
-          North:
-        </Text>
-        <TextInput
-          style={[globalStyles.inputField, { width: '20%' }]}
-          keyboardType={'numeric'}
-          placeholder={'0.0'}
-          autoCorrect={false}
-          value={
-            get(
-              props,
-              ['values', 'customFields', name, 'Value', 'north'],
-              ''
-            ) || north
-          }
-          onChangeText={(val) => {
-            [
-              setNorth(val),
-              props.setFieldValue(`customFields.${name}`, {
-                Type: type,
-                Value: {
-                  north: val,
-                  east: east,
-                  south: south,
-                  west: west,
-                },
-              }),
-            ];
+    <View>
+      <View
+        style={[
+          {
+            flexDirection: 'row',
+            justifyContent: 'center',
+          },
+        ]}
+      >
+        <View
+          style={{
+            flexDirection: 'column',
+            flex: 1,
+            justifyContent: 'space-around',
+            marginLeft: '5%',
           }}
-          onBlur={props.handleBlur(`customFields.${name}`)}
-        />
-        <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
-          East:
-        </Text>
-        <TextInput
-          style={[globalStyles.inputField, { width: '20%' }]}
-          keyboardType={'numeric'}
-          placeholder={'0.0'}
-          autoCorrect={false}
-          value={
-            get(props, ['values', 'customFields', name, 'Value', 'east'], '') ||
-            east
-          }
-          onChangeText={(val) => {
-            [
-              setEast(val),
-              props.setFieldValue(`customFields.${name}`, {
-                Type: type,
-                Value: {
-                  north: north,
-                  east: val,
-                  south: south,
-                  west: west,
-                },
-              }),
-            ];
-          }}
-          onBlur={props.handleBlur(`customFields.${name}`)}
-        />
-      </View>
-      <View style={styles.horizontal}>
-        <Text
-          style={[
-            globalStyles.h2Text,
-            globalStyles.inputHeader,
-            { paddingRight: '1%' },
-          ]}
         >
-          South:
-        </Text>
-        <TextInput
-          style={[globalStyles.inputField, { width: '20%' }]}
-          keyboardType={'numeric'}
-          placeholder={'0.0'}
-          autoCorrect={false}
-          value={
-            get(
-              props,
-              ['values', 'customFields', name, 'Value', 'south'],
-              ''
-            ) || south
-          }
-          onChangeText={(val) => {
-            [
-              setSouth(val),
-              props.setFieldValue(`customFields.${name}`, {
-                Type: type,
-                Value: {
-                  north: north,
-                  east: east,
-                  south: val,
-                  west: west,
-                },
-              }),
-            ];
+          <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
+            North:
+          </Text>
+          <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
+            South:
+          </Text>
+        </View>
+        <View
+          style={{
+            flexDirection: 'column',
+            flex: 1,
+            marginRight: '5%',
           }}
-          onBlur={props.handleBlur(`customFields.${name}`)}
-        />
-        <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
-          West:
-        </Text>
-        <TextInput
-          style={[globalStyles.inputField, { width: '20%' }]}
-          keyboardType={'numeric'}
-          placeholder={'0.0'}
-          autoCorrect={false}
-          value={
-            get(props, ['values', 'customFields', name, 'Value', 'west'], '') ||
-            west
-          }
-          onChangeText={(val) => {
-            [
-              setWest(val),
-              props.setFieldValue(`customFields.${name}`, {
-                Type: type,
-                Value: {
-                  north: north,
-                  east: east,
-                  south: south,
-                  west: val,
-                },
-              }),
-            ];
+        >
+          <TextInput
+            style={[
+              globalStyles.inputField,
+              { flex: 1, padding: 10, width: '90%' },
+            ]}
+            keyboardType={'numeric'}
+            placeholder={'0.0'}
+            autoCorrect={false}
+            value={
+              get(
+                props,
+                ['values', 'customFields', name, 'Value', 'north'],
+                ''
+              ) || north
+            }
+            onChangeText={(val) => {
+              [
+                setNorth(val),
+                props.setFieldValue(`customFields.${name}`, {
+                  Type: type,
+                  Value: {
+                    north: val,
+                    east: east,
+                    south: south,
+                    west: west,
+                  },
+                }),
+              ];
+            }}
+            onBlur={props.handleBlur(`customFields.${name}`)}
+          />
+          <TextInput
+            style={[
+              globalStyles.inputField,
+              { flex: 1, padding: 10, width: '90%' },
+            ]}
+            keyboardType={'numeric'}
+            placeholder={'0.0'}
+            autoCorrect={false}
+            value={
+              get(
+                props,
+                ['values', 'customFields', name, 'Value', 'south'],
+                ''
+              ) || south
+            }
+            onChangeText={(val) => {
+              [
+                setSouth(val),
+                props.setFieldValue(`customFields.${name}`, {
+                  Type: type,
+                  Value: {
+                    north: north,
+                    east: east,
+                    south: val,
+                    west: west,
+                  },
+                }),
+              ];
+            }}
+            onBlur={props.handleBlur(`customFields.${name}`)}
+          />
+        </View>
+        <View
+          style={{
+            flexDirection: 'column',
+            flex: 1,
+            justifyContent: 'space-around',
+            marginLeft: '5%',
           }}
-          onBlur={props.handleBlur(`customFields.${name}`)}
-        />
+        >
+          <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
+            East:
+          </Text>
+          <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
+            West:
+          </Text>
+        </View>
+        <View
+          style={{
+            flexDirection: 'column',
+            flex: 1,
+            marginRight: '5%',
+          }}
+        >
+          <TextInput
+            style={[
+              globalStyles.inputField,
+              { flex: 1, padding: 10, width: '90%' },
+            ]}
+            keyboardType={'numeric'}
+            placeholder={'0.0'}
+            autoCorrect={false}
+            value={
+              get(
+                props,
+                ['values', 'customFields', name, 'Value', 'east'],
+                ''
+              ) || east
+            }
+            onChangeText={(val) => {
+              [
+                setEast(val),
+                props.setFieldValue(`customFields.${name}`, {
+                  Type: type,
+                  Value: {
+                    north: north,
+                    east: val,
+                    south: south,
+                    west: west,
+                  },
+                }),
+              ];
+            }}
+            onBlur={props.handleBlur(`customFields.${name}`)}
+          />
+          <TextInput
+            style={[
+              globalStyles.inputField,
+              { flex: 1, padding: 10, width: '90%' },
+            ]}
+            keyboardType={'numeric'}
+            placeholder={'0.0'}
+            autoCorrect={false}
+            value={
+              get(
+                props,
+                ['values', 'customFields', name, 'Value', 'west'],
+                ''
+              ) || west
+            }
+            onChangeText={(val) => {
+              [
+                setWest(val),
+                props.setFieldValue(`customFields.${name}`, {
+                  Type: type,
+                  Value: {
+                    north: north,
+                    east: east,
+                    south: south,
+                    west: val,
+                  },
+                }),
+              ];
+            }}
+            onBlur={props.handleBlur(`customFields.${name}`)}
+          />
+        </View>
       </View>
     </View>
   );
