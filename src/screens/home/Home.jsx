@@ -34,12 +34,6 @@ const SightingCard = (props) => {
           <Text style={cardElementStyles.sightingTitle}>{props.name}</Text>
           <Text style={cardElementStyles.sightingDate}>{props.date}</Text>
         </View>
-        <Icon
-          name="more-vert"
-          type="material-icons"
-          size={28}
-          color={theme.black}
-        />
       </View>
     </View>
   );

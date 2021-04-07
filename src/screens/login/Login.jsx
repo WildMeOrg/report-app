@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { houstonUrl } from '../../constants/urls';
 import Loading from '../loading/Loading';
-import Logo from '../../../assets/images/logo.png';
+import Logo from '../../../assets/images/scoutLogo.png';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import theme from '../../constants/theme';
 import { baseUrl } from '../../constants/urls';
@@ -166,9 +166,9 @@ const styles = StyleSheet.create({
   },
   logoView: {
     height: '35%',
-    width: '50%',
-    marginLeft: '25%',
-    marginRight: '25%',
+    width: '60%',
+    marginLeft: '20%',
+    marginRight: '20%',
     marginTop: '10%',
   },
   loginView: {
