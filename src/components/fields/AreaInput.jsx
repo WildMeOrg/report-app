@@ -33,10 +33,22 @@ export default function AreaInput(rest) {
             marginLeft: '5%',
           }}
         >
-          <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
+          <Text
+            style={[
+              globalStyles.h2Text,
+              globalStyles.inputHeader,
+              { fontSize: 16 },
+            ]}
+          >
             North:
           </Text>
-          <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
+          <Text
+            style={[
+              globalStyles.h2Text,
+              globalStyles.inputHeader,
+              { fontSize: 16 },
+            ]}
+          >
             South:
           </Text>
         </View>
@@ -118,10 +130,22 @@ export default function AreaInput(rest) {
             marginLeft: '5%',
           }}
         >
-          <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
+          <Text
+            style={[
+              globalStyles.h2Text,
+              globalStyles.inputHeader,
+              { fontSize: 16 },
+            ]}
+          >
             East:
           </Text>
-          <Text style={[globalStyles.h2Text, globalStyles.inputHeader]}>
+          <Text
+            style={[
+              globalStyles.h2Text,
+              globalStyles.inputHeader,
+              { fontSize: 16 },
+            ]}
+          >
             West:
           </Text>
         </View>

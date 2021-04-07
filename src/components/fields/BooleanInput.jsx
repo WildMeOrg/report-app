@@ -11,7 +11,7 @@ export default function BooleanInput(rest) {
   const [choice, setChoice] = useState(false);
   return (
     <Switch
-      trackColor={{ true: theme.green, false: theme.grey }}
+      trackColor={{ true: theme.primary, false: theme.grey }}
       thumbColor={theme.white}
       style={{ marginHorizontal: '5%' }}
       onValueChange={() => [
