@@ -170,20 +170,6 @@ const HomeScreen = ({ navigation }) => {
           })
         }
       </ScrollView>
-      <View style={bodyStyles.addNewPosition}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate(screens.newSighting)}
-        >
-          <LinearGradient
-            colors={['#21BDC1', '#41D06A']}
-            start={[0, 0]}
-            end={[1, 1]}
-            style={bodyStyles.addNew}
-          >
-            <Text style={bodyStyles.addNewText}>+</Text>
-          </LinearGradient>
-        </TouchableOpacity>
-      </View>
     </View>
   );
 };
@@ -229,57 +215,6 @@ const bodyStyles = StyleSheet.create({
   //   justifyContent: 'space-between',
   //   alignSelf: 'flex-start',
   // },
-  addNewPosition: {
-    // backgroundColor: theme.red,
-    height: Dimensions.get('window').width * 0.07,
-    width: Dimensions.get('window').width * 0.07,
-    // marginTop: 15,
-    // marginBottom: 10,
-    // padding: '5%',
-    position: 'absolute',
-    bottom: 0,
-    right: 0,
-    margin: '7%',
-    // iOS
-    shadowColor: theme.black,
-    shadowOffset: {
-      width: 1,
-      height: 3,
-    },
-    shadowOpacity: 0.35,
-    // shadowRadius: 2.6,
-    // // Android
-    // elevation: 3,
-  },
-  addNew: {
-    // position: 'absolute',
-    // bottom: 0,
-    // left: 0,
-    // marginTop: 15,
-    // marginBottom: 10,
-    // width: Dimensions.get('window').width * 0.9, // Looks dumb but is necessary
-    height: '100%',
-    width: '100%',
-    // padding: 25,
-    justifyContent: 'center',
-    alignContent: 'center',
-    // borderStyle: 'dashed',
-    // borderWidth: 1,
-    // borderColor: theme.primary,
-    borderRadius: Dimensions.get('window').width * 0.09,
-    // backgroundColor: theme.primary,
-    // margin: '0%',
-    // Android
-    shadowRadius: 2.6,
-    elevation: 4,
-  },
-  addNewText: {
-    fontSize: 45,
-    fontFamily: 'Lato-Regular',
-    textAlign: 'center',
-    color: theme.white,
-    // margin: '0%',
-  },
 });
 
 const cardElementStyles = StyleSheet.create({
