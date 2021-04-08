@@ -6,12 +6,15 @@ import screens from '../constants/screens';
 import theme from '../constants/theme';
 import Typography from './Typography';
 import HomeScreen from '../screens/home/Home.jsx';
+import NewSighting from '../screens/newSighting/newSighting.jsx';
 import { TextInput } from 'react-native-gesture-handler';
 import globalStyles from '../styles/globalStyles';
 import AsyncStorage from '@react-native-community/async-storage';
 import { ReportContext } from '../context/reportContext';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { LinearGradient } from 'expo-linear-gradient';
+import { HeaderBackButton } from '@react-navigation/stack';
+import { StackActions } from '@react-navigation/native';
 
 const HomeStack = createStackNavigator();
 
@@ -19,6 +22,7 @@ export default function HomeStackScreen({ navigation }) {
   // AsyncStorage.getItem('REPORTS', (err, result) => {
   //   //console.log(JSON.parse(result).sightings[1].name);
   // });
+  const [onHome, setOnHome] = useState(true);
   const [isSearching, setIsSearching] = useState(false);
   const [state, dispatch] = useContext(ReportContext);
   const searchFunc = (input) => {
@@ -26,6 +30,33 @@ export default function HomeStackScreen({ navigation }) {
       type: 'search',
       text: input,
     });
+  };
+
+  const popAction = StackActions.pop(1);
+
+  const HomeScreenWithButtom = ({ navigation }) => {
+    return (
+      <View>
+        <HomeScreen navigation={navigation}></HomeScreen>
+        <View style={bodyStyles.addNewPosition}>
+          <TouchableOpacity
+            onPress={() => [
+              navigation.navigate('New Sighting'),
+              setOnHome(false),
+            ]}
+          >
+            <LinearGradient
+              colors={['#21BDC1', '#41D06A']}
+              start={[0, 0]}
+              end={[1, 1]}
+              style={bodyStyles.addNew}
+            >
+              <Text style={bodyStyles.addNewText}>+</Text>
+            </LinearGradient>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
   };
 
   if (isSearching) {
@@ -79,6 +110,7 @@ export default function HomeStackScreen({ navigation }) {
         <HomeStack.Navigator
           screenOptions={{
             headerTitleAlign: 'center',
+            // eslint-disable-next-line react/display-name
             headerLeft: () => (
               <Icon
                 name="menu"
@@ -88,6 +120,7 @@ export default function HomeStackScreen({ navigation }) {
                 iconStyle={headerStyles.iconLeft}
               />
             ),
+            // eslint-disable-next-line react/display-name
             headerRight: () => (
               <Icon
                 name="search"
@@ -101,28 +134,41 @@ export default function HomeStackScreen({ navigation }) {
         >
           <HomeStack.Screen
             name={screens.home}
-            component={HomeScreen}
+            component={HomeScreenWithButtom}
             options={{
+              // eslint-disable-next-line react/display-name
               headerTitle: () => (
                 <Typography style={globalStyles.headerText} id="APP_NAME" />
               ),
             }}
           />
+          <HomeStack.Screen
+            name={'New Sighting'}
+            component={NewSighting}
+            options={{
+              // eslint-disable-next-line react/display-name
+              headerTitle: 'General info',
+              headerTitleStyle: {
+                fontFamily: 'Lato-Regular',
+                fontStyle: 'normal',
+              },
+              // eslint-disable-next-line react/display-name
+              headerRight: () => (
+                <Icon
+                  name="close"
+                  type="material-icons"
+                  color={theme.black}
+                  onPress={() => {
+                    navigation.dispatch(popAction);
+                    setOnHome(true);
+                  }}
+                  iconStyle={globalStyles.icon}
+                />
+              ),
+              headerLeft: () => null,
+            }}
+          />
         </HomeStack.Navigator>
-        <View style={bodyStyles.addNewPosition}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate(screens.newSighting)}
-          >
-            <LinearGradient
-              colors={['#21BDC1', '#41D06A']}
-              start={[0, 0]}
-              end={[1, 1]}
-              style={bodyStyles.addNew}
-            >
-              <Text style={bodyStyles.addNewText}>+</Text>
-            </LinearGradient>
-          </TouchableOpacity>
-        </View>
       </>
     );
   }
@@ -130,12 +176,8 @@ export default function HomeStackScreen({ navigation }) {
 
 const bodyStyles = StyleSheet.create({
   addNewPosition: {
-    // backgroundColor: theme.red,
     height: Dimensions.get('window').width * 0.07,
     width: Dimensions.get('window').width * 0.07,
-    // marginTop: 15,
-    // marginBottom: 10,
-    // padding: '5%',
     position: 'absolute',
     bottom: 0,
     right: 0,
@@ -147,29 +189,13 @@ const bodyStyles = StyleSheet.create({
       height: 3,
     },
     shadowOpacity: 0.35,
-    // shadowRadius: 2.6,
-    // // Android
-    // elevation: 3,
   },
   addNew: {
-    // position: 'absolute',
-    // bottom: 0,
-    // left: 0,
-    // marginTop: 15,
-    // marginBottom: 10,
-    // width: Dimensions.get('window').width * 0.9, // Looks dumb but is necessary
     height: '100%',
     width: '100%',
-    // padding: 25,
     justifyContent: 'center',
     alignContent: 'center',
-    // borderStyle: 'dashed',
-    // borderWidth: 1,
-    // borderColor: theme.primary,
     borderRadius: Dimensions.get('window').width * 0.09,
-    // backgroundColor: theme.primary,
-    // margin: '0%',
-    // Android
     shadowRadius: 2.6,
     elevation: 4,
   },
@@ -178,7 +204,6 @@ const bodyStyles = StyleSheet.create({
     fontFamily: 'Lato-Regular',
     textAlign: 'center',
     color: theme.white,
-    // margin: '0%',
   },
 });
 

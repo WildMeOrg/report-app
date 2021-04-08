@@ -177,10 +177,6 @@ const bodyStyles = StyleSheet.create({
   sortBy: {
     fontSize: 18,
     fontFamily: 'Lato-Regular',
-    // alignSelf: 'flex-start',
-    // flexDirection: 'row',
-    // marginLeft: 12,
-    // marginTop: 4,
   },
   sortByPos: {
     alignSelf: 'flex-start',
@@ -196,19 +192,6 @@ const bodyStyles = StyleSheet.create({
     backgroundColor: theme.white,
     minHeight: 160,
   },
-  // addSighting: {
-  //   fontSize: 14,
-  //   fontFamily: 'Lato-Regular',
-  //   color: theme.white,
-  // },
-  // sortBy: {
-  //   width: 102,
-  //   marginTop: 10,
-  //   marginHorizontal: 10,
-  //   flexDirection: 'row',
-  //   justifyContent: 'space-between',
-  //   alignSelf: 'flex-start',
-  // },
 });
 
 const cardElementStyles = StyleSheet.create({
