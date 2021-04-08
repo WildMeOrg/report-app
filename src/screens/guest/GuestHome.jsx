@@ -20,30 +20,24 @@ const GuestHome = ({ navigation }) => {
             You have logged in as a guest. To view {'\n'} past sightings or save
             a sighting to your {'\n'} account log in.{' '}
           </Text>
-          <View style={[styles.horizontal, styles.contentSpacing]}>
-            <Text style={styles.contentText}> Have an account?</Text>
-            <TouchableOpacity
-              onPress={() => navigation.navigate(screens.login)}
-            >
-              <Text style={(styles.contentText, styles.underline)}>
-                {' '}
-                Log in{' '}
-              </Text>
-            </TouchableOpacity>
-          </View>
+
+          <TouchableOpacity onPress={() => navigation.navigate(screens.login)}>
+            <View style={styles.button}>
+              <View style={styles.buttonText}>
+                <Text style={[styles.contentText]}> Login </Text>
+              </View>
+            </View>
+          </TouchableOpacity>
 
           <TouchableOpacity
             onPress={() => navigation.navigate(screens.guestAdd)}
           >
-            <View style={styles.button}>
-              <View style={styles.buttonText}>
-                <Text style={[styles.contentText]}> Continue as guest </Text>
-                <Icon
-                  name="arrow-forward"
-                  type="material-icons"
-                  size={18}
-                  color={theme.white}
-                />
+            <View style={styles.button2}>
+              <View style={styles.buttonText2}>
+                <Text style={[styles.contentText, { color: theme.primary }]}>
+                  {' '}
+                  Continue as guest{' '}
+                </Text>
               </View>
             </View>
           </TouchableOpacity>
@@ -67,11 +61,13 @@ const styles = StyleSheet.create({
     fontFamily: 'Lato-Regular',
     fontSize: 38,
     color: theme.white,
+    textAlign: 'center',
     margin: '5%',
     marginTop: '25%',
   },
   contentText: {
     fontFamily: 'Lato-Regular',
+    textAlign: 'center',
     fontSize: 16,
     color: theme.white,
     marginHorizontal: '0%',
@@ -79,15 +75,33 @@ const styles = StyleSheet.create({
   },
   contentSpacing: {
     marginHorizontal: '5%',
+    alignSelf: 'center',
   },
   button: {
     backgroundColor: theme.primary,
+    alignSelf: 'center',
+    marginTop: '10%',
+    marginBottom: '5%',
+    borderRadius: 30,
+    borderRadius: 30,
+  },
+  button2: {
+    backgroundColor: 'transparent',
+    borderColor: theme.primary,
+    borderWidth: 5,
     alignSelf: 'center',
     marginBottom: '15%',
     borderRadius: 30,
     borderRadius: 30,
   },
   buttonText: {
+    marginHorizontal: '16%',
+    marginVertical: '3%',
+    textAlign: 'right',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  buttonText2: {
     marginHorizontal: '5%',
     marginVertical: '3%',
     textAlign: 'right',
