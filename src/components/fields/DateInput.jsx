@@ -31,17 +31,6 @@ export default function DateInput(rest) {
     showMode('time');
   };
 
-  // console.log(
-  //   (props.values.customFields[name] &&
-  //     props.values.customFields[name].Value) ||
-  //     date
-  // );
-
-  console.log(props['errors']);
-  console.log(
-    props.values.customFields[name] && props.values.customFields[name].Value
-  );
-
   function formatDate(date) {
     var options = {
       year: 'numeric',

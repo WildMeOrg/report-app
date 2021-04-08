@@ -13,8 +13,6 @@ export default function CustomField({ id, required, name, ...rest }) {
   const displayName = (schema && schema.label) || name;
   const description = (schema && schema.description) || '';
 
-  // console.log(props);
-
   return (
     <View>
       <Text style={[globalStyles.inputHeader, globalStyles.h2Text]}>

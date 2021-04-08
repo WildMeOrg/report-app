@@ -49,7 +49,7 @@ export default function CustomDrawerContent(props) {
             <Typography id="NEW_SIGHTING" style={styles.drawerListText} />
           </View>
         )}
-        onPress={() => props.navigation.navigate(screens.newSighting)}
+        onPress={() => props.navigation.navigate('New Sighting')}
       />
       <DrawerItem
         label={() => (

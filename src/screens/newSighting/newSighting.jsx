@@ -8,7 +8,6 @@ import {
   Alert,
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from 'react-native-elements';
 import { Formik } from 'formik';
 import * as ImagePicker from 'expo-image-picker';
@@ -18,7 +17,6 @@ import theme from '../../constants/theme';
 import globalStyles from '../../styles/globalStyles';
 import styles from '../../styles/newSightingStyles';
 import AsyncStorage from '@react-native-community/async-storage';
-// import { baseUrl } from '../constants/urls';
 import sightingFormFields from '../../components/fields/sightingFormFields';
 import CustomField from '../../components/CustomField.jsx';
 import Typography from '../../components/Typography';
@@ -31,15 +29,8 @@ import IndividualInformationFields from '../../components/fields/IndividualInfor
 import useAsyncStorage from '../../hooks/useAsyncStorage';
 import { ImageSelectContext } from '../../context/imageSelectContext';
 import UppyComponent from '../../components/UppyComponent';
-// import { color } from 'react-native-reanimated';
-// import { Button } from 'react-native';
-
-// const NewSightingStack = createStackNavigator();
 
 const NewSighting = ({ navigation }) => {
-  // const { section } = navigation;
-  // console.log('section: ' + section);
-
   const errorData = 'Error no data';
   const settingsPacket = useAsyncStorage('appConfiguration');
   const sightingSubmissions = useAsyncStorage('SightingSubmissions');
@@ -113,41 +104,14 @@ const NewSighting = ({ navigation }) => {
   React.useEffect(
     () =>
       navigation.addListener('beforeRemove', (e) => {
-        // console.log('in addlistener');
-        if (formSection === 0) {
-          // console.log('form section is 0');
-          // If we don't have unsaved changes, then we don't need to do anything
+        if (
+          formSection === 0 ||
+          e.data.action.source.includes('New Sighting')
+        ) {
           return;
         }
-        // console.log('form section is not 0');
-        // Prevent default behavior of leaving the screen
         e.preventDefault();
 
-        // Prompt the user before leaving the screen
-        // alert(
-        //   'Discard changes?',
-        //   'You have unsaved changes. Are you sure to discard them and leave the screen?',
-        //   [
-        //     { text: "Don't leave", style: 'cancel', onPress: () => {} },
-        //     {
-        //       text: 'Discard',
-        //       style: 'destructive',
-        //       // If the user confirmed, then we dispatch the action we blocked earlier
-        //       // This will continue the action that had triggered the removal of the screen
-        //       onPress: () => navigation.dispatch(e.data.action),
-        //     },
-        //   ]
-        // );
-
-        // alert('Discard changes?', [
-        //   {
-        //     text: 'Cancel',
-        //     onPress: () => console.log('Cancel Pressed'),
-        //     style: 'cancel',
-        //   },
-        //   { text: 'OK', onPress: () => console.log('OK Pressed') },
-        //   { cancelable: true },
-        // ]);
         Alert.alert(
           'Discard changes?',
           'You have unsaved changes. Are you sure to discard them and leave the screen?',
@@ -213,7 +177,6 @@ const NewSighting = ({ navigation }) => {
           }
         }
       );
-      // console.log(fieldsByCategory);
       fieldsByCategory['Regions'] = appConfig['site.custom.regions'];
       setCustomValidation(customRequiredFields); // validation
       setViews(customFields); // category titles for custom fields
@@ -291,9 +254,6 @@ const NewSighting = ({ navigation }) => {
             navigation.navigate(screens.home);
           } else {
             setFormSection(formSection + 1);
-            // navigation.setParams({ section: formSection + 1 });
-            // console.log('section: ' + section);
-            // setCurrentSection(formSection + 1);
             navigation.setOptions({
               headerTitle: headers[formSection + 1],
             });

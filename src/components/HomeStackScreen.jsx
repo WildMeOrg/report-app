@@ -34,31 +34,6 @@ export default function HomeStackScreen({ navigation }) {
 
   const popAction = StackActions.pop(1);
 
-  // const HomeScreenWithButtom = ({ navigation }) => {
-  //   return (
-  //     <View>
-  //       <HomeScreen navigation={navigation}></HomeScreen>
-  //       <View style={bodyStyles.addNewPosition}>
-  //         <TouchableOpacity
-  //           onPress={() => [
-  //             navigation.navigate('New Sighting'),
-  //             setOnHome(false),
-  //           ]}
-  //         >
-  //           <LinearGradient
-  //             colors={['#21BDC1', '#41D06A']}
-  //             start={[0, 0]}
-  //             end={[1, 1]}
-  //             style={bodyStyles.addNew}
-  //           >
-  //             <Text style={bodyStyles.addNewText}>+</Text>
-  //           </LinearGradient>
-  //         </TouchableOpacity>
-  //       </View>
-  //     </View>
-  //   );
-  // };
-
   if (isSearching) {
     return (
       <HomeStack.Navigator
@@ -89,7 +64,6 @@ export default function HomeStackScreen({ navigation }) {
       >
         <HomeStack.Screen
           name={screens.home}
-          //component={HomeScreen}
           options={{
             headerTitle: () => (
               <TextInput
@@ -136,7 +110,6 @@ export default function HomeStackScreen({ navigation }) {
         >
           <HomeStack.Screen
             name={screens.home}
-            //component={HomeScreen}
             options={{
               // eslint-disable-next-line react/display-name
               headerTitle: () => (
@@ -177,39 +150,6 @@ export default function HomeStackScreen({ navigation }) {
     );
   }
 }
-
-// const bodyStyles = StyleSheet.create({
-//   addNewPosition: {
-//     height: Dimensions.get('window').width * 0.07,
-//     width: Dimensions.get('window').width * 0.07,
-//     position: 'absolute',
-//     bottom: 0,
-//     right: 0,
-//     margin: '7%',
-//     // iOS
-//     shadowColor: theme.black,
-//     shadowOffset: {
-//       width: 1,
-//       height: 3,
-//     },
-//     shadowOpacity: 0.35,
-//   },
-//   addNew: {
-//     height: '100%',
-//     width: '100%',
-//     justifyContent: 'center',
-//     alignContent: 'center',
-//     borderRadius: Dimensions.get('window').width * 0.09,
-//     shadowRadius: 2.6,
-//     elevation: 4,
-//   },
-//   addNewText: {
-//     fontSize: 45,
-//     fontFamily: 'Lato-Regular',
-//     textAlign: 'center',
-//     color: theme.white,
-//   },
-// });
 
 const headerStyles = StyleSheet.create({
   headerText: {

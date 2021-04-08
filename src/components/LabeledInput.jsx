@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-  Animated,
-} from 'react-native';
-import AllTextInput from './fields/AllTextInput';
+import { Text } from 'react-native';
 import fieldList from './fields/fieldsList';
 import globalStyles from '../styles/globalStyles';
 
