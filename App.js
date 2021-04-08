@@ -10,6 +10,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
 import { IntlProvider } from 'react-intl';
+import NetInfo from '@react-native-community/netinfo';
 
 import englishTranslations from './locale/en.json';
 import spanishTranslations from './locale/es.json';
@@ -44,6 +45,8 @@ const loadFonts = () =>
     'Lato-Bold': require('./assets/fonts/Lato/Lato-Bold.ttf'),
     'Lato-Italic': require('./assets/fonts/Lato/Lato-Italic.ttf'),
   });
+
+NetInfo.fetch().then(() => {});
 
 export default function App() {
   const [fontsLoaded, setfontsLoaded] = useState(false);

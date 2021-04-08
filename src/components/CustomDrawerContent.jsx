@@ -24,7 +24,7 @@ export default function CustomDrawerContent(props) {
       <DrawerItem
         style={styles.drawerItemEnd}
         label={() => (
-          <View style={styles.drawerHeaderItem}>
+          <View style={styles.drawerListItem}>
             <Icon
               name="person"
               type="material-icons"
@@ -49,7 +49,7 @@ export default function CustomDrawerContent(props) {
             <Typography id="NEW_SIGHTING" style={styles.drawerListText} />
           </View>
         )}
-        onPress={() => props.navigation.navigate(screens.newSighting)}
+        onPress={() => props.navigation.navigate('New Sighting')}
       />
       <DrawerItem
         label={() => (
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
   },
   drawerHeaderItem: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    // justifyContent: 'center',
     alignItems: 'center',
   },
   drawerHeaderName: {
