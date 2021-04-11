@@ -15,15 +15,6 @@ export default function LoginStackScreen({ navigation, route }) {
     <LoginStack.Navigator
       screenOptions={{
         headerTitleAlign: 'center',
-        headerLeft: () => (
-          <Icon
-            name="menu"
-            type="material-icons"
-            color={theme.black}
-            onPress={() => navigation.toggleDrawer()}
-            iconStyle={globalStyles.iconLeft}
-          />
-        ),
       }}
     >
       <LoginStack.Screen
