@@ -11,13 +11,15 @@ export default function FeetMetersInput(rest) {
   const type = (schema && schema.displayType) || displayType;
   const [choice, setChoice] = useState('Feet');
   const [measurement, setMeasurement] = useState(
-    round(
-      ((props.values.customFields[name] &&
-        props.values.customFields[name]['Value']) ||
-        0) * 3.28084,
-      2
-    ).toString()
+    (props.values.customFields[name] &&
+      props.values.customFields[name]['Value'] &&
+      round(
+        props.values.customFields[name]['Value'] * 3.28084,
+        2
+      ).toString()) ||
+      null
   );
+
   const onTextChange = (value) => {
     setMeasurement(value);
     props.setFieldValue(`customFields.${name}`, { Type: type, Value: value });

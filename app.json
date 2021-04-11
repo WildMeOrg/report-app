@@ -1,12 +1,12 @@
 {
   "expo": {
-    "name": "WildMe",
-    "slug": "WildMe",
+    "name": "Wild Me Scout",
+    "slug": "WildMeScout",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/appIcon.png",
     "splash": {
-      "image": "./assets/images/logo.png",
+      "image": "./assets/images/scoutLogo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },

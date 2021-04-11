@@ -14,6 +14,7 @@ export default function LoginStackScreen({ navigation }) {
   return (
     <LoginStack.Navigator
       screenOptions={{
+        cardStyle: { backgroundColor: '#fff' },
         headerTitleAlign: 'center',
         headerLeft: () => (
           <Icon

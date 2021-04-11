@@ -1,15 +1,20 @@
 import React, { useState, useContext } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View, Dimensions, Text } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { createStackNavigator } from '@react-navigation/stack';
 import screens from '../constants/screens';
 import theme from '../constants/theme';
 import Typography from './Typography';
 import HomeScreen from '../screens/home/Home.jsx';
+import NewSighting from '../screens/newSighting/newSighting.jsx';
 import { TextInput } from 'react-native-gesture-handler';
 import globalStyles from '../styles/globalStyles';
 import AsyncStorage from '@react-native-community/async-storage';
 import { ReportContext } from '../context/reportContext';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { LinearGradient } from 'expo-linear-gradient';
+import { HeaderBackButton } from '@react-navigation/stack';
+import { StackActions } from '@react-navigation/native';
 
 const HomeStack = createStackNavigator();
 
@@ -17,6 +22,7 @@ export default function HomeStackScreen({ navigation }) {
   // AsyncStorage.getItem('REPORTS', (err, result) => {
   //   //console.log(JSON.parse(result).sightings[1].name);
   // });
+  const [onHome, setOnHome] = useState(true);
   const [isSearching, setIsSearching] = useState(false);
   const [state, dispatch] = useContext(ReportContext);
   const searchFunc = (input) => {
@@ -25,6 +31,8 @@ export default function HomeStackScreen({ navigation }) {
       text: input,
     });
   };
+
+  const popAction = StackActions.pop(1);
 
   if (isSearching) {
     return (
@@ -56,7 +64,6 @@ export default function HomeStackScreen({ navigation }) {
       >
         <HomeStack.Screen
           name={screens.home}
-          component={HomeScreen}
           options={{
             headerTitle: () => (
               <TextInput
@@ -68,44 +75,78 @@ export default function HomeStackScreen({ navigation }) {
               />
             ),
           }}
-        />
+        >
+          {(props) => <HomeScreen {...props} searching={isSearching} />}
+        </HomeStack.Screen>
       </HomeStack.Navigator>
     );
   } else {
     return (
-      <HomeStack.Navigator
-        screenOptions={{
-          headerTitleAlign: 'center',
-          headerLeft: () => (
-            <Icon
-              name="menu"
-              type="material-icons"
-              color={theme.black}
-              onPress={() => navigation.toggleDrawer()}
-              iconStyle={headerStyles.iconLeft}
-            />
-          ),
-          headerRight: () => (
-            <Icon
-              name="search"
-              type="material-icons"
-              color={theme.black}
-              onPress={() => setIsSearching(true)}
-              iconStyle={headerStyles.iconRight}
-            />
-          ),
-        }}
-      >
-        <HomeStack.Screen
-          name={screens.home}
-          component={HomeScreen}
-          options={{
-            headerTitle: () => (
-              <Typography style={headerStyles.headerText} id="APP_NAME" />
+      <>
+        <HomeStack.Navigator
+          screenOptions={{
+            headerTitleAlign: 'center',
+            // eslint-disable-next-line react/display-name
+            headerLeft: () => (
+              <Icon
+                name="menu"
+                type="material-icons"
+                color={theme.black}
+                onPress={() => navigation.toggleDrawer()}
+                iconStyle={headerStyles.iconLeft}
+              />
+            ),
+            // eslint-disable-next-line react/display-name
+            headerRight: () => (
+              <Icon
+                name="search"
+                type="material-icons"
+                color={theme.black}
+                onPress={() => setIsSearching(true)}
+                iconStyle={headerStyles.iconRight}
+              />
             ),
           }}
-        />
-      </HomeStack.Navigator>
+        >
+          <HomeStack.Screen
+            name={screens.home}
+            options={{
+              // eslint-disable-next-line react/display-name
+              headerTitle: () => (
+                <Typography style={globalStyles.headerText} id="APP_NAME" />
+              ),
+            }}
+          >
+            {(props) => <HomeScreen {...props} searching={isSearching} />}
+          </HomeStack.Screen>
+          <HomeStack.Screen
+            name={'New Sighting'}
+            component={NewSighting}
+            options={{
+              // eslint-disable-next-line react/display-name
+              headerTitle: 'General info',
+              headerTitleStyle: {
+                fontFamily: 'Lato-Regular',
+                fontStyle: 'normal',
+              },
+              // eslint-disable-next-line react/display-name
+              headerRight: () => (
+                <Icon
+                  name="close"
+                  type="material-icons"
+                  color={theme.black}
+                  onPress={() => {
+                    navigation.dispatch(popAction);
+                    setOnHome(true);
+                  }}
+                  iconStyle={globalStyles.icon}
+                />
+              ),
+              headerLeft: () => null,
+            }}
+          />
+        </HomeStack.Navigator>
+      </>
     );
   }
 }
