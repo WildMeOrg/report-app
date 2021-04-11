@@ -41,6 +41,20 @@ export default function CustomDrawerContent(props) {
         label={() => (
           <View style={styles.drawerListItem}>
             <Icon
+              name="list"
+              type="material-icons"
+              color={theme.black}
+              iconStyle={styles.icon}
+            />
+            <Typography id="VIEW_SIGHTINGS" style={styles.drawerListText} />
+          </View>
+        )}
+        onPress={() => props.navigation.navigate('Home')}
+      />
+      <DrawerItem
+        label={() => (
+          <View style={styles.drawerListItem}>
+            <Icon
               name="add"
               type="material-icons"
               color={theme.black}
@@ -122,8 +136,6 @@ export default function CustomDrawerContent(props) {
           }),
         ]}
       />
-      {/* Until all screens are linked together this allow us to go to each screen */}
-      <DrawerItemList {...props} />
     </DrawerContentScrollView>
   );
 }

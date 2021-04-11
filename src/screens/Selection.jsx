@@ -59,9 +59,9 @@ const WildbookCard = (props) => {
           isEnabled
             ? cardElementStyles.sightingCard
             : [
-                cardElementStyles.sightingCard,
-                { backgroundColor: theme.lightGrey },
-              ]
+              cardElementStyles.sightingCard,
+              { backgroundColor: theme.lightGrey },
+            ]
         }
       >
         <Image
