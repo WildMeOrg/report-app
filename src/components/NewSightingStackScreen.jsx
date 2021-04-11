@@ -5,6 +5,7 @@ import screens from '../constants/screens';
 import theme from '../constants/theme';
 import globalStyles from '../styles/globalStyles';
 import NewSighting from '../screens/newSighting/newSighting.jsx';
+import { StackActions } from '@react-navigation/native';
 
 const NewSightingStack = createStackNavigator();
 
@@ -12,7 +13,7 @@ export default function NewSightingStackScreen({ navigation }) {
   const currentSection = 0;
   const exitForm = (currentSection) => {
     if (currentSection === 0) {
-      navigation.navigate(screens.home);
+      StackActions.pop(1);
     }
   };
   return (
@@ -34,7 +35,7 @@ export default function NewSightingStackScreen({ navigation }) {
       }}
     >
       <NewSightingStack.Screen
-        name={screens.newSighting}
+        name={'New Sighting'}
         component={NewSighting}
         options={{
           headerTitle: 'General info',

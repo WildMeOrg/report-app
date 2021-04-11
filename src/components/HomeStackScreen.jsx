@@ -15,6 +15,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { LinearGradient } from 'expo-linear-gradient';
 import { HeaderBackButton } from '@react-navigation/stack';
 import { StackActions } from '@react-navigation/native';
+import { ImageSelectContext } from '../context/imageSelectContext.jsx';
 
 const HomeStack = createStackNavigator();
 
@@ -31,6 +32,11 @@ export default function HomeStackScreen({ navigation }) {
       text: input,
     });
   };
+
+  const [state2, dispatch2] = useContext(ImageSelectContext);
+  const clearImages = () => {
+    dispatch2({ type: 'clear' });
+  }
 
   const popAction = StackActions.pop(1);
 
@@ -136,6 +142,7 @@ export default function HomeStackScreen({ navigation }) {
                   type="material-icons"
                   color={theme.black}
                   onPress={() => {
+                    clearImages();
                     navigation.dispatch(popAction);
                     setOnHome(true);
                   }}
