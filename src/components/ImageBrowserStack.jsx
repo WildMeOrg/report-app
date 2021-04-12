@@ -30,7 +30,7 @@ const ImageBrowserComponent = ({ navigation }) => {
           });
         }
         setImages(photosToRet);
-        navigation.navigate(screens.newSighting);
+        navigation.navigate('New Sighting');
       })
       .catch((e) => console.error(e));
   };
@@ -99,7 +99,7 @@ export default function ImageBrowserStackScreen({ navigation }) {
             onPress={() => {
               // TODO: Add `react-native-dialogbox` when back with selection
               clearImages();
-              navigation.navigate(screens.newSighting);
+              navigation.navigate('New Sighting');
             }}
             iconStyle={globalStyles.iconLeft}
           />

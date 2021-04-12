@@ -61,6 +61,10 @@ const NewSighting = ({ navigation }) => {
     );
   };
 
+  const clearImages = () => {
+    imageStateDispatch({ type: 'clear' });
+  };
+
   const validationSchema = [];
   generalValidationSchema.map((schema) => {
     validationSchema.push(schema);
@@ -251,6 +255,7 @@ const NewSighting = ({ navigation }) => {
               headerTitle: headers[0],
             });
             setFormSection(0);
+            clearImages();
             navigation.navigate(screens.home);
           } else {
             setFormSection(formSection + 1);

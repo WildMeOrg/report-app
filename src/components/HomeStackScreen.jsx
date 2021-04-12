@@ -15,6 +15,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { LinearGradient } from 'expo-linear-gradient';
 import { HeaderBackButton } from '@react-navigation/stack';
 import { StackActions } from '@react-navigation/native';
+import { ImageSelectContext } from '../context/imageSelectContext.jsx';
 
 const HomeStack = createStackNavigator();
 
@@ -24,12 +25,17 @@ export default function HomeStackScreen({ navigation }) {
   // });
   const [onHome, setOnHome] = useState(true);
   const [isSearching, setIsSearching] = useState(false);
-  const [state, dispatch] = useContext(ReportContext);
+  const [reportState, reportDispatch] = useContext(ReportContext);
   const searchFunc = (input) => {
-    dispatch({
+    reportDispatch({
       type: 'search',
       text: input,
     });
+  };
+
+  const [imageSelectState, imageSelectDispatch] = useContext(ImageSelectContext);
+  const clearImages = () => {
+    imageSelectDispatch({ type: 'clear' });
   };
 
   const popAction = StackActions.pop(1);
@@ -136,6 +142,7 @@ export default function HomeStackScreen({ navigation }) {
                   type="material-icons"
                   color={theme.black}
                   onPress={() => {
+                    clearImages();
                     navigation.dispatch(popAction);
                     setOnHome(true);
                   }}
