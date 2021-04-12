@@ -25,17 +25,17 @@ export default function HomeStackScreen({ navigation }) {
   // });
   const [onHome, setOnHome] = useState(true);
   const [isSearching, setIsSearching] = useState(false);
-  const [state, dispatch] = useContext(ReportContext);
+  const [reportState, reportDispatch] = useContext(ReportContext);
   const searchFunc = (input) => {
-    dispatch({
+    reportDispatch({
       type: 'search',
       text: input,
     });
   };
 
-  const [state2, dispatch2] = useContext(ImageSelectContext);
+  const [imageSelectState, imageSelectDispatch] = useContext(ImageSelectContext);
   const clearImages = () => {
-    dispatch2({ type: 'clear' });
+    imageSelectDispatch({ type: 'clear' });
   };
 
   const popAction = StackActions.pop(1);
