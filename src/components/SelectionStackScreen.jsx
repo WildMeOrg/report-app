@@ -16,24 +16,6 @@ export default function SelectionStackScreen({ navigation }) {
     <SelectionStack.Navigator
       screenOptions={{
         headerTitleAlign: 'center',
-        headerLeft: () => (
-          <Icon
-            name="menu"
-            type="material-icons"
-            color={theme.black}
-            onPress={() => navigation.toggleDrawer()}
-            iconStyle={globalStyles.iconLeft}
-          />
-        ),
-        headerRight: () => (
-          <Icon
-            name="close"
-            type="material-icons"
-            color={theme.black}
-            onPress={() => navigation.navigate(screens.home)}
-            iconStyle={styles.closeButton}
-          />
-        ),
       }}
     >
       <SelectionStack.Screen
