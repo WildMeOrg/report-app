@@ -36,7 +36,7 @@ export default function HomeStackScreen({ navigation }) {
   const [state2, dispatch2] = useContext(ImageSelectContext);
   const clearImages = () => {
     dispatch2({ type: 'clear' });
-  }
+  };
 
   const popAction = StackActions.pop(1);
 
