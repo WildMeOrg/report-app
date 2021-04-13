@@ -52,6 +52,11 @@ const HomeScreen = ({ navigation }) => {
   const BooleanXOR = (a, b) => {
     return (a || b) && !(a && b);
   };
+  const sortedSightings = [...state.sightings].sort((a, b) => {
+    //TODO: Change to more readable code
+    console.log('Sorting State');
+    return BooleanXOR(a.date > b.date, sortDescending) ? -1 : 1;
+  });
 
   // console.log(state.sightings);
   useEffect(() => {
@@ -166,34 +171,26 @@ const HomeScreen = ({ navigation }) => {
         />
       </View>
       <ScrollView contentContainerStyle={bodyStyles.content}>
-        {
-          // Create a separate array from state
-          state.sightings
-            .sort((a, b) => {
-              return BooleanXOR(a.date > b.date, sortDescending) ? -1 : 1;
-            })
-            // Then use map to generate each sighting
-            .map((sighting) => {
-              return (
-                <TouchableOpacity
-                  onPress={() => [
-                    navigation.navigate(screens.viewSighting, {
-                      screen: screens.viewSighting,
-                      params: { id: sighting.id },
-                    }),
-                  ]}
-                  style={cardElementStyles.touchableOpacityHolder}
-                  key={sighting.id}
-                >
-                  <SightingCard
-                    image={sighting.image[0]}
-                    name={sighting.name}
-                    date={sighting.date.toLocaleDateString()}
-                  />
-                </TouchableOpacity>
-              );
-            })
-        }
+        {sortedSightings.map((sighting) => {
+          return (
+            <TouchableOpacity
+              onPress={() => [
+                navigation.navigate(screens.viewSighting, {
+                  screen: screens.viewSighting,
+                  params: { id: sighting.id },
+                }),
+              ]}
+              style={cardElementStyles.touchableOpacityHolder}
+              key={sighting.id}
+            >
+              <SightingCard
+                image={sighting.image[0]}
+                name={sighting.name}
+                date={new Date(sighting.date).toLocaleDateString()}
+              />
+            </TouchableOpacity>
+          );
+        })}
       </ScrollView>
     </View>
   );
