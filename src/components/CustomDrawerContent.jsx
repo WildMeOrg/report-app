@@ -24,7 +24,7 @@ export default function CustomDrawerContent(props) {
       <DrawerItem
         style={styles.drawerItemEnd}
         label={() => (
-          <View style={styles.drawerHeaderItem}>
+          <View style={styles.drawerListItem}>
             <Icon
               name="person"
               type="material-icons"
@@ -41,6 +41,20 @@ export default function CustomDrawerContent(props) {
         label={() => (
           <View style={styles.drawerListItem}>
             <Icon
+              name="list"
+              type="material-icons"
+              color={theme.black}
+              iconStyle={styles.icon}
+            />
+            <Typography id="VIEW_SIGHTINGS" style={styles.drawerListText} />
+          </View>
+        )}
+        onPress={() => props.navigation.navigate('Home')}
+      />
+      <DrawerItem
+        label={() => (
+          <View style={styles.drawerListItem}>
+            <Icon
               name="add"
               type="material-icons"
               color={theme.black}
@@ -49,7 +63,7 @@ export default function CustomDrawerContent(props) {
             <Typography id="NEW_SIGHTING" style={styles.drawerListText} />
           </View>
         )}
-        onPress={() => props.navigation.navigate(screens.newSighting)}
+        onPress={() => props.navigation.navigate('New Sighting')}
       />
       <DrawerItem
         label={() => (
@@ -98,6 +112,8 @@ export default function CustomDrawerContent(props) {
             <Typography id="HELP" style={styles.drawerListText} />
           </View>
         )}
+        //TODO THIS IS BROKE FOR SOME REASON
+        onPress={() => props.navigation.navigate(screens.helpPage)}
       />
       <DrawerItem
         style={styles.drawerItem}
@@ -120,8 +136,6 @@ export default function CustomDrawerContent(props) {
           }),
         ]}
       />
-      {/* Until all screens are linked together this allow us to go to each screen */}
-      <DrawerItemList {...props} />
     </DrawerContentScrollView>
   );
 }
@@ -133,7 +147,7 @@ const styles = StyleSheet.create({
   },
   drawerHeaderItem: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    // justifyContent: 'center',
     alignItems: 'center',
   },
   drawerHeaderName: {

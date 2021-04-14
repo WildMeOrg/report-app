@@ -17,6 +17,7 @@ import screens from '../../constants/screens';
 import { ReportContext } from '../../context/reportContext';
 import AsyncStorage from '@react-native-community/async-storage';
 import Sighting from '../localSightings/Sighting';
+import { LinearGradient } from 'expo-linear-gradient';
 
 /** <SightingCard> : A functional component that creates the sighting cards on the homepage
  *    @props
@@ -33,23 +34,16 @@ const SightingCard = (props) => {
           <Text style={cardElementStyles.sightingTitle}>{props.name}</Text>
           <Text style={cardElementStyles.sightingDate}>{props.date}</Text>
         </View>
-        <Icon
-          name="more-vert"
-          type="material-icons"
-          size={28}
-          color={theme.black}
-        />
       </View>
     </View>
   );
 };
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = ({ navigation, searching }) => {
   const [state, dispatch] = useContext(ReportContext);
   const [isSyncing, setIsSyncing] = useState(false);
   const [storedSightings, setStoredSightings] = useState([]);
 
-  // console.log(state.sightings);
   useEffect(() => {
     AsyncStorage.getItem('SightingSubmissions').then((result) =>
       result != null
@@ -80,7 +74,7 @@ const HomeScreen = ({ navigation }) => {
   return (
     <View style={bodyStyles.parentView}>
       <View style={{ alignItems: 'center' }}>
-        <View style={bodyStyles.sortBy}>
+        <View style={bodyStyles.sortByPos}>
           <Typography id="LAST_ADDED" style={bodyStyles.sortBy} />
           <Icon
             name="arrow-downward"
@@ -89,12 +83,6 @@ const HomeScreen = ({ navigation }) => {
             color={theme.black}
           />
         </View>
-        <TouchableOpacity
-          style={bodyStyles.addNew}
-          onPress={() => navigation.navigate(screens.newSighting)}
-        >
-          <Typography id="ADD_NEW_SIGHTING" style={bodyStyles.addNewText} />
-        </TouchableOpacity>
       </View>
       {storedSightings.length > 0 ? (
         <View style={offlineSightings.header}>
@@ -141,12 +129,14 @@ const HomeScreen = ({ navigation }) => {
           ))}
         </ScrollView>
       ) : null}
-      <View style={offlineSightings.header}>
-        <Typography
-          id="SYNCED_SIGHTINGS"
-          style={offlineSightings.offlineSightingsText}
-        />
-      </View>
+      {storedSightings.length > 0 ? (
+        <View style={offlineSightings.header}>
+          <Typography
+            id="SYNCED_SIGHTINGS"
+            style={offlineSightings.offlineSightingsText}
+          />
+        </View>
+      ) : null}
       <ScrollView contentContainerStyle={bodyStyles.content}>
         {
           // Procedurally generate the cards from the sightings array
@@ -173,6 +163,25 @@ const HomeScreen = ({ navigation }) => {
           })
         }
       </ScrollView>
+      {searching ? null : (
+        <View style={bodyStyles.addNewPosition}>
+          <TouchableOpacity
+            onPress={() => [
+              navigation.navigate('New Sighting'),
+              // setOnHome(false),
+            ]}
+          >
+            <LinearGradient
+              colors={['#21BDC1', '#41D06A']}
+              start={[0, 0]}
+              end={[1, 1]}
+              style={bodyStyles.addNew}
+            >
+              <Text style={bodyStyles.addNewText}>+</Text>
+            </LinearGradient>
+          </TouchableOpacity>
+        </View>
+      )}
     </View>
   );
 };
@@ -186,10 +195,12 @@ const bodyStyles = StyleSheet.create({
   sortBy: {
     fontSize: 18,
     fontFamily: 'Lato-Regular',
+  },
+  sortByPos: {
     alignSelf: 'flex-start',
     flexDirection: 'row',
-    marginLeft: 12,
-    marginTop: 4,
+    marginLeft: 20,
+    marginTop: 10,
   },
   content: {
     flexDirection: 'column',
@@ -199,30 +210,35 @@ const bodyStyles = StyleSheet.create({
     backgroundColor: theme.white,
     minHeight: 160,
   },
-  // sortBy: {
-  //   width: 102,
-  //   marginTop: 10,
-  //   marginHorizontal: 10,
-  //   flexDirection: 'row',
-  //   justifyContent: 'space-between',
-  //   alignSelf: 'flex-start',
-  // },
+  addNewPosition: {
+    height: Dimensions.get('window').width * 0.07,
+    width: Dimensions.get('window').width * 0.07,
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    margin: '7%',
+    // iOS
+    shadowColor: theme.black,
+    shadowOffset: {
+      width: 1,
+      height: 3,
+    },
+    shadowOpacity: 0.35,
+  },
   addNew: {
-    marginTop: 15,
-    marginBottom: 10,
-    width: Dimensions.get('window').width * 0.9, // Looks dumb but is necessary
-    padding: 25,
+    height: '100%',
+    width: '100%',
     justifyContent: 'center',
-    borderStyle: 'dashed',
-    borderWidth: 2,
-    borderColor: '#888',
-    borderRadius: 6,
+    alignContent: 'center',
+    borderRadius: Dimensions.get('window').width * 0.09,
+    shadowRadius: 2.6,
+    elevation: 4,
   },
   addNewText: {
-    fontSize: 20,
+    fontSize: 45,
     fontFamily: 'Lato-Regular',
     textAlign: 'center',
-    color: '#888',
+    color: theme.white,
   },
 });
 
@@ -286,10 +302,11 @@ const cardElementStyles = StyleSheet.create({
 
 const offlineSightings = StyleSheet.create({
   offlineSightingsText: {
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: 'Lato-Regular',
     textAlign: 'center',
     color: theme.black,
+    opacity: 0.5,
   },
   scrollView: {
     marginLeft: 12,

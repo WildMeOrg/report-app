@@ -10,6 +10,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
 import { IntlProvider } from 'react-intl';
+import NetInfo from '@react-native-community/netinfo';
 
 import englishTranslations from './locale/en.json';
 import spanishTranslations from './locale/es.json';
@@ -30,7 +31,7 @@ import SelectionStackScreen from './src/components/SelectionStackScreen';
 import { ReportContextProvider } from './src/context/reportContext';
 import { ImageSelectProvider } from './src/context/imageSelectContext';
 import ImageBrowserStackScreen from './src/components/ImageBrowserStack';
-
+import HelpPageStackScreen from './src/components/HelpPageStackScreen';
 const messageMap = {
   en: englishTranslations,
   es: spanishTranslations,
@@ -44,6 +45,8 @@ const loadFonts = () =>
     'Lato-Bold': require('./assets/fonts/Lato/Lato-Bold.ttf'),
     'Lato-Italic': require('./assets/fonts/Lato/Lato-Italic.ttf'),
   });
+
+NetInfo.fetch().then(() => {});
 
 export default function App() {
   const [fontsLoaded, setfontsLoaded] = useState(false);
@@ -106,6 +109,10 @@ export default function App() {
                 <Drawer.Screen
                   name={screens.notifications}
                   component={NotificationsStackScreen}
+                />
+                <Drawer.Screen
+                  name={screens.helpPage}
+                  component={HelpPageStackScreen}
                 />
               </Drawer.Navigator>
             </NavigationContainer>

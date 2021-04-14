@@ -11,20 +11,10 @@ import globalStyles from '../styles/globalStyles';
 const LoginStack = createStackNavigator();
 
 export default function LoginStackScreen({ navigation, route }) {
-  //console.log(route.state.routes[0].params.param);//params from selection page
   return (
     <LoginStack.Navigator
       screenOptions={{
         headerTitleAlign: 'center',
-        headerLeft: () => (
-          <Icon
-            name="menu"
-            type="material-icons"
-            color={theme.black}
-            onPress={() => navigation.toggleDrawer()}
-            iconStyle={globalStyles.iconLeft}
-          />
-        ),
       }}
     >
       <LoginStack.Screen
