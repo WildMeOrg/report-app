@@ -2,7 +2,7 @@
   "expo": {
     "name": "WildMe",
     "slug": "WildMe",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "splash": {
@@ -27,6 +27,7 @@
     },
     "android": {
       "package": "com.WildMe.WildMeReport",
+      "versionCode": 2,
       "permissions": ["ACCESS_COARSE_LOCATION","ACCESS_FINE_LOCATION"]
     }
   }
