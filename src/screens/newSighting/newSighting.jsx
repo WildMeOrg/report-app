@@ -29,6 +29,10 @@ import IndividualInformationFields from '../../components/fields/IndividualInfor
 import useAsyncStorage from '../../hooks/useAsyncStorage';
 import { ImageSelectContext } from '../../context/imageSelectContext';
 import UppyComponent from '../../components/UppyComponent';
+import testReportFormat from '../../constants/testReportFormat';
+import { baseUrl } from '../../constants/urls';
+import axios from 'axios';
+import { transformUpload } from '../../components/transformUpload';
 
 const NewSighting = ({ navigation }) => {
   const errorData = 'Error no data';
@@ -133,6 +137,41 @@ const NewSighting = ({ navigation }) => {
     [navigation, formSection]
   );
 
+  const sendReport = async (values) => {
+    console.log(imageState);
+    console.log('ABOUT TO TRANSFORM');
+    const data = transformUpload(values, imageState);
+    try {
+      console.log(JSON.stringify(data));
+      const response = await axios.request({
+        url: `${baseUrl}/api/v1/sightings/`,
+        withCredentials: true,
+        method: 'post',
+        data,
+      });
+      if (response) {
+        console.log(response);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getReport = async () => {
+    console.log('GET REPORT');
+    const urlTemp = 'ec09d9b6-ad68-4f2d-81bd-75e375f940be';
+    try {
+      const response = await axios.get(
+        `${baseUrl}/api/v1/sightings/${urlTemp}`
+      );
+      if (response) {
+        console.log(response);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   //sets views to display fields
   const form = async (formikProps) => {
     const appConfig = await getConfig();
@@ -233,6 +272,7 @@ const NewSighting = ({ navigation }) => {
                 alert(
                   'Internet Reachable: ' + JSON.stringify(values, undefined, 4)
                 );
+                sendReport(values);
               } else {
                 if (sightingSubmissions) {
                   let updatedSubmissions = sightingSubmissions;
@@ -335,6 +375,7 @@ const NewSighting = ({ navigation }) => {
                         onPress={() => [
                           formikProps.handleSubmit(),
                           formikProps.setSubmitting(false),
+                          //getReport(),
                         ]}
                       >
                         <View style={(globalStyles.button, styles.button)}>

@@ -101,7 +101,7 @@ export default {
           className: 'org.ecocean.MarkedIndividual',
           id: 'c32e690c-e308-4362-82d5-bc97579e0c7f',
           type: 'string',
-          required: true,
+          required: false,
         },
         {
           schema: {
@@ -116,7 +116,7 @@ export default {
           className: 'org.ecocean.MarkedIndividual',
           id: '165c3695-8eee-4a60-a9e9-eba4dacba4d0',
           type: 'string',
-          required: true,
+          required: false,
         },
         {
           schema: {
@@ -144,7 +144,7 @@ export default {
           className: 'org.ecocean.MarkedIndividual',
           id: 'fa4907e5-681e-46a8-9980-85d32cd746c4',
           type: 'string',
-          required: true,
+          required: false,
         },
         {
           schema: {
@@ -174,7 +174,7 @@ export default {
           className: 'org.ecocean.MarkedIndividual',
           id: '1b62470c-890e-4665-8153-6ebefce10d189',
           type: 'double',
-          required: true,
+          required: false,
         },
       ],
     },
@@ -215,7 +215,7 @@ export default {
           className: 'org.ecocean.Encounter',
           id: '165c3695-8eee-4a60-a9e9-eba4dacba4d0',
           type: 'string',
-          required: true,
+          required: false,
         },
         {
           schema: {
@@ -229,7 +229,7 @@ export default {
           className: 'org.ecocean.Encounter',
           id: '48259ec8-0307-4c55-b181-ef721b8f203b',
           type: 'string',
-          required: true,
+          required: false,
         },
         {
           schema: {
@@ -243,7 +243,7 @@ export default {
           className: 'org.ecocean.Encounter',
           id: '48259ec8-0307-4c55-b181-ef721b8f2123',
           type: 'string',
-          required: true,
+          required: false,
         },
         {
           schema: {
@@ -257,7 +257,7 @@ export default {
           className: 'org.ecocean.Encounter',
           id: '48259ec8-0307-4c55-b181-ef721b8f2908nuk',
           type: 'string',
-          required: true,
+          required: false,
         },
       ],
     },
@@ -398,7 +398,7 @@ export default {
         },
         {
           schema: {
-            displayType: 'multiselect',
+            displayType: 'latlong',
             category: 'd52499ba-b0d3-44e1-af8a-0b72cbc300b8',
             label: 'Multi Select',
             choices: [
@@ -424,11 +424,11 @@ export default {
           className: 'org.ecocean.Occurrence',
           id: 'c4131e13-42dd-4eb9-ad2c-40cde2835949',
           type: 'string',
-          required: true,
+          required: false,
         },
         {
           schema: {
-            displayType: 'select',
+            displayType: 'locationIds',
             description: '',
             label: 'dropitup',
             choices: [
@@ -464,7 +464,7 @@ export default {
           className: 'org.ecocean.Occurrence',
           id: '1a701d24-83eb-4ae9-a0ca-9210b85f0c60',
           type: 'string',
-          required: true,
+          required: false,
         },
         {
           schema: {
@@ -479,7 +479,7 @@ export default {
           className: 'org.ecocean.Occurrence',
           id: '391ed61f-6dd3-4390-a25e-7dda58c596fa',
           type: 'string',
-          required: true,
+          required: false,
         },
         {
           schema: {
@@ -491,7 +491,7 @@ export default {
           className: 'org.ecocean.Occurrence',
           id: 'aaaaa8a0-d499-4651-81d1-5c233df4c6dd',
           type: 'string',
-          required: true,
+          required: false,
         },
         {
           displayType: 'file',
@@ -500,7 +500,7 @@ export default {
           className: 'org.ecocean.Occurrence',
           id: 'bbbba8a0-d499-4651-81d1-5c233df4c6dd',
           type: 'string',
-          required: true,
+          required: false,
         },
       ],
     },

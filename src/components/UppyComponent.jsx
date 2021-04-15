@@ -74,6 +74,8 @@ export default function UppyComponent() {
 
     uppy.on('complete', (uppyState) => {
       setUploading(false);
+      console.log(uuidTemp);
+      console.log(uppyState);
       setUploadID(uppyState.uploadID, uuidTemp);
       setUploadComplete(true);
       setreUploadComplete(true);
