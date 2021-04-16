@@ -2,24 +2,7 @@ export const transformUpload = (values, imageState) => {
   const transactionId = imageState.submissionID;
   var uploadJSON = {};
   var customFields = {};
-  var assetReferences = [
-    {
-      transactionId: 'ffb6c3a0-e34e-4831-9082-b25b501b192a',
-      path: 'IMG_0004.JPG',
-    },
-    {
-      transactionId: 'ffb6c3a0-e34e-4831-9082-b25b501b192a',
-      path: 'IMG_0003.JPG',
-    },
-    {
-      transactionId: 'ffb6c3a0-e34e-4831-9082-b25b501b192a',
-      path: 'IMG_0001.JPG',
-    },
-    {
-      transactionId: 'ffb6c3a0-e34e-4831-9082-b25b501b192a',
-      path: 'IMG_0006.HEIC',
-    },
-  ];
+  var assetReferences = [];
   // var assestReferences = [];
   //Adding General Fields
   Object.keys(values).map((field) => {
@@ -61,5 +44,7 @@ export const transformUpload = (values, imageState) => {
   }
   const encounter = { customFields, assetReferences };
   uploadJSON['encounters'] = [encounter];
+  console.log('TRANSFORM RETURN');
+  console.log(uploadJSON);
   return uploadJSON;
 };

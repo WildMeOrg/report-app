@@ -14,25 +14,27 @@ const ViewSightingStack = createStackNavigator();
 const ViewSightingScreen = ({ navigation, route }) => {
   const [state, dispatch] = useContext(ReportContext);
 
-  var sighting = state.sightings.filter((item) => {
+  var report = state.sightings.filter((item) => {
     if (item.id === route.params.id) {
       return item;
     }
   })[0];
   //This is a bandage for a weird search bar bug.
-  if (sighting === undefined) {
+  if (report === undefined) {
     return null;
   }
+  var sighting = report.encounters[0];
   return (
     <View style={styles.InfoView} key={'Mainsection'}>
       <SliderBox images={sighting.image} sliderBoxHeight={250} />
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <Text style={globalStyles.inputHeader}>{sighting.name}</Text>
+        <Text style={globalStyles.inputHeader}>{report.context}</Text>
         <Text style={[globalStyles.basicText, styles.InfoText]}>
-          {sighting.date}
+          {report.createdHoutston}
         </Text>
         <View style={styles.Divider} />
-        {Object.keys(sighting).map((field) => {
+        {Object.keys(report).map((field) => {
+          console.log(field);
           const excludeList = [
             'customFields',
             'image',
@@ -53,7 +55,7 @@ const ViewSightingScreen = ({ navigation, route }) => {
                 style={[globalStyles.basicText, styles.InfoText]}
                 key={field + 'Body'}
               >
-                {sighting[field].toString()}
+                {report[field].toString()}
               </Text>
             );
             return [header, body];
@@ -61,9 +63,10 @@ const ViewSightingScreen = ({ navigation, route }) => {
           return;
         })}
         {Object.keys(sighting.customFields).map((field) => {
+          console.log(field);
           var jsBody;
-          const fieldType = sighting.customFields[field].Type;
-          const fieldValue = sighting.customFields[field].Value;
+          const fieldType = field;
+          const fieldValue = sighting.customFields[field];
           const jsHeader = (
             <Text
               style={globalStyles.inputHeader}

@@ -28,11 +28,14 @@ import SightingDetailsFields from '../../components/fields/SightingDetailsFields
 import IndividualInformationFields from '../../components/fields/IndividualInformationFields';
 import useAsyncStorage from '../../hooks/useAsyncStorage';
 import { ImageSelectContext } from '../../context/imageSelectContext';
+import { ReportContext } from '../../context/reportContext';
 import UppyComponent from '../../components/UppyComponent';
-import testReportFormat from '../../constants/testReportFormat';
+import testGetReport from '../../constants/testGetReport';
 import { baseUrl } from '../../constants/urls';
 import axios from 'axios';
 import { transformUpload } from '../../components/transformUpload';
+import { Buffer } from 'buffer';
+import { ActionSheetIOS } from 'react-native';
 
 const NewSighting = ({ navigation }) => {
   const errorData = 'Error no data';
@@ -45,6 +48,7 @@ const NewSighting = ({ navigation }) => {
   const [customValidation, setCustomValidation] = useState('');
   const numGeneralForm = 3; //there are 3 general form screens
   const [imageState, imageStateDispatch] = useContext(ImageSelectContext); //Grab images from imageSelector
+  const [reportState, reportDispatch] = useContext(ReportContext);
   const [headers, setHeaders] = useState([
     'General info',
     'Sighting details',
@@ -63,6 +67,10 @@ const NewSighting = ({ navigation }) => {
         key={i}
       />
     );
+  };
+
+  const saveReport = (newReport) => {
+    reportDispatch({ type: 'add', newSighting: newReport });
   };
 
   const clearImages = () => {
@@ -141,6 +149,8 @@ const NewSighting = ({ navigation }) => {
     console.log(imageState);
     console.log('ABOUT TO TRANSFORM');
     const data = transformUpload(values, imageState);
+    var urlTemp = [];
+    var gotReport;
     try {
       console.log(JSON.stringify(data));
       const response = await axios.request({
@@ -150,22 +160,74 @@ const NewSighting = ({ navigation }) => {
         data,
       });
       if (response) {
+        console.log('RESPONSE IN SENDING REPORT');
         console.log(response);
+        //response.data.result.id
+        gotReport = await getReport(response.data.result.id);
+        console.log('GOTREPORT');
+        if (gotReport) {
+          console.log(gotReport);
+          gotReport.data.encounters[0].assets.map((asset) => {
+            urlTemp = [...urlTemp, asset.src];
+          });
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    try {
+      // const response = await axios.get(
+      //   `${baseUrl}/api/v1/sightings/${urlTemp}`
+      // );
+      var images = [];
+      try {
+        await axios
+          .all(
+            urlTemp.map((image) =>
+              axios.get(`${baseUrl}${image}`, { responseType: 'arraybuffer' })
+            )
+          )
+          .then(
+            axios.spread(function (...res) {
+              console.log('AXIOS SPREAD FUNCTION');
+              console.log(res);
+              res.map((image) => {
+                images = [
+                  ...images,
+                  {
+                    uri:
+                      'data:image/jpg;base64,' +
+                      Buffer.from(image.data, 'binary').toString('base64'),
+                  },
+                ];
+              });
+              console.log(images);
+              if (gotReport) {
+                console.log('RIGHT BEFORE SAVE REPORT');
+                console.log(gotReport);
+                gotReport.data.encounters[0]['image'] = images;
+                saveReport(gotReport.data);
+              }
+            })
+          );
+      } catch (error) {
+        console.log(error);
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-  const getReport = async () => {
+  const getReport = async (sightingId) => {
     console.log('GET REPORT');
     const urlTemp = 'ec09d9b6-ad68-4f2d-81bd-75e375f940be';
     try {
       const response = await axios.get(
-        `${baseUrl}/api/v1/sightings/${urlTemp}`
+        `${baseUrl}/api/v1/sightings/${sightingId}`
       );
       if (response) {
         console.log(response);
+        return response;
       }
     } catch (error) {
       console.log(error);

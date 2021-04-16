@@ -12,7 +12,7 @@ const reducer = (state, action) => {
   // TODO: add state documentation
   switch (action.type) {
     case 'add':
-      state.sightings.append(action.newSighting);
+      state.sightings = [action.newSighting, ...state.sightings];
       break;
 
     case 'remove':
