@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import screens from '../constants/screens';
@@ -13,6 +13,13 @@ export default function CustomField({ id, required, name, ...rest }) {
   const displayName = (schema && schema.label) || name;
   const description = (schema && schema.description) || '';
 
+  const [submitAttempts, setSubmitAttempts] = useState(props.submitCount);
+
+  // console.log(props.touched.customFields);
+  // console.log(props.errors.customFields);
+  // console.log(props);
+  // console.log('SUBMIT COUNT:' + submitAttempts);
+
   //separate style for boolean custom fields
   if (schema.displayType === 'boolean') {
     return (
@@ -22,7 +29,11 @@ export default function CustomField({ id, required, name, ...rest }) {
             {displayName}
             {required && '*'}
           </Text>
-          {props.touched.customFields &&
+          {/* {props.touched.customFields &&
+            props.touched.customFields[name] &&
+            props.errors.customFields &&
+            props.errors.customFields[name] && ( */}
+          {props.submitCount > submitAttempts &&
             props.errors.customFields &&
             props.errors.customFields[name] && (
               <Typography
@@ -56,7 +67,11 @@ export default function CustomField({ id, required, name, ...rest }) {
           {displayName}
           {required && '*'}
         </Text>
-        {props.touched.customFields &&
+        {/* {props.touched.customFields &&
+          props.touched.customFields[name] &&
+          props.errors.customFields &&
+          props.errors.customFields[name] && ( */}
+        {props.submitCount > submitAttempts &&
           props.errors.customFields &&
           props.errors.customFields[name] && (
             <Typography
