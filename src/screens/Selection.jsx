@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   ScrollView,
   Text,
@@ -6,41 +6,21 @@ import {
   StyleSheet,
   Image,
   Dimensions,
-  Switch,
-  Alert,
 } from 'react-native';
-import { Icon } from 'react-native-elements';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import Typography from '../components/Typography';
 import theme from '../constants/theme';
-import globalStyles from '../styles/globalStyles';
 import screens from '../constants/screens';
-import { ReportContext } from '../context/reportContext';
 import selection from '../constants/wildbooks';
 import AsyncStorage from '@react-native-community/async-storage';
-import useAsyncStorage from '../hooks/useAsyncStorage';
 
 const WildbookCard = (props) => {
   const loggedInfo = JSON.parse(props.loggedInfo);
 
   const isEnabled = loggedInfo && loggedInfo.wildbook === props.name;
 
-  // const [isEnabled, setIsEnabled] = useState(
-  //   loggedInfo && loggedInfo.wildbook === props.name
-  // );
-
-  // useEffect(() => {
-  //   setIsEnabled(loggedInfo && loggedInfo.wildbook === props.name);
-  // }, [loggedInfo]);
-
   const toggleSwitch = async (name) => {
-    if (loggedInfo) {
-      if (name === loggedInfo.wildbook) {
-        // setIsEnabled(true);
-        props.nav.navigate(screens.home);
-      } else {
-        Alert.alert(`Already Signed into ${loggedInfo.wildbook}`);
-      }
+    if (loggedInfo && name === loggedInfo.wildbook) {
+      props.nav.navigate(screens.home);
     } else {
       props.nav.navigate('Login', {
         screen: 'Login1',
