@@ -31,7 +31,8 @@ export default function HelpChangeWildbookStackScreen({ navigation }) {
             name="close"
             type="material-icons"
             color={theme.black}
-            onPress={() => navigation.navigate(screens.home)}
+            // TODO: Reset the help "page"?
+            onPress={() => navigation.navigate(screens.helpPage)}
             iconStyle={styles.closeButton}
           />
         ),
@@ -43,7 +44,10 @@ export default function HelpChangeWildbookStackScreen({ navigation }) {
         options={{
           // eslint-disable-next-line react/display-name
           headerTitle: () => (
-            <Typography style={globalStyles.headerText} id="HELP" />
+            <Typography
+              style={globalStyles.headerText}
+              id="HOW_TO_CHANGE_WILDBOOKS"
+            />
           ),
         }}
       />

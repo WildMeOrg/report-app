@@ -28,7 +28,7 @@ const HelpPage = ({ navigation }) => {
           />
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.helpRow}
+          style={styles.helpRowBottom}
           onPress={() => navigation.navigate(screens.helpChangeWildbook)}
         >
           <Typography
@@ -43,6 +43,7 @@ const HelpPage = ({ navigation }) => {
             iconStyle={styles.icon}
           />
         </TouchableOpacity>
+        {/* There is room for more help pages / a "if you need more help, do X here" */}
       </ScrollView>
     </View>
   );
