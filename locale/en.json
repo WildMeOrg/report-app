@@ -48,5 +48,8 @@
   "IMAGE_UPLOAD_SUCCESSFUL": "Images Uploaded Successfully",
   "IMAGE_UPLOAD": "Upload Images",
   "IMAGE_REUPLOAD": "Upload New Images?",
-  "VIEW_SIGHTINGS": "View Sightings"
+  "VIEW_SIGHTINGS": "View Sightings",
+  "HOW_TO_USE": "How To Use Wild Me Scout:",
+  "HOW_TO_ADD_SIGHTING": "How To Add a Sighting",
+  "HOW_TO_CHANGE_WILDBOOKS": "How To Change Wildbooks"
 }

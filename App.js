@@ -32,6 +32,8 @@ import { ReportContextProvider } from './src/context/reportContext';
 import { ImageSelectProvider } from './src/context/imageSelectContext';
 import ImageBrowserStackScreen from './src/components/ImageBrowserStack';
 import HelpPageStackScreen from './src/components/HelpPageStackScreen';
+import HelpAddSightingStackScreen from './src/components/HelpAddSightingStackScreen';
+import HelpChangeWildbookStackScreen from './src/components/HelpChangeWildbookStackScreen';
 const messageMap = {
   en: englishTranslations,
   es: spanishTranslations,
@@ -113,6 +115,14 @@ export default function App() {
                 <Drawer.Screen
                   name={screens.helpPage}
                   component={HelpPageStackScreen}
+                />
+                <Drawer.Screen
+                  name={screens.helpAddSighting}
+                  component={HelpAddSightingStackScreen}
+                />
+                <Drawer.Screen
+                  name={screens.helpChangeWildbook}
+                  component={HelpChangeWildbookStackScreen}
                 />
               </Drawer.Navigator>
             </NavigationContainer>

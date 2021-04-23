@@ -6,13 +6,13 @@ import screens from '../constants/screens';
 import theme from './Typography';
 import Typography from './Typography';
 import globalStyles from '../styles/globalStyles';
-import HelpPageScreen from '../screens/help/HelpPage';
+import HelpChangeWildbook from '../screens/help/HelpChangeWildbook';
 
-const HelpPageStack = createStackNavigator();
+const HelpChangeWildbookStack = createStackNavigator();
 
-export default function HelpPageStackScreen({ navigation }) {
+export default function HelpChangeWildbookStackScreen({ navigation }) {
   return (
-    <HelpPageStack.Navigator
+    <HelpChangeWildbookStack.Navigator
       screenOptions={{
         headerTitleAlign: 'center',
         // eslint-disable-next-line react/display-name
@@ -37,9 +37,9 @@ export default function HelpPageStackScreen({ navigation }) {
         ),
       }}
     >
-      <HelpPageStack.Screen
+      <HelpChangeWildbookStack.Screen
         name={screens.helpPage}
-        component={HelpPageScreen}
+        component={HelpChangeWildbook}
         options={{
           // eslint-disable-next-line react/display-name
           headerTitle: () => (
@@ -47,7 +47,7 @@ export default function HelpPageStackScreen({ navigation }) {
           ),
         }}
       />
-    </HelpPageStack.Navigator>
+    </HelpChangeWildbookStack.Navigator>
   );
 }
 const styles = StyleSheet.create({

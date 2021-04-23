@@ -99,7 +99,6 @@ export default function CustomDrawerContent(props) {
             <Typography id="HELP" style={styles.drawerListText} />
           </View>
         )}
-        //TODO THIS IS BROKE FOR SOME REASON
         onPress={() => props.navigation.navigate(screens.helpPage)}
       />
     </DrawerContentScrollView>
