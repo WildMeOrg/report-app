@@ -430,7 +430,7 @@ export default {
           schema: {
             displayType: 'locationIds',
             description: '',
-            label: 'dropitup',
+            label: 'Location Id',
             choices: [
               {
                 label: 'abc',
@@ -452,7 +452,7 @@ export default {
           className: 'org.ecocean.Occurrence',
           id: '0000045f-7b76-4eb0-885b-26a910cb5160',
           type: 'string',
-          required: false,
+          required: true,
         },
         {
           schema: {

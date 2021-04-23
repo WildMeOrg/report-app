@@ -52,7 +52,13 @@ const Login = ({ navigation, route }) => {
       onChangeResponseData(JSON.stringify(response.data));
     } catch (loginError) {
       console.log('login error');
-      onChangeResponseData(loginError.name + ': ' + loginError.message);
+      alert(
+        'Username and/or Password is Incorrect' +
+          '\n' +
+          loginError.name +
+          ': ' +
+          loginError.message
+      );
       setIsLoading(false);
       return;
     }
@@ -152,10 +158,10 @@ const Login = ({ navigation, route }) => {
         </View>
       </View>
 
-      {/*This text field display login success or unsuccesful response from server*/}
+      {/* This text field display login success or unsuccesful response from server
       <Text style={{ fontSize: 16, textAlign: 'center', marginTop: 25 }}>
         {responseData}
-      </Text>
+      </Text> */}
     </KeyboardAvoidingView>
   );
 };
