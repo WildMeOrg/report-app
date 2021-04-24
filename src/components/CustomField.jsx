@@ -15,11 +15,6 @@ export default function CustomField({ id, required, name, ...rest }) {
 
   const [submitAttempts, setSubmitAttempts] = useState(props.submitCount);
 
-  // console.log(props.touched.customFields);
-  // console.log(props.errors.customFields);
-  // console.log(props);
-  // console.log('SUBMIT COUNT:' + submitAttempts);
-
   //separate style for boolean custom fields
   if (schema.displayType === 'boolean') {
     return (
@@ -29,10 +24,6 @@ export default function CustomField({ id, required, name, ...rest }) {
             {displayName}
             {required && '*'}
           </Text>
-          {/* {props.touched.customFields &&
-            props.touched.customFields[name] &&
-            props.errors.customFields &&
-            props.errors.customFields[name] && ( */}
           {props.submitCount > submitAttempts &&
             props.errors.customFields &&
             props.errors.customFields[name] && (
@@ -67,10 +58,6 @@ export default function CustomField({ id, required, name, ...rest }) {
           {displayName}
           {required && '*'}
         </Text>
-        {/* {props.touched.customFields &&
-          props.touched.customFields[name] &&
-          props.errors.customFields &&
-          props.errors.customFields[name] && ( */}
         {props.submitCount > submitAttempts &&
           props.errors.customFields &&
           props.errors.customFields[name] && (
