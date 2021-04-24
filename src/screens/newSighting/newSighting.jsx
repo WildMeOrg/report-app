@@ -12,6 +12,7 @@ import { Icon } from 'react-native-elements';
 import { Formik } from 'formik';
 import * as ImagePicker from 'expo-image-picker';
 import * as yup from 'yup';
+import * as Permissions from 'expo-permissions';
 import screens from '../../constants/screens';
 import theme from '../../constants/theme';
 import globalStyles from '../../styles/globalStyles';
@@ -198,9 +199,17 @@ const NewSighting = ({ navigation }) => {
 
   useEffect(() => {
     (async () => {
-      const { status } = await ImagePicker.requestCameraRollPermissionsAsync();
-      if (status !== 'granted') {
-        alert('Sorry, we need camera roll permissions in upload photos.');
+      //const { status } = await ImagePicker.requestCameraRollPermissionsAsync();
+      const permission = await Permissions.getAsync(Permissions.CAMERA_ROLL);
+      console.log(permission);
+      if (permission.status !== 'granted') {
+        //ask
+        const newPermission = await Permissions.askAsync(
+          Permissions.CAMERA_ROLL
+        );
+        if (newPermission.status !== 'granted') {
+          alert('Sorry, we need camera roll permissions in upload photos.');
+        }
       }
       6;
     })();
