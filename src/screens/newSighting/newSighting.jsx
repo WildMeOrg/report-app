@@ -163,21 +163,21 @@ const NewSighting = ({ navigation }) => {
             fieldsByCategory[category.label] = fields;
             customFields.push(category);
             headers.push(category.label);
-          }
-          if (categoryValidation) {
-            const test = categoryValidation.reduce(
-              (obj, item) => ({
-                ...obj,
-                [item[0]]:
-                  item[1] === 'string'
-                    ? yup.string().required('This is Required')
-                    : yup.number().required('This is Required'),
-              }),
-              {}
-            );
-            customRequiredFields.push(test);
-          } else {
-            customRequiredFields.push({});
+            if (categoryValidation) {
+              const test = categoryValidation.reduce(
+                (obj, item) => ({
+                  ...obj,
+                  [item[0]]:
+                    item[1] === 'string'
+                      ? yup.string().required('This is Required')
+                      : yup.number().required('This is Required'),
+                }),
+                {}
+              );
+              customRequiredFields.push(test);
+            } else {
+              customRequiredFields.push({});
+            }
           }
         }
       );

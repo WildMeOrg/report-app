@@ -146,6 +146,20 @@ export default {
           type: 'string',
           required: true,
         },
+        // {
+        //   schema: {
+        //     description: 'date input',
+        //     label: 'Date Input',
+        //     category: '661661cd-a017-4796-ac4b-16a40b869daf',
+        //   },
+        //   displayType: 'date',
+        //   name: 'DATE',
+        //   multiple: false,
+        //   className: 'org.ecocean.MarkedIndividual',
+        //   id: 'c32e690c-e308-4362-82d5-bc97579e0abc',
+        //   type: 'string',
+        //   required: true,
+        // },
         {
           schema: {
             displayType: 'string',
@@ -174,7 +188,7 @@ export default {
           className: 'org.ecocean.MarkedIndividual',
           id: '1b62470c-890e-4665-8153-6ebefce10d189',
           type: 'double',
-          required: true,
+          required: false,
         },
       ],
     },
