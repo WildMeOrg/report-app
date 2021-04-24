@@ -33,7 +33,9 @@ export default function HomeStackScreen({ navigation }) {
     });
   };
 
-  const [imageSelectState, imageSelectDispatch] = useContext(ImageSelectContext);
+  const [imageSelectState, imageSelectDispatch] = useContext(
+    ImageSelectContext
+  );
   const clearImages = () => {
     imageSelectDispatch({ type: 'clear' });
   };

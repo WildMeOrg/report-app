@@ -48,7 +48,7 @@ export default function HelpPageStackScreen({ navigation }) {
   );
 }
 const styles = StyleSheet.create({
-    closeButton: {
-      marginRight: 16,
-    },
-  });
+  closeButton: {
+    marginRight: 16,
+  },
+});

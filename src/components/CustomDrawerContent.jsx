@@ -1,24 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import {
-  DrawerContentScrollView,
-  DrawerItemList,
-  DrawerItem,
-} from '@react-navigation/drawer';
+import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import { Icon } from 'react-native-elements';
 import screens from '../constants/screens';
 import theme from '../constants/theme';
 import Typography from './Typography';
-import AsyncStorage from '@react-native-community/async-storage';
 
 export default function CustomDrawerContent(props) {
-  const removeLogin = async () => {
-    try {
-      await AsyncStorage.removeItem('loggedIn');
-    } catch (e) {
-      console.error(e);
-    }
-  };
   return (
     <DrawerContentScrollView {...props}>
       <DrawerItem
@@ -100,7 +88,6 @@ export default function CustomDrawerContent(props) {
         ]}
       />
       <DrawerItem
-        style={styles.drawerItemEnd}
         label={() => (
           <View style={styles.drawerListItem}>
             <Icon
@@ -115,27 +102,6 @@ export default function CustomDrawerContent(props) {
         //TODO THIS IS BROKE FOR SOME REASON
         onPress={() => props.navigation.navigate(screens.helpPage)}
       />
-      <DrawerItem
-        style={styles.drawerItem}
-        label={() => (
-          <View style={styles.drawerListItem}>
-            <Icon
-              name="exit-to-app"
-              type="material-icons"
-              color={theme.black}
-              iconStyle={styles.icon}
-            />
-            <Typography id="LOG_OUT" style={styles.drawerListText} />
-          </View>
-        )}
-        onPress={() => [
-          removeLogin(),
-          props.navigation.navigate(screens.selection, {
-            screen: screens.selection,
-            params: { loggedOut: true },
-          }),
-        ]}
-      />
     </DrawerContentScrollView>
   );
 }
@@ -147,7 +113,6 @@ const styles = StyleSheet.create({
   },
   drawerHeaderItem: {
     flexDirection: 'row',
-    // justifyContent: 'center',
     alignItems: 'center',
   },
   drawerHeaderName: {
