@@ -200,15 +200,17 @@ const NewSighting = ({ navigation }) => {
   useEffect(() => {
     (async () => {
       //const { status } = await ImagePicker.requestCameraRollPermissionsAsync();
-      const permission = await Permissions.getAsync(Permissions.CAMERA_ROLL);
-      console.log(permission);
-      if (permission.status !== 'granted') {
+      const { status } = await Permissions.getAsync(Permissions.CAMERA_ROLL); //last change, get to ask
+      console.log(status);
+      if (status !== 'granted') {
         //ask
         const newPermission = await Permissions.askAsync(
           Permissions.CAMERA_ROLL
         );
         if (newPermission.status !== 'granted') {
-          alert('Sorry, we need camera roll permissions in upload photos.');
+          alert(
+            'Sorry, we need camera roll permissions in upload photos. Enable them to continue.'
+          );
         }
       }
       6;
