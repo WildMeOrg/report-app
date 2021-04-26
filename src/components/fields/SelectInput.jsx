@@ -4,12 +4,13 @@ import globalStyles from '../../styles/globalStyles';
 import styles from '../../styles/newSightingStyles';
 
 export default function SelectInput(rest) {
-  const { name, schema, props } = rest;
+  const { name, schema, props, id } = rest;
   const { displayType } = rest;
   const type = (schema && schema.displayType) || displayType;
   const onChoiceChange = (choice) => {
     props.setFieldValue(`customFields.${name}`, {
       Type: type,
+      id,
       Value: choice,
     });
   };

@@ -6,7 +6,7 @@ import theme from '../../constants/theme';
 import { View } from 'react-native';
 
 export default function MultiSelectInput(rest) {
-  const { name, schema, props } = rest;
+  const { name, schema, props, id } = rest;
   const { displayType } = rest;
   const type = (schema && schema.displayType) || displayType;
   const multiSelectOptions = schema.choices;
@@ -14,7 +14,11 @@ export default function MultiSelectInput(rest) {
   const onSelectionsChange = (items) => {
     props.setFieldValue('customFields.MULTI_TEMP', items);
     const values = items.map((item) => item.value);
-    props.setFieldValue(`customFields.${name}`, { Type: type, Value: values });
+    props.setFieldValue(`customFields.${name}`, {
+      Type: type,
+      id,
+      Value: values,
+    });
     setSelectedOptions(items);
   };
   return (

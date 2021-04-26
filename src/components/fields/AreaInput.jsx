@@ -7,7 +7,7 @@ import { get } from 'lodash-es';
 import theme from '../../constants/theme';
 
 export default function AreaInput(rest) {
-  const { name, schema, props } = rest;
+  const { name, schema, props, id } = rest;
   const [north, setNorth] = useState(null);
   const [east, setEast] = useState(null);
   const [south, setSouth] = useState(null);
@@ -79,6 +79,7 @@ export default function AreaInput(rest) {
                 setNorth(val),
                 props.setFieldValue(`customFields.${name}`, {
                   Type: type,
+                  id,
                   Value: {
                     north: val,
                     east: east,
@@ -110,6 +111,7 @@ export default function AreaInput(rest) {
                 setSouth(val),
                 props.setFieldValue(`customFields.${name}`, {
                   Type: type,
+                  id,
                   Value: {
                     north: north,
                     east: east,
@@ -176,6 +178,7 @@ export default function AreaInput(rest) {
                 setEast(val),
                 props.setFieldValue(`customFields.${name}`, {
                   Type: type,
+                  id,
                   Value: {
                     north: north,
                     east: val,
@@ -207,6 +210,7 @@ export default function AreaInput(rest) {
                 setWest(val),
                 props.setFieldValue(`customFields.${name}`, {
                   Type: type,
+                  id,
                   Value: {
                     north: north,
                     east: east,

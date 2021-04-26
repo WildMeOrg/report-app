@@ -7,12 +7,13 @@ import styles from '../../styles/newSightingStyles';
 import { get } from 'lodash-es';
 
 export default function AllTextInput(rest) {
-  const { name, schema, props } = rest;
+  const { name, schema, props, id } = rest;
   const { displayType } = rest;
   const type = (schema && schema.displayType) || displayType;
   const onTextChange = (text) => {
     props.setFieldValue(`customFields.${name}`, {
       Type: type,
+      id,
       Value: text,
     });
   };

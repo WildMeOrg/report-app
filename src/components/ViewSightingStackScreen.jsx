@@ -62,11 +62,11 @@ const ViewSightingScreen = ({ navigation, route }) => {
           }
           return;
         })}
-        {Object.keys(sighting.customFields).map((field) => {
+        {Object.keys(report.customFields).map((field) => {
           console.log(field);
           var jsBody;
           const fieldType = field;
-          const fieldValue = sighting.customFields[field];
+          const fieldValue = report.customFields[field];
           const jsHeader = (
             <Text
               style={globalStyles.inputHeader}

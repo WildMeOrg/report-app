@@ -19,6 +19,7 @@ export const transformUpload = (values, imageState) => {
   if (values.customFields) {
     Object.keys(values.customFields).map((field) => {
       const fieldType = values.customFields[field].Type;
+      const fieldID = values.customFields[field].id;
       const fieldValue = values.customFields[field].Value;
       console.log('FIELD ' + values.customFields[field]);
       if (fieldType === 'latlong') {
@@ -28,7 +29,7 @@ export const transformUpload = (values, imageState) => {
       if (fieldType === 'locationIds') {
         uploadJSON['locationId'] = fieldValue;
       }
-      customFields[fieldType] = fieldValue;
+      customFields[fieldID] = fieldValue;
     });
   }
   //Adding assets if there are any to include
@@ -44,6 +45,7 @@ export const transformUpload = (values, imageState) => {
   }
   const encounter = { customFields, assetReferences };
   uploadJSON['encounters'] = [encounter];
+  uploadJSON['customFields'] = customFields; //<< Testing
   console.log('TRANSFORM RETURN');
   console.log(uploadJSON);
   return uploadJSON;
