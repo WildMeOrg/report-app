@@ -63,20 +63,20 @@ export default function Settings({ navigation }) {
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.settingRowBottom}
-        onPress={() => console.log('click')}
+        onPress={() => navigation.navigate(screens.helpPage)}
       >
         <Typography id="HELP" style={globalStyles.h2Text} />
         <Icon
           name="chevron-right"
           type="material-icons"
           color={theme.black}
-          onPress={() => navigation.toggleDrawer()}
+          onPress={() => navigation.navigate(screens.helpPage)}
           iconStyle={styles.icon}
         />
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.settingRow}
-        onPress={() => console.log('click')}
+        onPress={() => console.log('click')} // TODO: Log out user
       >
         <Typography id="LOG_OUT" style={globalStyles.h2Text} />
       </TouchableOpacity>

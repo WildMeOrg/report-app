@@ -14,4 +14,6 @@ export default {
   selection: 'Selection',
   localSigthing: 'LocalSighting',
   helpPage: 'HelpPage',
+  helpAddSighting: 'HelpAddSighting',
+  helpChangeWildbook: 'HelpChangeWildbook',
 };

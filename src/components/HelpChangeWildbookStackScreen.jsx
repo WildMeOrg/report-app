@@ -3,16 +3,16 @@ import { StyleSheet } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { createStackNavigator } from '@react-navigation/stack';
 import screens from '../constants/screens';
-import theme from './Typography';
+import theme from '../constants/theme';
 import Typography from './Typography';
 import globalStyles from '../styles/globalStyles';
-import HelpPageScreen from '../screens/help/HelpPage';
+import HelpChangeWildbook from '../screens/help/HelpChangeWildbook';
 
-const HelpPageStack = createStackNavigator();
+const HelpChangeWildbookStack = createStackNavigator();
 
-export default function HelpPageStackScreen({ navigation }) {
+export default function HelpChangeWildbookStackScreen({ navigation }) {
   return (
-    <HelpPageStack.Navigator
+    <HelpChangeWildbookStack.Navigator
       screenOptions={{
         headerTitleAlign: 'center',
         // eslint-disable-next-line react/display-name
@@ -31,23 +31,27 @@ export default function HelpPageStackScreen({ navigation }) {
             name="close"
             type="material-icons"
             color={theme.black}
-            onPress={() => navigation.navigate(screens.home)}
+            // TODO: Reset the help "page"?
+            onPress={() => navigation.navigate(screens.helpPage)}
             iconStyle={styles.closeButton}
           />
         ),
       }}
     >
-      <HelpPageStack.Screen
+      <HelpChangeWildbookStack.Screen
         name={screens.helpPage}
-        component={HelpPageScreen}
+        component={HelpChangeWildbook}
         options={{
           // eslint-disable-next-line react/display-name
           headerTitle: () => (
-            <Typography style={globalStyles.headerText} id="HELP" />
+            <Typography
+              style={globalStyles.headerText}
+              id="HOW_TO_CHANGE_WILDBOOKS"
+            />
           ),
         }}
       />
-    </HelpPageStack.Navigator>
+    </HelpChangeWildbookStack.Navigator>
   );
 }
 const styles = StyleSheet.create({
