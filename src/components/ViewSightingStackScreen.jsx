@@ -34,7 +34,6 @@ const ViewSightingScreen = ({ navigation, route }) => {
         </Text>
         <View style={styles.Divider} />
         {Object.keys(report).map((field) => {
-          console.log(field);
           const excludeList = [
             'customFields',
             'image',
@@ -62,11 +61,10 @@ const ViewSightingScreen = ({ navigation, route }) => {
           }
           return;
         })}
-        {Object.keys(report.customFields).map((field) => {
-          console.log(field);
+        {Object.keys(sighting.customFields).map((field) => {
           var jsBody;
           const fieldType = field;
-          const fieldValue = report.customFields[field];
+          const fieldValue = sighting.customFields[field];
           const jsHeader = (
             <Text
               style={globalStyles.inputHeader}

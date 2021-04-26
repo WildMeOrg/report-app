@@ -28,9 +28,7 @@ export default function AllTextInput(rest) {
       multiline={schema.displayType === 'longstring'}
       rowsMax={schema.displayType === 'longstring' ? 5 : undefined}
       onChangeText={onTextChange}
-      value={
-        get(props, ['values', 'customFields', name, 'Value'],'')
-      }
+      value={get(props, ['values', 'customFields', name, 'Value'], '')}
       onBlur={props.handleBlur(`customFields.${name}`)}
       isValid={
         props.touched.customFields &&

@@ -21,7 +21,6 @@ export const transformUpload = (values, imageState) => {
       const fieldType = values.customFields[field].Type;
       const fieldID = values.customFields[field].id;
       const fieldValue = values.customFields[field].Value;
-      console.log('FIELD ' + values.customFields[field]);
       if (fieldType === 'latlong') {
         uploadJSON['decimalLatitude'] = fieldValue[0];
         uploadJSON['decimalLongitude'] = fieldValue[1];
@@ -34,9 +33,7 @@ export const transformUpload = (values, imageState) => {
   }
   //Adding assets if there are any to include
   if (transactionId) {
-    console.log(transactionId);
     imageState.images.map((image) => {
-      console.log(image);
       assetReferences.push({
         transactionId,
         path: image.name,
@@ -45,8 +42,6 @@ export const transformUpload = (values, imageState) => {
   }
   const encounter = { customFields, assetReferences };
   uploadJSON['encounters'] = [encounter];
-  uploadJSON['customFields'] = customFields; //<< Testing
-  console.log('TRANSFORM RETURN');
-  console.log(uploadJSON);
+  //uploadJSON['customFields'] = customFields; //<< Testing
   return uploadJSON;
 };

@@ -11,6 +11,5 @@ import Humpback3 from '../../assets/images/humpback3.jpeg';
 
 export default storage = {
   //dummy data for testing
-  sightings: [
-  ],
+  sightings: [],
 };

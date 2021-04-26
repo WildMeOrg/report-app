@@ -146,13 +146,10 @@ const NewSighting = ({ navigation }) => {
   );
 
   const sendReport = async (values) => {
-    console.log(imageState);
-    console.log('ABOUT TO TRANSFORM');
     const data = transformUpload(values, imageState);
     var urlTemp = [];
     var gotReport;
     try {
-      console.log(JSON.stringify(data));
       const response = await axios.request({
         url: `${baseUrl}/api/v1/sightings/`,
         withCredentials: true,
@@ -160,13 +157,9 @@ const NewSighting = ({ navigation }) => {
         data,
       });
       if (response) {
-        console.log('RESPONSE IN SENDING REPORT');
-        console.log(response);
         //response.data.result.id
         gotReport = await getReport(response.data.result.id);
-        console.log('GOTREPORT');
         if (gotReport) {
-          console.log(gotReport);
           gotReport.data.encounters[0].assets.map((asset) => {
             urlTemp = [...urlTemp, asset.src];
           });
@@ -189,8 +182,6 @@ const NewSighting = ({ navigation }) => {
           )
           .then(
             axios.spread(function (...res) {
-              console.log('AXIOS SPREAD FUNCTION');
-              console.log(res);
               res.map((image) => {
                 images = [
                   ...images,
@@ -201,10 +192,7 @@ const NewSighting = ({ navigation }) => {
                   },
                 ];
               });
-              console.log(images);
               if (gotReport) {
-                console.log('RIGHT BEFORE SAVE REPORT');
-                console.log(gotReport);
                 gotReport.data.encounters[0]['image'] = images;
                 saveReport(gotReport.data);
               }
@@ -219,14 +207,12 @@ const NewSighting = ({ navigation }) => {
   };
 
   const getReport = async (sightingId) => {
-    console.log('GET REPORT');
     const urlTemp = 'ec09d9b6-ad68-4f2d-81bd-75e375f940be';
     try {
       const response = await axios.get(
         `${baseUrl}/api/v1/sightings/${sightingId}`
       );
       if (response) {
-        console.log(response);
         return response;
       }
     } catch (error) {
