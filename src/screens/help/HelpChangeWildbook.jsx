@@ -1,57 +1,25 @@
-import React, { useState } from 'react';
-import {
-  Text,
-  TouchableOpacity,
-  Image,
-  ScrollView,
-  View,
-  StyleSheet,
-} from 'react-native';
+import React, { useRef, useState } from 'react';
+import { Image, ScrollView, View, StyleSheet } from 'react-native';
 import screens from '../../constants/screens';
 import theme from '../../constants/theme';
-import globalStyles from '../../styles/globalStyles';
-import Typography from '../../components/Typography';
 import { Dimensions } from 'react-native';
 import changeWildbook1 from '../../../assets/images/HelpPage/ChangeWildbook1.png';
 import changeWildbook2 from '../../../assets/images/HelpPage/ChangeWildbook2.png';
 import changeWildbook3 from '../../../assets/images/HelpPage/ChangeWildbook3.png';
 import changeWildbook4 from '../../../assets/images/HelpPage/ChangeWildbook4.png';
 import changeWildbook5 from '../../../assets/images/HelpPage/ChangeWildbook5.png';
-
-const winWidth = Dimensions.get('window').width;
-const imageRatio = winWidth / 700; // The 700 is the px width of the images
-
-const Instruction = (props) => {
-  const typographyID = `HELP_CHANGE_WILDBOOK_${props.number}`;
-  return (
-    <View style={styles.instruction}>
-      <Text
-        style={[
-          globalStyles.basicText,
-          styles.instructionSubElement,
-          styles.instructionNumber,
-        ]}
-      >
-        {props.number}
-      </Text>
-      <Typography
-        id={typographyID}
-        style={[
-          globalStyles.basicText,
-          styles.instructionSubElement,
-          styles.instructionText,
-        ]}
-      />
-    </View>
-  );
-};
+import { Instruction, PageNavigationButtons } from './HelpElements';
 
 const HelpChangeWildbook = ({ navigation }) => {
   const [helpSection, setHelpSection] = useState(0);
+  const scrollReference = useRef();
+  const scrollTop = () => {
+    scrollReference.current?.scrollTo({ y: 0 });
+  };
 
   return (
     <View style={styles.content}>
-      <ScrollView style={styles.helpPage}>
+      <ScrollView style={styles.helpPage} ref={scrollReference}>
         {helpSection === 0 && (
           <>
             <Image
@@ -59,22 +27,12 @@ const HelpChangeWildbook = ({ navigation }) => {
               source={changeWildbook1}
               resizeMode={'contain'}
             />
-            <Instruction number={1} />
-            <View style={[styles.horizontal, styles.bottomElement]}>
-              {/* // TODO: why not working?? */}
-              <TouchableOpacity
-                onPress={() => navigation.navigate(screens.helpPage)}
-              >
-                <View style={[styles.button, styles.buttonInactive]}>
-                  <Typography id="BACK" style={globalStyles.buttonText} />
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => setHelpSection(1)}>
-                <View style={styles.button}>
-                  <Typography id="NEXT" style={globalStyles.buttonText} />
-                </View>
-              </TouchableOpacity>
-            </View>
+            <Instruction section={'HELP_CHANGE_WILDBOOK'} number={1} />
+            <PageNavigationButtons
+              onBackward={() => navigation.navigate(screens.helpPage)}
+              onForward={() => setHelpSection(1)}
+              postNavigate={scrollTop}
+            />
           </>
         )}
         {helpSection === 1 && (
@@ -84,19 +42,12 @@ const HelpChangeWildbook = ({ navigation }) => {
               source={changeWildbook2}
               resizeMode={'contain'}
             />
-            <Instruction number={2} />
-            <View style={[styles.horizontal, styles.bottomElement]}>
-              <TouchableOpacity onPress={() => setHelpSection(0)}>
-                <View style={[styles.button, styles.buttonInactive]}>
-                  <Typography id="BACK" style={globalStyles.buttonText} />
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => setHelpSection(2)}>
-                <View style={styles.button}>
-                  <Typography id="NEXT" style={globalStyles.buttonText} />
-                </View>
-              </TouchableOpacity>
-            </View>
+            <Instruction section={'HELP_CHANGE_WILDBOOK'} number={2} />
+            <PageNavigationButtons
+              onBackward={() => setHelpSection(0)}
+              onForward={() => setHelpSection(2)}
+              postNavigate={scrollTop}
+            />
           </>
         )}
         {helpSection === 2 && (
@@ -106,20 +57,13 @@ const HelpChangeWildbook = ({ navigation }) => {
               source={changeWildbook3}
               resizeMode={'contain'}
             />
-            <Instruction number={3} />
-            <Instruction number={4} />
-            <View style={[styles.horizontal, styles.bottomElement]}>
-              <TouchableOpacity onPress={() => setHelpSection(1)}>
-                <View style={[styles.button, styles.buttonInactive]}>
-                  <Typography id="BACK" style={globalStyles.buttonText} />
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => setHelpSection(3)}>
-                <View style={styles.button}>
-                  <Typography id="NEXT" style={globalStyles.buttonText} />
-                </View>
-              </TouchableOpacity>
-            </View>
+            <Instruction section={'HELP_CHANGE_WILDBOOK'} number={3} />
+            <Instruction section={'HELP_CHANGE_WILDBOOK'} number={4} />
+            <PageNavigationButtons
+              onBackward={() => setHelpSection(1)}
+              onForward={() => setHelpSection(3)}
+              postNavigate={scrollTop}
+            />
           </>
         )}
         {helpSection === 3 && (
@@ -129,20 +73,13 @@ const HelpChangeWildbook = ({ navigation }) => {
               source={changeWildbook4}
               resizeMode={'contain'}
             />
-            <Instruction number={5} />
-            <Instruction number={6} />
-            <View style={[styles.horizontal, styles.bottomElement]}>
-              <TouchableOpacity onPress={() => setHelpSection(2)}>
-                <View style={[styles.button, styles.buttonInactive]}>
-                  <Typography id="BACK" style={globalStyles.buttonText} />
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => setHelpSection(4)}>
-                <View style={styles.button}>
-                  <Typography id="NEXT" style={globalStyles.buttonText} />
-                </View>
-              </TouchableOpacity>
-            </View>
+            <Instruction section={'HELP_CHANGE_WILDBOOK'} number={5} />
+            <Instruction section={'HELP_CHANGE_WILDBOOK'} number={6} />
+            <PageNavigationButtons
+              onBackward={() => setHelpSection(2)}
+              onForward={() => setHelpSection(4)}
+              postNavigate={scrollTop}
+            />
           </>
         )}
         {helpSection === 4 && (
@@ -152,30 +89,25 @@ const HelpChangeWildbook = ({ navigation }) => {
               source={changeWildbook5}
               resizeMode={'contain'}
             />
-            <Instruction number={7} />
-            <View style={[styles.horizontal, styles.bottomElement]}>
-              <TouchableOpacity onPress={() => setHelpSection(3)}>
-                <View style={[styles.button, styles.buttonInactive]}>
-                  <Typography id="BACK" style={globalStyles.buttonText} />
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate(screens.home);
-                  setHelpSection(0);
-                }}
-              >
-                <View style={styles.button}>
-                  <Typography id="DONE" style={globalStyles.buttonText} />
-                </View>
-              </TouchableOpacity>
-            </View>
+            <Instruction section={'HELP_CHANGE_WILDBOOK'} number={7} />
+            <PageNavigationButtons
+              onBackward={() => setHelpSection(3)}
+              onForward={() => {
+                navigation.navigate(screens.home);
+                setHelpSection(0);
+              }}
+              forwardName={'DONE'}
+              postNavigate={scrollTop}
+            />
           </>
         )}
       </ScrollView>
     </View>
   );
 };
+
+const winWidth = Dimensions.get('window').width;
+const imageRatio = winWidth / 700; // The 700 is the px width of the images
 
 const styles = StyleSheet.create({
   content: {
@@ -190,49 +122,6 @@ const styles = StyleSheet.create({
   helpImage: {
     width: winWidth,
     height: 800 * imageRatio,
-  },
-  instruction: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginHorizontal: 15,
-    marginVertical: 5,
-    borderBottomColor: '#2C2C2C',
-    borderBottomWidth: 0.5,
-  },
-  instructionSubElement: {
-    flex: 0,
-    marginBottom: 10,
-    marginHorizontal: 10,
-    paddingVertical: 5,
-    textAlignVertical: 'center',
-    lineHeight: 25,
-    color: theme.black,
-  },
-  instructionNumber: {
-    paddingTop: 18,
-    fontSize: 30,
-    fontWeight: 'bold',
-    color: theme.blue,
-  },
-  instructionText: {
-    paddingRight: 30,
-    flexGrow: 1,
-  },
-  button: {
-    backgroundColor: theme.primary,
-    paddingVertical: 12,
-    paddingHorizontal: 50,
-    borderRadius: 20,
-    margin: '5%',
-  },
-  horizontal: {
-    width: '100%',
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-  },
-  buttonInactive: {
-    backgroundColor: '#CACACA',
   },
 });
 
