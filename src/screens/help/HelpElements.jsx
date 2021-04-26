@@ -61,13 +61,13 @@ const PageNavigationButtons = (props) => {
     props.forwardName === undefined ? 'NEXT' : props.forwardName;
   const backwardName =
     props.backwardName === undefined ? 'BACK' : props.backwardName;
-  const postNavigate =
-    props.postNavigate === undefined ? () => {} : props.postNavigate;
+  const postNavigate = props.postNavigate;
+  // props.postNavigate === undefined ? () => {} : props.postNavigate;
   return (
     <View style={[styles.horizontal, styles.bottomElement]}>
-      {/* // TODO: why not working?? */}
       <TouchableOpacity
         onPress={() => {
+          console.log('firing forward');
           props.onBackward();
           postNavigate();
         }}
@@ -78,6 +78,7 @@ const PageNavigationButtons = (props) => {
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {
+          console.log('firing backward');
           props.onForward();
           postNavigate();
         }}

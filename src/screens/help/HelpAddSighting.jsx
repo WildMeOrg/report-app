@@ -13,8 +13,12 @@ import { Instruction, PageNavigationButtons } from './HelpElements';
 const HelpAddSighting = ({ navigation }) => {
   const [helpSection, setHelpSection] = useState(0);
   const scrollReference = useRef();
+  // TODO: Abstract into PageNavigationButtons
   const scrollTop = () => {
-    scrollReference.current?.scrollTo({ y: 0 });
+    setTimeout(
+      () => scrollReference.current?.scrollTo({ y: 0, animated: true }),
+      0
+    );
   };
 
   return (
@@ -29,7 +33,7 @@ const HelpAddSighting = ({ navigation }) => {
             />
             <Instruction section={'HELP_ADD_SIGHTING'} number={1} />
             <PageNavigationButtons
-              onBackward={() => navigation.navigate(screens.helpPage)}
+              onBackward={() => navigation.goBack()}
               onForward={() => setHelpSection(1)}
               postNavigate={scrollTop}
             />
