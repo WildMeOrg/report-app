@@ -27,7 +27,12 @@
     },
     "android": {
       "package": "com.WildMe.WildMeReport",
-      "permissions": ["ACCESS_COARSE_LOCATION","ACCESS_FINE_LOCATION","READ_EXTERNAL_STORAGE","WRITE_EXTERNAL_STORAGE"] //testing these
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ]
     }
   }
 }

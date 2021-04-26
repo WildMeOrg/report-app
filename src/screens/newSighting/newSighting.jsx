@@ -199,14 +199,10 @@ const NewSighting = ({ navigation }) => {
 
   useEffect(() => {
     (async () => {
-      //const { status } = await ImagePicker.requestCameraRollPermissionsAsync();
-      const { status } = await Permissions.getAsync(Permissions.CAMERA_ROLL); //last change, get to ask
+      const { status } = await ImagePicker.requestCameraRollPermissionsAsync();
       console.log(status);
       if (status !== 'granted') {
-        //ask
-        const newPermission = await Permissions.askAsync(
-          Permissions.CAMERA_ROLL
-        );
+        const newPermission = await ImagePicker.requestCameraRollPermissionsAsync();
         if (newPermission.status !== 'granted') {
           alert(
             'Sorry, we need camera roll permissions in upload photos. Enable them to continue.'
