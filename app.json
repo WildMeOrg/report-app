@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Wild Me Scout",
-    "slug": "WildMeScout",
-    "version": "1.0.0",
+    "name": "WildMe",
+    "slug": "WildMe",
+    "version": "2.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/appIcon.png",
     "splash": {
@@ -27,6 +27,7 @@
     },
     "android": {
       "package": "com.WildMe.WildMeReport",
+      "versionCode": 2,
       "permissions": ["ACCESS_COARSE_LOCATION","ACCESS_FINE_LOCATION"]
     }
   }

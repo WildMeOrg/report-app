@@ -11,7 +11,7 @@ import Typography from '../../components/Typography';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function DateRangeInput(rest) {
-  const { name, schema, props } = rest;
+  const { name, schema, props, id } = rest;
   const { displayType } = rest;
   const type = (schema && schema.displayType) || displayType;
   //start date constants
@@ -42,6 +42,7 @@ export default function DateRangeInput(rest) {
     setShowStart(Platform.OS === 'ios');
     props.setFieldValue(`customFields.${name}`, {
       Type: type,
+      id,
       Value: [currDate, dateEnd],
     });
     setDateStart(currDate);
@@ -67,6 +68,7 @@ export default function DateRangeInput(rest) {
     setShowEnd(Platform.OS === 'ios');
     props.setFieldValue(`customFields.${name}`, {
       Type: type,
+      id,
       Value: [dateStart, currDate],
     });
     setDateEnd(currDate);

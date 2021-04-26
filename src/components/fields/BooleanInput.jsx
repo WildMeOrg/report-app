@@ -5,7 +5,7 @@ import styles from '../../styles/newSightingStyles';
 import { Switch } from 'react-native-gesture-handler';
 import theme from '../../constants/theme';
 export default function BooleanInput(rest) {
-  const { name, schema, props } = rest;
+  const { name, schema, props, id } = rest;
   const { displayType } = rest;
   const type = (schema && schema.displayType) || displayType;
   const [choice, setChoice] = useState(false);
@@ -18,6 +18,7 @@ export default function BooleanInput(rest) {
         setChoice(!choice),
         props.setFieldValue(`customFields.${name}`, {
           Type: type,
+          id,
           Value: !choice,
         }),
       ]}
