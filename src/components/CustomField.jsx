@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import screens from '../constants/screens';
@@ -8,10 +8,12 @@ import styles from '../styles/newSightingStyles';
 import LabeledInput from './LabeledInput';
 import Typography from './Typography';
 
-export default function CustomField({ id, required, name, ...rest }) {
+export default function CustomField({ required, name, ...rest }) {
   const { schema, props } = rest;
   const displayName = (schema && schema.label) || name;
   const description = (schema && schema.description) || '';
+
+  const [submitAttempts, setSubmitAttempts] = useState(props.submitCount);
 
   //separate style for boolean custom fields
   if (schema.displayType === 'boolean') {
@@ -22,7 +24,7 @@ export default function CustomField({ id, required, name, ...rest }) {
             {displayName}
             {required && '*'}
           </Text>
-          {props.touched.customFields &&
+          {props.submitCount > submitAttempts &&
             props.errors.customFields &&
             props.errors.customFields[name] && (
               <Typography
@@ -56,7 +58,7 @@ export default function CustomField({ id, required, name, ...rest }) {
           {displayName}
           {required && '*'}
         </Text>
-        {props.touched.customFields &&
+        {props.submitCount > submitAttempts &&
           props.errors.customFields &&
           props.errors.customFields[name] && (
             <Typography

@@ -10,7 +10,7 @@ import theme from '../../constants/theme';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function DateInput(rest) {
-  const { name, schema, props } = rest;
+  const { name, schema, props, id } = rest;
   const { displayType } = rest;
   const type = (schema && schema.displayType) || displayType;
   const [date, setDate] = useState(new Date());
@@ -63,6 +63,7 @@ export default function DateInput(rest) {
     setShow(Platform.OS === 'ios');
     props.setFieldValue(`customFields.${name}`, {
       Type: type,
+      id,
       Value: currDate,
     });
     setDate(currDate);

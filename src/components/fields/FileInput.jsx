@@ -6,7 +6,7 @@ import globalStyles from '../../styles/globalStyles';
 import styles from '../../styles/newSightingStyles';
 
 export default function FileInput(rest) {
-  const { name, schema, props } = rest;
+  const { name, schema, props, id } = rest;
   const { displayType } = rest;
   const type = (schema && schema.displayType) || displayType;
   const [file, setFile] = useState(); //file to be used
@@ -16,7 +16,11 @@ export default function FileInput(rest) {
     if (res.type !== 'cancel') {
       setFile(res);
       setFileName(res.name);
-      props.setFieldValue(`customFields.${name}`, { Type: type, Value: res });
+      props.setFieldValue(`customFields.${name}`, {
+        Type: type,
+        id,
+        Value: res,
+      });
     }
   };
   const deleteFile = () => {

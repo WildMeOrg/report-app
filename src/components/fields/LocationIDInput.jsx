@@ -6,7 +6,7 @@ import { View } from 'react-native';
 
 export default function locationIDInput(rest) {
   //NOTE: for some reason this field doesnt have a schema, just locationID
-  const { name, schema, locationID, props } = rest;
+  const { name, schema, locationID, props, id } = rest;
   const { displayType } = rest;
   const type = (schema && schema.displayType) || displayType;
   const [choice, setChoice] = useState();
@@ -25,6 +25,7 @@ export default function locationIDInput(rest) {
             setChoice(itemValue),
             props.setFieldValue(`customFields.${name}`, {
               Type: type,
+              id,
               Value: itemValue,
             }),
           ];

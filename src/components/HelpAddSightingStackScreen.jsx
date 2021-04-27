@@ -3,16 +3,16 @@ import { StyleSheet } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { createStackNavigator } from '@react-navigation/stack';
 import screens from '../constants/screens';
-import theme from './Typography';
+import theme from '../constants/theme';
 import Typography from './Typography';
 import globalStyles from '../styles/globalStyles';
-import HelpPageScreen from '../screens/help/HelpPage';
+import HelpAddSighting from '../screens/help/HelpAddSighting';
 
-const HelpPageStack = createStackNavigator();
+const HelpAddSightingStack = createStackNavigator();
 
-export default function HelpPageStackScreen({ navigation }) {
+export default function HelpAddSightingStackScreen({ navigation }) {
   return (
-    <HelpPageStack.Navigator
+    <HelpAddSightingStack.Navigator
       screenOptions={{
         headerTitleAlign: 'center',
         // eslint-disable-next-line react/display-name
@@ -31,23 +31,27 @@ export default function HelpPageStackScreen({ navigation }) {
             name="close"
             type="material-icons"
             color={theme.black}
-            onPress={() => navigation.navigate(screens.home)}
+            // TODO: Reset the help "page"?
+            onPress={() => navigation.navigate(screens.helpPage)}
             iconStyle={styles.closeButton}
           />
         ),
       }}
     >
-      <HelpPageStack.Screen
+      <HelpAddSightingStack.Screen
         name={screens.helpPage}
-        component={HelpPageScreen}
+        component={HelpAddSighting}
         options={{
           // eslint-disable-next-line react/display-name
           headerTitle: () => (
-            <Typography style={globalStyles.headerText} id="HELP" />
+            <Typography
+              style={globalStyles.headerText}
+              id="HOW_TO_ADD_SIGHTING"
+            />
           ),
         }}
       />
-    </HelpPageStack.Navigator>
+    </HelpAddSightingStack.Navigator>
   );
 }
 const styles = StyleSheet.create({

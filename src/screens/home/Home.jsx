@@ -154,9 +154,9 @@ const HomeScreen = ({ navigation, searching }) => {
               >
                 <SightingCard
                   key={sighting.id}
-                  image={sighting.image[0]}
-                  name={sighting.name}
-                  date={sighting.date}
+                  image={sighting.encounters[0].image}
+                  name={sighting.context}
+                  date={sighting.createdHouston}
                 />
               </TouchableOpacity>
             );

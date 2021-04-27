@@ -4,8 +4,6 @@ export const ImageSelectContext = createContext();
 
 const initialState = {
   images: [],
-  submissionID: '',
-  uploadID: '',
 };
 
 const reducer = (state, action) => {
@@ -18,7 +16,6 @@ const reducer = (state, action) => {
 
     case 'clear':
       return {
-        ...state,
         images: [],
       };
 
