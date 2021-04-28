@@ -28,7 +28,12 @@
     "android": {
       "package": "com.WildMe.WildMeReport",
       "versionCode": 2,
-      "permissions": ["ACCESS_COARSE_LOCATION","ACCESS_FINE_LOCATION"]
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ]
     }
   }
 }
