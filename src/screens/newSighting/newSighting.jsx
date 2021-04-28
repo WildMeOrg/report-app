@@ -287,7 +287,6 @@ const NewSighting = ({ navigation }) => {
   useEffect(() => {
     (async () => {
       const { status } = await ImagePicker.requestCameraRollPermissionsAsync();
-      console.log(status);
       if (status !== 'granted') {
         const newPermission = await ImagePicker.requestCameraRollPermissionsAsync();
         if (newPermission.status !== 'granted') {
